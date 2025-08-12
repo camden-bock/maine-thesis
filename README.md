@@ -1,6 +1,9 @@
 # maine-thesis
 A LaTeX class file for the typesetting of a Masters or Doctorate Thesis at the University of Maine (Orono, ME).
 
+## TODO
+The goal of this fork is to update to the current graduate school specifications and make available in CTAN.
+
 ## Installation
 
 To install this class file simply copy or link `maine-thesis.cls` to your texmf tree.  On Unix based systems one of the following commands should work:

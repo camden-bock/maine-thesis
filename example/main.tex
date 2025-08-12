@@ -1,7 +1,7 @@
 \documentclass{maine-thesis}  % Default options 12pt and final copy
 
-% Include necessary packages here
-% \usepackage{...}
+
+\addbibresource{references.bib}
 
 % Replace contents of {...} with your own information.
 \title{...}					% Title of thesis
@@ -32,24 +32,15 @@
 \preliminary
 \titlepage
 
-\include{Front}
+\input{skeleton/Front}
 
-% Main text of the thesis.  Use of the `\input' command will make later editing much easier.
-\include{Ch1}				% Chapter 1
-\include{Ch2}				% Chapter 2
-\include{Ch3}				% Chapter 3, etc.
+\input{skeleton/Chapters}
 
-% Bibliography files are included here.  Separate with a comma if more than one
-\bibfiles{..., ...}
-\bibliographystyle{...} 		% Appropriate bibliography style
-% Appropriate bibliography title, default is REFERENCES, Uncomment to change it.
-%\renewcommand{\bibname}{...}
+\renewcommand{\bibname}{References}
 \references				% Inserts and formats the reference section.
 
-\appendix					% Include this before any appendices.
-\include{AppA}				% First appendix.
-\include{AppB}				% Second appendix, etc.
+\input{skeleton/Appendices}
 
-\include{Biography}
+\include{front/Biography}
 
 \end{document}
