@@ -49,17 +49,17 @@
 \DeclareOption{11pt}{\renewcommand\docsize{11pt}}
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}}
 \DeclareOption{draft}{\drafttrue
-	\ExecuteOptions{10pt}
-	\PassOptionsToClass{draft}{report}
-	\newcommand{\drafttext}{\sffamily\small{DRAFT}
-	\mt@officialfalse}
+    \ExecuteOptions{10pt}
+    \PassOptionsToClass{draft}{report}
+    \newcommand{\drafttext}{\sffamily\small{DRAFT}
+    \mt@officialfalse}
 }
 \DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
 \DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
 \DeclareOption{apa}{
-	\setcounter{secnumdefault}{0}
-	\setcounter{head}{0}}
+    \setcounter{secnumdefault}{0}
+    \setcounter{head}{0}}
 \DeclareOption{chicago}{\setcounter{secnumdefault}{0}\setcounter{head}{1}}
 \DeclareOption{headings}{\setcounter{secnumdefault}{0}\setcounter{head}{2}}
 \DeclareOption{idecimal}{\setcounter{secnumdefault}{3}\setcounter{head}{3}}
@@ -92,6 +92,8 @@
 \RequirePackage{geometry}[2010/09/12 v5.6 Page Geometry]
 \RequirePackage{xstring}[2013/10/13 v1.7c  String manipulations (C Tellechea)]
 \RequirePackage{textcase} %% safe manipulation of text case
+\RequirePackage{titlesec} %% safer TOC generation
+\RequirePackage{setspace} %% single, double and oneandahalf spacing -- following same parameters, are default in this package
 
 %% Additional  Package Inclusions
 \RequirePackage{lscape} %adds ability to rotate pages
@@ -136,65 +138,65 @@
     ]{biblatex} %% TODO allow an argument for style in the package options
 
 \AfterPackage{hyperref}{% There are a few changes that are required for the hyperref package, so we make those changes if it is loaded.
-	\hypersetup{ pdfdisplaydoctitle=true}
-	\AtBeginDocument{
-		\hypersetup{	
-			pdftitle=\@title,
-			pdfauthor=\@author,
-			pdfcreator=\relax,
-			pdfproducer=\relax % These could be changed, but for the thesis, I left them blank.
-			}
-	}
-	% Graduate School requirements mandate a slight modification to hyperref's
-	% redefinition of the caption command.
-	\long\def\@caption#1[#2]#3{%
-	  \ifmt@legacycaptions%
-	    \def\mt@captiontext{#3}%
-	  \else%
-	    \IfStrEq{#2}{#3}{\def\mt@captiontext{#3}}{\def\mt@captiontext{#2\ \ignorespaces#3}}%
-	  \fi%
-	  \expandafter\ifx\csname if@capstart\expandafter\endcsname
-	                  \csname iftrue\endcsname
-	    \global\let\@currentHref\hc@currentHref
-	  \else
-	    \hyper@makecurrent{\@captype}%
-	  \fi
-	  \@ifundefined{NR@gettitle}{%
-	    \def\@currentlabelname{#2}%
-	  }{%
-	    \NR@gettitle{#2}%
-	  }%
-	  \par\addcontentsline{\csname ext@#1\endcsname}{#1}{%
-	    \protect\numberline{\csname fnum@#1\endcsname}{\ignorespaces #2}%
-	  }%
-	  \begingroup
-	    \@parboxrestore
-	    \if@minipage
-	      \@setminipage
-	    \fi
-	    \normalsize
-	    \expandafter\ifx\csname if@capstart\expandafter\endcsname
-	                    \csname iftrue\endcsname
-	      \global\@capstartfalse
-	      \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces\mt@captiontext}%
-	    \else
-	      \@makecaption{\csname fnum@#1\endcsname}{%
-	        \ignorespaces
-	        \ifHy@nesting
-	          \expandafter\hyper@@anchor\expandafter{\@currentHref}{\mt@captiontext}%
-	        \else
-	          \Hy@raisedlink{%
-	            \expandafter\hyper@@anchor\expandafter{%
-	              \@currentHref
-	            }{\relax}%
-	          }%
-	          \mt@captiontext%
-	        \fi
-	      }%
-	    \fi
-	    \par
-	  \endgroup
-	}
+    \hypersetup{ pdfdisplaydoctitle=true}
+    \AtBeginDocument{
+        \hypersetup{    
+            pdftitle=\@title,
+            pdfauthor=\@author,
+            pdfcreator=\relax,
+            pdfproducer=\relax % These could be changed, but for the thesis, I left them blank.
+            }
+    }
+    % Graduate School requirements mandate a slight modification to hyperref's
+    % redefinition of the caption command.
+    \long\def\@caption#1[#2]#3{%
+      \ifmt@legacycaptions%
+        \def\mt@captiontext{#3}%
+      \else%
+        \IfStrEq{#2}{#3}{\def\mt@captiontext{#3}}{\def\mt@captiontext{#2\ \ignorespaces#3}}%
+      \fi%
+      \expandafter\ifx\csname if@capstart\expandafter\endcsname
+                      \csname iftrue\endcsname
+        \global\let\@currentHref\hc@currentHref
+      \else
+        \hyper@makecurrent{\@captype}%
+      \fi
+      \@ifundefined{NR@gettitle}{%
+        \def\@currentlabelname{#2}%
+      }{%
+        \NR@gettitle{#2}%
+      }%
+      \par\addcontentsline{\csname ext@#1\endcsname}{#1}{%
+        \protect\numberline{\csname fnum@#1\endcsname}{\ignorespaces #2}%
+      }%
+      \begingroup
+        \@parboxrestore
+        \if@minipage
+          \@setminipage
+        \fi
+        \normalsize
+        \expandafter\ifx\csname if@capstart\expandafter\endcsname
+                        \csname iftrue\endcsname
+          \global\@capstartfalse
+          \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces\mt@captiontext}%
+        \else
+          \@makecaption{\csname fnum@#1\endcsname}{%
+            \ignorespaces
+            \ifHy@nesting
+              \expandafter\hyper@@anchor\expandafter{\@currentHref}{\mt@captiontext}%
+            \else
+              \Hy@raisedlink{%
+                \expandafter\hyper@@anchor\expandafter{%
+                  \@currentHref
+                }{\relax}%
+              }%
+              \mt@captiontext%
+            \fi
+          }%
+        \fi
+        \par
+      \endgroup
+    }
 }
 \PassOptionsToPackage{caption=false}{subfig}
 %To handle a conflict with multirow and xcolor
@@ -202,10 +204,10 @@
 
 \ifdraft{\linenumbers}
 
-\ifPDFTeX
-	\pdfsuppressptexinfo=-1 %to remove some useless tags generated by pdftex
+\ifPDFTeXCode Check uses heuristics and assumes that the document is typical LaTeX, using only standard commands, e.g. every \begin{} has a corresponding \end{}. 
+    \pdfsuppressptexinfo=-1 %to remove some useless tags generated by pdftex
 \fi
-	
+    
 %%%%%%%%%%%%%%%%%%%%%
 % ------MAIN CODE------
 %%%%%%%%%%%%%%%%%%%%%
@@ -259,105 +261,84 @@
 % Variable Modification Commands
 %%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\author}[1]{%
-	\ifx\empty#1\empty\else\gdef\@author{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@author{#1}\fi}
 \newcommand{\authorpronoun}[1]{%
-	\ifx\empty#1\empty\else\gdef\@authorpronoun{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@authorpronoun{#1}\fi}
 \renewcommand{\title}[1]{%
-	\ifx\empty#1\empty\else\gdef\@title{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@title{#1}\fi}
 \newcommand{\degreesheld}[1]{%
-	\ifx\empty#1\empty\else\gdef\@degreesheld{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@degreesheld{#1}\fi}
 \newcommand{\degree}[1]{%
-	\ifx\empty#1\empty\else\gdef\@degree{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@degree{#1}\fi}
 \newcommand{\program}[1]{%
-	\ifx\empty#1\empty\else\gdef\@program{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@program{#1}\fi}
 \newcommand{\submitdate}[1]{%
-	\ifx\empty#1\empty\else\gdef\@submitdate{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@submitdate{#1}\fi}
 \newcommand{\principaladvisor}[2][\empty]{%
-	\ifx\empty#1\empty\else\gdef\@principalshort{\sloppy#1}\fi%
-	\ifx\empty#2\empty\else\gdef\@principaladvisor{\sloppy#2}\fi%
-	}
+    \ifx\empty#1\empty\else\gdef\@principalshort{\sloppy#1}\fi%
+    \ifx\empty#2\empty\else\gdef\@principaladvisor{\sloppy#2}\fi%
+    }
 \newcommand{\secondadvisor}[1]{%
-	\ifx\empty#1\empty\else\gdef\@secondadvisor{\sloppy#1}\fi
-	\twoadvisors}
+    \ifx\empty#1\empty\else\gdef\@secondadvisor{\sloppy#1}\fi
+    \twoadvisors}
 \newcommand{\principalshort}[1]{%
-	\ifx\empty#1\empty\else\gdef\@principalshort{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@principalshort{#1}\fi}
 \newcommand{\firstreader}[1]{%
-	\ifx\empty#1\empty\else\gdef\@firstreader{\sloppy#1}\fi
-	\members{1}}
+    \ifx\empty#1\empty\else\gdef\@firstreader{\sloppy#1}\fi
+    \members{1}}
 \newcommand{\secondreader}[1]{%
-	\ifx\empty#1\empty\else\gdef\@secondreader{\sloppy#1}\fi
-	\members{2}}
+    \ifx\empty#1\empty\else\gdef\@secondreader{\sloppy#1}\fi
+    \members{2}}
 \newcommand{\thirdreader}[1]{%
-	\ifx\empty#1\empty\else\gdef\@thirdreader{\sloppy#1}\fi
-	\members{3}}
+    \ifx\empty#1\empty\else\gdef\@thirdreader{\sloppy#1}\fi
+    \members{3}}
 \newcommand{\fourthreader}[1]{%
-	\ifx\empty#1\empty\else\gdef\@fourthreader{\sloppy#1}\fi
-	\members{4}}
+    \ifx\empty#1\empty\else\gdef\@fourthreader{\sloppy#1}\fi
+    \members{4}}
 \newcommand{\fifthreader}[1]{%
-	\ifx\empty#1\empty\else\gdef\@fifthreader{\sloppy#1}\fi
-	\members{5}}
+    \ifx\empty#1\empty\else\gdef\@fifthreader{\sloppy#1}\fi
+    \members{5}}
 \newcommand{\bibfiles}[1]{%
-	\ifx\empty#1\empty\else\gdef\@bibfiles{#1}\fi}
+    \ifx\empty#1\empty\else\gdef\@bibfiles{#1}\fi}
 \newcommand{\members}[1]{\numcomm=#1}
 \newcommand{\twoadvisors}{\numadv=2}
 \newcommand{\oneadvisor}{\numadv=1}
 \newcommand{\thesis}{
-	\gdef\@type{Thesis}}
+    \gdef\@type{Thesis}}
 \newcommand{\project}{
-	\gdef\@type{Project}}
+    \gdef\@type{Project}}
 \newcommand{\compresstitlepage}[1][1]{
-	\ifcase#1
-		\relax
-	\or
-		\bigtitlepagetrue
-	\or
-		\bigtitlepagetrue
-		\verybigtitlepagetrue
-	\fi
+    \ifcase#1
+        \relax
+    \or
+        \bigtitlepagetrue
+    \or
+        \bigtitlepagetrue
+        \verybigtitlepagetrue
+    \fi
 }
+\renewcommand{\bibname}{References}
 
 %%%%%%%%%%%%%%%%%%%%%
 % Special Commands
 %%%%%%%%%%%%%%%%%%%%%
 \newcommand{\comment}[1]{
-	\ifdraft
-	\marginpar{
-		\color{red}\flushleft\scriptsize\setlength{\baselineskip}{7pt}
-		{\MakeTextUppercase{Note}: #1}}
-	\fi
+    \ifdraft
+    \marginpar{
+        \color{red}\flushleft\scriptsize\setlength{\baselineskip}{7pt}
+        {\MakeTextUppercase{Note}: #1}}
+    \fi
 }
 
 \newcommand{\ignore}[1]{}
 
 \newcommand{\toclabel}[1]{%
-	\addtocontents{toc}{\protect\pagebreak[3]}
-	\addtocontents{toc}{\addvspace{1em \@plus\p@}
-	\parindent \z@ \rightskip \@pnumwidth
-	#1}%
+    \addtocontents{toc}{\protect\pagebreak[3]}
+    \addtocontents{toc}{\addvspace{1em \@plus\p@}
+    \parindent \z@ \rightskip \@pnumwidth
+    #1}%
 }
 
-
-%% map to use addcontentsline
-\newcommand{\pocket}[1]{
-    \refstepcounter{chapter}
-    \addtocontents{toc}{\protect\pagebreak[2]\vskip 10pt plus 1pt minus 1pt}
-    \ifapp
-        \ifmultipleappendices
-            \typeout{<---- Appendix \thechapter ---->}
-            \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\appendixname}\space\thechapter\space -- \MakeTextUppercase{#1}}{\MakeTextUppercase{Appendix\ \thechapter\ -- #1}}}
-        \else
-            \typeout{<---- APPENDIX ---->}%
-            \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\appendixname}\space -- \MakeTextUppercase{#1}}{\MakeTextUppercase{Appendix\ -- #1}}}
-        \fi
-    \else
-        \typeout{*** \@chapapp\space\thechapter\space ****}
-        \addcontentsline{toc}{chapter}{\texorpdfstring{\protect\numberline{\thechapter.}\space\MakeTextUppercase{#1}}{#1}}
-    \fi
-    \ifmt@loftspace
-        \addtocontents{lof}{\protect\addvspace{\loftspacing\p@}}
-        \addtocontents{lot}{\protect\addvspace{\loftspacing\p@}}
-    \fi
-}
 \newcommand{\highlight}[1]{%
     \ifdraft%
         \hl{#1}%
@@ -370,17 +351,17 @@
 % General Formating Declarations
 %%%%%%%%%%%%%%%%%%%%%
 \geometry{
-	letterpaper,
-	margin=1in,
-	left=\@margg,
-	headsep=0.4in,
-	headheight=14pt,
-	footskip=30pt,
-	marginparwidth=40pt,
-	marginparsep=10pt}
-	
+    letterpaper,
+    margin=1in,
+    left=\@margg,
+    headsep=0.4in,
+    headheight=14pt,
+    footskip=30pt,
+    marginparwidth=40pt,
+    marginparsep=10pt}
+    
 \setcounter{secnumdepth}{\value{secnumdefault}}
-\setcounter{tocdepth}{\value{secnumdepth}}
+\setcounter{tocdepth}{\value{secnumdefault}}
 \raggedbottom
 \raggedright
 \parindent=1.5em\relax
@@ -390,47 +371,7 @@
 
 \def\verbatim@font{\rmfamily}
 
-\def\setspace@size{%
-	\ifx \@currsize \normalsize
-		\@normalsize
-	\else
-		\@currsize
-	\fi
-}
-
-\def\doublespacing{%
-	\ifcase \@ptsize \relax
-		\def\baselinestretch{1.667}
-	\or
-		\def\baselinestretch{1.618}
-	\or
-		\def\baselinestretch{1.655}
-	\fi
-	\setspace@size
-}
-
-\def\onehalfspacing{%
-	\ifcase \@ptsize \relax
-		\def\baselinestretch{1.25}
-	\or
-		\def\baselinestretch{1.213}
-	\or
-		\def\baselinestretch{1.241}
-	\fi
-	\setspace@size
-}
-
-\def\singlespacing{%
-	\def\baselinestretch{1}
-	\setspace@size
-	\vskip \baselineskip
-}
-
 \newcommand*\loftspacing{10}
-
-%%%%%%%%%%%%%%%%%%%%%
-% Header Formatting Declarations
-%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%
 % Header Formatting Declarations
@@ -445,147 +386,75 @@
 \newlength{\subparagraphpost}
 \newdimen\headindent
 \headindent=1.5em
+
+% The main \ifcase block to select a heading style
 \ifcase\value{head}
-    %---APA Style Headings---
-    \newcommand*{\sectionstyle}{\bfseries\centering}
-    \setlength{\sectionpost}{1.5ex \@plus .2ex}
-    \newcommand*{\subsectionstyle}{\bfseries}
-    \setlength{\subsectionpost}{.3ex \@plus .2ex}
-    \newcommand*{\subsubsectionstyle}{\bfseries}
-    \setlength{\subsubsectionpost}{-1em}
-    \newcommand*{\paragraphstyle}{\hspace{2\headindent}\bfseries\underline}
-    \setlength{\paragraphpost}{-1em}
-    \newcommand*{\subparagraphstyle}{\hspace{3\headindent}\underline}
-    \setlength{\subparagraphpost}{-1em}
+    %--- APA Style Headings ---
+    \titleformat{\section}{\bfseries\centering}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\bfseries}{\thesubsection}{0.3ex}{\MakeTextUppercase}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\hspace{2em}\bfseries\underline}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{3em}\underline}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{11.1em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+
 \or
-    %---Chicago Style Headings---
-    \newcommand*{\sectionstyle}{\bfseries\centering}
-    \setlength{\sectionpost}{1.5ex \@plus .2ex}
-    \newcommand*{\subsectionstyle}{\centering}
-    \setlength{\subsectionpost}{.3ex \@plus .2ex}
-    \newcommand*{\subsubsectionstyle}{\bfseries}
-    \setlength{\subsubsectionpost}{.2ex \@plus .1ex}
-    \newcommand*{\paragraphstyle}{}
-    \setlength{\paragraphpost}{.2ex \@plus .1ex}
-    \newcommand*{\subparagraphstyle}{\hspace{\headindent}\bfseries}
-    \setlength{\subparagraphpost}{-1em}
+    %--- Chicago Style Headings ---
+    \titleformat{\section}{\bfseries\centering}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\centering}{\thesubsection}{0.3ex}{\MakeTextUppercase}
+    \titlespacing{\subsection}{0pt}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{1.5em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{}{}{0pt}{}
+    \titlespacing{\paragraph}{3.8em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{1.5em}\bfseries}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+
 \or
-    %---Sample Headings from Guidelines
-    \newcommand*{\sectionstyle}{\bfseries\underline\centering}
-    \setlength{\sectionpost}{1.5ex \@plus .2ex}
-    \newcommand*{\subsectionstyle}{\bfseries}
-    \setlength{\subsectionpost}{.3ex \@plus .2ex}
-    \newcommand*{\subsubsectionstyle}{\bfseries\underline}
-    \setlength{\subsubsectionpost}{-1em}
-    \newcommand*{\paragraphstyle}{\hspace{\headindent}\underline}
-    \setlength{\paragraphpost}{-1em}
-    \newcommand*{\subparagraphstyle}{\hspace{\headindent}\bfseries}
-    \setlength{\subparagraphpost}{-1em}
+    %--- Sample Headings from Guidelines ---
+    \titleformat{\section}{\bfseries\underline\centering}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\bfseries}{\thesubsection}{0.3ex}{\MakeTextUppercase}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries\underline}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\hspace{1.5em}\underline}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{1.5em}\bfseries}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+
 \or
-    %---Indented Decimal System
-    \newcommand*{\sectionstyle}{\bfseries}
-    \setlength{\sectionpost}{1.5ex \@plus .2ex}
-    \newcommand*{\subsectionstyle}{\hspace{\headindent}\bfseries}
-    \setlength{\subsectionpost}{.3ex \@plus .2ex}
-    \newcommand*{\subsubsectionstyle}{\hspace{2\headindent}\bfseries}
-    \setlength{\subsubsectionpost}{.2ex \@plus .1ex}
-    \newcommand*{\paragraphstyle}{\hspace{3\headindent}\bfseries}
-    \setlength{\paragraphpost}{-1em}
-    \newcommand*{\subparagraphstyle}{\hspace{4\headindent}\underline}
-    \setlength{\subparagraphpost}{-1em}
+    %--- Indented Decimal System ---
+    \titleformat{\section}{\bfseries}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\hspace{1.5em}\bfseries}{\thesubsection}{0.3ex}{}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\hspace{2em}\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\hspace{3em}\bfseries}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{4em}\underline}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{11.1em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+
 \else
-    %---Justified Decimal---
-    \newcommand*{\sectionstyle}{\bfseries}
-    \setlength{\sectionpost}{1.5ex \@plus .2ex}
-    \newcommand*{\subsectionstyle}{\bfseries}
-    \setlength{\subsectionpost}{.3ex \@plus .2ex}
-    \newcommand*{\subsubsectionstyle}{\bfseries}
-    \setlength{\subsubsectionpost}{.2ex \@plus .1ex}
-    \newcommand*{\paragraphstyle}{\bfseries}
-    \setlength{\paragraphpost}{-1em}
-    \newcommand*{\subparagraphstyle}{\hspace{\parindent}\underline}
-    \setlength{\subparagraphpost}{-1em}
+    %--- Justified Decimal System (Default) ---
+    \titleformat{\section}{\bfseries}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\bfseries}{\thesubsection}{0.3ex}{}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\bfseries}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{1.5em}\underline}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{11.1em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
 \fi
 
-\def\@chapter[#1]#2{%
-    \ifnum \c@secnumdepth >\m@ne
-        \refstepcounter{chapter}
-        \typeout{*** \@chapapp\space\thechapter\space ****}
-        \addtocontents{toc}{\protect\pagebreak[3]}
-        \def\@LastLevel{0}
-        \addcontentsline{toc}{chapter}{\texorpdfstring{\protect\numberline{\thechapter.}\space\MakeTextUppercase{#1}}{#1}}
-    \else
-        \addtocontents{toc}{\protect\pagebreak[3]}
-        \def\@LastLevel{0}
-        \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{#1}}{#1}}
-    \fi
-    \chaptermark{#1}
-    \ifmt@loftspace
-        \addtocontents{lof}{\protect\addvspace{\loftspacing\p@}}
-        \addtocontents{lot}{\protect\addvspace{\loftspacing\p@}}
-    \fi
-    \@makechapterhead{#2}
-}
 
-\def\@makechapterhead#1{%
-    \cleardoublepage
-    {\parindent \z@ \raggedright \centering\normalfont\chaptersize
-        \ifnum \c@secnumdepth >\m@ne
-            \bfseries \MakeTextUppercase{\chaptername}\ \thechapter
-            \par\nobreak
-        \fi
-        \interlinepenalty\@M
-        \bfseries\texorpdfstring{\MakeTextUppercase{#1}}{#1}\par\nobreak
-        \vskip 15\p@
-    }
-}
-
-\def\@makeschapterhead#1{%
-    \cleardoublepage
-    {\parindent \z@ \raggedright \centering\normalfont\chaptersize
-        \interlinepenalty\@M
-        \bfseries \texorpdfstring{\MakeTextUppercase{#1}}{#1}\par\nobreak
-        \vskip 15\p@
-    }
-}
-
-
-\renewcommand\part{\@startsection{paragraph}{4}{\z@}%
-    {3.25ex \@plus1ex \@minus.2ex}%
-    {\paragraphpost}%
-    {\paragraphstyle}}
-
-\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%    
-    {3.25ex \@plus1ex \@minus .2ex}%    
-    {\subparagraphpost}%
-    {\subparagraphstyle}}
-
-\def\app@chapter[#1]#2{%
-    \ifmultipleappendices
-        \ifnum \c@secnumdepth >\m@ne
-            \refstepcounter{chapter}
-            \typeout{<---- Appendix \thechapter ---->}
-            \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\appendixname}\space\thechapter\space -- \MakeTextUppercase{#1}}{\MakeTextUppercase{Appendix\ \thechapter\ -- #1}}}
-        \else
-            \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{#1}}{#1}}
-        \fi
-    \else
-        \ifnum \c@secnumdepth >\m@ne
-            \refstepcounter{chapter}
-            \typeout{<---- APPENDIX ---->}%
-            \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\appendixname}\space -- \MakeTextUppercase{#1}}{\MakeTextUppercase{Appendix\ -- #1}}}
-        \else
-            \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{#1}}{#1}}
-        \fi
-       \fi
-    \ifmt@loftspace
-        \addtocontents{lof}{\protect\addvspace{\loftspacing\p@}}
-        \addtocontents{lot}{\protect\addvspace{\loftspacing\p@}}
-    \fi
-    \chaptermark{#1}
-    \@makeapphead{#2}
-    \@afterheading
-}
 \setcounter{topnumber}{2}
 \renewcommand\topfraction{0.8}
 \setcounter{bottomnumber}{2}
@@ -602,273 +471,200 @@
 %%%%%%%%%%%%%%%%%%%%%
 \let\latex@xfloat=\@xfloat
 \def\@xfloat#1[#2]{%
-	\latex@xfloat#1[#2]
-	\centering
-	\def\baselinestretch{1}\@normalsize
-	\normalsize
+    \latex@xfloat#1[#2]
+    \centering
+    \def\baselinestretch{1}\@normalsize
+    \normalsize
 }
 
 \long\def\@makecaption#1#2{%
-	\vskip\abovecaptionskip
-	\sbox\@tempboxa{#1.~~#2}%
-	\ifdim \wd\@tempboxa >\hsize
-		{#1.~~#2}\par%
-	\else
-		\global \@minipagefalse
-		\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
-	\fi
-	\vskip\belowcaptionskip
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{#1.~~#2}%
+    \ifdim \wd\@tempboxa >\hsize
+        {#1.~~#2}\par%
+    \else
+        \global \@minipagefalse
+        \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \vskip\belowcaptionskip
 }
 
 \long\def\@caption#1[#2]#3{%
-	\ifmt@legacycaptions%
-		\def\mt@captiontext{#3}%.
-	\else%
-		\IfStrEq{#2}{#3}{\def\mt@captiontext{#3}}{\def\mt@captiontext{#2\ \ignorespaces#3}}%
-	\fi%
-	\addcontentsline{\csname ext@#1\endcsname}{#1}	{\protect\numberline{\csname fnum@#1\endcsname}{\ignorespaces #2}}%
-	\begingroup
-	\@parboxrestore
-	\normalsize
-	\centering
-	\@makecaption{\csname fnum@#1\endcsname}{\ignorespaces\mt@captiontext}\par
-	\endgroup
+    \ifmt@legacycaptions%
+        \def\mt@captiontext{#3}%.
+    \else%
+        \IfStrEq{#2}{#3}{\def\mt@captiontext{#3}}{\def\mt@captiontext{#2\ \ignorespaces#3}}%
+    \fi%
+    \addcontentsline{\csname ext@#1\endcsname}{#1}  {\protect\numberline{\csname fnum@#1\endcsname}{\ignorespaces #2}}%
+    \begingroup
+    \@parboxrestore
+    \normalsize
+    \centering
+    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces\mt@captiontext}\par
+    \endgroup
 }
 
 \long\def\@footnotetext#1{%
-	\insert\footins{%
-		\def\baselinestretch {1}
-		\reset@font\footnotesize
-		\interlinepenalty\interfootnotelinepenalty
-		\splittopskip\footnotesep
-		\splitmaxdepth \dp\strutbox \floatingpenalty \@MM
-		\hsize\columnwidth
-		\@parboxrestore
-		\protected@edef\@currentlabel{%
-			\csname p@footnote\endcsname\@thefnmark}%
-		\color@begingroup
-		\@makefntext{\rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
-	\color@endgroup}
+    \insert\footins{%
+        \def\baselinestretch {1}
+        \reset@font\footnotesize
+        \interlinepenalty\interfootnotelinepenalty
+        \splittopskip\footnotesep
+        \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+        \hsize\columnwidth
+        \@parboxrestore
+        \protected@edef\@currentlabel{%
+            \csname p@footnote\endcsname\@thefnmark}%
+        \color@begingroup
+        \@makefntext{\rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
+    \color@endgroup}
 }
 
 \long\def\@mpfootnotetext#1{%
-	\global\setbox\@mpfootins\vbox{%
-		\unvbox \@mpfootins
-		\def\baselinestretch {1}
-		\reset@font\footnotesize
-		\hsize\columnwidth
-		\@parboxrestore
-		\protected@edef\@currentlabel{%
-			\csname p@mpfootnote\endcsname\@thefnmark}%
-		\color@begingroup
-		\@makefntext{\rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
-	\color@endgroup}
+    \global\setbox\@mpfootins\vbox{%
+        \unvbox \@mpfootins
+        \def\baselinestretch {1}
+        \reset@font\footnotesize
+        \hsize\columnwidth
+        \@parboxrestore
+        \protected@edef\@currentlabel{%
+            \csname p@mpfootnote\endcsname\@thefnmark}%
+        \color@begingroup
+        \@makefntext{\rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
+    \color@endgroup}
 }
 
 %%%%%%%%%%%%%%%%%%%%%
 % Table of Contents Formatting
 %%%%%%%%%%%%%%%%%%%%%
 \renewcommand\tableofcontents{%
-	\chapter*{\contentsname}%
-	\doublespacing
-	\@starttoc{toc}
+    \chapter*{\contentsname}%
+    \doublespacing
+    \@starttoc{toc}
 }
 
 \renewcommand\listoftables{%
-	\chapter*{\listtablename}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\listtablename}}{\listtablename}}
-	\doublespacing
-	\setcounter{tocdepth}{\value{secnumdepth}}
-	\@starttoc{lot}
+    \chapter*{\listtablename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\listtablename}}{\listtablename}}
+    \doublespacing
+    \setcounter{tocdepth}{\value{secnumdefault}}
+    \@starttoc{lot}
 }
 
 \renewcommand\listoffigures{%
-	\chapter*{\listfigurename}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\listfigurename}}{\listfigurename}}
-	\doublespacing
-	\setcounter{tocdepth}{\value{secnumdepth}}
-	\@starttoc{lof}
+    \chapter*{\listfigurename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\listfigurename}}{\listfigurename}}
+    \doublespacing
+    \setcounter{tocdepth}{\value{secnumdefault}}
+    \@starttoc{lof}
 }
 
 \newenvironment{thesislist}[1]{%
-	\chapter*{\listname\ #1}
-	\addcontentsline{toc}{chapter}{{\texorpdfstring{\MakeTextUppercase{\listname\ #1}}{\listname\ #1}}}
-	\begingroup
+    \chapter*{\listname\ #1}
+    \addcontentsline{toc}{chapter}{{\texorpdfstring{\MakeTextUppercase{\listname\ #1}}{\listname\ #1}}}
+    \begingroup
 }{\par\endgroup}
 
 \renewcommand\@dotsep{1}
 \renewcommand\@tocrmarg{4em}
 \renewcommand\@pnumwidth{1.4em}
 \patchcmd{\@dottedtocline}%
-	{\rightskip\@tocrmarg}%
-	{\rightskip\@tocrmarg plus 4em \hyphenpenalty\@M}%
-	{%
-		\patchcmd{\@dottedtocline}{\hfill}{\hskip 9.4mm plus1fill}{\typeout{5-dot minimum leader patched}}{}%
-	}%
-	{\ClassErrorNoLine{maine-thesis}{Unable to patch \protect\@dottedtocline\MessageBreak 5-dot leader minimum will not be respected}{Please report this error with a MWE.}}
+    {\rightskip\@tocrmarg}%
+    {\rightskip\@tocrmarg plus 4em \hyphenpenalty\@M}%
+    {%
+        \patchcmd{\@dottedtocline}{\hfill}{\hskip 9.4mm plus1fill}{\typeout{5-dot minimum leader patched}}{}%
+    }%
+    {\ClassErrorNoLine{maine-thesis}{Unable to patch \protect\@dottedtocline\MessageBreak 5-dot leader minimum will not be respected}{Please report this error with a MWE.}}
 
-%We use this count to prevent a page break between two toc entries when the second is one level lower than the first.
-\newcount\mt@lasttocentry
-\mt@lasttocentry=0
-%This if is supposed to keep the first two entries at a level together.
-\newif\ifmt@isfirst
-\mt@isfirsttrue
 
-\renewcommand*\l@chapter{%
-	\ifnum\mt@lasttocentry=0\relax%
-		\nopagebreak%
-		\mt@isfirsttrue%
-	\else%
-		\ifmt@isfirst\nopagebreak\fi%
-		\mt@isfirstfalse%
-	\fi%
-	\mt@lasttocentry=1%
-	\vskip 12pt plus 1pt minus 1pt%
-	\@dottedtocline{0}{0em}{1.4em}}
-\renewcommand*\l@section{%
-	\ifnum\mt@lasttocentry=1\relax%
-		\nopagebreak%
-		\mt@isfirsttrue%
-	\else%
-		\ifmt@isfirst\nopagebreak\fi%
-		\mt@isfirstfalse%
-	\fi%
-	\mt@lasttocentry=2%
-	\ifnum\c@tocdepth>0 \vskip 5pt plus 1pt minus 1pt \fi%
-	\@dottedtocline{1}{1.5em}{2.3em}}
-\renewcommand*\l@subsection{%
-	\ifnum\mt@lasttocentry=2\relax%
-		\nopagebreak%
-		\mt@isfirsttrue%
-	\else%
-		\ifmt@isfirst\nopagebreak\fi%
-		\mt@isfirstfalse%
-	\fi%
-	\mt@lasttocentry=3%
-	\ifnum\c@tocdepth>1 \vskip 4pt minus 1pt \fi%
-	\@dottedtocline{2}{3.8em}{3.2em}}
-\renewcommand*\l@subsubsection{%
-	\ifnum\mt@lasttocentry=3\relax%
-		\nopagebreak%
-		\mt@isfirsttrue%
-	\else%
-		\ifmt@isfirst\nopagebreak\fi%
-		\mt@isfirstfalse%
-	\fi%
-	\mt@lasttocentry=4%
-	\ifnum\c@tocdepth>2 \vskip 3pt minus 1pt \fi%
-	\@dottedtocline{3}{7.0em}{4.1em}}
-\renewcommand*\l@figure{%
-	\vskip 8pt plus 1pt minus 1pt%
-	\@dottedtocline{1}{0em}{5.8em}}
-\let\l@table\l@figure
+%% TODO: what is bibalign??
 \newcommand{\bibalign}{}
 
 %%%%%%%%%%%%%%%%%%%%%
 % Special Pages/Environments
 %%%%%%%%%%%%%%%%%%%%%
 \newcommand{\references}{%
-	\cleardoublepage
-	\singlespacing
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}
-	\printbibliography
+    \cleardoublepage
+    \singlespacing
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}
+    \printbibliography
 }
-
-\renewenvironment{thebibliography}[1]
-	{%begin
-		\chapter*{\bibname}
-		\bibalign\frenchspacing
-		\list{\@biblabel{\@arabic\c@enumiv}}%
-			{\settowidth\labelwidth{\@biblabel{#1}}%
-				\leftmargin\labelwidth
-				\advance\leftmargin\labelsep
-				\@openbib@code
-				\usecounter{enumiv}
-				\let\p@enumiv\@empty
-				\renewcommand\theenumiv{\@arabic\c@enumiv}}%
-		\sloppy
-		\sfcode`\.=\@m
-	}
-	{%end
-		\def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
-		\endlist%
-	}
 
 \renewcommand\titlepage{%
-	\thispagestyle{empty}
-	\ifverybigtitlepage
-		\onehalfspacing
-	\else
-		\doublespacing
-	\fi
-	\begin{center}
-	{\bfseries\MakeTextUppercase{\@title}}\\
-	By \\
-	\@author \\
-	\@degreesheld
-	\vfill
-	A \MakeTextUppercase{\@type}\\[4pt]
-	Submitted in Partial Fulfillment of the\\
-	Requirements for the Degree of\\
-	\expandafter{\@degree}\\
-	(in \expandafter{\@program})\\
-	\vskip 0.5in
-	The Graduate School\\
-	The University of Maine\\
-	\expandafter{\@submitdate}
-	\vfill
-	\end{center}
-	\ifbigtitlepage
-		\singlespacing
-	\fi
-	Advisory Committee:
-	\begin{list}{}{%
-		\setlength{\itemsep}{0pt}%
-		\setlength{\topsep}{0in}%
-		\setlength{\partopsep}{0pt}%
-		\setlength{\itemindent}{-\parindent}%
-		\setlength{\leftmargin}{1cm}%
-		}
-	\item{\@principaladvisor, %
-		\ifnum\numadv=2%
-			Co-%
-		\fi%
-		Advisor}
-	\ifnum\numadv=2
-		\item{\@secondadvisor, Co-Advisor}
-	\fi
-	\ifnum\numcomm>0
-		\item{\@firstreader}
-	\fi
-	\ifnum\numcomm>1
-		\item{\@secondreader}
-	\fi
-	\ifnum\numcomm>2
-		\item{\@thirdreader}
-	\fi
-	\ifnum\numcomm>3
-		\item{\@fourthreader}
-	\fi
-	\ifnum\numcomm>4
-		\item{\@fifthreader}
-	\fi
-	\end{list}
-	\clearpage
+    \thispagestyle{empty}
+    \ifverybigtitlepage
+        \onehalfspacing
+    \else
+        \doublespacing
+    \fi
+    \begin{center}
+    {\bfseries\MakeTextUppercase{\@title}}\\
+    By \\
+    \@author \\
+    \@degreesheld
+    \vfill
+    A \MakeTextUppercase{\@type}\\[4pt]
+    Submitted in Partial Fulfillment of the\\
+    Requirements for the Degree of\\
+    \expandafter{\@degree}\\
+    (in \expandafter{\@program})\\
+    \vskip 0.5in
+    The Graduate School\\
+    The University of Maine\\
+    \expandafter{\@submitdate}
+    \vfill
+    \end{center}
+    \ifbigtitlepage
+        \singlespacing
+    \fi
+    Advisory Committee:
+    \begin{list}{}{%
+        \setlength{\itemsep}{0pt}%
+        \setlength{\topsep}{0in}%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\itemindent}{-\parindent}%
+        \setlength{\leftmargin}{1cm}%
+        }
+    \item{\@principaladvisor, %
+        \ifnum\numadv=2%
+            Co-%
+        \fi%
+        Advisor}
+    \ifnum\numadv=2
+        \item{\@secondadvisor, Co-Advisor}
+    \fi
+    \ifnum\numcomm>0
+        \item{\@firstreader}
+    \fi
+    \ifnum\numcomm>1
+        \item{\@secondreader}
+    \fi
+    \ifnum\numcomm>2
+        \item{\@thirdreader}
+    \fi
+    \ifnum\numcomm>3
+        \item{\@fourthreader}
+    \fi
+    \ifnum\numcomm>4
+        \item{\@fifthreader}
+    \fi
+    \end{list}
+    \clearpage
 }
 
-\newcommand{\copyrightpage}[\@author]{%
-	\copyrightpagetrue
-	\onehalfspacing
-	\thispagestyle{plain}
-	\hbox{ }
-	\vfill
-	\begin{center}
-	\copyright \the\year{} \space#1\\
-	All Rights Reserved
-	\end{center}
-	\vfill
-	\clearpage
+\newcommand{\copyrightpage}{%
+    \copyrightpagetrue
+    \onehalfspacing
+    \thispagestyle{plain}
+    \hbox{ }
+    \vfill
+    \begin{center}
+    \copyright \the\year{} \space \@author\\
+    All Rights Reserved
+    \end{center}
+    \vfill
+    \clearpage
 }
 
  \newcommand{\glsa}{%
@@ -878,159 +674,154 @@
      \clearpage
  }
   \newcommand{\libraryrights}{%
-  	\ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Library Rights Statement page}{Please remove \protect\libraryrights\space from your thesis.}%
+    \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Library Rights Statement page}{Please remove \protect\libraryrights\space from your thesis.}%
   }
 
 \newcommand{\dissacceptance}{%
-	\ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
+    \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
 }
 
 \newcounter{mt@page}
 \renewenvironment{abstract}{%
-	\setcounter{mt@page}{\value{page}}
-	\doublespacing
-	\begin{center}
-		{\bfseries\MakeTextUppercase{\@title}}\\
-		By\space\@author\\[4pt]
-		\@type\ %
-		\ifnum\numadv=2%
-			Co-%
-		\fi%
-		Advisor%
-		\ifnum\numadv=2%
-			s%
-		\fi%
-		: \@principalshort
-		\vskip 0.33in
-		\singlespacing
-		An Abstract of the \@type\ Presented\\
-		in Partial Fulfillment of the Requirements for the\\
-		Degree of \@degree\\
-		(in \@program)\\
-		\@submitdate
-		\vskip 36pt plus 2pt minus 12pt
-	\end{center}
-	\doublespacing
-	\begingroup\par
-	\pagestyle{empty}
+    \setcounter{mt@page}{\value{page}}
+    \doublespacing
+    \begin{center}
+        {\bfseries\MakeTextUppercase{\@title}}\\
+        By\space\@author\\[4pt]
+        \@type\ %
+        \ifnum\numadv=2%
+            Co-Advisors: \@principalshort and \@secondadvisor
+        \else
+            Advisor: \@principalshort
+        \fi
+        \vskip 0.33in
+        \singlespacing
+        An Abstract of the \@type\ Presented\\
+        in Partial Fulfillment of the Requirements for the\\
+        Degree of \@degree\\
+        (in \@program)\\
+        \@submitdate
+        \vskip 36pt plus 2pt minus 12pt
+    \end{center}
+    \doublespacing
+    \begingroup\par
+    \pagestyle{empty}
 }
 {\cleardoublepage
-	\par\endgroup
-	\setcounter{page}{\value{mt@page}}
+    \par\endgroup
+    \setcounter{page}{\value{mt@page}}
 }
 
 \newenvironment{layabstract}[1]{%
-	\setcounter{mt@page}{\value{page}}
-	\doublespacing
-	\begin{center}
-		{\bfseries\MakeTextUppercase{\@title}}\\
-		By\space\@author\\[4pt]
-		\@type\ %
-		\ifnum\numadv=2%
-			Co-%
-		\fi%
-		Advisor%
-		\ifnum\numadv=2%
-			s%
-		\fi%
-		: \@principalshort
-		\vskip 0.33in
-		\singlespacing
-		A Lay Abstract of the \@type\ Presented\\
-		in Partial Fulfillment of the Requirements for the\\
-		Degree of \@degree\\
-		(in \@program)\\
-		\@submitdate
-		\vskip 26pt plus 2pt minus 12pt
-	\end{center}
-	Keywords: \MakeLowercase{#1}
-	\vskip 26pt plus 2pt minus 12pt
-	\doublespacing
-	\begingroup\par
-	\pagestyle{empty}
+    \setcounter{mt@page}{\value{page}}
+    \doublespacing
+    \begin{center}
+        {\bfseries\MakeTextUppercase{\@title}}\\
+        By\space\@author\\[4pt]
+        \@type\ %
+        \ifnum\numadv=2%
+            Co-%
+        \fi%
+        Advisor%
+        \ifnum\numadv=2%
+            s%
+        \fi%
+        : \@principalshort
+        \vskip 0.33in
+        \singlespacing
+        A Lay Abstract of the \@type\ Presented\\
+        in Partial Fulfillment of the Requirements for the\\
+        Degree of \@degree\\
+        (in \@program)\\
+        \@submitdate
+        \vskip 26pt plus 2pt minus 12pt
+    \end{center}
+    Keywords: \MakeLowercase{#1}
+    \vskip 26pt plus 2pt minus 12pt
+    \doublespacing
+    \begingroup\par
+    \pagestyle{empty}
 }
 {\cleardoublepage
-	\par\endgroup
-	\setcounter{page}{\value{mt@page}}
+    \par\endgroup
+    \setcounter{page}{\value{mt@page}}
 }
 
 \newenvironment{dedication}{%
-	\chapter*{\dedicationname}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\dedicationname}}{\dedicationname}}
-	\vskip 0.5in
-	\doublespacing
-	\begingroup
-	\begin{center}
+    \chapter*{\dedicationname}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\dedicationname}}{\dedicationname}}
+    \vskip 0.5in
+    \doublespacing
+    \begingroup
+    \begin{center}
 }{\end{center}\par\endgroup}
 
 \newenvironment{acknowledgements}{%
-	\chapter*{\acknowledgename}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\acknowledgename}}{\acknowledgename}}
-	\doublespacing
-	\begingroup
+    \chapter*{\acknowledgename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\acknowledgename}}{\acknowledgename}}
+    \doublespacing
+    \begingroup
 }{\par\endgroup}
 
 \newenvironment{landacknowledgements}{%
-	\chapter*{\landacknowledgename}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\landacknowledgename}}{\landacknowledgename}}
-	\doublespacing
-	\begingroup
+    \chapter*{\landacknowledgename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\landacknowledgename}}{\landacknowledgename}}
+    \doublespacing
+    \begingroup
 }{\par\endgroup}
 
 \newenvironment{preface}{%
-	\chapter*{\prefacename}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\prefacename}}{\prefacename}}
-	\doublespacing
-	\begingroup\setcounter{secnumdepth}{0}
+    \chapter*{\prefacename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\prefacename}}{\prefacename}}
+    \doublespacing
+    \begingroup\setcounter{secnumdepth}{0}
 }{\setcounter{secnumdepth}{\value{secnumdefault}}\par\endgroup}
 
 \newenvironment{biography}{%
-	\chapter*{\bioname}
-	\addtocontents{toc}{\protect\nopagebreak}
-	\addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bioname}}{\bioname}}
-	\begingroup
-	\doublespacing
-	\thispagestyle{plain}
+    \chapter*{\bioname}
+    \addtocontents{toc}{\protect\nopagebreak}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bioname}}{\bioname}}
+    \begingroup
+    \doublespacing
+    \thispagestyle{plain}
 }{\ifx\@authorpronoun\empty\@author\else\@authorpronoun\fi\ is a candidate for the \@degree\ degree in \@program\ from the University of Maine in \@submitdate.\par\endgroup}
 
 %%%%%%%%%%%%%%%%%%%%%
 % Front/Main/Back Separators
 %%%%%%%%%%%%%%%%%%%%%
 \newcommand{\preliminary}{%
-	\pagenumbering{roman}
-	\settocdepth{chapter}
+    \pagenumbering{roman}
+    \settocdepth{chapter}
 }
 
 \newcommand{\mainmatter}{%
-	\cleardoublepage
-	\doublespacing
-	\pagenumbering{arabic}
-	\ifcase\value{secnumdepth}
-		\or
-		\settocdepth{section}
-	\or
-		\settocdepth{subsection}
-	\or
-		\settocdepth{subsubsection}
-	\or
-		\settocdepth{paragraph}
-	\or
-		\settocdepth{subparagraph}
-	\fi
+    \cleardoublepage
+    \doublespacing
+    \pagenumbering{arabic}
+    \ifcase\value{secnumdepth}
+        \or
+        \settocdepth{section}
+    \or
+        \settocdepth{subsection}
+    \or
+        \settocdepth{subsubsection}
+    \or
+        \settocdepth{paragraph}
+    \or
+        \settocdepth{subparagraph}
+    \fi
 }
 
 \renewcommand{\appendix}{%
-	\setcounter{chapter}{0}
-	\setcounter{section}{0}
-	\renewcommand*\@chapter{\app@chapter}
-	\renewcommand*\thechapter{\@Alph\c@chapter}
-	\addtocontents{toc}{\protect\renewcommand*\protect\l@chapter{\protect\@dottedtocline{0}{0pt}{7.5em}}}
-	\ifmultipleappendices%
-		\toclabel{Appendices}
-	\fi%
-	\settocdepth{chapter}
-	\doublespacing
-	\apptrue
+    \renewcommand*\@chapter{\app@chapter}
+    \renewcommand*\thechapter{\@Alph\c@chapter}
+    \addtocontents{toc}{\protect\renewcommand*\protect\l@chapter{\protect\@dottedtocline{0}{0pt}{7.5em}}}
+    \ifmultipleappendices%
+        \toclabel{Appendices}
+    \fi%
+    \settocdepth{chapter}
+    \doublespacing
+    \apptrue
 }
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -1038,36 +829,36 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\ps@bottom}{%
-	\renewcommand{\@oddhead}{%
-		\ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
-	\renewcommand{\@evenhead}{\@oddhead}
-	\renewcommand{\@oddfoot}{%
-		\ifdraft\drafttext\hfil\thepage
-		\hfil\drafttext\else\hfil\thepage\hfil\fi}
-	\renewcommand{\@evenfoot}{\@oddfoot}
+    \renewcommand{\@oddhead}{%
+        \ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
+    \renewcommand{\@evenhead}{\@oddhead}
+    \renewcommand{\@oddfoot}{%
+        \ifdraft\drafttext\hfil\thepage
+        \hfil\drafttext\else\hfil\thepage\hfil\fi}
+    \renewcommand{\@evenfoot}{\@oddfoot}
 }
 
 \renewcommand{\ps@empty}{%
-	\renewcommand{\@oddhead}{%
-		\ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
-	\renewcommand{\@evenhead}{\@oddhead}
-	\renewcommand{\@oddfoot}{%
-		\ifdraft\drafttext\hfil\drafttext\else\fi}
-	\renewcommand{\@evenfoot}{\@oddfoot}
+    \renewcommand{\@oddhead}{%
+        \ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
+    \renewcommand{\@evenhead}{\@oddhead}
+    \renewcommand{\@oddfoot}{%
+        \ifdraft\drafttext\hfil\drafttext\else\fi}
+    \renewcommand{\@evenfoot}{\@oddfoot}
 }
 
 \newcommand{\ps@top}{%
-	\renewcommand{\@oddhead}{%
-		\ifdraft\drafttext\fi\hfil
-		\ifdraft\today\else\thepage\fi
-		\ifdraft\hfil\drafttext\fi}
-	\renewcommand{\@evenhead}{%
-		\ifdraft\drafttext\hfil\fi
-		\ifdraft\today\else\thepage\fi
-		\hfil\ifdraft\drafttext\fi}	
-	\renewcommand{\@oddfoot}{%
-		\ifdraft\drafttext\hfil\thepage\hfil\drafttext\fi}
-	\renewcommand{\@evenfoot}{\@oddfoot}
+    \renewcommand{\@oddhead}{%
+        \ifdraft\drafttext\fi\hfil
+        \ifdraft\today\else\thepage\fi
+        \ifdraft\hfil\drafttext\fi}
+    \renewcommand{\@evenhead}{%
+        \ifdraft\drafttext\hfil\fi
+        \ifdraft\today\else\thepage\fi
+        \hfil\ifdraft\drafttext\fi} 
+    \renewcommand{\@oddfoot}{%
+        \ifdraft\drafttext\hfil\thepage\hfil\drafttext\fi}
+    \renewcommand{\@evenfoot}{\@oddfoot}
 }
 
 
@@ -1077,4 +868,4 @@
 
 \endinput
 %%
-%% End of file `maine-thesis.cls'.
+%% End of file `maine-thesis.cls'
