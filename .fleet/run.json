@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "compile_example",
+            "type": "command",
+            "program": "latexmk",
+            "dependsOn": ["clean_example"],
+            "args": ["main.tex"]
+        },
+        {
+            "name": "clean_example",
+            "type": "command",
+            "program": "latexmk",
+            "args": ["-c", "main.tex"]
+        }
+    ]
+}
