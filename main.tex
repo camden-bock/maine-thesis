@@ -1,0 +1,31 @@
+\documentclass[apa]{maine-thesis}  % Default options 12pt and final copy
+
+%% ADD PACKAGES HERE AS NEEDED
+\usepackage[english]{babel} %for dummy text generation
+\usepackage{blindtext} %for dummy text generation
+
+\addbibresource{references.bib}
+
+\input{skeleton/metadata}
+
+% If the thesis has MORE than one appendix, leave the following command in.  Else, comment it out.
+\multipleappendicestrue
+
+% Begin the document.
+\begin{document}
+
+\preliminary
+\maketitle
+
+\input{skeleton/front}
+
+\mainmatter
+\input{skeleton/chapters}
+
+\references				% Inserts and formats the reference section.
+
+\input{skeleton/appendicies}
+
+\include{front/biography}
+
+\end{document}
