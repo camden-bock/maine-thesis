@@ -57,13 +57,28 @@
 \DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
 \DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
+
+\def\HeadingStyle{} % Define an empty macro as a placeholder
 \DeclareOption{apa}{
     \setcounter{secnumdefault}{0}
-    \setcounter{head}{0}}
-\DeclareOption{chicago}{\setcounter{secnumdefault}{0}\setcounter{head}{1}}
-\DeclareOption{headings}{\setcounter{secnumdefault}{0}\setcounter{head}{2}}
-\DeclareOption{idecimal}{\setcounter{secnumdefault}{3}\setcounter{head}{3}}
-\DeclareOption{jdecimal}{\setcounter{secnumdefault}{3}\setcounter{head}{1000}}
+    \setcounter{head}{0}
+    \def\HeadingStyle{apa}}
+\DeclareOption{chicago}{
+    \setcounter{secnumdefault}{0}
+    \setcounter{head}{1}
+    \def\HeadingStyle{chicago}}
+\DeclareOption{headings}{
+    \setcounter{secnumdefault}{0}
+    \setcounter{head}{2}
+    \def\HeadingStyle{mainethesis}}
+\DeclareOption{idecimal}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{3}
+    \def\HeadingStyle{idecimal}}
+\DeclareOption{jdecimal}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{1000}
+    \def\HeadingStyle{jdecimal}}
 \DeclareOption{legacycaptions}{\mt@legacycaptionstrue}
 \DeclareOption{pagenumberbottom}{\def\mt@pagestyle{bottom}}
 \DeclareOption{pagenumbertop}{\def\mt@pagestyle{top}}
@@ -115,6 +130,7 @@
 \RequirePackage{textcomp} %Adds trademark TM
 \RequirePackage[super]{nth} %adds counting of numbers with *th
 \RequirePackage{datetime}
+\RequirePackage{csquotes}
 
 %Formatting numbers, special characters and chemical formulas
 \RequirePackage[version=4]{mhchem} %adds chemical formulas
@@ -141,8 +157,6 @@
 \RequirePackage{lineno}
 %Formatting comments that will be printed in the margins of the compiled pdf
 \RequirePackage[colorinlistoftodos]{todonotes}
-
-
 
 \PassOptionsToPackage{caption=false}{subfig}
 
@@ -318,30 +332,103 @@
 %%%%%%%%%%%%%%%%%%%%%
 % Header Formatting Declarations
 %%%%%%%%%%%%%%%%%%%%%
+\newcommand{\apaheadings}{%
+    %--- APA 7 Style Headings ---
+    % Chapters
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
+    \titlespacing{\chapter}{0pt}{0pt}{15pt}
+    \titleformat{\section}{\bfseries\centering}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\bfseries}{\thesubsection}{0.3ex}{\MakeTextUppercase}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\hspace{2em}\bfseries\underline}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{3em}\underline}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{11.1em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+}
 
-\newcommand*\chaptersize{\normalsize}   
+\newcommand{\chicagoheadings}{%
+    %--- Chicago Style Headings ---
+    % Chapters
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
+    \titlespacing{\chapter}{0pt}{0pt}{15pt}
+    \titleformat{\section}{\bfseries\centering}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\centering}{\thesubsection}{0.3ex}{\MakeTextUppercase}
+    \titlespacing{\subsection}{0pt}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{1.5em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{}{}{0pt}{}
+    \titlespacing{\paragraph}{3.8em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{1.5em}\bfseries}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+}
 
-\newlength{\sectionpost}
-\newlength{\subsectionpost}
-\newlength{\subsubsectionpost}
-\newlength{\paragraphpost}
-\newlength{\subparagraphpost}
-\newdimen\headindent
-\headindent=1.5em
+\newcommand{\mainethesisheadings}{%
+    %--- Sample Headings from Guidelines ---
+    % Chapters
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
+    \titlespacing{\chapter}{0pt}{0pt}{15pt}
+    \titleformat{\section}{\bfseries\underline\centering}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    %% TODO: fix failure here.
+    \titleformat{\subsection}{\bfseries}{\thesubsection}{0.3ex}{\MakeTextUppercase}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries\underline}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\hspace{1.5em}\underline}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{1.5em}\bfseries}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+}
 
-% The main \ifcase block to select a heading style
+\newcommand{\idecimalheadings}{%
+    %--- Indented Decimal System ---
+    % Chapters
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
+    \titlespacing{\chapter}{0pt}{0pt}{15pt}
+    \titleformat{\section}{\bfseries}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    %% TODO: fix failure here.
+    \titleformat{\subsection}{\hspace{1.5em}\bfseries}{\thesubsection}{0.3ex}{}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\hspace{2em}\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\hspace{3em}\bfseries}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{4em}\underline}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{11.1em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+}
 
+\newcommand{\jdecimalheadings}{%
+    %--- Justified Decimal System (Default) ---
+    % Chapters
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
+    \titlespacing{\chapter}{0pt}{0pt}{15pt}
+    \titleformat{\section}{\bfseries}{\thesection}{1.5ex}{\MakeTextUppercase}
+    \titlespacing{\section}{0pt}{1.5ex plus .2ex minus 0pt}{.3ex plus .2ex}
+    \titleformat{\subsection}{\bfseries}{\thesubsection}{0.3ex}{}
+    \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
+    \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
+    \titleformat{\paragraph}{\bfseries}{\theparagraph}{0pt}{}
+    \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+    \titleformat{\subparagraph}{\hspace{1.5em}\underline}{\thesubparagraph}{0pt}{}
+    \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
+}
 
-\setcounter{topnumber}{2}
-\renewcommand\topfraction{0.8}
-\setcounter{bottomnumber}{2}
-\renewcommand\bottomfraction{0.8}
-\setcounter{totalnumber}{4}
-\renewcommand\textfraction{0.2}
-\renewcommand\floatpagefraction{0.8}
-\setcounter{dbltopnumber}{2}
-\renewcommand\dbltopfraction{0.8}
-\renewcommand\dblfloatpagefraction{0.8}
+\typeout{=== Checking HeadingStyle Flag ===}
+
+\ifdefined\HeadingStyle
+  \typeout{--- Using \string\csname to execute style \HeadingStyle ---}
+  \csname\HeadingStyle headings\endcsname
+\else
+  \typeout{--- No HeadingStyle option was selected. ---}
+\fi
+
+\typeout{=== Finished HeadingStyle Check ===}
 
 %%%%%%%%%%%%%%%%%%%%%
 % Float Formatting Declarations
