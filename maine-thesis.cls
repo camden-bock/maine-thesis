@@ -70,6 +70,18 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \DeclareOption{loftspacing}{\mt@loftspacetrue\mt@officialfalse}
 
+% Define a macro to store the citation style
+\newcommand*{\@citestyle}{authoryear}
+
+% Declare the 'citestyle' option
+% #1 represents the argument passed to the option
+\DeclareOption{citestyle}{%
+  \renewcommand*{\@citestyle}{#1}%
+}
+
+% Set a default value for 'citestyle'
+\ExecuteOptions{citestyle=authoryear}
+
 %%%%%%%%%%%%%%%%%%%%%
 % ------EXECUTION OF OPTIONS------
 %%%%%%%%%%%%%%%%%%%%%
@@ -93,7 +105,8 @@
 \RequirePackage{textcase} %% safe manipulation of text case
 \RequirePackage{titlesec} %% safer TOC generation
 \RequirePackage{setspace} %% single, double and oneandahalf spacing -- following same parameters, are default in this package
-\RequirePackage{titling}
+\RequirePackage{titling} % title page generation
+\RequirePackage[backend=biber, style=\@citestyle,  doi = true, autopunct = true, date=year]{biblatex} %biblatex citations
 
 %% Additional  Package Inclusions
 \RequirePackage{lscape} %adds ability to rotate pages
@@ -129,13 +142,6 @@
 %Formatting comments that will be printed in the margins of the compiled pdf
 \RequirePackage[colorinlistoftodos]{todonotes}
 
-
-\RequirePackage[backend=biber, 
-    style=apa,
-    doi = true,
-    autopunct = true,
-    date=year
-    ]{biblatex} %% TODO allow an argument for style in the package options
 
 
 \PassOptionsToPackage{caption=false}{subfig}
