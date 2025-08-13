@@ -22,6 +22,19 @@
 *.cb2
 .*.lb
 
+*.bbl
+*.bbl*
+*.fls
+*.fdb*
+ *.lof
+ *.log
+ *.out
+ *.lot
+ *.run.xml
+ *.toc
+
+temp*
+
 ## Intermediate documents:
 *.dvi
 *.xdv
