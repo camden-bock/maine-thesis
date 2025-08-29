@@ -35,6 +35,7 @@
 
 temp*
 */_build*
+*.tmp*.dtx
 
 ## Intermediate documents:
 *.dvi
