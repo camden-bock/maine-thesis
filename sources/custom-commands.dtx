@@ -1,0 +1,23 @@
+%%% ------------------------------------------------------------------
+%			Module 2: Custom Commands
+%%% ------------------------------------------------------------------
+% TODO: ideally, we want to reduce these and use our dependencies insetead,
+% but still provide backwards compatability
+
+\newcommand{\comment}[1]{
+    \ifdraft
+    \marginpar{
+        \color{red}\flushleft\scriptsize\setlength{\baselineskip}{7pt}
+        {\MakeTextUppercase{Note}: #1}}
+    \fi
+}
+
+\newcommand{\ignore}[1]{}
+
+\newcommand{\highlight}[1]{%
+    \ifdraft%
+        \hl{#1}%
+    \else%
+        #1%
+    \fi%
+}

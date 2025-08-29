@@ -1,0 +1,36 @@
+%%% ------------------------------------------------------------------
+%           Module F: Page Style
+%%% -------------------------------------------------------------------
+
+\newcommand{\ps@bottom}{%
+    \renewcommand{\@oddhead}{%
+        \ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
+    \renewcommand{\@evenhead}{\@oddhead}
+    \renewcommand{\@oddfoot}{%
+        \ifdraft\drafttext\hfil\thepage
+        \hfil\drafttext\else\hfil\thepage\hfil\fi}
+    \renewcommand{\@evenfoot}{\@oddfoot}
+}
+
+\renewcommand{\ps@empty}{%
+    \renewcommand{\@oddhead}{%
+        \ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
+    \renewcommand{\@evenhead}{\@oddhead}
+    \renewcommand{\@oddfoot}{%
+        \ifdraft\drafttext\hfil\drafttext\else\fi}
+    \renewcommand{\@evenfoot}{\@oddfoot}
+}
+
+\newcommand{\ps@top}{%
+    \renewcommand{\@oddhead}{%
+        \ifdraft\drafttext\hfil\today\hfil\drafttext\else\thepage\fi}%
+    \renewcommand{\@evenhead}{%
+        \ifdraft\drafttext\hfil\today\hfil\drafttext\else\thepage\fi}%
+    \renewcommand{\@oddfoot}{%
+        \ifdraft\drafttext\hfil\thepage\hfil\drafttext\else\fi}%
+    \renewcommand{\@evenfoot}{\@oddfoot}%
+}
+
+
+\pagestyle{\mt@pagestyle}
+\renewcommand{\ps@plain}{\csname ps@\mt@pagestyle\endcsname}

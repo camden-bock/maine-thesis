@@ -1,0 +1,63 @@
+%%%%%%%%%%%%%%%%%%%%%
+% ------PACKAGE LOADING------
+%%%%%%%%%%%%%%%%%%%%%
+
+\LoadClass[\docsize,\side]{report}[2007/10/19 v1.4h Standard LaTeX document class]
+\RequirePackage[T1]{fontenc}[2005/09/27 v1.99g Standard LaTeX package]
+\RequirePackage{fontspec}
+\RequirePackage{fontspec}
+\RequirePackage{microtype} % Optional, but recommended for better typesetting
+\RequirePackage{color}[2005/11/14 v1.0j Standard LaTeX Color (DPC)]
+\RequirePackage[norule]{footmisc}[2009/09/15 v5.5a a miscellany of footnote facilities]
+\RequirePackage{soul}[2003/11/17 v2.4 letterspacing/underlining  (mf)]
+\RequirePackage{afterpackage}[2006/01/17 v1.1 Apply Commands After Package (NCC)]
+\RequirePackage{etoolbox}[2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)]
+\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c hyphenation utilities]
+\RequirePackage{iftex}[2013/04/04 v0.2 Provides if(tex) conditional for PDFTeX, XeTeX, and LuaTeX]
+\RequirePackage{geometry}[2010/09/12 v5.6 Page Geometry]
+\RequirePackage{xstring}[2013/10/13 v1.7c  String manipulations (C Tellechea)]
+\RequirePackage{textcase} %% safe manipulation of text case
+\RequirePackage{titlesec} %% safer heading generation
+\RequirePackage{setspace} %% single, double and oneandahalf spacing -- following same parameters, are default in this package
+\RequirePackage{titling} % title page generation
+\RequirePackage[backend=biber, style=\@citestyle,  doi = true, autopunct = true, date=year]{biblatex} %biblatex citations
+
+%% Additional  Package Inclusions
+\RequirePackage{lscape} %adds ability to rotate pages
+\RequirePackage[titles]{tocloft} %Ttitle page generation
+\usepackage[nottoc]{tocbibind} %adds list of tables and list of figures to the table of contents
+\RequirePackage[utf8]{inputenc} %allows latex to handle unicode characters
+\RequirePackage{textcomp} %Adds trademark TM
+\RequirePackage[super]{nth} %adds counting of numbers with *th
+\RequirePackage{datetime}
+\RequirePackage{csquotes}
+
+%Formatting numbers, special characters and chemical formulas
+\RequirePackage[version=4]{mhchem} %adds chemical formulas
+\RequirePackage{textgreek}
+\RequirePackage{siunitx} %adds SI unit compatibility
+
+%Formatting the references
+\RequirePackage{hyperref}
+
+%Formatting the figures
+\RequirePackage{graphicx} %Allows us to have graphics embedded
+\RequirePackage{rotating} %Allows graphics to be rotated and tables
+\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}  %adds a caption to the figure
+
+%Formatting tables
+\RequirePackage{float}
+\RequirePackage{booktabs}
+\RequirePackage[table,xcdraw]{xcolor}
+\RequirePackage{multirow}
+\RequirePackage{lscape}
+\RequirePackage{longtable}
+
+%% Draft Annotations
+\RequirePackage{lineno}
+
+%Formatting comments that will be printed in the margins of the compiled pdf
+\RequirePackage[colorinlistoftodos]{todonotes}
+
+\PassOptionsToPackage{caption=false}{subfig}
+

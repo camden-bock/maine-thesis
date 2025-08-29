@@ -1,12 +1,15 @@
 # maine-thesis
+
 A LaTeX class file for the typesetting of a Masters or Doctorate Thesis at the University of Maine (Orono, ME).
 
 ## TODO
+
 The goal of this fork is to update to the current graduate school specifications and make available in CTAN.
 
 ## Installation
 
-To install this class file simply copy or link `maine-thesis.cls` to your texmf tree.  On Unix based systems one of the following commands should work:
+To install this class file simply copy or link `maine-thesis.cls` to your texmf tree. On Unix based systems one of the
+following commands should work:
 
 `cp maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)`
 
@@ -18,11 +21,16 @@ On Windows machines the equivalent commands are:
 
 ``for /f "usebackq tokens=*" %a in (`kpsewhich --var-value TEXMFHOME`) do mklink %a maine-thesis.cls``
 
-The advantage to linking over copying is that once you've set this up, you need only use `git fetch` to make updates, but you do have to keep your copy of the repository.
+The advantage to linking over copying is that once you've set this up, you need only use `git fetch` to make updates,
+but you do have to keep your copy of the repository.
 
 ## Thesis Guidelines
 
-The latest version of the [official thesis guidelines](https://umaine.edu/graduate/students/progress/thesis/) is now available online.  If you find a deviation between the guidelines and this class file, please contact me either by posting an issue here on [GitHub](https://github.com/rpspringuel/maine-thesis/issues) or by [emailing me](mailto:rpspringuel@gmail.com).  If emailing me please include `maine-thesis` in your subject line in order to avoid spam filters.
+The latest version of the [official thesis guidelines](https://umaine.edu/graduate/students/progress/thesis/) is now
+available online. If you find a deviation between the guidelines and this class file, please contact me either by
+posting an issue here on [GitHub](https://github.com/rpspringuel/maine-thesis/issues) or
+by [emailing me](mailto:rpspringuel@gmail.com). If emailing me please include `maine-thesis` in your subject line in
+order to avoid spam filters.
 
 ## Repository inventory:
 
@@ -38,6 +46,30 @@ The skeleton folder contains a basic document structure which you can use as a t
 
 ## Contributing
 
-If you find a bug in the class file or something that it doesn't format correctly, please contact me either by posting an issue here on [GitHub](https://github.com/rpspringuel/maine-thesis/issues) or by [emailing me](mailto:rpspringuel@gmail.com).  If emailing me please include `maine-thesis` in your subject line in order to avoid spam filters.
+If you find a bug in the class file or something that it doesn't format correctly, please contact me either by posting
+an issue here on [GitHub](https://github.com/rpspringuel/maine-thesis/issues) or
+by [emailing me](mailto:rpspringuel@gmail.com). If emailing me please include `maine-thesis` in your subject line in
+order to avoid spam filters.
 
-Also, when reporting a bug or something that needs to be changed a MWE that demonstrates the current unacceptable behavior and a picture or complete description of the desired result is really useful.
+Also, when reporting a bug or something that needs to be changed a MWE that demonstrates the current unacceptable
+behavior and a picture or complete description of the desired result is really useful.
+
+%% Copyright (C) 2003 by Jim Kenneally
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%%
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is R. Padraic Springuel.
+%% Please report all bugs and problems (particularly formatting that
+%% the UMaine Graduate School wants changed) to:
+%% rpspringuel@gmail.com
+%%
+%% Contributions from Camden Bock and Hanna Brooks.

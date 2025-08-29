@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Copyrgiht             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\copyrightpage}{%
+    \setcounter{page}{3} % we must manually set the copyright page because of the runtime call of preliminary.
+    \copyrightpagetrue
+    \onehalfspacing
+    \thispagestyle{plain}
+    \hbox{ }
+    \vfill
+    \begin{center}
+    \copyright \the\year{} \space \@author\\
+    All Rights Reserved
+    \end{center}
+    \vfill
+    \clearpage
+}

@@ -1,0 +1,65 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abstract             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{mt@page}
+\renewenvironment{abstract}{%
+    \doublespacing
+    \begin{center}
+        {\bfseries\MakeTextUppercase{\@title}}\\
+        By\space\@author\\[4pt]
+        \@type\ %
+        \ifnum\numadv=2%
+            Co-Advisors: \@principalshort and \@secondadvisor
+        \else
+            Advisor: \@principalshort
+        \fi
+        \vskip 0.33in
+        \singlespacing
+        An Abstract of the \@type\ Presented\\
+        in Partial Fulfillment of the Requirements for the\\
+        Degree of \@degree\\
+        (in \@program)\\
+        \@submitdate
+        \vskip 36pt plus 2pt minus 12pt
+    \end{center}
+    \doublespacing
+    \begingroup\par
+    \pagestyle{empty}
+}
+{\cleardoublepage
+    \par\endgroup
+}
+
+\newenvironment{layabstract}[1]{%
+    \doublespacing
+    \begin{center}
+        {\bfseries\MakeTextUppercase{\@title}}\\
+        By\space\@author\\[4pt]
+        \@type\ %
+        \ifnum\numadv=2%
+            Co-%
+        \fi%
+        Advisor%
+        \ifnum\numadv=2%
+            s%
+        \fi%
+        : \@principalshort
+        \vskip 0.33in
+        \singlespacing
+        A Lay Abstract of the \@type\ Presented\\
+        in Partial Fulfillment of the Requirements for the\\
+        Degree of \@degree\\
+        (in \@program)\\
+        \@submitdate
+        \vskip 26pt plus 2pt minus 12pt
+    \end{center}
+    Keywords: \MakeLowercase{#1}
+    \vskip 26pt plus 2pt minus 12pt
+    \doublespacing
+    \begingroup\par
+    \pagestyle{empty}
+}
+{\cleardoublepage
+    \par\endgroup
+}

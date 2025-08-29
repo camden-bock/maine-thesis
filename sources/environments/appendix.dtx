@@ -1,0 +1,20 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Appendix             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\appendix}{%
+    \cleardoublepage
+    \doublespacing
+    \setcounter{tocdepth}{1} % Sets the ToC depth to chapters and above
+    \setcounter{secnumdepth}{1} % Sets the section numbering depth to chapters and above
+    \setcounter{chapter}{0}
+    \apptrue
+    \gdef\chaptername{Appendix} % This changes the name globally
+    \gdef\thechapter{\@Alph\c@chapter}% Changes the numbering globally
+    \ifmultipleappendices%
+        \cftaddtitleline{toc}{chapter}{\texorpdfstring{\MakeUppercase{Appendices}}{Appendices}}
+    \fi
+}
+
+\pretocmd{\chapter}{\ifapp\renewcommand*\chaptername{Appendix}\fi}{}{}

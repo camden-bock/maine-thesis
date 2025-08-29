@@ -1,0 +1,89 @@
+%%% ------------------------------------------------------------------
+%           Module E: Titlepage Formatting
+%%% -------------------------------------------------------------------
+
+\pretitle{
+    \begin{center}
+
+    \bfseries\MakeTextUppercase
+}
+\posttitle{
+    \end{center}
+}
+
+\preauthor{
+    \begin{center}
+    By \\
+    \MakeUppercase
+}
+\postauthor{
+    \\
+    \@degreesheld
+    \end{center}
+}
+
+\renewcommand{\maketitlehooka}{
+    \thispagestyle{empty}
+    \ifverybigtitlepage
+        \onehalfspacing
+    \else
+        \doublespacing
+    \fi
+}
+\renewcommand{\maketitlehookd}{
+    \begin{center}
+        A \MakeTextUppercase{\@type}\\[4pt]
+        Submitted in Partial Fulfillment of the\\
+        Requirements for the Degree of\\
+        \expandafter{\@degree}\\
+        (in \expandafter{\@program})\\
+        \vskip 0.5in
+        The Graduate School\\
+        The University of Maine\\
+        \expandafter{\@submitdate}
+        \vfill
+    \end{center}
+    \ifbigtitlepage
+        \singlespacing
+    \fi
+    \begin{flushleft}
+    Advisory Committee:
+    \begin{list}{}{%
+        \setlength{\itemsep}{0pt}%
+        \setlength{\topsep}{0in}%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\itemindent}{-\parindent}%
+        \setlength{\leftmargin}{1cm}%
+    }
+        % Check if the principal advisor is defined before printing
+        \ifx\@principaladvisor\empty\else
+            \item{\@principaladvisor, %
+                \ifnum\numadv=2%
+                    Co-%
+                \fi%
+                Advisor}
+        \fi
+        % Check for second advisor before printing
+        \ifx\@secondadvisor\empty\else
+            \item{\@secondadvisor, Co-Advisor}
+        \fi
+        % Check for each reader before printing
+        \ifx\@firstreader\empty\else
+            \item{\@firstreader}
+        \fi
+        \ifx\@secondreader\empty\else
+            \item{\@secondreader}
+        \fi
+        \ifx\@thirdreader\empty\else
+            \item{\@thirdreader}
+        \fi
+        \ifx\@fourthreader\empty\else
+            \item{\@fourthreader}
+        \fi
+        \ifx\@fifthreader\empty\else
+            \item{\@fifthreader}
+        \fi
+    \end{list}
+    \end{flushleft}
+    \clearpage
+}

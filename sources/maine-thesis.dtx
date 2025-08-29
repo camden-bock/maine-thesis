@@ -1,0 +1,24 @@
+% maine-thesis.dtx
+%<*class>
+
+\ProvidesClass{maine-thesis}[2025/09/01 v2.1 Maine thesis class]
+
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+
+%%%%%%%%%%%%%%%%%%%%%
+% ------INITIAL CODE------
+%%%%%%%%%%%%%%%%%%%%%
+\newif\ifdraft\draftfalse
+\newif\iftwoside\twosidefalse
+\newif\ifmt@official\mt@officialtrue
+\newif\ifunbound\unboundfalse
+\newif\ifmt@legacycaptions\mt@legacycaptionsfalse
+\newif\ifmt@loftspace\mt@loftspacefalse
+\newcommand\docsize{}
+\newcommand\side{oneside}
+\newcounter{secnumdefault}
+\setcounter{secnumdefault}{3}
+\newcounter{head} %Heading styles get numbered so that \ifcase can be used when determining which heading style is currently set instead of a nested set of \if and \else.
+\setcounter{head}{1000} %The default value is set very large so that adding new styles shouldn't necessitate changing it.
+\def\@margg{1.5in}
+\def\mt@pagestyle{bottom}

@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Biography             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{biography}{%
+    \chapter*{\bioname}
+    \addtocontents{toc}{\protect\nopagebreak}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bioname}}{\bioname}}
+    \begingroup
+    \doublespacing
+    \thispagestyle{plain}
+}{%
+    \par
+    \ifx\@authorpronoun\empty
+        \@author
+    \else
+        \@authorpronoun
+    \fi%
+    \ is a candidate for the \@degree\ degree in \@program\ from the University of Maine in \@submitdate.\par\endgroup
+}

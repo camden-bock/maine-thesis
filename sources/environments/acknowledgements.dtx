@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Acknowledgements     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{acknowledgements}{%
+    \chapter*{\acknowledgename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\acknowledgename}}{\acknowledgename}}
+    \doublespacing
+    \begingroup
+}{\par\endgroup}
+
+\newenvironment{landacknowledgements}{%
+    \chapter*{\landacknowledgename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\landacknowledgename}}{\landacknowledgename}}
+    \doublespacing
+    \begingroup
+}{\par\endgroup}
+
+\newcommand{\glsa}{%
+     \chapter*{UNIVERSITY OF MAINE GRADUATE SCHOOL LAND ACKNOWLEDGMENT}
+     The University of Maine recognizes that it is located on Marsh Island in the homeland of Penobscot people, where issues of water and territorial rights, and encroachment upon sacred sites, are ongoing. Penobscot homeland is connected to the other Wabanaki Tribal Nations— the Passamaquoddy, Maliseet, and Micmac—through kinship, alliances, and diplomacy. The University also recognizes that the Penobscot Nation and the other Wabanaki Tribal Nations are distinct, sovereign, legal and political entities with their own powers of self-governance and self-determination.
+     \vfill
+     \clearpage
+}

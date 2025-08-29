@@ -1,0 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Preface             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{preface}{%
+    \chapter*{\prefacename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\prefacename}}{\prefacename}}
+    \doublespacing
+    \begingroup\setcounter{secnumdepth}{0}
+}{\setcounter{secnumdepth}{\value{secnumdefault}}\par\endgroup}

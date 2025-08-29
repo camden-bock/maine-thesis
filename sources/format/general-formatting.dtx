@@ -1,0 +1,31 @@
+%%% ------------------------------------------------------------------
+%           Module A: General Formatting
+%%% -------------------------------------------------------------------
+
+\ifdraft{\linenumbers}\fi
+
+\setmainfont{EB Garamond}
+
+\geometry{
+    letterpaper,
+    margin=1in,
+    left=\@margg,
+    headsep=0.4in,
+    headheight=14pt,
+    footskip=30pt,
+    marginparwidth=40pt,
+    marginparsep=10pt}
+
+\setcounter{secnumdepth}{\value{secnumdefault}}
+\setcounter{tocdepth}{\value{secnumdefault}}
+\raggedbottom
+\raggedright
+\parindent=1.5em\relax
+\markboth{}{}
+\clubpenalty=10000
+\widowpenalty=10000
+
+\def\verbatim@font{\rmfamily}
+
+\newcommand*\loftspacing{10}
+

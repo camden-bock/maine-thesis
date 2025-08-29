@@ -1,0 +1,27 @@
+%%% ------------------------------------------------------------------
+%           Module D: TOC Formatting
+%%% -------------------------------------------------------------------
+
+\renewcommand{\cftchapfont}{\normalfont\bfseries}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftloftitlefont}{\normalfont\bfseries}
+
+\newenvironment{thesislist}[1]{%
+    \chapter*{\listname\ #1}
+    \addcontentsline{toc}{chapter}{{\texorpdfstring{\MakeTextUppercase{\listname\ #1}}{\listname\ #1}}}
+    \begingroup
+}{\par\endgroup}
+
+%% Define Leader Dots
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
+
+\setlength{\cftsecindent}{1.5em}
+\setlength{\cftsecnumwidth}{2em}
+
+%% TODO: what is bibalign??
+\newcommand{\bibalign}{}
+

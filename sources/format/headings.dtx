@@ -1,0 +1,14 @@
+%%% ------------------------------------------------------------------
+%           Module B: Headings Formatting
+%%% -------------------------------------------------------------------
+
+\typeout{=== Checking HeadingStyle Flag ===}
+
+\ifdefined\HeadingStyle
+  \typeout{--- Using \string\csname to execute style \HeadingStyle ---}
+  \csname\HeadingStyle headings\endcsname
+\else
+  \typeout{--- No HeadingStyle option was selected. ---}
+\fi
+
+\typeout{=== Finished HeadingStyle Check ===}

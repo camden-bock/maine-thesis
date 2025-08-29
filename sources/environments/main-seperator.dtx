@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%
+% Front/Main/Back Separators
+%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\preliminary}{%
+    \pagenumbering{roman}
+    \setcounter{tocdepth}{1} % Sets the ToC depth to chapters and above
+    \setcounter{secnumdepth}{1} % Sets the section numbering depth to chapters and above
+}
+
+\newcommand{\mainmatter}{%
+    \cleardoublepage
+    \doublespacing
+    \pagenumbering{arabic}
+    \setcounter{tocdepth}{\value{secnumdefault}}
+    \setcounter{secnumdepth}{\value{secnumdefault}}
+}
+

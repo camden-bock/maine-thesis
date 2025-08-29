@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%
+% ------DECLARATION OF OPTIONS------
+%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareOption{10pt}{\renewcommand\docsize{10pt}}
+\DeclareOption{11pt}{\renewcommand\docsize{11pt}}
+\DeclareOption{12pt}{\renewcommand\docsize{12pt}}
+\DeclareOption{draft}{\drafttrue
+    \ExecuteOptions{10pt}
+    \PassOptionsToClass{draft}{report}
+    \newcommand{\drafttext}{\sffamily\small{DRAFT}
+    \mt@officialfalse}
+}
+\DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
+\DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
+\DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
+
+\def\HeadingStyle{} % Define an empty macro as a placeholder
+\DeclareOption{apa}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{0}
+    \def\HeadingStyle{apa}}
+\DeclareOption{chicago}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{1}
+    \def\HeadingStyle{chicago}}
+\DeclareOption{headings}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{2}
+    \def\HeadingStyle{mainethesis}}
+\DeclareOption{idecimal}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{3}
+    \def\HeadingStyle{idecimal}}
+\DeclareOption{jdecimal}{
+    \setcounter{secnumdefault}{3}
+    \setcounter{head}{1000}
+    \def\HeadingStyle{jdecimal}}
+\DeclareOption{legacycaptions}{\mt@legacycaptionstrue}
+\DeclareOption{pagenumberbottom}{\def\mt@pagestyle{bottom}}
+\DeclareOption{pagenumbertop}{\def\mt@pagestyle{top}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{loftspacing}{\mt@loftspacetrue\mt@officialfalse}
+
+% Define a macro to store the citation style
+\newcommand*{\@citestyle}{authoryear}
+
+% Declare the 'citestyle' option
+% #1 represents the argument passed to the option
+\DeclareOption{citestyle}{%
+  \renewcommand*{\@citestyle}{#1}%
+}
+
+% Set a default value for 'citestyle'
+\ExecuteOptions{citestyle=authoryear}
+
+%%%%%%%%%%%%%%%%%%%%%
+% ------EXECUTION OF OPTIONS------
+%%%%%%%%%%%%%%%%%%%%%
+\ExecuteOptions{12pt,unbound}
+\ProcessOptions
+

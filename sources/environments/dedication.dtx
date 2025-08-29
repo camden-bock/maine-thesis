@@ -1,0 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Dedication             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{dedication}{%
+    \chapter*{\dedicationname}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\dedicationname}}{\dedicationname}}
+    \vskip 0.5in
+    \doublespacing
+    \begingroup
+    \begin{center}
+}{\end{center}\par\endgroup}
