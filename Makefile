@@ -4,7 +4,7 @@ INS_FILE = maine-thesis.ins
 CLS_FILE = maine-thesis.cls
 MWE_DIR = mwe/
 TEMPLATE_DIR = template/
-EXAMPLE_FILE = $(MWE_DIR)main.tex
+EXAMPLE_FILE = $(MWE_DIR)maine-thesis-example.tex
 TEMP_DTX = $(CLS_FILE).tmp.dtx
 
 # List all the modular .dtx files in the correct order

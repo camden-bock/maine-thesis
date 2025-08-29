@@ -57,7 +57,7 @@
                 "clean_mwe"
             ],
             "args": [
-                "main.tex"
+                "maine-thesis-example.tex"
             ],
             "workingDir": "mwe/"
         },
@@ -67,7 +67,7 @@
             "program": "latexmk",
             "args": [
                 "-c",
-                "main.tex"
+                "maine-thesis-example.tex"
             ],
             "workingDir": "mwe/"
         }
