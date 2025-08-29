@@ -91,7 +91,7 @@
 \LoadClass[\docsize,\side]{report}[2007/10/19 v1.4h Standard LaTeX document class]
 \RequirePackage[T1]{fontenc}[2005/09/27 v1.99g Standard LaTeX package]
 \RequirePackage{fontspec}
-\RequirePackage{fontspec}
+\RequirePackage{blindtext}
 \RequirePackage{microtype} % Optional, but recommended for better typesetting
 \RequirePackage{color}[2005/11/14 v1.0j Standard LaTeX Color (DPC)]
 \RequirePackage[norule]{footmisc}[2009/09/15 v5.5a a miscellany of footnote facilities]
@@ -146,6 +146,116 @@
 \RequirePackage[colorinlistoftodos]{todonotes}
 
 \PassOptionsToPackage{caption=false}{subfig}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% Variable Declarations
+%%%%%%%%%%%%%%%%%%%%%
+
+%<*class>
+\def\@title{}
+\def\@author{}
+\def\@authorpronoun{}
+\def\@degreesheld{}
+\def\@degree{}
+\def\@program{}
+\def\@submitdate{}
+\def\@principaladvisor{}
+\def\@secondadvisor{}
+\def\@principalshort{}
+\def\@firstreader{}
+\def\@secondreader{}
+\def\@thirdreader{}
+\def\@fourthreader{}
+\def\@fifthreader{}
+\def\@bibfiles{}
+\def\@type{Dissertation}
+\def\@LastLevel{0}
+
+\newif\ifmultipleappendices\multipleappendicesfalse
+\newif\ifcopyrightpage\copyrightpagefalse
+\newif\ifbigtitlepage\bigtitlepagefalse
+\newif\ifverybigtitlepage\verybigtitlepagefalse
+\newif\ifapp\appfalse
+
+\newcount\numcomm \numcomm=4
+\newcount\numadv \numadv=1
+
+\renewcommand*\contentsname{Table of Contents}
+\renewcommand*\bibname{References}
+\renewcommand*\indexname{INDEX}
+\renewcommand*\chaptername{Chapter}
+\renewcommand*\appendixname{Appendix}
+\newcommand*\listname{List of}
+\newcommand*\chapternamep{\chaptername s}
+\newcommand*\prefacename{Preface}
+\newcommand*\acknowledgename{Acknowledgments}
+\newcommand*\landacknowledgename{Land Acknowledgments}
+\newcommand*\dedicationname{Dedication}
+\newcommand*\bioname{Biography of the Author}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Variable Modification Commands
+%%%%%%%%%%%%%%%%%%%%%
+%<*class>
+\renewcommand{\author}[1]{%
+    \ifx\empty#1\empty\else\gdef\@author{#1}\fi}
+\newcommand{\authorpronoun}[1]{%
+    \ifx\empty#1\empty\else\gdef\@authorpronoun{#1}\fi}
+\renewcommand{\title}[1]{%
+    \ifx\empty#1\empty\else\gdef\@title{#1}\fi}
+\newcommand{\degreesheld}[1]{%
+    \ifx\empty#1\empty\else\gdef\@degreesheld{#1}\fi}
+\newcommand{\degree}[1]{%
+    \ifx\empty#1\empty\else\gdef\@degree{#1}\fi}
+\newcommand{\program}[1]{%
+    \ifx\empty#1\empty\else\gdef\@program{#1}\fi}
+\newcommand{\submitdate}[1]{%
+    \ifx\empty#1\empty\else\gdef\@submitdate{#1}\fi}
+\newcommand{\principaladvisor}[2][\empty]{%
+    \ifx\empty#1\empty\else\gdef\@principalshort{\sloppy#1}\fi%
+    \ifx\empty#2\empty\else\gdef\@principaladvisor{\sloppy#2}\fi%
+    }
+\newcommand{\secondadvisor}[1]{%
+    \ifx\empty#1\empty\else\gdef\@secondadvisor{\sloppy#1}\fi
+    \twoadvisors}
+\newcommand{\principalshort}[1]{%
+    \ifx\empty#1\empty\else\gdef\@principalshort{#1}\fi}
+\newcommand{\firstreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@firstreader{\sloppy#1}\fi
+    \members{1}}
+\newcommand{\secondreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@secondreader{\sloppy#1}\fi
+    \members{2}}
+\newcommand{\thirdreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@thirdreader{\sloppy#1}\fi
+    \members{3}}
+\newcommand{\fourthreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@fourthreader{\sloppy#1}\fi
+    \members{4}}
+\newcommand{\fifthreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@fifthreader{\sloppy#1}\fi
+    \members{5}}
+\newcommand{\bibfiles}[1]{%
+    \ifx\empty#1\empty\else\gdef\@bibfiles{#1}\fi}
+\newcommand{\members}[1]{\numcomm=#1}
+\newcommand{\twoadvisors}{\numadv=2}
+\newcommand{\oneadvisor}{\numadv=1}
+\newcommand{\thesis}{
+    \gdef\@type{Thesis}}
+\newcommand{\project}{
+    \gdef\@type{Project}}
+\newcommand{\compresstitlepage}[1][1]{
+    \ifcase#1
+        \relax
+    \or
+        \bigtitlepagetrue
+    \or
+        \bigtitlepagetrue
+        \verybigtitlepagetrue
+    \fi
+}
+\renewcommand{\bibname}{References}
 
 %%% ------------------------------------------------------------------
 %			Module 2: Custom Commands

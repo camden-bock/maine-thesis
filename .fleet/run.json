@@ -7,6 +7,9 @@
             "args": [
                 "all"
             ],
+            "dependsOn": [
+                "make_clean"
+            ],
         },
         {
             "type": "command",

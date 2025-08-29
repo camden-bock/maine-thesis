@@ -3,6 +3,7 @@ MAIN_DTX = sources/maine-thesis.dtx
 INS_FILE = maine-thesis.ins
 CLS_FILE = maine-thesis.cls
 MWE_DIR = mwe/
+TEMPLATE_DIR = template/
 EXAMPLE_FILE = $(MWE_DIR)main.tex
 TEMP_DTX = $(CLS_FILE).tmp.dtx
 
@@ -10,6 +11,7 @@ TEMP_DTX = $(CLS_FILE).tmp.dtx
 MODULES = \
 	sources/options.dtx \
 	sources/requirements.dtx \
+	sources/variables.dtx \
 	sources/custom-commands.dtx \
 	sources/format/general-formatting.dtx \
 	sources/format/heading-definitions.dtx \
@@ -30,7 +32,7 @@ MODULES = \
 	sources/end.dtx
 
 # The main target to build everything
-all: $(CLS_FILE) $(EXAMPLE_FILE)
+all: $(CLS_FILE) $(EXAMPLE_FILE) copy-cls
 
 # The following lines MUST be indented with a single TAB character
 $(CLS_FILE): $(INS_FILE) $(MAIN_DTX) $(MODULES)
@@ -43,12 +45,13 @@ $(CLS_FILE): $(INS_FILE) $(MAIN_DTX) $(MODULES)
 copy-cls: $(CLS_FILE)
 	@echo "--- Copying $(CLS_FILE) to $(MWE_DIR) ---"
 	cp $(CLS_FILE) $(MWE_DIR)
+	cp $(CLS_FILE) $(TEMPLATE_DIR)
 
 # Rule to compile the user example
 $(EXAMPLE_FILE): $(CLS_FILE)
 	@echo "--- Compiling example document ---"
-	lualatex $(EXAMPLE_FILE)
-	lualatex $(EXAMPLE_FILE)
+	lualatex $(EXAMPLE_FILE) -jobname=example
+	lualatex $(EXAMPLE_FILE) -jobname=example
 
 # Clean up temporary files
 clean:
@@ -57,5 +60,5 @@ clean:
 
 # The distclean target removes all generated files, including the .cls and PDF
 distclean: clean
-	rm -f $(CLS_FILE) $(MWE_DIR)$(CLS_FILE) $(MWE_DIR)*.pdf
+	rm -f $(CLS_FILE) $(TEMPLATE_DIR)$(CLS_FILE) $(MWE_DIR)$(CLS_FILE) $(MWE_DIR)*.pdf
 	@echo "--- Performed a thorough clean of all generated files. ---"
