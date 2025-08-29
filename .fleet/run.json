@@ -1,17 +1,72 @@
 {
     "configurations": [
         {
-            "name": "compile_example",
             "type": "command",
-            "program": "latexmk",
-            "dependsOn": ["clean_example"],
-            "args": ["main.tex"]
+            "name": "make",
+            "program": "make",
+            "args": [
+                "all"
+            ],
         },
         {
-            "name": "clean_example",
+            "type": "command",
+            "name": "make_clean",
+            "program": "make",
+            "args": [
+                "clean"
+            ],
+        },
+        {
+            "type": "command",
+            "name": "distclean",
+            "program": "make",
+            "args": [
+                "distclean"
+            ],
+        },
+        {
+            "name": "compile_template",
             "type": "command",
             "program": "latexmk",
-            "args": ["-c", "main.tex"]
+            "dependsOn": [
+                "clean_template"
+            ],
+            "args": [
+                "main.tex"
+            ],
+            "workingDir": "template/"
+        },
+        {
+            "name": "clean_template",
+            "type": "command",
+            "program": "latexmk",
+            "args": [
+                "-c",
+                "main.tex"
+            ],
+            "workingDir": "template/"
+        },
+        {
+            "name": "compile_mwe",
+            "type": "command",
+            "program": "latexmk",
+            "dependsOn": [
+                "clean_mwe"
+            ],
+            "args": [
+                "main.tex"
+            ],
+            "workingDir": "mwe/"
+        },
+        {
+            "name": "clean_mwe",
+            "type": "command",
+            "program": "latexmk",
+            "args": [
+                "-c",
+                "main.tex"
+            ],
+            "workingDir": "mwe/"
         }
     ]
 }

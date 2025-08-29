@@ -34,7 +34,7 @@
  *.toc
 
 temp*
-_build*
+*/_build*
 
 ## Intermediate documents:
 *.dvi
