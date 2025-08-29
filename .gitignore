@@ -35,7 +35,9 @@
 
 temp*
 */_build*
-*.tmp*.dtx
+*.tmp.dtx
+mwe/maine-thesis.cls
+template/maine-thesis.cls
 
 ## Intermediate documents:
 *.dvi
