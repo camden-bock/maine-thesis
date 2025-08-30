@@ -43,18 +43,25 @@
 \def\mt@pagestyle{bottom}
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
-
 \DeclareOption{10pt}{\renewcommand\docsize{10pt}}
 \DeclareOption{11pt}{\renewcommand\docsize{11pt}}
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}}
+
 \DeclareOption{draft}{\drafttrue
+    % When in draft mode, it defaults to a 10pt font size for faster compilation.
     \ExecuteOptions{10pt}
+    % The `draft` option is passed to the underlying `report` class to
+    % show draft annotations (like black squares for overfull hboxes).
     \PassOptionsToClass{draft}{report}
-    \newcommand{\drafttext}{\sffamily\small{DRAFT}
-    \mt@officialfalse}
+    % Defines a command to display a "DRAFT" watermark or text.
+    \newcommand{\drafttext}{\sffamily\small{DRAFT}}
+    % Sets a conditional to false, which might hide official marks.
+    \mt@officialfalse
 }
+
 \DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
 \DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
+
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
 
 \def\HeadingStyle{} % Define an empty macro as a placeholder
@@ -78,11 +85,18 @@
     \setcounter{secnumdefault}{3}
     \setcounter{head}{1000}
     \def\HeadingStyle{jdecimal}}
+
 \DeclareOption{legacycaptions}{\mt@legacycaptionstrue}
+
 \DeclareOption{pagenumberbottom}{\def\mt@pagestyle{bottom}}
 \DeclareOption{pagenumbertop}{\def\mt@pagestyle{top}}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+
 \DeclareOption{loftspacing}{\mt@loftspacetrue\mt@officialfalse}
+
+\DeclareOption{table}{\PassOptionsToPackage{table}{xcolor}}
+\DeclareOption{xcdraw}{\PassOptionsToPackage{xcdraw}{xcolor}}
 
 \newcommand*{\@citestyle}{authoryear}
 
@@ -90,70 +104,90 @@
   \renewcommand*{\@citestyle}{#1}%
 }
 
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+
 \ExecuteOptions{citestyle=authoryear}
 
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
 \ExecuteOptions{12pt,unbound}
 \ProcessOptions
-
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
 
-\LoadClass[\docsize,\side]{report}[2007/10/19 v1.4h Standard LaTeX document class]
-\RequirePackage[T1]{fontenc}[2005/09/27 v1.99g Standard LaTeX package]
-\RequirePackage{fontspec}
-\RequirePackage{blindtext}
-\RequirePackage{microtype} % Optional, but recommended for better typesetting
-\RequirePackage{color}[2005/11/14 v1.0j Standard LaTeX Color (DPC)]
-\RequirePackage[norule]{footmisc}[2009/09/15 v5.5a a miscellany of footnote facilities]
-\RequirePackage{soul}[2003/11/17 v2.4 letterspacing/underlining  (mf)]
-\RequirePackage{afterpackage}[2006/01/17 v1.1 Apply Commands After Package (NCC)]
-\RequirePackage{etoolbox}[2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)]
-\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c hyphenation utilities]
-\RequirePackage{iftex}[2013/04/04 v0.2 Provides if(tex) conditional for PDFTeX, XeTeX, and LuaTeX]
-\RequirePackage{geometry}[2010/09/12 v5.6 Page Geometry]
-\RequirePackage{xstring}[2013/10/13 v1.7c  String manipulations (C Tellechea)]
-\RequirePackage{textcase} %% safe manipulation of text case
-\RequirePackage{titlesec} %% safer heading generation
-\RequirePackage{setspace} %% single, double and oneandahalf spacing -- following same parameters, are default in this package
-\RequirePackage{titling} % title page generation
-\RequirePackage[backend=biber, style=\@citestyle,  doi = true, autopunct = true, date=year]{biblatex} %biblatex citations
+\LoadClass[\docsize,\side]{report}[2024/06/01 LaTeX2e Standard LaTeX document class]
 
-%% Additional  Package Inclusions
-\RequirePackage{lscape} %adds ability to rotate pages
-\RequirePackage[titles]{tocloft} %Ttitle page generation
-\usepackage[nottoc]{tocbibind} %adds list of tables and list of figures to the table of contents
-\RequirePackage[utf8]{inputenc} %allows latex to handle unicode characters
-\RequirePackage{textcomp} %Adds trademark TM
-\RequirePackage[super]{nth} %adds counting of numbers with *th
-\RequirePackage{datetime}
-\RequirePackage{csquotes}
+\RequirePackage[T1]{fontenc}[2024/06/01 v2.0h Standard LaTeX package]
 
-\RequirePackage[version=4]{mhchem} %adds chemical formulas
-\RequirePackage{textgreek}
-\RequirePackage{siunitx} %adds SI unit compatibility
+\RequirePackage{fontspec}[2024/05/11 v2.9e]
 
-\RequirePackage{hyperref}
+\RequirePackage{microtype}[2025/07/09 v3.0c]
 
-\RequirePackage{graphicx} %Allows us to have graphics embedded
-\RequirePackage{rotating} %Allows graphics to be rotated and tables
-\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=period]{caption}  %adds a caption to the figure
+\RequirePackage{lscape}[2020/05/28 v3.02]
 
-\RequirePackage{float}
-\RequirePackage{booktabs}
-\RequirePackage{tabularx}
-\RequirePackage[table,xcdraw]{xcolor}
-\RequirePackage{multirow}
-\RequirePackage{lscape}
-\RequirePackage{longtable}
+\RequirePackage{pdflscape}[2025/06/23 v0.14]
 
-%% Draft Annotations
-\RequirePackage{lineno}
+\RequirePackage[titles]{tocloft}[2025/05/08 v2.22]
 
-\RequirePackage[colorinlistoftodos]{todonotes}
+\RequirePackage{newunicodechar}[2024/06/01 v0.1c]
 
-\PassOptionsToPackage{caption=false}{subfig}
+\RequirePackage{textcomp}[2022/06/01 v2.01]
+
+\RequirePackage[super]{nth}[2016/09/05 v1.05]
+
+\RequirePackage[colorinlistoftodos]{todonotes}[2024/02/04 v1.0.2]
+
+\RequirePackage[version=4]{mhchem}[2024/03/01 v4.09]
+
+\RequirePackage{textgreek}[2024/03/19 v2.0]
+
+\RequirePackage{siunitx}[2024/06/28 v3.2.1]
+
+\RequirePackage{hyperref}[2025/07/12 v7.01o]
+
+\RequirePackage{csquotes}[2024/04/04 v5.2o]
+
+\RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
+
+\RequirePackage{graphicx}[2024/06/23 v1.2d]
+
+\RequirePackage{rotating}[2024/02/09 v2.4a]
+
+\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/10/01 v3.4h]
+
+\RequirePackage{float}[2009/04/04 v1.3d]
+
+\RequirePackage{booktabs}[2020/01/15 v1.61803398]
+
+\RequirePackage{xcolor}[2024/06/23 v2.13]
+
+\RequirePackage{multirow}[2022/05/25 v2.0]
+
+\RequirePackage{longtable}[2024/12/18 v4.23]
+
+\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
+
+\RequirePackage{iftex}[2024/12/13 v0.2]
+
+\RequirePackage{lineno}[2025/05/13 v5.5]
+
+\RequirePackage{etoolbox}[2025/02/11 v2.5d]
+
+\RequirePackage{soul}[2003/11/17 v2.4]
+
+\RequirePackage{tocbibind}[2024/07/16 v1.2e]
+
+\RequirePackage{titlesec}[2025/01/04 v2.17]
+
+\RequirePackage{textcase}[2025/02/16 v1.05]
+
+\RequirePackage{titling}[2004/08/17 v2.1d]
+
+\RequirePackage{setspace}[2022/12/05 v6.7b]
+
+\RequirePackage{xstring}[2013/10/13 v1.7c]
+
+\RequirePackage{afterpackage}[2006/01/17 v1.1]
 
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%

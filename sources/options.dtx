@@ -1,20 +1,41 @@
 %%%%%%%%%%%%%%%%%%%%%
 % ------DECLARATION OF OPTIONS------
 %%%%%%%%%%%%%%%%%%%%%
-
+%<*class>
+% These options allow the user to select the base font size for the document.
+% The chosen value is stored in the `\docsize` macro, which is later passed to the
+% underlying `report` class.
 \DeclareOption{10pt}{\renewcommand\docsize{10pt}}
 \DeclareOption{11pt}{\renewcommand\docsize{11pt}}
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}}
+
+% The `draft` option enables a "draft mode" for the document.
+% It sets the `\ifdraft` conditional to true, which can be used by other
+% parts of the class to show or hide draft-specific content.
 \DeclareOption{draft}{\drafttrue
+    % When in draft mode, it defaults to a 10pt font size for faster compilation.
     \ExecuteOptions{10pt}
+    % The `draft` option is passed to the underlying `report` class to
+    % show draft annotations (like black squares for overfull hboxes).
     \PassOptionsToClass{draft}{report}
-    \newcommand{\drafttext}{\sffamily\small{DRAFT}
-    \mt@officialfalse}
+    % Defines a command to display a "DRAFT" watermark or text.
+    \newcommand{\drafttext}{\sffamily\small{DRAFT}}
+    % Sets a conditional to false, which might hide official marks.
+    \mt@officialfalse
 }
+
+% These options control the page layout, specifically whether the document is
+% for a one-sided or two-sided print.
 \DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
 \DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
+
+% The `unbound` option sets the class for single-sided printing with a smaller
+% left margin, which is suitable for documents that will not be bound.
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
 
+% The following options allow the user to choose from different heading styles.
+% Each option sets a counter (`\head`) and defines a macro (`\HeadingStyle`)
+% that is used later in the class to execute the correct formatting commands.
 \def\HeadingStyle{} % Define an empty macro as a placeholder
 \DeclareOption{apa}{
     \setcounter{secnumdefault}{3}
@@ -36,27 +57,48 @@
     \setcounter{secnumdefault}{3}
     \setcounter{head}{1000}
     \def\HeadingStyle{jdecimal}}
+
+% The `legacycaptions` option changes the caption formatting.
 \DeclareOption{legacycaptions}{\mt@legacycaptionstrue}
+
+% These options control the placement of page numbers.
 \DeclareOption{pagenumberbottom}{\def\mt@pagestyle{bottom}}
 \DeclareOption{pagenumbertop}{\def\mt@pagestyle{top}}
+
+% This passes any unknown option directly to the underlying `report` class.
+% This is a catch-all to make the class compatible with standard report options.
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+
+% The `loftspacing` option enables a specific spacing setting.
 \DeclareOption{loftspacing}{\mt@loftspacetrue\mt@officialfalse}
 
-% Define a macro to store the citation style
+% These options are specifically for the `xcolor` package.
+% They intercept the options from `\documentclass` and pass them to `xcolor`
+% before it's loaded, preventing an option clash.
+\DeclareOption{table}{\PassOptionsToPackage{table}{xcolor}}
+\DeclareOption{xcdraw}{\PassOptionsToPackage{xcdraw}{xcolor}}
+
+% This defines a macro to store the citation style provided by the user.
 \newcommand*{\@citestyle}{authoryear}
 
-% Declare the 'citestyle' option
-% #1 represents the argument passed to the option
+% This option takes the value passed to `citestyle` (e.g., `apa`) and
+% redefines the `\@citestyle` macro with that value.
 \DeclareOption{citestyle}{%
   \renewcommand*{\@citestyle}{#1}%
 }
 
-% Set a default value for 'citestyle'
+% This passes any unknown option directly to the underlying `report` class.
+% NOTE: This is a duplicate of a previous line and should be consolidated.
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+
+% This command sets the default citation style if none is specified.
 \ExecuteOptions{citestyle=authoryear}
 
 %%%%%%%%%%%%%%%%%%%%%
 % ------EXECUTION OF OPTIONS------
 %%%%%%%%%%%%%%%%%%%%%
+% This is the final execution block. It's crucial for processing all
+% the options that have been declared and passed.
 \ExecuteOptions{12pt,unbound}
 \ProcessOptions
-
+%</class>
