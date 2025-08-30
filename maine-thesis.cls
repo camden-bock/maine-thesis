@@ -5,21 +5,17 @@
 %% The original source files were:
 %%
 %% maine-thesis.cls.tmp.dtx  (with options: `class')
-%% 
-%% IMPORTANT NOTICE:
-%% 
-%% For the copyright see the source file.
-%% 
-%% Any modified versions of this file must be renamed
-%% with new filenames distinct from maine-thesis.cls.
-%% 
-%% For distribution of the original source see the terms
-%% for copying and modification in the file maine-thesis.cls.tmp.dtx.
-%% 
-%% This generated file may be distributed as long as the
-%% original source files, as listed above, are part of the
-%% same distribution. (The sources need not necessarily be
-%% in the same archive or directory.)
+%% This is the 'maine-thesis' LaTeX class.
+\documentclass{ltxdoc}
+\usepackage{myclass}
+\title{My Awesome Class Documentation}
+\author{Your Name}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{myclass.dtx}
+\end{document}
+
 
 \ProvidesClass{maine-thesis}[2025/09/01 v2.1 Maine thesis class]
 
@@ -53,7 +49,7 @@
     \ExecuteOptions{10pt}
     % The `draft` option is passed to the underlying `report` class to
     % show draft annotations (like black squares for overfull hboxes).
-    %\PassOptionsToClass{draft}{report}
+    \PassOptionsToClass{draft}{report}
     % Defines a command to display a "DRAFT" watermark or text.
     \newcommand{\drafttext}{\sffamily\small{DRAFT}}
     % Sets a conditional to false, which might hide official marks.
@@ -489,13 +485,12 @@
 \renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\contentsname}{Table of Contents}
 
+
 \setlength{\cftsecindent}{1.5em}
 \setlength{\cftsecnumwidth}{2em}
 
-%% TODO: what is bibalign??
-\newcommand{\bibalign}{}
-
-%%% ------------------------------------------------------------------
+\cftsetrmarg{3cm} % Sets the right margin for the TOC entry
+\cftsetpnumwidth{2cm} % Sets the width for the page number box%%% ------------------------------------------------------------------
 %%% -------------------------------------------------------------------
 
 \pretitle{
@@ -789,6 +784,7 @@
     \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
 }
 
-\endinput
+%% LaTeX Project Public License, either version 1.3 of this license or (at your option) any later version.
+%% Contributions from
 %%
 %% End of file `maine-thesis.cls'.

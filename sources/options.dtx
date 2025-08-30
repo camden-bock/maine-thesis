@@ -11,7 +11,6 @@
 \DeclareOption{11pt}{\renewcommand\docsize{11pt}\PassOptionsToClass{11pt}{report}}
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}\PassOptionsToClass{12pt}{report}}
 
-
 % The `draft` option enables a "draft mode" for the document.
 % It sets the `\ifdraft` conditional to true, which can be used by other
 % parts of the class to show or hide draft-specific content.
@@ -20,7 +19,7 @@
     \ExecuteOptions{10pt}
     % The `draft` option is passed to the underlying `report` class to
     % show draft annotations (like black squares for overfull hboxes).
-    %\PassOptionsToClass{draft}{report}
+    \PassOptionsToClass{draft}{report}
     % Defines a command to display a "DRAFT" watermark or text.
     \newcommand{\drafttext}{\sffamily\small{DRAFT}}
     % Sets a conditional to false, which might hide official marks.

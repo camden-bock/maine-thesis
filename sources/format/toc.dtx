@@ -20,9 +20,11 @@
 \renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\contentsname}{Table of Contents}
 
+% \cftsecindent and \cftsecnumwidth define where the title starts.
+% \cftsetrmarg and \cftsetpnumwidth define where the dotted leader ends and where the page number starts.
+
 \setlength{\cftsecindent}{1.5em}
 \setlength{\cftsecnumwidth}{2em}
 
-%% TODO: what is bibalign??
-\newcommand{\bibalign}{}
-
+\cftsetrmarg{3cm} % Sets the right margin for the TOC entry
+\cftsetpnumwidth{2cm} % Sets the width for the page number box
