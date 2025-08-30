@@ -3,18 +3,18 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 % Fundamental Classes and Packages
-\LoadClass[\docsize,\side]{report}[2024/06/01 LaTeX2e Standard LaTeX document class]
+\LoadClass[\docsize,\side]{report}[2022/07/02 v1.4n Standard LaTeX document class]
 % The fundamental LaTeX class on which this thesis class is based.
 
 \RequirePackage[T1]{fontenc}[2024/06/01 v2.0h Standard LaTeX package]
 % Provides the T1 font encoding, which allows for correct hyphenation of
 % accented characters and improves overall text rendering.
 
-\RequirePackage{fontspec}[2024/05/11 v2.9e]
+\RequirePackage{fontspec}[2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX]
 % Provides advanced font selection with LuaLaTeX and XeLaTeX, allowing for
 % the use of system fonts and OpenType/TrueType font features.
 
-\RequirePackage{microtype}[2025/07/09 v3.0c]
+\RequirePackage{microtype}[2023/03/13 v3.1a Micro-typographical refinements (RS)]
 % Enhances the appearance of justified text through micro-typographical
 % adjustments like character protrusion and font expansion.
 
@@ -23,46 +23,57 @@
 % Provides a landscape environment to rotate pages. For PDF output, the
 % `pdflscape` package is required to correctly set the page orientation.
 
-\RequirePackage{pdflscape}[2025/06/23 v0.14]
+\RequirePackage{pdflscape}[2022-10-27 v0.13 Display of landscape pages in PDF]
 % Adds PDF support to the `lscape` environment, ensuring landscape pages
 % are displayed correctly in PDF viewers.
 
-\RequirePackage[titles]{tocloft}[2025/05/08 v2.22]
+\RequirePackage[titles]{tocloft}[2017/08/31 v2.3i parameterised ToC, etc., typesetting]
 % Offers extensive customization of the table of contents, list of figures,
 % and list of tables.
 
-\RequirePackage{newunicodechar}[2024/06/01 v0.1c]
+\RequirePackage{newunicodechar}[2018/04/08 v1.2 Defining Unicode characters]
 % Provides a command to define new Unicode characters, which is essential
 % for modern typesetting.
 
-\RequirePackage{textcomp}[2022/06/01 v2.01]
+\RequirePackage{textcomp}[2020/02/02 v2.0n Standard LaTeX package]
 % Provides a wide range of symbols and characters not available in default
 % LaTeX fonts, such as the trademark symbol.
 
-\RequirePackage[super]{nth}[2016/09/05 v1.05]
+\RequirePackage[super]{nth}[2002/02/27]
 % Adds commands for typesetting ordinal numbers (e.g., 1st, 2nd, 3rd)
 % with correct superscripting.
 
-\RequirePackage[colorinlistoftodos]{todonotes}[2024/02/04 v1.0.2]
+\RequirePackage[colorinlistoftodos]{todonotes}[2023/01/31]
 % Provides commands for adding margin notes and todo lists during drafting.
 
 % Numbers, Special Characters, and Chemical Formulas
-\RequirePackage[version=4]{mhchem}[2024/03/01 v4.09]
+\RequirePackage[version=4]{mhchem}[2021/12/31 v4.09 for typesetting chemical formulae]
 % Provides an easy way to write chemical formulas and equations.
 
-\RequirePackage{textgreek}[2024/03/19 v2.0]
+\RequirePackage{textgreek}[2011/10/09 v0.7 Greek symbols in text]
 % Provides commands for typesetting Greek letters in text mode.
 
-\RequirePackage{siunitx}[2024/06/28 v3.2.1]
+\RequirePackage{siunitx}[2023-03-14 v3.2.3 A comprehensive (SI) units package]
 % Provides a powerful command for typesetting SI units and numbers with
 % proper spacing and formatting.
 
+\RequirePackage{geometry}[2020/01/02 v5.9 Page Geometry]
+% This package provides a flexible interface to control the document's page layout.
+% Within this class, it's used to set the document margins, including the left margin
+% based on the `unbound` option.
+
+\RequirePackage{tabularx}[2023/12/11 v2.12a]
+% This package provides the `tabularx` environment, which is an extension of the
+% standard `tabular` environment. It includes a new column type, `X`, that
+% automatically adjusts its width to fill the specified table width. This is
+% essential for creating tables that span the full text width of your document.
+
 % References and Citations
-\RequirePackage{hyperref}[2025/07/12 v7.01o]
+\RequirePackage{hyperref}[2023-02-07 v7.00v Hypertext links for LaTeX]
 % Creates hyperlinks within the document, making the table of contents,
 % citations, and external links clickable.
 
-\RequirePackage{csquotes}[2024/04/04 v5.2o]
+\RequirePackage{csquotes}[2022-09-14 v5.2n context-sensitive quotations (JAW)]
 % Provides context-sensitive quotation facilities, automatically handling
 % nesting and language-specific rules.
 
@@ -70,60 +81,60 @@
 % A powerful package for managing bibliographies and citations.
 
 % Figures and Tables
-\RequirePackage{graphicx}[2024/06/23 v1.2d]
+\RequirePackage{graphicx}[2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)]
 % A fundamental package for including graphics files in a document.
 
-\RequirePackage{rotating}[2024/02/09 v2.4a]
+\RequirePackage{rotating}[2016/08/11 v2.16d rotated objects in LaTeX]
 % Provides environments for rotating objects such as figures and tables.
 
-\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/10/01 v3.4h]
+\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/03/12 v3.6j Customizing captions (AR)]
 % Provides an interface to customize the captions of figures and tables.
 
-\RequirePackage{float}[2009/04/04 v1.3d]
+\RequirePackage{float}[2001/11/08 v1.3d Float enhancements (AL)]
 % Provides the H placement specifier for floats, giving more precise control.
 
-\RequirePackage{booktabs}[2020/01/15 v1.61803398]
+\RequirePackage{booktabs}[2020/01/12 v1.61803398 Publication quality tables]
 % Provides commands for drawing professional-looking horizontal rules in tables.
 
-\RequirePackage{xcolor}[2024/06/23 v2.13]
+\RequirePackage{xcolor}[2022/06/12 v2.14 LaTeX color extensions (UK)]
 % An extended version of the `color` package, providing more color models
 % and table coloring features.
 
-\RequirePackage{multirow}[2022/05/25 v2.0]
+\RequirePackage{multirow}[2021/03/15 v2.8 Span multiple rows of a table]
 % Provides a command to create cells that span multiple rows in a table.
 
-\RequirePackage{longtable}[2024/12/18 v4.23]
+\RequirePackage{longtable}[2021-09-01 v4.17 Multi-page Table package (DPC)]
 % Provides an environment for creating tables that can span multiple pages.
 
 % Other
 \RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
 % Provides fine control over hyphenation.
 
-\RequirePackage{iftex}[2024/12/13 v0.2]
+\RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
 % Provides a conditional command to check which TeX engine is being used.
 
-\RequirePackage{lineno}[2025/05/13 v5.5]
+\RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
 % Adds line numbers to a document, useful during the drafting process.
 
-\RequirePackage{etoolbox}[2025/02/11 v2.5d]
+\RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
 % A set of tools for programming in LaTeX, providing macros for conditionals.
 
 \RequirePackage{soul}[2003/11/17 v2.4]
 % Provides commands for letter-spacing, underlining, and highlighting text.
 
-\RequirePackage{tocbibind}[2024/07/16 v1.2e]
+\RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
 % Adds the bibliography, index, and lists of figures/tables to the table of contents.
 
-\RequirePackage{titlesec}[2025/01/04 v2.17]
+\RequirePackage{titlesec}[2021/07/05 v2.14 Sectioning titles]
 % Offers a powerful interface to sectioning commands, allowing for custom headings.
 
-\RequirePackage{textcase}[2025/02/16 v1.05]
+\RequirePackage{textcase}[2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
 % Provides robust commands for changing the case of text.
 
 \RequirePackage{titling}[2004/08/17 v2.1d]
 % Provides greater control over the typesetting of the title page.
 
-\RequirePackage{setspace}[2022/12/05 v6.7b]
+\RequirePackage{setspace}[2022/12/04 v6.7b set line spacing]
 % Provides support for setting line spacing, such as single, one-and-a-half, and double spacing.
 
 \RequirePackage{xstring}[2013/10/13 v1.7c]

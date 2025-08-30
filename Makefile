@@ -33,7 +33,7 @@ MODULES = \
 	sources/end.dtx
 
 # The main target to build everything
-all: $(CLS_FILE) $(EXAMPLE_FILE) copy-cls
+all: $(CLS_FILE)  $(EXAMPLE_FILE) copy-cls
 
 # The following lines MUST be indented with a single TAB character
 $(CLS_FILE): $(INS_FILE) $(MAIN_DTX) $(MODULES)
@@ -48,11 +48,10 @@ copy-cls: $(CLS_FILE)
 	cp $(CLS_FILE) $(MWE_DIR)
 	cp $(CLS_FILE) $(TEMPLATE_DIR)
 
-# Rule to compile the user example
+# Rule to compile the user example and run biber
 $(EXAMPLE_FILE): $(CLS_FILE)
-	@echo "--- Compiling example document ---"
-	lualatex $(EXAMPLE_FILE) -jobname=example
-	lualatex $(EXAMPLE_FILE) -jobname=example
+	@echo "--- Compiling example document with lualatex ---"
+	lualatex $(EXAMPLE_FILE)
 
 # Clean up temporary files
 clean:
@@ -61,5 +60,6 @@ clean:
 
 # The distclean target removes all generated files, including the .cls and PDF
 distclean: clean
-	rm -f $(CLS_FILE) $(TEMPLATE_DIR)$(CLS_FILE) $(MWE_DIR)$(CLS_FILE) $(MWE_DIR)*.pdf
+	rm -f $(CLS_FILE) $(MWE_DIR)$(CLS_FILE) $(MWE_DIR)*.pdf
+	rm -f $(MWE_DIR)*.aux $(MWE_DIR)*.bbl $(MWE_DIR)*.bcf $(MWE_DIR)*.blg $(MWE_DIR)*.log $(MWE_DIR)*.run.xml
 	@echo "--- Performed a thorough clean of all generated files. ---"

@@ -5,9 +5,12 @@
 % These options allow the user to select the base font size for the document.
 % The chosen value is stored in the `\docsize` macro, which is later passed to the
 % underlying `report` class.
-\DeclareOption{10pt}{\renewcommand\docsize{10pt}}
-\DeclareOption{11pt}{\renewcommand\docsize{11pt}}
-\DeclareOption{12pt}{\renewcommand\docsize{12pt}}
+% These options are all standard and can be passed to the report class.
+
+\DeclareOption{10pt}{\renewcommand\docsize{10pt}\PassOptionsToClass{10pt}{report}}
+\DeclareOption{11pt}{\renewcommand\docsize{11pt}\PassOptionsToClass{11pt}{report}}
+\DeclareOption{12pt}{\renewcommand\docsize{12pt}\PassOptionsToClass{12pt}{report}}
+
 
 % The `draft` option enables a "draft mode" for the document.
 % It sets the `\ifdraft` conditional to true, which can be used by other
@@ -17,7 +20,7 @@
     \ExecuteOptions{10pt}
     % The `draft` option is passed to the underlying `report` class to
     % show draft annotations (like black squares for overfull hboxes).
-    \PassOptionsToClass{draft}{report}
+    %\PassOptionsToClass{draft}{report}
     % Defines a command to display a "DRAFT" watermark or text.
     \newcommand{\drafttext}{\sffamily\small{DRAFT}}
     % Sets a conditional to false, which might hide official marks.
@@ -26,8 +29,9 @@
 
 % These options control the page layout, specifically whether the document is
 % for a one-sided or two-sided print.
-\DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
-\DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
+% These options are standard and should be passed to the report class.
+\DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}\PassOptionsToClass{twoside}{report}}
+\DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}\PassOptionsToClass{oneside}{report}}
 
 % The `unbound` option sets the class for single-sided printing with a smaller
 % left margin, which is suitable for documents that will not be bound.
@@ -86,10 +90,6 @@
 \DeclareOption{citestyle}{%
   \renewcommand*{\@citestyle}{#1}%
 }
-
-% This passes any unknown option directly to the underlying `report` class.
-% NOTE: This is a duplicate of a previous line and should be consolidated.
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
 % This command sets the default citation style if none is specified.
 \ExecuteOptions{citestyle=authoryear}

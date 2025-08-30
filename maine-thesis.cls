@@ -43,24 +43,25 @@
 \def\mt@pagestyle{bottom}
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
-\DeclareOption{10pt}{\renewcommand\docsize{10pt}}
-\DeclareOption{11pt}{\renewcommand\docsize{11pt}}
-\DeclareOption{12pt}{\renewcommand\docsize{12pt}}
+
+\DeclareOption{10pt}{\renewcommand\docsize{10pt}\PassOptionsToClass{10pt}{report}}
+\DeclareOption{11pt}{\renewcommand\docsize{11pt}\PassOptionsToClass{11pt}{report}}
+\DeclareOption{12pt}{\renewcommand\docsize{12pt}\PassOptionsToClass{12pt}{report}}
 
 \DeclareOption{draft}{\drafttrue
     % When in draft mode, it defaults to a 10pt font size for faster compilation.
     \ExecuteOptions{10pt}
     % The `draft` option is passed to the underlying `report` class to
     % show draft annotations (like black squares for overfull hboxes).
-    \PassOptionsToClass{draft}{report}
+    %\PassOptionsToClass{draft}{report}
     % Defines a command to display a "DRAFT" watermark or text.
     \newcommand{\drafttext}{\sffamily\small{DRAFT}}
     % Sets a conditional to false, which might hide official marks.
     \mt@officialfalse
 }
 
-\DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}}
-\DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}}
+\DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}\PassOptionsToClass{twoside}{report}}
+\DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}\PassOptionsToClass{oneside}{report}}
 
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
 
@@ -104,8 +105,6 @@
   \renewcommand*{\@citestyle}{#1}%
 }
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-
 \ExecuteOptions{citestyle=authoryear}
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -115,75 +114,79 @@
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
 
-\LoadClass[\docsize,\side]{report}[2024/06/01 LaTeX2e Standard LaTeX document class]
+\LoadClass[\docsize,\side]{report}[2022/07/02 v1.4n Standard LaTeX document class]
 
 \RequirePackage[T1]{fontenc}[2024/06/01 v2.0h Standard LaTeX package]
 
-\RequirePackage{fontspec}[2024/05/11 v2.9e]
+\RequirePackage{fontspec}[2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX]
 
-\RequirePackage{microtype}[2025/07/09 v3.0c]
+\RequirePackage{microtype}[2023/03/13 v3.1a Micro-typographical refinements (RS)]
 
 \RequirePackage{lscape}[2020/05/28 v3.02]
 
-\RequirePackage{pdflscape}[2025/06/23 v0.14]
+\RequirePackage{pdflscape}[2022-10-27 v0.13 Display of landscape pages in PDF]
 
-\RequirePackage[titles]{tocloft}[2025/05/08 v2.22]
+\RequirePackage[titles]{tocloft}[2017/08/31 v2.3i parameterised ToC, etc., typesetting]
 
-\RequirePackage{newunicodechar}[2024/06/01 v0.1c]
+\RequirePackage{newunicodechar}[2018/04/08 v1.2 Defining Unicode characters]
 
-\RequirePackage{textcomp}[2022/06/01 v2.01]
+\RequirePackage{textcomp}[2020/02/02 v2.0n Standard LaTeX package]
 
-\RequirePackage[super]{nth}[2016/09/05 v1.05]
+\RequirePackage[super]{nth}[2002/02/27]
 
-\RequirePackage[colorinlistoftodos]{todonotes}[2024/02/04 v1.0.2]
+\RequirePackage[colorinlistoftodos]{todonotes}[2023/01/31]
 
-\RequirePackage[version=4]{mhchem}[2024/03/01 v4.09]
+\RequirePackage[version=4]{mhchem}[2021/12/31 v4.09 for typesetting chemical formulae]
 
-\RequirePackage{textgreek}[2024/03/19 v2.0]
+\RequirePackage{textgreek}[2011/10/09 v0.7 Greek symbols in text]
 
-\RequirePackage{siunitx}[2024/06/28 v3.2.1]
+\RequirePackage{siunitx}[2023-03-14 v3.2.3 A comprehensive (SI) units package]
 
-\RequirePackage{hyperref}[2025/07/12 v7.01o]
+\RequirePackage{geometry}[2020/01/02 v5.9 Page Geometry]
 
-\RequirePackage{csquotes}[2024/04/04 v5.2o]
+\RequirePackage{tabularx}[2023/12/11 v2.12a]
+
+\RequirePackage{hyperref}[2023-02-07 v7.00v Hypertext links for LaTeX]
+
+\RequirePackage{csquotes}[2022-09-14 v5.2n context-sensitive quotations (JAW)]
 
 \RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
 
-\RequirePackage{graphicx}[2024/06/23 v1.2d]
+\RequirePackage{graphicx}[2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)]
 
-\RequirePackage{rotating}[2024/02/09 v2.4a]
+\RequirePackage{rotating}[2016/08/11 v2.16d rotated objects in LaTeX]
 
-\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/10/01 v3.4h]
+\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/03/12 v3.6j Customizing captions (AR)]
 
-\RequirePackage{float}[2009/04/04 v1.3d]
+\RequirePackage{float}[2001/11/08 v1.3d Float enhancements (AL)]
 
-\RequirePackage{booktabs}[2020/01/15 v1.61803398]
+\RequirePackage{booktabs}[2020/01/12 v1.61803398 Publication quality tables]
 
-\RequirePackage{xcolor}[2024/06/23 v2.13]
+\RequirePackage{xcolor}[2022/06/12 v2.14 LaTeX color extensions (UK)]
 
-\RequirePackage{multirow}[2022/05/25 v2.0]
+\RequirePackage{multirow}[2021/03/15 v2.8 Span multiple rows of a table]
 
-\RequirePackage{longtable}[2024/12/18 v4.23]
+\RequirePackage{longtable}[2021-09-01 v4.17 Multi-page Table package (DPC)]
 
 \RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
 
-\RequirePackage{iftex}[2024/12/13 v0.2]
+\RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
 
-\RequirePackage{lineno}[2025/05/13 v5.5]
+\RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
 
-\RequirePackage{etoolbox}[2025/02/11 v2.5d]
+\RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
 
 \RequirePackage{soul}[2003/11/17 v2.4]
 
-\RequirePackage{tocbibind}[2024/07/16 v1.2e]
+\RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
 
-\RequirePackage{titlesec}[2025/01/04 v2.17]
+\RequirePackage{titlesec}[2021/07/05 v2.14 Sectioning titles]
 
-\RequirePackage{textcase}[2025/02/16 v1.05]
+\RequirePackage{textcase}[2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
 
 \RequirePackage{titling}[2004/08/17 v2.1d]
 
-\RequirePackage{setspace}[2022/12/05 v6.7b]
+\RequirePackage{setspace}[2022/12/04 v6.7b set line spacing]
 
 \RequirePackage{xstring}[2013/10/13 v1.7c]
 
