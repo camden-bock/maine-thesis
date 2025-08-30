@@ -138,10 +138,11 @@
 
 \RequirePackage{graphicx} %Allows us to have graphics embedded
 \RequirePackage{rotating} %Allows graphics to be rotated and tables
-\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}  %adds a caption to the figure
+\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=period]{caption}  %adds a caption to the figure
 
 \RequirePackage{float}
 \RequirePackage{booktabs}
+\RequirePackage{tabularx}
 \RequirePackage[table,xcdraw]{xcolor}
 \RequirePackage{multirow}
 \RequirePackage{lscape}
@@ -431,71 +432,6 @@
 %%% ------------------------------------------------------------------
 %%% -------------------------------------------------------------------
 
-\let\latex@xfloat=\@xfloat
-\def\@xfloat#1[#2]{%
-    \latex@xfloat#1[#2]
-    \centering
-    \def\baselinestretch{1}\@normalsize
-    \normalsize
-}
-
-\long\def\@makecaption#1#2{%
-    \vskip\abovecaptionskip
-    \sbox\@tempboxa{#1.~~#2}%
-    \ifdim \wd\@tempboxa >\hsize
-        {#1.~~#2}\par%
-    \else
-        \global \@minipagefalse
-        \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
-    \fi
-    \vskip\belowcaptionskip
-}
-
-\long\def\@caption#1[#2]#3{%
-    \ifmt@legacycaptions%
-        \def\mt@captiontext{#3}%.
-    \else%
-        \IfStrEq{#2}{#3}{\def\mt@captiontext{#3}}{\def\mt@captiontext{#2\ \ignorespaces#3}}%
-    \fi%
-    \addcontentsline{\csname ext@#1\endcsname}{#1}  {\protect\numberline{\csname fnum@#1\endcsname}{\ignorespaces #2}}%
-    \begingroup
-    \@parboxrestore
-    \normalsize
-    \centering
-    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces\mt@captiontext}\par
-    \endgroup
-}
-
-\long\def\@footnotetext#1{%
-    \insert\footins{%
-        \def\baselinestretch {1}
-        \reset@font\footnotesize
-        \interlinepenalty\interfootnotelinepenalty
-        \splittopskip\footnotesep
-        \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
-        \hsize\columnwidth
-        \@parboxrestore
-        \protected@edef\@currentlabel{%
-            \csname p@footnote\endcsname\@thefnmark}%
-        \color@begingroup
-        \@makefntext{\rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
-    \color@endgroup}
-}
-
-\long\def\@mpfootnotetext#1{%
-    \global\setbox\@mpfootins\vbox{%
-        \unvbox \@mpfootins
-        \def\baselinestretch {1}
-        \reset@font\footnotesize
-        \hsize\columnwidth
-        \@parboxrestore
-        \protected@edef\@currentlabel{%
-            \csname p@mpfootnote\endcsname\@thefnmark}%
-        \color@begingroup
-        \@makefntext{\rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
-    \color@endgroup}
-}
-%%% ------------------------------------------------------------------
 %%% -------------------------------------------------------------------
 
 \renewcommand{\cftchapfont}{\normalfont\bfseries}

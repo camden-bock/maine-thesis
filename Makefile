@@ -8,6 +8,7 @@ EXAMPLE_FILE = $(MWE_DIR)maine-thesis-example.tex
 TEMP_DTX = $(CLS_FILE).tmp.dtx
 
 # List all the modular .dtx files in the correct order
+# temporarily removed float formatting
 MODULES = \
 	sources/options.dtx \
 	sources/requirements.dtx \
@@ -16,7 +17,7 @@ MODULES = \
 	sources/format/general-formatting.dtx \
 	sources/format/heading-definitions.dtx \
 	sources/format/headings.dtx \
-	sources/format/float-format.dtx \
+	sources/format/caption-format.dtx \
 	sources/format/toc.dtx \
 	sources/format/titlepage.dtx \
 	sources/environments/abstract.dtx \
