@@ -1,12 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%
 % ------DECLARATION OF OPTIONS------
 %%%%%%%%%%%%%%%%%%%%%
-%<*class>
+
 % These options allow the user to select the base font size for the document.
 % The chosen value is stored in the `\docsize` macro, which is later passed to the
 % underlying `report` class.
 % These options are all standard and can be passed to the report class.
 
+\begin{macrocode}
 \DeclareOption{10pt}{\renewcommand\docsize{10pt}\PassOptionsToClass{10pt}{report}}
 \DeclareOption{11pt}{\renewcommand\docsize{11pt}\PassOptionsToClass{11pt}{report}}
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}\PassOptionsToClass{12pt}{report}}
@@ -100,4 +101,5 @@
 % the options that have been declared and passed.
 \ExecuteOptions{12pt,unbound}
 \ProcessOptions
-%</class>
+
+\end{macrocode}

@@ -1,5 +1,5 @@
 # Define the source files and the main executable
-MAIN_DTX = sources/maine-thesis.dtx
+MAIN_DTX = maine-thesis.dtx
 INS_FILE = maine-thesis.ins
 CLS_FILE = maine-thesis.cls
 MWE_DIR = mwe/
@@ -7,40 +7,14 @@ TEMPLATE_DIR = template/
 EXAMPLE_FILE = $(MWE_DIR)maine-thesis-example.tex
 TEMP_DTX = $(CLS_FILE).tmp.dtx
 
-# List all the modular .dtx files in the correct order
-# temporarily removed float formatting
-MODULES = \
-	sources/options.dtx \
-	sources/requirements.dtx \
-	sources/variables.dtx \
-	sources/custom-commands.dtx \
-	sources/format/general-formatting.dtx \
-	sources/format/heading-definitions.dtx \
-	sources/format/headings.dtx \
-	sources/format/caption-format.dtx \
-	sources/format/toc.dtx \
-	sources/format/titlepage.dtx \
-	sources/environments/abstract.dtx \
-	sources/environments/acknowledgements.dtx \
-	sources/environments/appendix.dtx \
-	sources/environments/biography.dtx \
-	sources/environments/copyright.dtx \
-	sources/environments/dedication.dtx \
-	sources/environments/preface.dtx \
-	sources/environments/references.dtx \
-	sources/environments/main-seperator.dtx \
-	sources/depreciated.dtx \
-	sources/end.dtx
-
 # The main target to build everything
 all: $(CLS_FILE)  $(EXAMPLE_FILE) copy-cls
 
 # The following lines MUST be indented with a single TAB character
-$(CLS_FILE): $(INS_FILE) $(MAIN_DTX) $(MODULES)
-	@echo "--- Generating temporary combined DTX file ---"
-	cat $(MAIN_DTX) $(MODULES) > $(TEMP_DTX)
+$(CLS_FILE): $(INS_FILE) $(MAIN_DTX)
 	@echo "--- Running docstrip to create $(CLS_FILE) ---"
 	lualatex $(INS_FILE)
+	lualatex $(MAIN_DTX)
 
 # Rule to copy the generated .cls file to the mwe directory
 copy-cls: $(CLS_FILE)

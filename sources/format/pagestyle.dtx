@@ -1,6 +1,7 @@
 %%% ------------------------------------------------------------------
 %           Module F: Page Style
 %%% -------------------------------------------------------------------
+\begin{macrocode}
 
 \newcommand{\ps@bottom}{%
     \renewcommand{\@oddhead}{%
@@ -34,3 +35,5 @@
 
 \pagestyle{\mt@pagestyle}
 \renewcommand{\ps@plain}{\csname ps@\mt@pagestyle\endcsname}
+
+\end{macrocode}

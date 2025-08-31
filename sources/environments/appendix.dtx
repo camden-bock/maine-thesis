@@ -2,6 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Appendix             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{macrocode}
 
 \renewcommand{\appendix}{%
     \cleardoublepage
@@ -18,3 +19,5 @@
 }
 
 \pretocmd{\chapter}{\ifapp\renewcommand*\chaptername{Appendix}\fi}{}{}
+
+\end{macrocode}
