@@ -1,7 +1,22 @@
-%%%%%%%%%%%%%%%%%%%%%
-% ------PACKAGE LOADING------
-%%%%%%%%%%%%%%%%%%%%%
-%% file: requirements.dtx
+% \iffalse
+%
+% This is the driver to produce the documentation PDF for the
+% `maine-thesis` class.
+%
+\documentclass{ltxdoc}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
+\title{The University of Maine Thesis Class - Requirements Module}
+\author{Camden Bock}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{requirements.dtx}
+\end{document}
+%
+% \fi
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -24,6 +39,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{maine-thesis-requirements}[2025/08/31 v1.0 Requirements for Maine-Thesis]
 %    \end{macrocode}
+%</package>
 %
 %    \section{Introduction}
 %    This module provides functionality for [detailed description of module].
@@ -32,147 +48,336 @@
 %    \subsection{User Commands}
 %    Here are the commands that the end user can use.
 %
+%<*package>
 %    \begin{macrocode}
 \RequirePackage[T1]{fontenc}[2024/06/01 v2.0h Standard LaTeX package]
+%    \end{macrocode}
+%
+%</package>
 % Provides the T1 font encoding, which allows for correct hyphenation of
 % accented characters and improves overall text rendering.
 
+
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{fontspec}[2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX]
+%    \end{macrocode}
+%
+%</package>
 % Provides advanced font selection with LuaLaTeX and XeLaTeX, allowing for
 % the use of system fonts and OpenType/TrueType font features.
 
+
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{microtype}[2023/03/13 v3.1a Micro-typographical refinements (RS)]
+%    \end{macrocode}
+%
+%</package>
 % Enhances the appearance of justified text through micro-typographical
 % adjustments like character protrusion and font expansion.
 
 % Formatting
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{lscape}[2020/05/28 v3.02]
+%    \end{macrocode}
+%
+%</package>
 % Provides a landscape environment to rotate pages. For PDF output, the
 % `pdflscape` package is required to correctly set the page orientation.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{pdflscape}[2022-10-27 v0.13 Display of landscape pages in PDF]
+%    \end{macrocode}
+%
+%</package>
 % Adds PDF support to the `lscape` environment, ensuring landscape pages
 % are displayed correctly in PDF viewers.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage[titles]{tocloft}[2017/08/31 v2.3i parameterised ToC, etc., typesetting]
+%    \end{macrocode}
+%
+%</package>
 % Offers extensive customization of the table of contents, list of figures,
 % and list of tables.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{newunicodechar}[2018/04/08 v1.2 Defining Unicode characters]
+%    \end{macrocode}
+%
+%</package>
 % Provides a command to define new Unicode characters, which is essential
 % for modern typesetting.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{textcomp}[2020/02/02 v2.0n Standard LaTeX package]
+%    \end{macrocode}
+%
+%</package>
 % Provides a wide range of symbols and characters not available in default
 % LaTeX fonts, such as the trademark symbol.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage[super]{nth}[2002/02/27]
+%    \end{macrocode}
+%
+%</package>
 % Adds commands for typesetting ordinal numbers (e.g., 1st, 2nd, 3rd)
 % with correct superscripting.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage[colorinlistoftodos]{todonotes}[2023/01/31]
+%    \end{macrocode}
+%
+%</package>
 % Provides commands for adding margin notes and todo lists during drafting.
 
 % Numbers, Special Characters, and Chemical Formulas
+%<*package>
+%    \begin{macrocode}
 \RequirePackage[version=4]{mhchem}[2021/12/31 v4.09 for typesetting chemical formulae]
+%    \end{macrocode}
+%
+%</package>
 % Provides an easy way to write chemical formulas and equations.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{textgreek}[2011/10/09 v0.7 Greek symbols in text]
+%    \end{macrocode}
+%
+%</package>
 % Provides commands for typesetting Greek letters in text mode.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{siunitx}[2023-03-14 v3.2.3 A comprehensive (SI) units package]
+%    \end{macrocode}
+%
+%</package>
 % Provides a powerful command for typesetting SI units and numbers with
 % proper spacing and formatting.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{geometry}[2020/01/02 v5.9 Page Geometry]
+%    \end{macrocode}
+%
+%</package>
 % This package provides a flexible interface to control the document's page layout.
 % Within this class, it's used to set the document margins, including the left margin
 % based on the `unbound` option.
 
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{tabularx}[2023/12/11 v2.12a]
+%    \end{macrocode}
+%
+%</package>
 % This package provides the `tabularx` environment, which is an extension of the
 % standard `tabular` environment. It includes a new column type, `X`, that
 % automatically adjusts its width to fill the specified table width. This is
 % essential for creating tables that span the full text width of your document.
 
 % References and Citations
+%<*package>
+%    \begin{macrocode}
 \RequirePackage{hyperref}[2023-02-07 v7.00v Hypertext links for LaTeX]
-% Creates hyperlinks within the document, making the table of contents,
-% citations, and external links clickable.
-
-\RequirePackage{csquotes}[2022-09-14 v5.2n context-sensitive quotations (JAW)]
-% Provides context-sensitive quotation facilities, automatically handling
-% nesting and language-specific rules.
-
-\RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
-% A powerful package for managing bibliographies and citations.
-
-% Figures and Tables
-\RequirePackage{graphicx}[2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)]
-% A fundamental package for including graphics files in a document.
-
-\RequirePackage{rotating}[2016/08/11 v2.16d rotated objects in LaTeX]
-% Provides environments for rotating objects such as figures and tables.
-
-\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/03/12 v3.6j Customizing captions (AR)]
-% Provides an interface to customize the captions of figures and tables.
-
-\RequirePackage{float}[2001/11/08 v1.3d Float enhancements (AL)]
-% Provides the H placement specifier for floats, giving more precise control.
-
-\RequirePackage{booktabs}[2020/01/12 v1.61803398 Publication quality tables]
-% Provides commands for drawing professional-looking horizontal rules in tables.
-
-\RequirePackage{xcolor}[2022/06/12 v2.14 LaTeX color extensions (UK)]
-% An extended version of the `color` package, providing more color models
-% and table coloring features.
-
-\RequirePackage{multirow}[2021/03/15 v2.8 Span multiple rows of a table]
-% Provides a command to create cells that span multiple rows in a table.
-
-\RequirePackage{longtable}[2021-09-01 v4.17 Multi-page Table package (DPC)]
-% Provides an environment for creating tables that can span multiple pages.
-
-% Other
-\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
-% Provides fine control over hyphenation.
-
-\RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
-% Provides a conditional command to check which TeX engine is being used.
-
-\RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
-% Adds line numbers to a document, useful during the drafting process.
-
-\RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
-% A set of tools for programming in LaTeX, providing macros for conditionals.
-
-\RequirePackage{soul}[2003/11/17 v2.4]
-% Provides commands for letter-spacing, underlining, and highlighting text.
-
-\RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
-% Adds the bibliography, index, and lists of figures/tables to the table of contents.
-
-\RequirePackage{titlesec}[2021/07/05 v2.14 Sectioning titles]
-% Offers a powerful interface to sectioning commands, allowing for custom headings.
-
-\RequirePackage{textcase}[2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
-% Provides robust commands for changing the case of text.
-
-\RequirePackage{titling}[2004/08/17 v2.1d]
-% Provides greater control over the typesetting of the title page.
-
-\RequirePackage{setspace}[2022/12/04 v6.7b set line spacing]
-% Provides support for setting line spacing, such as single, one-and-a-half, and double spacing.
-
-\RequirePackage{xstring}[2013/10/13 v1.7c]
-% Provides commands for advanced string manipulation.
-
-\RequirePackage{afterpackage}[2006/01/17 v1.1]
-% Provides a command to execute code after a specific package has been loaded.
-
-
 %    \end{macrocode}
 %
 %</package>
+% Creates hyperlinks within the document, making the table of contents,
+% citations, and external links clickable.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{csquotes}[2022-09-14 v5.2n context-sensitive quotations (JAW)]
+%    \end{macrocode}
+%
+%</package>
+% Provides context-sensitive quotation facilities, automatically handling
+% nesting and language-specific rules.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
+%    \end{macrocode}
+%
+%</package>
+% A powerful package for managing bibliographies and citations.
+
+% Figures and Tables
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{graphicx}[2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)]
+%    \end{macrocode}
+%
+%</package>
+% A fundamental package for including graphics files in a document.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{rotating}[2016/08/11 v2.16d rotated objects in LaTeX]
+%    \end{macrocode}
+%
+%</package>
+% Provides environments for rotating objects such as figures and tables.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/03/12 v3.6j Customizing captions (AR)]
+%    \end{macrocode}
+%
+%</package>
+% Provides an interface to customize the captions of figures and tables.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{float}[2001/11/08 v1.3d Float enhancements (AL)]
+%    \end{macrocode}
+%
+%</package>
+% Provides the H placement specifier for floats, giving more precise control.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{booktabs}[2020/01/12 v1.61803398 Publication quality tables]
+%    \end{macrocode}
+%
+%</package>
+% Provides commands for drawing professional-looking horizontal rules in tables.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{xcolor}[2022/06/12 v2.14 LaTeX color extensions (UK)]
+%    \end{macrocode}
+%
+%</package>
+% An extended version of the `color` package, providing more color models
+% and table coloring features.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{multirow}[2021/03/15 v2.8 Span multiple rows of a table]
+%    \end{macrocode}
+%
+%</package>
+% Provides a command to create cells that span multiple rows in a table.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{longtable}[2021-09-01 v4.17 Multi-page Table package (DPC)]
+%    \end{macrocode}
+%
+%</package>
+% Provides an environment for creating tables that can span multiple pages.
+
+% Other
+%<*package>
+%    \begin{macrocode}
+\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
+%    \end{macrocode}
+%
+%</package>
+% Provides fine control over hyphenation.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
+%    \end{macrocode}
+%
+%</package>
+% Provides a conditional command to check which TeX engine is being used.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
+%    \end{macrocode}
+%
+%</package>
+% Adds line numbers to a document, useful during the drafting process.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
+%    \end{macrocode}
+%
+%</package>
+% A set of tools for programming in LaTeX, providing macros for conditionals.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{soul}[2003/11/17 v2.4]
+%    \end{macrocode}
+%
+%</package>
+% Provides commands for letter-spacing, underlining, and highlighting text.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
+%    \end{macrocode}
+%
+%</package>
+% Adds the bibliography, index, and lists of figures/tables to the table of contents.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{titlesec}[2021/07/05 v2.14 Sectioning titles]
+%    \end{macrocode}
+%
+%</package>
+% Offers a powerful interface to sectioning commands, allowing for custom headings.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{textcase}[2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
+%    \end{macrocode}
+%
+%</package>
+% Provides robust commands for changing the case of text.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{titling}[2004/08/17 v2.1d]
+%    \end{macrocode}
+%
+%</package>
+% Provides greater control over the typesetting of the title page.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{setspace}[2022/12/04 v6.7b set line spacing]
+%    \end{macrocode}
+%
+%</package>
+% Provides support for setting line spacing, such as single, one-and-a-half, and double spacing.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{xstring}[2013/10/13 v1.7c]
+%    \end{macrocode}
+%
+%</package>
+% Provides commands for advanced string manipulation.
+
+%<*package>
+%    \begin{macrocode}
+\RequirePackage{afterpackage}[2006/01/17 v1.1]
+%    \end{macrocode}
+%
+%</package>
+% Provides a command to execute code after a specific package has been loaded.
+
+
+
 %
 \endinput

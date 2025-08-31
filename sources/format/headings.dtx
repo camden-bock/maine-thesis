@@ -1,8 +1,22 @@
-%%% ------------------------------------------------------------------
-%           Module B: Headings Formatting
-%%% -------------------------------------------------------------------
-
-%% file: headings.dtx
+% \iffalse
+%
+% This is the driver to produce the documentation PDF for the
+% `maine-thesis` class.
+%
+\documentclass{ltxdoc}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
+\title{The University of Maine Thesis Class - Headings Module}
+\author{Camden Bock}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{headings.dtx}
+\end{document}
+%
+% \fi
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -25,6 +39,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{maine-thesis-headings}[2025/08/31 v1.0 Headings Format]
 %    \end{macrocode}
+%</package>
 %
 %    \section{Introduction}
 %    This module provides functionality for [detailed description of module].
@@ -35,17 +50,20 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % Header Formatting Declarations
 %%%%%%%%%%%%%%%%%%%%%
-
+% \section{Heading Format Definitions}
+% \subsection{Macros}
+%<*package>
 %    \begin{macrocode}
-
-
-
 %Macro for period after heading
 \def\adddot#1{#1.\thinspace}
 %macro for underline
 \def\addul#1{\underline{#1}}
 \def\adddotul#1{\underline{#1}.\thinspace}
 
+%   \subsection{APA 7 Format}
+%   
+%<*package>
+%    \begin{macrocode}
 \newcommand{\apaheadings}{%
     \typeout{applying apa headings}
     %--- APA 7 Style Headings ---
@@ -60,7 +78,14 @@
     \titleformat{\paragraph}[runin]{\normalfont\bfseries\itshape}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
+%   \end{macrocode}
+</package>
 
+
+%   \subsection{Chicago Format}
+%   
+%<*package>
+%    \begin{macrocode}
 \newcommand{\chicagoheadings}{%
     % Level 1: Centered, Boldface, Headline-style
     \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\chaptertitlename\ \thechapter}{-3pt}{\MakeTextUppercase}
@@ -82,7 +107,13 @@
     \titleformat{\paragraph}[runin]{\normalfont\bfseries\itshape}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
+%   \end{macrocode}
+</package>
 
+%   \subsection{Maine Thesis Default Format}
+%   
+%<*package>
+%    \begin{macrocode}
 \newcommand{\mainethesisheadings}{%
     %--- Sample Headings from Guidelines ---
     % Chapter Titles
@@ -105,7 +136,13 @@
     \titleformat{\paragraph}[runin]{\normalfont}{}{0pt}{\adddotul}
     \titlespacing{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
 }
+%   \end{macrocode}
+</package>
 
+%   \subsection{iDecimal Format}
+%   
+%<*package>
+%    \begin{macrocode}
 \newcommand{\idecimalheadings}{%
     \setcounter{tocdepth}{4}
     % Chapter Titles: Centered and bold
@@ -128,7 +165,14 @@
     \titleformat{\paragraph}[runin]{\normalfont\bfseries}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
+%   \end{macrocode}
+</package>
 
+
+%   \subsection{jDecimal Format}
+%   
+%<*package>
+%    \begin{macrocode}
 \newcommand{\jdecimalheadings}{%
     %--- Justified Decimal System (Default) ---
     \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
@@ -144,16 +188,19 @@
     \titleformat{\subparagraph}{\normalfont\hspace{1.5em}}{\thesubparagraph}{0pt}{\addul}
     \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
 }
-
-
-\end{macrocode}
+%   \end{macrocode}
+</package>
 
 %%%%%%%%%%%%%%%%%%%%%
 % Implementation
 %%%%%%%%%%%%%%%%%%%%%
 
-\begin{macrocode}
+%
+%\section{Implement Heading from Options Flag using a macro}
+%
 
+%<*package>
+%   \begin{macrocode}
 \typeout{=== Checking HeadingStyle Flag ===}
 
 \ifdefined\HeadingStyle

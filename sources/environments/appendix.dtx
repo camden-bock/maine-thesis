@@ -1,8 +1,22 @@
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Appendix             %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% file: appendix.dtx
+% \iffalse
+%
+% This is the driver to produce the documentation PDF for the
+% `maine-thesis` class.
+%
+\documentclass{ltxdoc}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
+\title{The University of Maine Thesis Class - Appendix Module}
+\author{Camden Bock}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{appendix.dtx}
+\end{document}
+%
+% \fi
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -25,6 +39,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{maine-thesis-appendix}[2025/08/31 v1.0 Appendix Enviornment]
 %    \end{macrocode}
+%</package>
+%
 %
 %    \section{Introduction}
 %    This module provides functionality for [detailed description of module].
@@ -33,8 +49,8 @@
 %    \subsection{User Commands}
 %    Here are the commands that the end user can use.
 %
+%<*package>
 %    \begin{macrocode}
-
 \renewcommand{\appendix}{%
     \cleardoublepage
     \doublespacing
@@ -50,8 +66,6 @@
 }
 
 \pretocmd{\chapter}{\ifapp\renewcommand*\chaptername{Appendix}\fi}{}{}
-
-
 %    \end{macrocode}
 %
 %</package>

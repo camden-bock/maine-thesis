@@ -1,7 +1,22 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Biography             %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% file: mymodule.dtx
+% \iffalse
+%
+% This is the driver to produce the documentation PDF for the
+% `maine-thesis` class.
+%
+\documentclass{ltxdoc}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
+\title{The University of Maine Thesis Class - Biography Module}
+\author{Camden Bock}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{biography.dtx}
+\end{document}
+%
+% \fi
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -24,6 +39,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{maine-thesis-mymodule}[2025/08/31 v1.0 Biography Environment]
 %    \end{macrocode}
+%</package>
+%
 %
 %    \section{Introduction}
 %    This module provides functionality for [detailed description of module].
@@ -32,6 +49,8 @@
 %    \subsection{User Commands}
 %    Here are the commands that the end user can use.
 %
+%
+%<*package>
 %    \begin{macrocode}
 
 \newenvironment{biography}{%
@@ -50,8 +69,6 @@
     \fi%
     \ is a candidate for the \@degree\ degree in \@program\ from the University of Maine in \@submitdate.\par\endgroup
 }
-
-
 %    \end{macrocode}
 %
 %</package>

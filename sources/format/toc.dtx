@@ -1,8 +1,22 @@
-%%% ------------------------------------------------------------------
-%           Module D: TOC Formatting
-%%% -------------------------------------------------------------------
-
-%% file: toc.dtx
+% \iffalse
+%
+% This is the driver to produce the documentation PDF for the
+% `maine-thesis` class.
+%
+\documentclass{ltxdoc}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
+\title{The University of Maine Thesis Class - Title of Contents Module}
+\author{Camden Bock}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{toc.dtx}
+\end{document}
+%
+% \fi
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -26,6 +40,8 @@
 \ProvidesPackage{maine-thesis-toc}[2025/08/31 v1.0 Table of Contents Format]
 %    \end{macrocode}
 %
+%</package>
+%
 %    \section{Introduction}
 %    This module provides functionality for [detailed description of module].
 %    It is designed to be loaded by the main `maine-thesis.cls` file.
@@ -33,37 +49,56 @@
 %    \subsection{User Commands}
 %    Here are the commands that the end user can use.
 %
+%<*package>
 %    \begin{macrocode}
 
 \renewcommand{\cftchapfont}{\normalfont\bfseries}
 \renewcommand{\cftchappagefont}{\normalfont}
 \renewcommand{\cftloftitlefont}{\normalfont\bfseries}
+%    \end{macrocode}
+%
+%</package>
 
+
+%<*package>
+%    \begin{macrocode}
 \newenvironment{thesislist}[1]{%
     \chapter*{\listname\ #1}
     \addcontentsline{toc}{chapter}{{\texorpdfstring{\MakeTextUppercase{\listname\ #1}}{\listname\ #1}}}
     \begingroup
 }{\par\endgroup}
+%    \end{macrocode}
+%
+%</package>
 
 %% Define Leader Dots
+%<*package>
+%    \begin{macrocode}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\contentsname}{Table of Contents}
+%    \end{macrocode}
+%
+%</package>
 
 % \cftsecindent and \cftsecnumwidth define where the title starts.
 % \cftsetrmarg and \cftsetpnumwidth define where the dotted leader ends and where the page number starts.
 
+%<*package>
+%    \begin{macrocode}
 \setlength{\cftsecindent}{1.5em}
 \setlength{\cftsecnumwidth}{2em}
+%    \end{macrocode}
+%
+%</package>
 
+%<*package>
+%    \begin{macrocode}
 \cftsetrmarg{3cm} % Sets the right margin for the TOC entry
 \cftsetpnumwidth{2cm} % Sets the width for the page number box
-
-\end{macrocode}
-
 %    \end{macrocode}
 %
 %</package>

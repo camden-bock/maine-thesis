@@ -1,22 +1,4 @@
-% \iffalse
-%
-% This is the driver to produce the documentation PDF for the
-% `maine-thesis` class.
-%
-\documentclass{ltxdoc}
-\CodelineIndex
-\EnableCrossrefs
-\RecordChanges
-% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
-\title{The University of Maine Thesis Class - Options Module}
-\author{Camden Bock}
-\date{\today}
-\begin{document}
-  \maketitle
-  \DocInput{maine-thesis.dtx}
-\end{document}
-%
-% \fi
+
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -128,6 +110,8 @@
 %<*package>
 %    \begin{macrocode}
 \DeclareOption{legacycaptions}{\mt@legacycaptionstrue}
+%    \end{macrocode}
+%</package>
 
 % These options control the placement of page numbers.
 %<*package>
@@ -179,6 +163,7 @@
 }
 %    \end{macrocode}
 %</package>
+%
 % This command sets the default citation style if none is specified.
 %<*package>
 %    \begin{macrocode}

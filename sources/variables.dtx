@@ -25,6 +25,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{maine-thesis-variables}[2025/08/31 v1.0 Variables for Maine-Thesis]
 %    \end{macrocode}
+%</package>
+%
 %
 %    \section{Introduction}
 %    This module provides functionality for [detailed description of module].
@@ -33,36 +35,121 @@
 %    \subsection{User Commands}
 %    Here are the commands that the end user can use.
 %
+%<*package>
 %    \begin{macrocode}
-
 \def\@title{}
+%    \end{macrocode}
+%
+%</package>
+
+%<*package>
+%    \begin{macrocode}
 \def\@author{}
+%    \end{macrocode}
+%
+%</package>
+
+%<*package>
+%    \begin{macrocode}
 \def\@authorpronoun{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@degreesheld{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@degree{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@program{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@submitdate{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@principaladvisor{}
 \def\@secondadvisor{}
 \def\@principalshort{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@firstreader{}
 \def\@secondreader{}
 \def\@thirdreader{}
 \def\@fourthreader{}
 \def\@fifthreader{}
-\def\@bibfiles{}
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
+\def\@bibfiles{} %TODO I'm guessing this isn't even used?
+%    \end{macrocode}
+%
+%</package>
+
+
+%<*package>
+%    \begin{macrocode}
 \def\@type{Dissertation}
 \def\@LastLevel{0}
+%    \end{macrocode}
+%
+%</package>
 
+
+%<*package>
+%    \begin{macrocode}
 \newif\ifmultipleappendices\multipleappendicesfalse
 \newif\ifcopyrightpage\copyrightpagefalse
 \newif\ifbigtitlepage\bigtitlepagefalse
 \newif\ifverybigtitlepage\verybigtitlepagefalse
 \newif\ifapp\appfalse
+%    \end{macrocode}
+%
+%</package>
 
+
+%<*package>
+%    \begin{macrocode}
 \newcount\numcomm \numcomm=4
 \newcount\numadv \numadv=1
+%    \end{macrocode}
+%
+%</package>
 
+%<*package>
+%    \begin{macrocode}
 \renewcommand*\contentsname{Table of Contents}
 \renewcommand*\bibname{References}
 \renewcommand*\indexname{INDEX}
@@ -75,11 +162,15 @@
 \newcommand*\landacknowledgename{Land Acknowledgments}
 \newcommand*\dedicationname{Dedication}
 \newcommand*\bioname{Biography of the Author}
+%    \end{macrocode}
+%
+%</package>
 
 %%%%%%%%%%%%%%%%%%%%%
 % Variable Modification Commands
 %%%%%%%%%%%%%%%%%%%%%
-%<*class>
+%<*package>
+%    \begin{macrocode}
 \renewcommand{\author}[1]{%
     \ifx\empty#1\empty\else\gdef\@author{#1}\fi}
 \newcommand{\authorpronoun}[1]{%
@@ -138,8 +229,6 @@
     \fi
 }
 \renewcommand{\bibname}{References}
-
-
 %    \end{macrocode}
 %
 %</package>
