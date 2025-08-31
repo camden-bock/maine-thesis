@@ -1,0 +1,70 @@
+%%% ------------------------------------------------------------------
+%           Module A: General Formatting
+%%% -------------------------------------------------------------------
+%% file: general-format.dtx
+%%
+%% This is a module for the 'maine-thesis' LaTeX document class.
+%% It provides functionality for [brief description of module].
+%%
+%% This program is free software; you can redistribute it and/or modify
+%% it under the terms of the LaTeX Project Public License (LPPL).
+%%
+%% ----------------------------------------------------------------------
+%% Installation:
+%%
+%% To install, simply run `l3build unpack` which will extract the `maine-thesis-general-format.sty`
+%% file from this source.
+%% ----------------------------------------------------------------------
+%
+%<*package>
+%    The `maine-thesis-general-format` package.
+%    This code will be written to `maine-thesis-general-format.sty`.
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{maine-thesis-general-format}[2025/08/31 v1.0 General Format]
+%    \end{macrocode}
+%
+%    \section{Introduction}
+%    This module provides functionality for [detailed description of module].
+%    It is designed to be loaded by the main `maine-thesis.cls` file.
+%
+%    \subsection{User Commands}
+%    Here are the commands that the end user can use.
+%
+%    \begin{macrocode}
+
+\ifdraft{\linenumbers}\fi
+
+\setmainfont{EB Garamond}
+
+\geometry{
+    letterpaper,
+    margin=1in,
+    left=\@margg,
+    headsep=0.4in,
+    headheight=14pt,
+    footskip=30pt,
+    marginparwidth=40pt,
+    marginparsep=10pt}
+
+\setcounter{secnumdepth}{\value{secnumdefault}}
+\setcounter{tocdepth}{\value{secnumdefault}}
+\raggedbottom
+\raggedright
+\parindent=1.5em\relax
+\markboth{}{}
+\clubpenalty=10000
+\widowpenalty=10000
+
+\def\verbatim@font{\rmfamily}
+
+\newcommand*\loftspacing{10}
+
+
+
+%    \end{macrocode}
+%
+%</package>
+%
+\endinput

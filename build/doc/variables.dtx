@@ -1,0 +1,147 @@
+
+%%%%%%%%%%%%%%%%%%%%%
+% Variable Declarations
+%%%%%%%%%%%%%%%%%%%%%
+%% file: variables.dtx
+%%
+%% This is a module for the 'maine-thesis' LaTeX document class.
+%% It provides functionality for [brief description of module].
+%%
+%% This program is free software; you can redistribute it and/or modify
+%% it under the terms of the LaTeX Project Public License (LPPL).
+%%
+%% ----------------------------------------------------------------------
+%% Installation:
+%%
+%% To install, simply run `l3build unpack` which will extract the `maine-thesis-variables.sty`
+%% file from this source.
+%% ----------------------------------------------------------------------
+%
+%<*package>
+%    The `maine-thesis-variables` package.
+%    This code will be written to `maine-thesis-variables.sty`.
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{maine-thesis-variables}[2025/08/31 v1.0 Variables for Maine-Thesis]
+%    \end{macrocode}
+%
+%    \section{Introduction}
+%    This module provides functionality for [detailed description of module].
+%    It is designed to be loaded by the main `maine-thesis.cls` file.
+%
+%    \subsection{User Commands}
+%    Here are the commands that the end user can use.
+%
+%    \begin{macrocode}
+
+\def\@title{}
+\def\@author{}
+\def\@authorpronoun{}
+\def\@degreesheld{}
+\def\@degree{}
+\def\@program{}
+\def\@submitdate{}
+\def\@principaladvisor{}
+\def\@secondadvisor{}
+\def\@principalshort{}
+\def\@firstreader{}
+\def\@secondreader{}
+\def\@thirdreader{}
+\def\@fourthreader{}
+\def\@fifthreader{}
+\def\@bibfiles{}
+\def\@type{Dissertation}
+\def\@LastLevel{0}
+
+\newif\ifmultipleappendices\multipleappendicesfalse
+\newif\ifcopyrightpage\copyrightpagefalse
+\newif\ifbigtitlepage\bigtitlepagefalse
+\newif\ifverybigtitlepage\verybigtitlepagefalse
+\newif\ifapp\appfalse
+
+\newcount\numcomm \numcomm=4
+\newcount\numadv \numadv=1
+
+\renewcommand*\contentsname{Table of Contents}
+\renewcommand*\bibname{References}
+\renewcommand*\indexname{INDEX}
+\renewcommand*\chaptername{Chapter}
+\renewcommand*\appendixname{Appendix}
+\newcommand*\listname{List of}
+\newcommand*\chapternamep{\chaptername s}
+\newcommand*\prefacename{Preface}
+\newcommand*\acknowledgename{Acknowledgments}
+\newcommand*\landacknowledgename{Land Acknowledgments}
+\newcommand*\dedicationname{Dedication}
+\newcommand*\bioname{Biography of the Author}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Variable Modification Commands
+%%%%%%%%%%%%%%%%%%%%%
+%<*class>
+\renewcommand{\author}[1]{%
+    \ifx\empty#1\empty\else\gdef\@author{#1}\fi}
+\newcommand{\authorpronoun}[1]{%
+    \ifx\empty#1\empty\else\gdef\@authorpronoun{#1}\fi}
+\renewcommand{\title}[1]{%
+    \ifx\empty#1\empty\else\gdef\@title{#1}\fi}
+\newcommand{\degreesheld}[1]{%
+    \ifx\empty#1\empty\else\gdef\@degreesheld{#1}\fi}
+\newcommand{\degree}[1]{%
+    \ifx\empty#1\empty\else\gdef\@degree{#1}\fi}
+\newcommand{\program}[1]{%
+    \ifx\empty#1\empty\else\gdef\@program{#1}\fi}
+\newcommand{\submitdate}[1]{%
+    \ifx\empty#1\empty\else\gdef\@submitdate{#1}\fi}
+\newcommand{\principaladvisor}[2][\empty]{%
+    \ifx\empty#1\empty\else\gdef\@principalshort{\sloppy#1}\fi%
+    \ifx\empty#2\empty\else\gdef\@principaladvisor{\sloppy#2}\fi%
+    }
+\newcommand{\secondadvisor}[1]{%
+    \ifx\empty#1\empty\else\gdef\@secondadvisor{\sloppy#1}\fi
+    \twoadvisors}
+\newcommand{\principalshort}[1]{%
+    \ifx\empty#1\empty\else\gdef\@principalshort{#1}\fi}
+\newcommand{\firstreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@firstreader{\sloppy#1}\fi
+    \members{1}}
+\newcommand{\secondreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@secondreader{\sloppy#1}\fi
+    \members{2}}
+\newcommand{\thirdreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@thirdreader{\sloppy#1}\fi
+    \members{3}}
+\newcommand{\fourthreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@fourthreader{\sloppy#1}\fi
+    \members{4}}
+\newcommand{\fifthreader}[1]{%
+    \ifx\empty#1\empty\else\gdef\@fifthreader{\sloppy#1}\fi
+    \members{5}}
+\newcommand{\bibfiles}[1]{%
+    \ifx\empty#1\empty\else\gdef\@bibfiles{#1}\fi}
+\newcommand{\members}[1]{\numcomm=#1}
+\newcommand{\twoadvisors}{\numadv=2}
+\newcommand{\oneadvisor}{\numadv=1}
+\newcommand{\thesis}{
+    \gdef\@type{Thesis}}
+\newcommand{\project}{
+    \gdef\@type{Project}}
+\newcommand{\compresstitlepage}[1][1]{
+    \ifcase#1
+        \relax
+    \or
+        \bigtitlepagetrue
+    \or
+        \bigtitlepagetrue
+        \verybigtitlepagetrue
+    \fi
+}
+\renewcommand{\bibname}{References}
+
+
+%    \end{macrocode}
+%
+%</package>
+%
+\endinput

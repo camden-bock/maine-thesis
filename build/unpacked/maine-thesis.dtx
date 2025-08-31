@@ -57,9 +57,10 @@
 \def\@margg{1.5in}
 \def\mt@pagestyle{bottom}
 
-%	\end{macrocode}
+%   \end{macrocode}
 %
 %</class>
+%
 %    \section{Introduction}
 %    This class is designed to assist students at the University of Maine...
 %    % You would have more documentation here...
@@ -68,15 +69,22 @@
 \RequirePackage{maine-thesis-options}
 \RequirePackage{maine-thesis-requirements}
 %    \end{macrocode}
-%
+%</class>
 %    \subsection{Class Options}
 %    The class options are processed in the `options.dtx` module.
 %
+%<*class>
 %    \begin{macrocode}
 \ProcessOptions\relax
 \LoadClass[<your default class options>]{report}
 %    \end{macrocode}
-
+%</class>
+%
+%   \subsection{Load Modules}
+%     Each of these modules has a specific function.
+%
+%<*class>
+%    \begin{macrocode}
 \RequirePackage{maine-thesis-variables}
 \RequirePackage{maine-thesis-pagestyle}
 \RequirePackage{maine-thesis-depreciated}
@@ -95,8 +103,8 @@
 \RequirePackage{maine-thesis-main-seperator}
 \RequirePackage{maine-thesis-preface}
 \RequirePackage{maine-thesis-references}
-%
-%  \end{macrocode}
+%    \end{macrocode}
 %</class>
-%%
+%
+\endinput
 %% End of file `maine-thesis.dtx'

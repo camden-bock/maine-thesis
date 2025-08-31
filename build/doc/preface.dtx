@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Preface             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% file: preface.dtx
+%%
+%% This is a module for the 'maine-thesis' LaTeX document class.
+%% It provides functionality for [brief description of module].
+%%
+%% This program is free software; you can redistribute it and/or modify
+%% it under the terms of the LaTeX Project Public License (LPPL).
+%%
+%% ----------------------------------------------------------------------
+%% Installation:
+%%
+%% To install, simply run `l3build unpack` which will extract the `maine-thesis-preface.sty`
+%% file from this source.
+%% ----------------------------------------------------------------------
+%
+%<*package>
+%    The `maine-thesis-preface` package.
+%    This code will be written to `maine-thesis-preface.sty`.
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{maine-thesis-preface}[2025/08/31 v1.0 Preface Environment]
+%    \end{macrocode}
+%
+%    \section{Introduction}
+%    This module provides functionality for [detailed description of module].
+%    It is designed to be loaded by the main `maine-thesis.cls` file.
+%
+%    \subsection{User Commands}
+%    Here are the commands that the end user can use.
+%
+%    \begin{macrocode}
+
+\newenvironment{preface}{%
+    \chapter*{\prefacename}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\prefacename}}{\prefacename}}
+    \doublespacing
+    \begingroup\setcounter{secnumdepth}{0}
+}{\setcounter{secnumdepth}{\value{secnumdefault}}\par\endgroup}
+
+
+%    \end{macrocode}
+%
+%</package>
+%
+\endinput
