@@ -35,6 +35,7 @@
 
 temp*
 */_build*
+*/build*
 *.tmp.dtx
 mwe/maine-thesis.cls
 template/maine-thesis.cls
