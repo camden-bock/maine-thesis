@@ -1,7 +1,7 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Biography             %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% file: mymodule.dtx
+%%% ------------------------------------------------------------------
+%           Module C: Caption Formatting
+%%% -------------------------------------------------------------------
+%% file: captions.dtx
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -12,17 +12,17 @@
 %% ----------------------------------------------------------------------
 %% Installation:
 %%
-%% To install, simply run `l3build unpack` which will extract the `maine-thesis-mymodule.sty`
+%% To install, simply run `l3build unpack` which will extract the `maine-thesis-captions.sty`
 %% file from this source.
 %% ----------------------------------------------------------------------
 %
 %<*package>
-%    The `maine-thesis-mymodule` package.
-%    This code will be written to `maine-thesis-mymodule.sty`.
+%    The `maine-thesis-captions` package.
+%    This code will be written to `maine-thesis-captions.sty`.
 %
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{maine-thesis-mymodule}[2025/08/31 v1.0 Biography Environment]
+\ProvidesPackage{maine-thesis-captions}[2025/08/31 v1.0 Captions Format]
 %    \end{macrocode}
 %
 %    \section{Introduction}
@@ -34,22 +34,11 @@
 %
 %    \begin{macrocode}
 
-\newenvironment{biography}{%
-    \chapter*{\bioname}
-    \addtocontents{toc}{\protect\nopagebreak}
-    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bioname}}{\bioname}}
-    \begingroup
-    \doublespacing
-    \thispagestyle{plain}
-}{%
-    \par
-    \ifx\@authorpronoun\empty
-        \@author
-    \else
-        \@authorpronoun
-    \fi%
-    \ is a candidate for the \@degree\ degree in \@program\ from the University of Maine in \@submitdate.\par\endgroup
-}
+%\DeclareCaptionFormat{thesis}
+%{%
+%    \textbf{#1#2}\textit{\small #3}
+%}
+%\captionsetup{format=thesis}
 
 
 %    \end{macrocode}

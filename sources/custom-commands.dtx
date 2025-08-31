@@ -4,7 +4,38 @@
 % TODO: ideally, we want to reduce these and use our dependencies insetead,
 % but still provide backwards compatability
 
-\begin{macrocode}
+%% file: custom-commands.dtx
+%%
+%% This is a module for the 'maine-thesis' LaTeX document class.
+%% It provides functionality for [brief description of module].
+%%
+%% This program is free software; you can redistribute it and/or modify
+%% it under the terms of the LaTeX Project Public License (LPPL).
+%%
+%% ----------------------------------------------------------------------
+%% Installation:
+%%
+%% To install, simply run `l3build unpack` which will extract the `maine-thesis-custom-commands.sty`
+%% file from this source.
+%% ----------------------------------------------------------------------
+%
+%<*package>
+%    The `maine-thesis-custom-commands` package.
+%    This code will be written to `maine-thesis-custom-commands.sty`.
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{maine-thesis-custom-commands}[2025/08/31 v1.0 Custom Commands for Maine-Thesis]
+%    \end{macrocode}
+%
+%    \section{Introduction}
+%    This module provides functionality for [detailed description of module].
+%    It is designed to be loaded by the main `maine-thesis.cls` file.
+%
+%    \subsection{User Commands}
+%    Here are the commands that the end user can use.
+%
+%    \begin{macrocode}
 
 \newcommand{\comment}[1]{
     \ifdraft
@@ -24,4 +55,9 @@
     \fi%
 }
 
-\end{macrocode}
+
+%    \end{macrocode}
+%
+%</package>
+%
+\endinput

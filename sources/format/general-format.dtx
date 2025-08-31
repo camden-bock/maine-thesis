@@ -1,7 +1,7 @@
 %%% ------------------------------------------------------------------
-%           Module 8: Depreciated Function Errors
+%           Module A: General Formatting
 %%% -------------------------------------------------------------------
-%% file: depreciated.dtx
+%% file: general-format.dtx
 %%
 %% This is a module for the 'maine-thesis' LaTeX document class.
 %% It provides functionality for [brief description of module].
@@ -12,17 +12,17 @@
 %% ----------------------------------------------------------------------
 %% Installation:
 %%
-%% To install, simply run `l3build unpack` which will extract the `maine-thesis-depreciated.sty`
+%% To install, simply run `l3build unpack` which will extract the `maine-thesis-general-format.sty`
 %% file from this source.
 %% ----------------------------------------------------------------------
 %
 %<*package>
-%    The `maine-thesis-depreciated` package.
-%    This code will be written to `maine-thesis-depreciated.sty`.
+%    The `maine-thesis-general-format` package.
+%    This code will be written to `maine-thesis-general-format.sty`.
 %
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{maine-thesis-depreciated}[2025/08/31 v1.0 Depreciated Functions for Maine-Thesis]
+\ProvidesPackage{maine-thesis-general-format}[2025/08/31 v1.0 General Format]
 %    \end{macrocode}
 %
 %    \section{Introduction}
@@ -34,13 +34,33 @@
 %
 %    \begin{macrocode}
 
-\newcommand{\libraryrights}{%
-    \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Library Rights Statement page}{Please remove \protect\libraryrights\space from your thesis.}%
-  }
+\ifdraft{\linenumbers}\fi
 
-\newcommand{\dissacceptance}{%
-    \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
-}
+\setmainfont{EB Garamond}
+
+\geometry{
+    letterpaper,
+    margin=1in,
+    left=\@margg,
+    headsep=0.4in,
+    headheight=14pt,
+    footskip=30pt,
+    marginparwidth=40pt,
+    marginparsep=10pt}
+
+\setcounter{secnumdepth}{\value{secnumdefault}}
+\setcounter{tocdepth}{\value{secnumdefault}}
+\raggedbottom
+\raggedright
+\parindent=1.5em\relax
+\markboth{}{}
+\clubpenalty=10000
+\widowpenalty=10000
+
+\def\verbatim@font{\rmfamily}
+
+\newcommand*\loftspacing{10}
+
 
 
 %    \end{macrocode}

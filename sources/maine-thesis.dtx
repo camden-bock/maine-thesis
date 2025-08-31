@@ -1,0 +1,102 @@
+% \iffalse
+%
+% This is the driver to produce the documentation PDF for the
+% `maine-thesis` class.
+%
+\documentclass{ltxdoc}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+% Note: No \usepackage or \RequirePackage here, as that would cause the recursive error.
+\title{The University of Maine Thesis Class}
+\author{Camden Bock}
+\date{\today}
+\begin{document}
+  \maketitle
+  \DocInput{maine-thesis.dtx}
+\end{document}
+%
+% \fi
+%
+% =============================================================
+% The actual class code, for extraction by docstrip
+% This is processed by `l3build unpack` to create `maine-thesis.cls`.
+% =============================================================
+%
+%<*class>
+%    The `maine-thesis` class.
+%    This code will be written to `maine-thesis.cls`.
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesClass{maine-thesis}[2025/09/01 v2.1 Maine thesis class]
+%    \end{macrocode}
+%
+%</class>
+%
+%    \section{Introduction}
+%    This class is designed to assist students at the University of Maine...
+%
+%    \subsection{Module Loading}
+%    This is where all the supporting modules are loaded using \cmd{RequirePackage}.
+%
+%<*class>
+%    \begin{macrocode}
+\newif\ifdraft\draftfalse
+\newif\iftwoside\twosidefalse
+\newif\ifmt@official\mt@officialtrue
+\newif\ifunbound\unboundfalse
+\newif\ifmt@legacycaptions\mt@legacycaptionsfalse
+\newif\ifmt@loftspace\mt@loftspacefalse
+\newcommand\docsize{}
+\newcommand\side{oneside}
+\newcounter{secnumdefault}
+\setcounter{secnumdefault}{3}
+\newcounter{head}
+\setcounter{head}{1000}
+\def\@margg{1.5in}
+\def\mt@pagestyle{bottom}
+
+%	\end{macrocode}
+%
+%</class>
+%    \section{Introduction}
+%    This class is designed to assist students at the University of Maine...
+%    % You would have more documentation here...
+%<*class>
+%    \begin{macrocode}
+\RequirePackage{maine-thesis-options}
+\RequirePackage{maine-thesis-requirements}
+%    \end{macrocode}
+%
+%    \subsection{Class Options}
+%    The class options are processed in the `options.dtx` module.
+%
+%    \begin{macrocode}
+\ProcessOptions\relax
+\LoadClass[<your default class options>]{report}
+%    \end{macrocode}
+
+\RequirePackage{maine-thesis-variables}
+\RequirePackage{maine-thesis-pagestyle}
+\RequirePackage{maine-thesis-depreciated}
+\RequirePackage{maine-thesis-caption}
+\RequirePackage{maine-thesis-general-format}
+\RequirePackage{maine-thesis-headings}
+\RequirePackage{maine-thesis-pagestyle}
+\RequirePackage{maine-thesis-titlepage}
+\RequirePackage{maine-thesis-contents}
+\RequirePackage{maine-thesis-abstract}
+\RequirePackage{maine-thesis-acknowledgements}
+\RequirePackage{maine-thesis-appendix}
+\RequirePackage{maine-thesis-biography}
+\RequirePackage{maine-thesis-copyright}
+\RequirePackage{maine-thesis-dedication}
+\RequirePackage{maine-thesis-main-seperator}
+\RequirePackage{maine-thesis-preface}
+\RequirePackage{maine-thesis-references}
+%
+%  \end{macrocode}
+%</class>
+%%
+%% End of file `maine-thesis.dtx'
