@@ -1,240 +1,43 @@
-% \iffalse meta-comment
-%
-% This work may be distributed and/or modified under the conditions of the
-% LaTeX Project Public License, either version 1.3c of this license or (at
-% your option) any later version. The latest version of this license is in
-%
-% http://www.latex-project.org/lppl.txt
-%
-% and version 1.3c or later is part of all distributions of LaTeX version
-% 2005/12/01 or later.
-%
-% This work is "maintained" (as per LPPL maintenance status) by
-% Camden Bock.
-%
-% This work consists of the files maine-thesis.dtx and
-% and the derived files           maine-thesis.ins,
-%                                 maine-thesis.sty,
-%                                 example.tex.
-%
-%<*ignore>
-\begingroup
-  \def\x{LaTeX2e}
-\expandafter\endgroup
-\ifcase 0\ifx\install y1\fi\expandafter
-         \ifx\csname processbatchFile\endcsname\relax\else1\fi
-         \ifx\fmtname\x\else 1\fi\relax
-\else\csname fi\endcsname
-%</ignore>
-%<*install>
-\input l3docstrip.tex
-\keepsilent
-\askforoverwritefalse
-\preamble
-
-This work may be distributed and/or modified under the conditions of the
-LaTeX Project Public License, either version 1.3c of this license or (at
-your option) any later version. The latest version of this license is in
-
- http://www.latex-project.org/lppl.txt
-
-and version 1.3c or later is part of all distributions of LaTeX version
-2005/12/01 or later.
-
-This work was originally developed by
-rpspringuel (R. Padraic Springuel) maintained v1 on github.
-camden-bock and hanna.brooks updated a variety of package references for consistency with 2025 style requirements and modern citation management with biber.
-
-This work is "maintained" (as per LPPL maintenance status) by
-Camden Bock.
-
-This work consists of the files maine-thesis.dtx and
-and the derived files           maine-thesis.ins,
-                                maine-thesis.sty,
-                                example.tex.
-
-\endpreamble
-\postamble
-Adapted from classic "A model .dtx file" by Joseph Wright
-https://www.texdev.net/2009/10/06/a-model-dtx-file/
-\endpostamble
-
-\usedir{tex/latex/maine-thesis}
-\generate{
-  \file{maine-thesis.cls}{\from{maine-thesis.dtx}{package}}
-  \nopreamble\nopostamble
-  \file{example.tex}{\from{maine-thesis.dtx}{example}}
-}
-
-\Msg{*****************************************************************}%
-\Msg{*}
-\Msg{* To finish the installation you have to move the files into a }
-\Msg{* TDS directory searched by TeX.}
-\Msg{*}
-\Msg{* To produce the documentation with source code run lualatex }%
-\Msg{* thrice on file maine-thesis.dtx }%
-\Msg{*}
-\Msg{* Happy TeXing!}
-\Msg{*}
-\Msg{*****************************************************************}%
-
-\endbatchfile
-%</install>
-%<*ignore>
-\fi
-%</ignore>
-%<*driver>
-\documentclass{ltxdoc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[numbered]{hypdoc}
-\usepackage{bookmark}
-\EnableCrossrefs
-\CodelineIndex
-\RecordChanges
-\begin{document}
-  \DocInput{maine-thesis.dtx}
-\end{document}
-%</driver>
-% \fi
-%
-% \GetFileInfo{maine-thesis.cls}
-%
-% \title{^^A
-%   \textsf{maine-thesis} --- description text\thanks{^^A
-%    This file describes version \fileversion, last revised \filedate.^^A
-%  }^^A
-% }
-% \author{^^A
-%  You\thanks{E-mail: you@your.domain}^^A
-% }
-% \date{Released \filedate}
-%
-% \maketitle
-%
-% \begin{abstract}
-% This is an example package for educational purposes only that defines a single macro
-% \end{abstract}
-%
-% \tableofcontents
-%
-% \section{User Interface}
-%
-% \changes{v1.0}{2020/02/12}{First public release}
-%
-% \DescribeMacro{\examplemacro}
-% Some text about an example macro called \cs{examplemacro}, which
-% might have an optional argument \oarg{arg1} and mandatory one
-% \marg{arg2}.
-%
-% \section{Example}
-%
-% Here is a straightforward example to illustrate how these macro
-% are used.
-%    \begin{macrocode}
-%<*example>
-\documentclass[jdecimal, citestyle=apa, 11pt]{maine-thesis}  % Default options 12pt and final copy
-
-% Include necessary packages here
-\usepackage{mwe}
-\usepackage{blindtext}
-
-% Replace contents of {...} with your own information.
-\title{An essay upon the vasomotor changes in tabes dorsalis}					% Title of thesis
-\author{Mary Morstan}					% Author's name: First Middle Last
-\degreesheld{Bachelor of Medicine, University of Edinburg \\
-Master of Surgery, University of Edinburg}			% Previously earned degree(s), institution(s) and year(s).
-\degree{Doctor of Medicine}  				% Degree to be granted
-\program{School of Medicine}				% Degree granting department or program
-\submitdate{May 1885}				% Month and year of graduation (do not separate with a comma)
-
-\principaladvisor[Dr. Seuss]{Dr. Seuss, Professor of Literature} 			% Advisor's [short title and name]{name, long title}
-% If you have more than one advisor then you'll should delete the first argument ("[...]") above and uncomment the following commands
-%\secondadvisor{...}
-%\principalshort{...} 			% Shortened advisor name for abstract.  See guidelines for example.
-
-% Include all committee members names and titles
-\firstreader{Dr. Dolittle, Vetinary School}
-\secondreader{Dr Watson, Medical School}
-% If necessary (i.e. for a doctorate), include extra committee members.  Else, comment out or delete any that are unnecessary
-\thirdreader{Dr. Digory Kirke, Professor of Geography of Magical Lands}
-
-% If the thesis has MORE than one appendix, leave the following command in.  Else, comment it out.
-\multipleappendicestrue
+%%
+%% This is file `maine-thesis.cls',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% maine-thesis.dtx  (with options: `package')
+%% 
+%% This work may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.3c of this license or (at
+%% your option) any later version. The latest version of this license is in
+%% 
+%%  http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3c or later is part of all distributions of LaTeX version
+%% 2005/12/01 or later.
+%% 
+%% This work was originally developed by
+%% rpspringuel (R. Padraic Springuel) maintained v1 on github.
+%% camden-bock and hanna.brooks updated a variety of package references for consistency with 2025 style requirements and modern citation management with biber.
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Camden Bock.
+%% 
+%% This work consists of the files maine-thesis.dtx and
+%% and the derived files           maine-thesis.ins,
+%%                                 maine-thesis.sty,
+%%                                 example.tex.
+%% 
 
 
-% Begin the document.
-\begin{document}
-\preliminary
-\maketitle
-
-\begin{abstract}
-\Blindtext
-\end{abstract}
-
-\begin{layabstract}{...}	% Replace the ... with the list of keywords
-\blindtext
-\end{layabstract}
-
-% Commands for the required lists
-\tableofcontents
-
-% Sets the document spacing and pagestyle.
-\mainmatter
-
-% Main text of the thesis.  Use of the `input' command will make later editing much easier.
-
-\chapter{Observations of Medicine}
-\blindtext
-
-\chapter{Deducatinos about Disease}
-\blindtext
-
-\appendix					% Include this before any appendices.
-\chapter{Some extras}
-\blindtext
-
-\end{document}
-%</example>
-%    \end{macrocode}
-%
-% \StopEventually{^^A
-%  \PrintChanges
-%  \PrintIndex
-% }
-% \changes{v2.0}{2025/09/01}{Refactor with New Dependencies, Update Formatting}
-% \section{Implementation}
-% Identification of pkg
-%    \begin{macrocode}
-%<*package>
-%   \end{macrocode}
-
-%    \begin{macrocode}
-%<@@=maine-thesis>
-%    \end{macrocode}
-
-% \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{maine-thesis}[2025/09/01 v2.0 University of Maine Thesis]
-%    \end{macrocode}
-%
-% \begin{macro}{\examplemacro}
-% \changes{v1.0}{2020/02/12}{Depricated Functions}
-%    \begin{macrocode}
 \newcommand{\libraryrights}{%
     \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Library Rights Statement page}{Please remove \protect\libraryrights\space from your thesis.}%
   }
-%    \end{macrocode}
-%    \begin{macrocode}
-	\newcommand{\dissacceptance}{%
+\newcommand{\dissacceptance}{%
     \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
 }
-%    \end{macrocode}
-% \end{macro}
 
-
-% \section{Initial Variables}
-%	\begin{macrocode}
 \newif\ifdraft\draftfalse
 \newif\iftwoside\twosidefalse
 \newif\ifmt@official\mt@officialtrue
@@ -249,21 +52,11 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \setcounter{head}{1000}
 \def\@margg{1.5in}
 \def\mt@pagestyle{bottom}
-%	\end{macrocode}
 
-%	\section{Declare Options}
-%
-%    \begin{macrocode}
 \DeclareOption{10pt}{\renewcommand\docsize{10pt}\PassOptionsToClass{10pt}{report}}
 \DeclareOption{11pt}{\renewcommand\docsize{11pt}\PassOptionsToClass{11pt}{report}}
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}\PassOptionsToClass{12pt}{report}}
-%    \end{macrocode}
-%
 
-% The `draft` option enables a "draft mode" for the document.
-% It sets the `ifdraft` conditional to true, which can be used by other
-% parts of the class to show or hide draft-specific content.
-%    \begin{macrocode}
 \DeclareOption{draft}{\drafttrue
     % When in draft mode, it defaults to a 10pt font size for faster compilation.
     \ExecuteOptions{10pt}
@@ -275,27 +68,10 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     % Sets a conditional to false, which might hide official marks.
     \mt@officialfalse
 }
-%    \end{macrocode}
 
-% These options control the page layout, specifically whether the document is
-% for a one-sided or two-sided print.
-% These options are standard and should be passed to the report class.
-%
-%    \begin{macrocode}
 \DeclareOption{twoside}{\mt@officialfalse\unboundfalse\twosidetrue\renewcommand\side{twoside}\def\@margg{1.5in}\PassOptionsToClass{twoside}{report}}
 \DeclareOption{oneside}{\mt@officialfalse\unboundfalse\renewcommand\side{oneside}\def\@margg{1.5in}\PassOptionsToClass{oneside}{report}}
-%    \end{macrocode}
-%
-% The `unbound` option sets the class for single-sided printing with a smaller
-% left margin, which is suitable for documents that will not be bound.
-%
-%    \begin{macrocode}
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
-%    \end{macrocode}
-%
-% The following options allow the user to choose from different heading styles.
-%
-%    \begin{macrocode}
 \def\HeadingStyle{} % Define an empty macro as a placeholder
 \DeclareOption{apa}{
     \setcounter{secnumdefault}{3}
@@ -317,382 +93,139 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \setcounter{secnumdefault}{3}
     \setcounter{head}{1000}
     \def\HeadingStyle{jdecimal}}
-%    \end{macrocode}
-%
-% The `legacycaptions` option changes the caption formatting.
-%
-%    \begin{macrocode}
 \DeclareOption{legacycaptions}{\mt@legacycaptionstrue}
-%    \end{macrocode}
-%
 
-% These options control the placement of page numbers.
-%
-%    \begin{macrocode}
 \DeclareOption{pagenumberbottom}{\def\mt@pagestyle{bottom}}
 \DeclareOption{pagenumbertop}{\def\mt@pagestyle{top}}
-%    \end{macrocode}
-%
 
-% This passes any unknown option directly to the underlying `report` class.
-% This is a catch-all to make the class compatible with standard report options.
 
-%
-%    \begin{macrocode}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-%    \end{macrocode}
-%
-% The `loftspacing` option enables a specific spacing setting.
 
-%
-%    \begin{macrocode}
 \DeclareOption{loftspacing}{\mt@loftspacetrue\mt@officialfalse}
-%    \end{macrocode}
-%
 
-% These options are specifically for the `xcolor` package.
-% They intercept the options from `documentclass` and pass them to `xcolor`
-% before it's loaded, preventing an option clash.
-%
-%    \begin{macrocode}
 \DeclareOption{table}{\PassOptionsToPackage{table}{xcolor}}
 \DeclareOption{xcdraw}{\PassOptionsToPackage{xcdraw}{xcolor}}
-%    \end{macrocode}
-%
 
-% This defines a macro to store the citation style provided by the user.
-%
-%    \begin{macrocode}
 \newcommand*{\@citestyle}{authoryear}
-%    \end{macrocode}
-%
 
-% This option takes the value passed to `citestyle` (e.g., `apa`) and
-% redefines the `@citestyle` macro with that value.
-%
-%    \begin{macrocode}
 \DeclareOption{citestyle}{%
   \renewcommand*{\@citestyle}{#1}%
 }
-%    \end{macrocode}
-%
-%
-% This command sets the default citation style if none is specified.
-%
-%    \begin{macrocode}
 \ExecuteOptions{citestyle=authoryear}
-%    \end{macrocode}
-%
 %%%%%%%%%%%%%%%%%%%%%
-% ------EXECUTION OF OPTIONS------
 %%%%%%%%%%%%%%%%%%%%%
-% This is the final execution block. It's crucial for processing all
-% the options that have been declared and passed.
-%
-%    \begin{macrocode}
 \ExecuteOptions{12pt,unbound}
-%    \end{macrocode}
 
-%   \begin{macrocode}
 \ProcessOptions
 \LoadClass[\docsize,\side]{report}[2022/07/02 v1.4n Standard LaTeX document class]
-%   \end{macrocode}
 
-%   \section{Import Required Packages}
-%   \subsection{Fonts}
-%    \begin{macrocode}
 \RequirePackage[T1]{fontenc}[2024/06/01 v2.0h Standard LaTeX package]
-%    \end{macrocode}
-% Provides the T1 font encoding, which allows for correct hyphenation of
-% accented characters and improves overall text rendering.
 
-%    \begin{macrocode}
 \RequirePackage{fontspec}[2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX]
-%    \end{macrocode}
-%
-% Provides advanced font selection with LuaLaTeX and XeLaTeX, allowing for
-% the use of system fonts and OpenType/TrueType font features.
 
-%    \begin{macrocode}
 \RequirePackage{microtype}[2023/03/13 v3.1a Micro-typographical refinements (RS)]
-%    \end{macrocode}
-%
 
-% Enhances the appearance of justified text through micro-typographical
-% adjustments like character protrusion and font expansion.
 
-% \subsection{Formatting}
-%    \begin{macrocode}
 \RequirePackage{lscape}[2020/05/28 v3.02]
-%    \end{macrocode}
-% Provides a landscape environment to rotate pages. For PDF output, the
-% `pdflscape` package is required to correctly set the page orientation.
 
-%    \begin{macrocode}
 \RequirePackage{pdflscape}[2022-10-27 v0.13 Display of landscape pages in PDF]
-%    \end{macrocode}
-% Adds PDF support to the `lscape` environment, ensuring landscape pages
-% are displayed correctly in PDF viewers.
 
-%    \begin{macrocode}
 \RequirePackage[titles]{tocloft}[2017/08/31 v2.3i parameterised ToC, etc., typesetting]
-%    \end{macrocode}
-% Offers extensive customization of the table of contents, list of figures,
-% and list of tables.
 
-%    \begin{macrocode}
 \RequirePackage{newunicodechar}[2018/04/08 v1.2 Defining Unicode characters]
-%    \end{macrocode}
-% Provides a command to define new Unicode characters, which is essential
-% for modern typesetting.
 
-%    \begin{macrocode}
 \RequirePackage{textcomp}[2020/02/02 v2.0n Standard LaTeX package]
-%    \end{macrocode}
-% Provides a wide range of symbols and characters not available in default
-% LaTeX fonts, such as the trademark symbol.
 
-%    \begin{macrocode}
 \RequirePackage[super]{nth}[2002/02/27]
-%    \end{macrocode}
-% Adds commands for typesetting ordinal numbers (e.g., 1st, 2nd, 3rd)
-% with correct superscripting.
 
-%    \begin{macrocode}
 \RequirePackage[colorinlistoftodos]{todonotes}[2023/01/31]
-%    \end{macrocode}
-% Provides commands for adding margin notes and todo lists during drafting.
 
-% \section{ Numbers, Special Characters, and Chemical Formulas}
-%    \begin{macrocode}
 \RequirePackage[version=4]{mhchem}[2021/12/31 v4.09 for typesetting chemical formulae]
-%    \end{macrocode}
-% Provides an easy way to write chemical formulas and equations.
 
-%    \begin{macrocode}
 \RequirePackage{textgreek}[2011/10/09 v0.7 Greek symbols in text]
-%    \end{macrocode}
-% Provides commands for typesetting Greek letters in text mode.
 
-%    \begin{macrocode}
 \RequirePackage{siunitx}[2023-03-14 v3.2.3 A comprehensive (SI) units package]
-%    \end{macrocode}
-% Provides a powerful command for typesetting SI units and numbers with
-% proper spacing and formatting.
 
-
-%    \begin{macrocode}
 \RequirePackage{geometry}[2020/01/02 v5.9 Page Geometry]
-%    \end{macrocode}
-% This package provides a flexible interface to control the document's page layout.
-% Within this class, it's used to set the document margins, including the left margin
-% based on the `unbound` option.
 
-
-%    \begin{macrocode}
 \RequirePackage{tabularx}[2023/12/11 v2.12a]
-%    \end{macrocode}
-% This package provides the `tabularx` environment, which is an extension of the
-% standard `tabular` environment. It includes a new column type, `X`, that
-% automatically adjusts its width to fill the specified table width. This is
-% essential for creating tables that span the full text width of your document.
 
-% \subsection{References and Citations}
 
-%    \begin{macrocode}
 \RequirePackage{hyperref}[2023-02-07 v7.00v Hypertext links for LaTeX]
-%    \end{macrocode}
-% Creates hyperlinks within the document, making the table of contents,
-% citations, and external links clickable.
 
-%    \begin{macrocode}
 \RequirePackage{csquotes}[2022-09-14 v5.2n context-sensitive quotations (JAW)]
-%    \end{macrocode}
-% Provides context-sensitive quotation facilities, automatically handling
-% nesting and language-specific rules.
 
-%    \begin{macrocode}
 \RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
-%    \end{macrocode}
-% A powerful package for managing bibliographies and citations.
 
-% \subsection{Figures and Tables}
-%    \begin{macrocode}
 \RequirePackage{graphicx}[2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)]
-%    \end{macrocode}
-% A fundamental package for including graphics files in a document.
 
-%    \begin{macrocode}
 \RequirePackage{rotating}[2016/08/11 v2.16d rotated objects in LaTeX]
-%    \end{macrocode}
-% Provides environments for rotating objects such as figures and tables.
 
-%    \begin{macrocode}
 \RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/03/12 v3.6j Customizing captions (AR)]
-%    \end{macrocode}
-% Provides an interface to customize the captions of figures and tables.
 
-%    \begin{macrocode}
 \RequirePackage{float}[2001/11/08 v1.3d Float enhancements (AL)]
-%    \end{macrocode}
-% Provides the H placement specifier for floats, giving more precise control.
 
-%    \begin{macrocode}
 \RequirePackage{booktabs}[2020/01/12 v1.61803398 Publication quality tables]
-%    \end{macrocode}
-% Provides commands for drawing professional-looking horizontal rules in tables.
 
-%    \begin{macrocode}
 \RequirePackage{xcolor}[2022/06/12 v2.14 LaTeX color extensions (UK)]
-%    \end{macrocode}
-% An extended version of the `color` package, providing more color models
-% and table coloring features.
 
-%    \begin{macrocode}
 \RequirePackage{multirow}[2021/03/15 v2.8 Span multiple rows of a table]
-%    \end{macrocode}
-% Provides a command to create cells that span multiple rows in a table.
 
-%    \begin{macrocode}
 \RequirePackage{longtable}[2021-09-01 v4.17 Multi-page Table package (DPC)]
-%    \end{macrocode}
-% Provides an environment for creating tables that can span multiple pages.
 
-% \subsection{Other Packages}
 
-%    \begin{macrocode}
 \RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
-%    \end{macrocode}
-%
-% Provides fine control over hyphenation.
 
-
-%    \begin{macrocode}
 \RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
-%    \end{macrocode}
-% Provides a conditional command to check which TeX engine is being used.
 
-%    \begin{macrocode}
 \RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
-%    \end{macrocode}
-% Adds line numbers to a document, useful during the drafting process.
 
-%    \begin{macrocode}
 \RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
-%    \end{macrocode}
-% A set of tools for programming in LaTeX, providing macros for conditionals.
 
-%    \begin{macrocode}
 \RequirePackage{soul}[2003/11/17 v2.4]
-%    \end{macrocode}
-% Provides commands for letter-spacing, underlining, and highlighting text.
 
-%    \begin{macrocode}
 \RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
-%    \end{macrocode}
-% Adds the bibliography, index, and lists of figures/tables to the table of contents.
 
-%    \begin{macrocode}
 \RequirePackage{titlesec}[2021/07/05 v2.14 Sectioning titles]
-%    \end{macrocode}
-% Offers a powerful interface to sectioning commands, allowing for custom headings.
 
-%    \begin{macrocode}
 \RequirePackage{textcase}[2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
-%    \end{macrocode}
-% Provides robust commands for changing the case of text.
 
-%    \begin{macrocode}
 \RequirePackage{titling}[2004/08/17 v2.1d]
-%    \end{macrocode}
-% Provides greater control over the typesetting of the title page.
 
-%    \begin{macrocode}
 \RequirePackage{setspace}[2022/12/04 v6.7b set line spacing]
-%    \end{macrocode}
-% Provides support for setting line spacing, such as single, one-and-a-half, and double spacing.
 
-%    \begin{macrocode}
 \RequirePackage{xstring}[2013/10/13 v1.7c]
-%    \end{macrocode}
-% Provides commands for advanced string manipulation.
 
-%    \begin{macrocode}
 \RequirePackage{afterpackage}[2006/01/17 v1.1]
-%    \end{macrocode}
-% Provides a command to execute code after a specific package has been loaded.
 
-
-%	\section{Additional Variables}
-%	\subsection{Title}
-%	This should be defined in an inverted pyramid format, but must be manually constructed by the user.
-%    \begin{macrocode}
 \def\@title{}
-%    \end{macrocode}
-%	\subsection{Author Name}
-%    \begin{macrocode}
 \def\@author{}
-%    \end{macrocode}
-% 	\subsection{Author's Pronouns}
-%    \begin{macrocode}
 \def\@authorpronoun{}
-%    \end{macrocode}
-% 	\subsection{Author's Previous Degrees}
-%    \begin{macrocode}
 \def\@degreesheld{}
-%    \end{macrocode}
-% 	\subsection{Author's Current Degree}
-%	For example, Doctor of Philosphy, Master of Science
-%    \begin{macrocode}
 \def\@degree{}
-%    \end{macrocode}
-% 	\subsection{Author's Current Program}
-%    \begin{macrocode}
 \def\@program{}
-%    \end{macrocode}
-% 	\subsection{Author's Submission Date}
-%	May, December or August and Year
-%    \begin{macrocode}
 \def\@submitdate{}
-%    \end{macrocode}
-%	\subsection{Advisors}
-%    \begin{macrocode}
 \def\@principaladvisor{}
 \def\@secondadvisor{}
 \def\@principalshort{}
-%    \end{macrocode}
-%	\subsection{Committee Members}
-%    \begin{macrocode}
 \def\@firstreader{}
 \def\@secondreader{}
 \def\@thirdreader{}
 \def\@fourthreader{}
 \def\@fifthreader{}
-%    \end{macrocode}
 
-%	\subsection{Dissertation Tag}
-%    \begin{macrocode}
 \def\@type{Dissertation}
 \def\@LastLevel{0}
-%    \end{macrocode}
 
-%	\subsection{Initialize Conditionals}
-%    \begin{macrocode}
 \newif\ifmultipleappendices\multipleappendicesfalse
 \newif\ifcopyrightpage\copyrightpagefalse
 \newif\ifbigtitlepage\bigtitlepagefalse
 \newif\ifverybigtitlepage\verybigtitlepagefalse
 \newif\ifapp\appfalse
-%    \end{macrocode}
 
-%	\subsection{Initialize Counts}
-%    \begin{macrocode}
 \newcount\numcomm \numcomm=4
 \newcount\numadv \numadv=1
-%    \end{macrocode}
 
-%	\subsection{Define Section Names}
-%    \begin{macrocode}
 \renewcommand*\contentsname{Table of Contents}
 \renewcommand*\bibname{References}
 \renewcommand*\indexname{INDEX}
@@ -705,10 +238,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \newcommand*\landacknowledgename{Land Acknowledgments}
 \newcommand*\dedicationname{Dedication}
 \newcommand*\bioname{Biography of the Author}
-%    \end{macrocode}
 
-%	\section{Varaible Modification Commands}
-%    \begin{macrocode}
 \renewcommand{\author}[1]{%
     \ifx\empty#1\empty\else\gdef\@author{#1}\fi}
 \newcommand{\authorpronoun}[1]{%
@@ -767,12 +297,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \fi
 }
 \renewcommand{\bibname}{References}
-%    \end{macrocode}
 
-%    \section{Custom Commands}
-%   Our goal is to minimize these as much as possible in future versions.
-%   \subsection{comment}
-%    \begin{macrocode}
 \newcommand{\comment}[1]{
     \ifdraft
     \marginpar{
@@ -780,15 +305,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         {\MakeTextUppercase{Note}: #1}}
     \fi
 }
-%    \end{macrocode}
-%
-%   \subsection{ignore}
-%    \begin{macrocode}
 \newcommand{\ignore}[1]{}
-%    \end{macrocode}
-%
-%   \subsection{highlight}
-%    \begin{macrocode}
 \newcommand{\highlight}[1]{%
     \ifdraft%
         \hl{#1}%
@@ -796,19 +313,9 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         #1%
     \fi%
 }
-%    \end{macrocode}
-%   \section{General Formatting}
 
-%   \subsection{Line Numbering on Draft Mode}
-%   \begin{macrocode}
 \ifdraft{\linenumbers}\fi
-%   \end{macrocode}
-%   \subsection{Default Font}
-%   \begin{macrocode}
 \setmainfont{EB Garamond}
-%   \end{macrocode}
-%   \subsection{Page Geometry}
-%   \begin{macrocode}
 \geometry{
     letterpaper,
     margin=1in,
@@ -818,9 +325,6 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     footskip=30pt,
     marginparwidth=40pt,
     marginparsep=10pt}
-%   \end{macrocode}
-%   \subsection{Additional Page Format}
-%   \begin{macrocode}
 \setcounter{secnumdepth}{\value{secnumdefault}}
 \setcounter{tocdepth}{\value{secnumdefault}}
 \raggedbottom
@@ -829,36 +333,19 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \markboth{}{}
 \clubpenalty=10000
 \widowpenalty=10000
-%   \end{macrocode}
-%   \subsection{Font Parameter}
-%   \begin{macrocode}
 \def\verbatim@font{\rmfamily}
-%   \subsection{Spacing for Title Page and Headings}
-%   \begin{macrocode}
 \newcommand*\loftspacing{10}
-%    \end{macrocode}
 
-% \section{Caption Format Declaration}
-%    \begin{macrocode}
 \DeclareCaptionFormat{thesis}
 {
     \textbf{#1#2}\textit{\small #3}
 }
 \captionsetup{format=thesis}
-%    \end{macrocode}
 
-% \section{Heading Format Definitions}
-% \subsection{Macros}
-%    \begin{macrocode}
-%Macro for period after heading
 \def\adddot#1{#1.\thinspace}
-%macro for underline
 \def\addul#1{\underline{#1}}
 \def\adddotul#1{\underline{#1}.\thinspace}
 
-%   \subsection{APA 7 Format}
-%
-%    \begin{macrocode}
 \newcommand{\apaheadings}{%
     \typeout{applying apa headings}
     %--- APA 7 Style Headings ---
@@ -873,13 +360,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont\bfseries\itshape}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
-%   \end{macrocode}
 
-
-
-%   \subsection{Chicago Format}
-%
-%    \begin{macrocode}
 \newcommand{\chicagoheadings}{%
     % Level 1: Centered, Boldface, Headline-style
     \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\chaptertitlename\ \thechapter}{-3pt}{\MakeTextUppercase}
@@ -901,12 +382,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont\bfseries\itshape}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
-%   \end{macrocode}
 
-
-%   \subsection{Maine Thesis Default Format}
-%
-%    \begin{macrocode}
 \newcommand{\mainethesisheadings}{%
     %--- Sample Headings from Guidelines ---
     % Chapter Titles
@@ -929,12 +405,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont}{}{0pt}{\adddotul}
     \titlespacing{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
 }
-%   \end{macrocode}
 
-
-%   \subsection{iDecimal Format}
-%
-%    \begin{macrocode}
 \newcommand{\idecimalheadings}{%
     \setcounter{tocdepth}{4}
     % Chapter Titles: Centered and bold
@@ -957,13 +428,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont\bfseries}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
-%   \end{macrocode}
 
-
-
-%   \subsection{jDecimal Format}
-%
-%    \begin{macrocode}
 \newcommand{\jdecimalheadings}{%
     %--- Justified Decimal System (Default) ---
     \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
@@ -979,12 +444,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\subparagraph}{\normalfont\hspace{1.5em}}{\thesubparagraph}{0pt}{\addul}
     \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
 }
-%   \end{macrocode}
 
-%
-%\section{Implement Heading from Options Flag using a macro}
-%
-%   \begin{macrocode}
 \typeout{=== Checking HeadingStyle Flag ===}
 
 \ifdefined\HeadingStyle
@@ -997,12 +457,6 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \typeout{=== Finished HeadingStyle Check ===}
 
 
-%    \end{macrocode}
-
-
-% \section{Page Style}
-% \subsection{Bottom of Page}
-%    \begin{macrocode}
 \newcommand{\ps@bottom}{%
     \renewcommand{\@oddhead}{%
         \ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
@@ -1012,10 +466,6 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         \hfil\drafttext\else\hfil\thepage\hfil\fi}
     \renewcommand{\@evenfoot}{\@oddfoot}
 }
-%    \end{macrocode}
-%
-% \subsection{Empty Page}
-%    \begin{macrocode}
 \renewcommand{\ps@empty}{%
     \renewcommand{\@oddhead}{%
         \ifdraft\drafttext\hfil\today\hfil\drafttext\else\fi}%
@@ -1024,11 +474,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         \ifdraft\drafttext\hfil\drafttext\else\fi}
     \renewcommand{\@evenfoot}{\@oddfoot}
 }
-%    \end{macrocode}
-%
 
-% \subsection{Top of Page}
-%    \begin{macrocode}
 \newcommand{\ps@top}{%
     \renewcommand{\@oddhead}{%
         \ifdraft\drafttext\hfil\today\hfil\drafttext\else\thepage\fi}%
@@ -1038,59 +484,33 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         \ifdraft\drafttext\hfil\thepage\hfil\drafttext\else\fi}%
     \renewcommand{\@evenfoot}{\@oddfoot}%
 }
-%    \end{macrocode}
-%
 
-% \subsection{Plain PAge}
-%    \begin{macrocode}
 \pagestyle{\mt@pagestyle}
 \renewcommand{\ps@plain}{\csname ps@\mt@pagestyle\endcsname}
-%    \end{macrocode}
-%
 
-%   \section{Title Page Format}
 
-%   \subsection{Refacotring Make Title}
-%   \subsubsection{Pre Title Formatting}
-%    \begin{macrocode}
 \pretitle{
     \begin{center}
 
     \bfseries\MakeTextUppercase
 }
-%    \end{macrocode}
-%
 
-%   \subsubsection{Post Title Formatting}
-%    \begin{macrocode}
 \posttitle{
     \end{center}
 }
-%    \end{macrocode}
-%
 
-%   \subsubsection{Pre Author Formatting}
-%    \begin{macrocode}
 \preauthor{
     \begin{center}
     By \\
     \MakeUppercase
 }
-%    \end{macrocode}
-%
 
-%   \subsubsection{Post Author Formatting}
-%    \begin{macrocode}
 \postauthor{
     \\
     \@degreesheld
     \end{center}
 }
-%    \end{macrocode}
-%
 
-%   \subsubsection{Title Page Hook Formatting}
-%    \begin{macrocode}
 \renewcommand{\maketitlehooka}{
     \thispagestyle{empty}
     \ifverybigtitlepage
@@ -1099,9 +519,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         \doublespacing
     \fi
 }
-%    \end{macrocode}
 
-%    \begin{macrocode}
 \renewcommand{\maketitlehookd}{
     \begin{center}
         A \MakeTextUppercase{\@type}\\[4pt]
@@ -1159,59 +577,33 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \end{flushleft}
     \clearpage
 }
-%    \end{macrocode}
 
-
-% \section{Table of Contents Formatting}
-% \subsection{Table of Contents Font Specs}
-%    \begin{macrocode}
 \renewcommand{\cftchapfont}{\normalfont\bfseries}
 \renewcommand{\cftchappagefont}{\normalfont}
 \renewcommand{\cftloftitlefont}{\normalfont\bfseries}
-%    \end{macrocode}
 
-% \subsection{Define Enviornment for Custom Thesis List}
-%    \begin{macrocode}
 \newenvironment{thesislist}[1]{%
     \chapter*{\listname\ #1}
     \addcontentsline{toc}{chapter}{{\texorpdfstring{\MakeTextUppercase{\listname\ #1}}{\listname\ #1}}}
     \begingroup
 }{\par\endgroup}
-%    \end{macrocode}
 
 %% Define Leader Dots
-% \subsection{Define Leader Dots Specifications}
-%    \begin{macrocode}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\contentsname}{Table of Contents}
-%    \end{macrocode}
 
-%	\subsubsection{Parameters for Ensuring that }
-% These should eventually be exposed as options with default values.
-% cftsecindent and cftsecnumwidth define where the title starts.
 
-%    \begin{macrocode}
 \setlength{\cftsecindent}{1.5em}
 \setlength{\cftsecnumwidth}{2em}
-%    \end{macrocode}
 
-% cftsetrmarg and cftsetpnumwidth define where the dotted leader ends and where the page number starts.
-%    \begin{macrocode}
 \cftsetrmarg{3cm}
-%    \end{macrocode}
-% Sets the right margin for the TOC entry
-%    \begin{macrocode}
 \cftsetpnumwidth{2cm}
-%    \end{macrocode}
-% Sets the width for the page number box
 
-%   \section{Abstract Environment}
 
-%    \begin{macrocode}
 \newcounter{mt@page}
 \renewenvironment{abstract}{%
     \doublespacing
@@ -1240,11 +632,8 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 {\cleardoublepage
     \par\endgroup
 }
-%    \end{macrocode}
 
-%   \section{Lay Abstract Environment}
 
-%    \begin{macrocode}
 \newenvironment{layabstract}[1]{%
     \doublespacing
     \begin{center}
@@ -1277,32 +666,21 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 {\cleardoublepage
     \par\endgroup
 }
-%    \end{macrocode}
 
-%	\section{Acknowledgements Environment}
-%    \begin{macrocode}
 \newenvironment{acknowledgements}{%
     \chapter*{\acknowledgename}
     \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\acknowledgename}}{\acknowledgename}}
     \doublespacing
     \begingroup
 }{\par\endgroup}
-%    \end{macrocode}
 
-%	\section{Land Acknowledgements Environment}
-%	For Custom Land Acknowledgements
-%    \begin{macrocode}
 \newenvironment{landacknowledgements}{%
     \chapter*{\landacknowledgename}
     \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\landacknowledgename}}{\landacknowledgename}}
     \doublespacing
     \begingroup
 }{\par\endgroup}
-%    \end{macrocode}
 
-% \section{GRADUATE SCHOOL LAND ACKNOWLEDGMENT}
-%	Default GLSA Land Acknowledgement
-%    \begin{macrocode}
 
 \newcommand{\glsa}{%
      \chapter*{UNIVERSITY OF MAINE GRADUATE SCHOOL LAND ACKNOWLEDGMENT}
@@ -1310,21 +688,12 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
      \vfill
      \clearpage
 }
-%    \end{macrocode}
 
-%   \section{Seperators}
-%   \subsection{Preliminary}
-%   Contents following this tag are front matter with roman numeral page numbering
-%    \begin{macrocode}
 \newcommand{\preliminary}{%
     \pagenumbering{roman}
     \setcounter{tocdepth}{1} % Sets the ToC depth to chapters and above
     \setcounter{secnumdepth}{1} % Sets the section numbering depth to chapters and above
 }
-%    \end{macrocode}
-%   \subsection{Main Matter}
-%   Contents following this tag are considered chapters
-%    \begin{macrocode}
 \newcommand{\mainmatter}{%
     \cleardoublepage
     \doublespacing
@@ -1332,11 +701,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \setcounter{tocdepth}{\value{secnumdefault}}
     \setcounter{secnumdepth}{\value{secnumdefault}}
 }
-%    \end{macrocode}
 
-%	\subsection{Appendix}
-%	All chapters after the Appendix flag are appendicies.
-%    \begin{macrocode}
 \renewcommand{\appendix}{%
     \cleardoublepage
     \doublespacing
@@ -1350,15 +715,9 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
         \cftaddtitleline{toc}{chapter}{\texorpdfstring{\MakeUppercase{Appendices}}{Appendices}}
     \fi
 }
-%    \end{macrocode}
 
-% We add Appendix to the chapter name for all appendicies.
-%    \begin{macrocode}
 \pretocmd{\chapter}{\ifapp\renewcommand*\chaptername{Appendix}\fi}{}{}
-%    \end{macrocode}
 
-%	\section{Biography Environment}
-%    \begin{macrocode}
 \newenvironment{biography}{%
     \chapter*{\bioname}
     \addtocontents{toc}{\protect\nopagebreak}
@@ -1367,9 +726,6 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \doublespacing
     \thispagestyle{plain}
 }{%
-%    \end{macrocode}
-%	This section adds the required text as the last sentance of the biography.
-%    \begin{macrocode}
     \par
     \ifx\@authorpronoun\empty
         \@author
@@ -1378,11 +734,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \fi%
     \ is a candidate for the \@degree\ degree in \@program\ from the University of Maine in \@submitdate.\par\endgroup
 }
-%    \end{macrocode}
 
-%  \section{Copyright Page}
-%   The copyright page is automatically placed using the copyright page command.
-%    \begin{macrocode}
 \newcommand{\copyrightpage}{%
     \setcounter{page}{3} % we must manually set the copyright page because of the runtime call of preliminary.
     \copyrightpagetrue
@@ -1397,10 +749,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \vfill
     \clearpage
 }
-%    \end{macrocode}
 
-%   \section{Dedication Environment}
-%    \begin{macrocode}
 \newenvironment{dedication}{%
     \chapter*{\dedicationname}
     \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\dedicationname}}{\dedicationname}}
@@ -1409,44 +758,24 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \begingroup
     \begin{center}
 }{\end{center}\par\endgroup}
-%    \end{macrocode}
 
-%   \section{Preface Environment}
-%   This is an optional section in the front matter.
-%    \begin{macrocode}
 \newenvironment{preface}{%
     \chapter*{\prefacename}
     \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\prefacename}}{\prefacename}}
     \doublespacing
     \begingroup\setcounter{secnumdepth}{0}
 }{\setcounter{secnumdepth}{\value{secnumdefault}}\par\endgroup}
-%    \end{macrocode}
 
-% \section{Custom Formatting for References}
-%   The graduate school allows for field-specific citation styles, but requires.
-%   Note that the citation style is specified in the class options above and implemented with Biblatex and Biber.
-%
-%   The references command will render the references on a new page.
-%    \begin{macrocode}
 \newcommand{\references}{%
     \cleardoublepage
     \singlespacing
-%    \end{macrocode}
-%   The references are added to the table of contents as a chapter.
-%    \begin{macrocode}
     \phantomsection
     \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\bibname}}{\bibname}}
-%    \end{macrocode}
-%   The bibliography is printed from Biblatex and Biber.
-%    \begin{macrocode}
     \printbibliography
 }
-%    \end{macrocode}
 
-%    \begin{macrocode}
-%</package>
-%    \end{macrocode}
-%
-% \Finale
 
-\endinput
+%% Adapted from classic "A model .dtx file" by Joseph Wright
+%% https://www.texdev.net/2009/10/06/a-model-dtx-file/
+%%
+%% End of file `maine-thesis.cls'.

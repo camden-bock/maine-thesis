@@ -1,78 +1,83 @@
-typesetexe = "lualatex"
-checkengines = {"luatex", "pdftex", "xetex"}
-
 -- Identify the bundle and main module
 bundle = "maine-thesis"
 module = "maine-thesis"
 
+typesetexe = "lualatex"
+
 -- Specify the directory where the main source files (.dtx, .ins) are located
-sourcefiledir = "sources"
+maindir       = "."
+sourcefiledir = "./sources"
+textfiledir   = "./sources"
+textfiles     = {textfiledir.."/CTANREADME.md"}
+sourcefiles   = {"maine-thesis.dtx"}
+installfiles  = {"maine-thesis.pdf", "maine-thesis.cls"}
 
--- Identify all source files to be processed
-sourcefiles = {
-    "maine-thesis.dtx",
-    "pagestyle.dtx",
-    "options.dtx",
-    "requirements.dtx",
-    "variables.dtx",
-    "depreciated.dtx",
-    "format/captions.dtx",
-    "format/general-format.dtx",
-    "format/headings.dtx",
-    "format/pagestyle.dtx",
-    "format/titlepage.dtx",
-    "format/toc.dtx",
-    "environments/abstract.dtx",
-    "environments/acknowledgements.dtx",
-    "environments/appendix.dtx",
-    "environments/biography.dtx",
-    "environments/copyright.dtx",
-    "environments/dedication.dtx",
-    "environments/main-seperator.dtx",
-    "environments/preface.dtx",
-    "environments/references.dtx"
-}
+unpackfiles = {"maine-thesis.dtx"}
+unpackopts  = "--interaction=batchmode"
+unpackexe   = "luatex"
 
-unpackfiles = {"*.dtx"}
-
--- Identify files to be installed. These are the *generated* files, and
--- l3build will expect them in the main directory after running `l3build unpack`.
-installfiles = {
-    "maine-thesis.cls",
-    "maine-thesis-pagestyle.sty",
-    "maine-thesis-options.sty",
-    "maine-thesis-requirements.sty",
-    "maine-thesis-variables.sty",
-    "maine-thesis-depreciated.sty",
-    "maine-thesis-caption.sty",
-    "maine-thesis-general-format.sty",
-    "maine-thesis-headings.sty",
-    "maine-thesis-pagestyle.sty",
-    "maine-thesis-titlepage.sty",
-    "maine-thesis-contents.sty",
-    "maine-thesis-abstract.sty",
-    "maine-thesis-acknowledgements.sty",
-    "maine-thesis-appendix.sty",
-    "maine-thesis-biography.sty",
-    "maine-thesis-copyright.sty",
-    "maine-thesis-dedication.sty",
-    "maine-thesis-main-seperator.sty",
-    "maine-thesis-preface.sty",
-    "maine-thesis-references.sty"
-}
 
 -- Set the name for the main documentation.
 -- We'll assume the main documentation is compiled from myclass.dtx
-typesetfile = {"maine-thesis.dtx"}
+typesetfiles  = {"maine-thesis.dtx", "example.tex"}
+typesetexe    = "lualatex"
+typesetopts   = "--interaction=batchmode"
+typesetruns   = 3
+makeindexopts = "-q"
 
--- This is the new part for handling examples and templates!
--- `demofiles` lists files that should be packaged as examples.
--- The path is relative to the directory where the command is run.
--- You can use wildcards here.
-demofiles = {
-    install = "example", -- The directory in the TDS archive
-    files = {
-        "mwe/maine-thesis-example.tex",
-        "template/main.tex"
-    }
-}
+
+-- Build example.tex using lualatex (one run)
+local function type_example()
+  local file = jobname(unpackdir.."/example.tex")
+  errorlevel = run(unpackdir, "lualatex --interaction=batchmode "..file..".tex > "..os_null)
+  if errorlevel ~= 0 then
+    error("** Error!!: lualatex --interaction=batchmode "..file..".tex")
+    return errorlevel
+  else
+    print("** Running: lualatex --interaction=batchmode "..file..".tex")
+  end
+  return 0
+end
+
+specialtypesetting = { }
+specialtypesetting["example.tex"]= {func = type_example}
+
+-- Update package date and version
+tagfiles = {"maine-thesis.dtx", "CTANREADME.md"}
+local mydate = os.date("!%Y-%m-%d")
+
+function update_tag(file, content, tagname, tagdate)
+  if not tagname and tagdate == mydate then
+    tagname = pkgversion
+    tagdate = pkgdate
+    print("** "..file.." have been tagged with the version and date of build.lua")
+  else
+    local v_maj, v_min = string.match(tagname, "^v?(%d+)(%S*)$")
+    if v_maj == "" or not v_min then
+      print("Error!!: Invalid tag '"..tagname.."', none of the files have been tagged")
+      os.exit(0)
+    else
+      tagname = string.format("%i%s", v_maj, v_min)
+      tagdate = mydate
+    end
+    print("** "..file.." have been tagged with the version "..tagname.." and date "..mydate)
+  end
+
+  if string.match(file, "maine-thesis.dtx") then
+    local tagdate = string.gsub(tagdate, "-", "/")
+    content = string.gsub(content,
+                          "%[%d%d%d%d%/%d%d%/%d%d%s+v%S+",
+                          "["..tagdate.." v"..tagname)
+  end
+
+  if string.match(file, "CTANREADME.md") then
+    local tagdate = string.gsub(tagdate, "/", "-")
+    content = string.gsub(content,
+                          "Version: (%d+)(%S+)",
+                          "Version: "..tagname)
+    content = string.gsub(content,
+                          "Date: %d%d%d%d%-%d%d%-%d%d",
+                          "Date: "..tagdate)
+  end
+  return content
+end
