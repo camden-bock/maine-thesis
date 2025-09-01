@@ -33,7 +33,6 @@
  *.run.xml
  *.toc
 
-temp*
 */_build*
 */build*
 *.tmp.dtx

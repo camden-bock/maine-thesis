@@ -1,21 +1,25 @@
 -- Identify the bundle and main module
 bundle = "maine-thesis"
 module = "maine-thesis"
+pkgversion = "2.0"
+pkgdate    = "2025-09-01"
 
 typesetexe = "lualatex"
 
 -- Specify the directory where the main source files (.dtx, .ins) are located
-maindir       = "."
+maindir        = "."
 sourcefiledir = "./sources"
 textfiledir   = "./sources"
+
+
 textfiles     = {textfiledir.."/CTANREADME.md"}
 sourcefiles   = {"maine-thesis.dtx"}
 installfiles  = {"maine-thesis.pdf", "maine-thesis.cls"}
+template_main_file = "main.tex"
 
 unpackfiles = {"maine-thesis.dtx"}
 unpackopts  = "--interaction=batchmode"
 unpackexe   = "luatex"
-
 
 -- Set the name for the main documentation.
 -- We'll assume the main documentation is compiled from myclass.dtx
@@ -25,8 +29,8 @@ typesetopts   = "--interaction=batchmode"
 typesetruns   = 3
 makeindexopts = "-q"
 
-
 -- Build example.tex using lualatex (one run)
+-- This function is moved to be defined before it is used.
 local function type_example()
   local file = jobname(unpackdir.."/example.tex")
   errorlevel = run(unpackdir, "lualatex --interaction=batchmode "..file..".tex > "..os_null)
@@ -40,7 +44,7 @@ local function type_example()
 end
 
 specialtypesetting = { }
-specialtypesetting["example.tex"]= {func = type_example}
+specialtypesetting["example.tex"] = {func = type_example}
 
 -- Update package date and version
 tagfiles = {"maine-thesis.dtx", "CTANREADME.md"}

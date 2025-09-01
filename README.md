@@ -40,9 +40,9 @@ Besides the class file itself, this repository contains the following additional
 
 The files in the Documentation folder serve both as the documentation for this class file and as an example of its use.
 
-### skeleton
+### template
 
-The skeleton folder contains a basic document structure which you can use as a template for your own thesis.
+The template folder contains a basic document structure which you can use as a template for your own thesis.
 
 ## Contributing
 
