@@ -1,3 +1,6 @@
+typesetexe = "lualatex"
+checkengines = {"luatex", "pdftex", "xetex"}
+
 -- Identify the bundle and main module
 bundle = "maine-thesis"
 module = "maine-thesis"
@@ -29,6 +32,8 @@ sourcefiles = {
     "environments/preface.dtx",
     "environments/references.dtx"
 }
+
+unpackfiles = {"*.dtx"}
 
 -- Identify files to be installed. These are the *generated* files, and
 -- l3build will expect them in the main directory after running `l3build unpack`.
