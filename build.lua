@@ -1,3 +1,4 @@
+
 -- Identify the bundle and main module
 bundle = "maine-thesis"
 module = "maine-thesis"
@@ -84,4 +85,143 @@ function update_tag(file, content, tagname, tagdate)
                           "Date: "..tagdate)
   end
   return content
+end
+
+
+-- Configuration for ctan
+ctanreadme = "CTANREADME.md"
+ctanpkg    = "maine-thesis"
+ctanzip    = ctanpkg.."-"..pkgversion
+packtdszip = false
+
+-- Load personal data for ctan upload
+local ok, mydata = pcall(require, "mypersonaldata.lua")
+if not ok then
+  -- This block is executed if the file is not found or has an error.
+  mydata = { email="XXX", uploader="YYY", }
+  print("Warning: mypersonaldata.lua was not found or is invalid. Using default values.")
+else
+  -- This block is executed if the file is found and loaded successfully.
+  print("Success: mypersonaldata.lua loaded.")
+  print("Email:", mydata.email)
+  print("Uploader:", mydata.uploader)
+end
+
+uploadconfig = {
+  author      = "Camden Bock",
+  uploader    = mydata.uploader,
+  email       = mydata.email,
+  pkg         = ctanpkg,
+  version     = pkgversion,
+  license     = "lppl1.3c",
+  summary     = "Document Class for University of Maine Graduate Thesis",
+  description = [[A Document Class for Thesis Formatting and Template]],
+  topic       = { "thesis" },
+  ctanPath    = "/macros/latex/contrib/" .. ctanpkg,
+  repository  = "https://gitlab.com/camden-bock/maine-thesis",
+  bugtracker  = "https://github.com/camden-bock/maine-thesis/issues",
+  support     = "https://github.com/camden-bock/maine-thesis/issues",
+  announcement_file="ctan.ann",
+  note_file   = "ctan.note",
+  update      = true,
+}
+
+-- Clean files
+cleanfiles = {
+  ctanzip..".curlopt",
+  ctanzip..".zip",
+  "example.log",
+  "example.pdf",
+  "maine-thesis.pdf",
+}
+
+-- Line length in 80 characters
+local function os_message(text)
+  local mymax = 77 - string.len(text) - string.len("done")
+  local msg = text.." "..string.rep(".", mymax).." done"
+  return print(msg)
+end
+
+-- Create check_marked_tags() function
+local function check_marked_tags()
+  local f = assert(io.open("sources/maine-thesis.dtx", "r"))
+  marked_tags = f:read("*all")
+  f:close()
+
+  local m_pkgd, m_pkgv = string.match(marked_tags, "%[(%d%d%d%d%/%d%d%/%d%d)%s+v(%S+)")
+  local pkgdate = string.gsub(pkgdate, "-", "/")
+  if pkgversion == m_pkgv and pkgdate == m_pkgd then
+    os_message("** Checking version and date in maine-thesis.dtx: OK")
+  else
+    print("** Warning: maine-thesis.dtx is marked with version "..m_pkgv.." and date "..m_pkgd)
+    print("** Warning: build.lua is marked with version "..pkgversion.." and date "..pkgdate)
+    print("** Check version and date in build.lua then run l3build tag")
+  end
+end
+
+-- Config tag_hook
+function tag_hook(tagname)
+  check_marked_tags()
+end
+
+-- Add "tagged" target to l3build CLI
+if options["target"] == "tagged" then
+  check_marked_tags()
+  os.exit()
+end
+
+-- Create make_temp_dir() function
+local function make_temp_dir()
+  -- Fix basename(path) in windows (https://chat.stackexchange.com/transcript/message/55064157#55064157)
+  local function basename(path)
+    return path:match("^.*[\\/]([^/\\]*)$")
+  end
+  local tmpname = os.tmpname()
+  tempdir = basename(tmpname)
+  errorlevel = mkdir(tempdir)
+  if errorlevel ~= 0 then
+    error("** Error!!: The ./"..tempdir.." directory could not be created")
+    return errorlevel
+  else
+    os_message("** Creating the temporary directory ./"..tempdir..": OK")
+  end
+end
+
+-- Add "testpkg" target to l3build CLI
+if options["target"] == "testpkg" then
+  make_temp_dir()
+  errorlevel = cp("*.*", sourcefiledir, tempdir)
+  if errorlevel ~= 0 then
+    error("** Error!!: Can't copy files from "..sourcefiledir.." to /"..tempdir)
+    return errorlevel
+  else
+    os_message("** Copying files from "..sourcefiledir.." to ./"..tempdir..": OK")
+  end
+  -- Unpack files
+  local file = jobname(tempdir.."/maine-thesis.dtx")
+  errorlevel = run(tempdir, "luatex -interaction=batchmode "..file..".dtx > "..os_null)
+  if errorlevel ~= 0 then
+    error("** Error!!: luatex -interaction=batchmode "..file..".dtx")
+    return errorlevel
+  else
+    os_message("** Running: luatex -interaction=batchmode "..file..".dtx")
+  end
+  -- lualatex
+  local file = jobname(tempdir.."/example.tex")
+  errorlevel = run(tempdir, "lualatex -interaction=nonstopmode "..file.." > "..os_null)
+  if errorlevel ~= 0 then
+    error("** Error!!: lualatex -interaction=nonstopmode "..file..".tex")
+    return errorlevel
+  else
+    os_message("** Running: lualatex -interaction=nonstopmode "..file..".tex")
+  end
+  -- Copying
+  os_message("** Copying "..file..".log and "..file..".pdf files to main dir: OK")
+  cp("example.log", tempdir, maindir)
+  cp("example.pdf", tempdir, maindir)
+  -- Clean
+  os_message("** Remove temporary directory ./"..tempdir..": OK")
+  cleandir(tempdir)
+  lfs.rmdir(tempdir)
+  os.exit()
 end
