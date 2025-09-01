@@ -1,0 +1,44 @@
+\documentclass[jdecimal, citestyle=apa, 12pt]{maine-thesis}  % Default options 12pt and final copy
+% Use the draft option for faster compiling.
+%% Default font is Garamond 12 pt (using EB Garamond). Approved list
+% Arial – 10 pt
+% Century – 11 pt
+% Courier New – 10 pt
+% Garamond – 12 pt
+% Georgia – 11 pt
+% Lucida Bright – 10 pt
+% Microsoft Sans Serif – 10 pt
+% Tahoma – 10 pt
+% Times New Roman – 12 pt
+% Trebuchet MS – 10 pt
+% Verdana – 10 pt
+
+%% ADD PACKAGES HERE AS NEEDED
+\usepackage[english]{babel} %for dummy text generation
+\usepackage{blindtext} %for dummy text generation
+
+\addbibresource{references.bib}
+
+\input{skeleton/metadata}
+
+% If the thesis has MORE than one appendix, leave the following command in.  Else, comment it out.
+\multipleappendicestrue
+
+% Begin the document.
+\begin{document}
+
+\preliminary
+\maketitle
+
+\input{skeleton/front}
+
+\mainmatter
+\input{skeleton/chapters}
+
+\references				% Inserts and formats the reference section.
+
+\input{skeleton/appendicies}
+
+\input{front/biography}
+
+\end{document}
