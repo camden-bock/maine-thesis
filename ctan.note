@@ -1,0 +1,2 @@
+Package 'maine-thesis' provides support for the formating requirements for graduate theses of the Graduate School at The university of Maine.
+It sets default parameters for the report class, modifies captions, referneces, and the table of contents, and makes specific environments available.

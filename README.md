@@ -1,75 +1,73 @@
 # maine-thesis
 
-A LaTeX class file for the typesetting of a Masters or Doctorate Thesis at the University of Maine (Orono, ME).
+A LaTeX class file for typesetting Master's and Doctorate theses at the University of Maine (Orono, ME).
 
-## TODO
+This project aims to update the class file to the current graduate school specifications and make it available on CTAN
+for wider use.
 
-The goal of this fork is to update to the current graduate school specifications and make available in CTAN.
+## Quick Start
 
-## Installation
+Once maine-thesis is available on CTAN, the easiest way to install it will be through your TeX distribution's package
+manager. In the meantime, you can install it manually from this repository.
 
-To install this class file simply copy or link `maine-thesis.cls` to your texmf tree. On Unix based systems one of the
-following commands should work:
+### CTAN Installation (Future Support)
 
-`cp maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)`
+When the package is on CTAN, you'll be able to install it using your TeX distribution's package manager.
 
-`ln maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)`
+    TeX Live: tlmgr install maine-thesis
 
-On Windows machines the equivalent commands are:
+    MiKTeX: Use the MiKTeX Console or mpm utility.
 
-``for /f "usebackq tokens=*" %a in (`kpsewhich --var-value TEXMFHOME`) do copy maine-thesis.cls %a``
+### GitLab Installation (Future Support)
 
-``for /f "usebackq tokens=*" %a in (`kpsewhich --var-value TEXMFHOME`) do mklink %a maine-thesis.cls``
+In a future revision, the package will be available with automated releases in Gitlab.
 
-The advantage to linking over copying is that once you've set this up, you need only use `git fetch` to make updates,
-but you do have to keep your copy of the repository.
+### Overleaf Template (Future Support)
 
-## Thesis Guidelines
+In a future version, the template will be made available in overleaf with reference to the class file.
 
-The latest version of the [official thesis guidelines](https://umaine.edu/graduate/students/progress/thesis/) is now
-available online. If you find a deviation between the guidelines and this class file, please contact me either by
-posting an issue here on [GitHub](https://github.com/rpspringuel/maine-thesis/issues) or
-by [emailing me](mailto:rpspringuel@gmail.com). If emailing me please include `maine-thesis` in your subject line in
-order to avoid spam filters.
+## Development with l3build
 
-## Repository inventory:
+This project uses l3build to automate common tasks. To get started, you can use the following commands:
 
-Besides the class file itself, this repository contains the following additional resources:
+    l3build unpack: Extracts the .cls and .pdf files from the source.
 
-### Documentation
+    l3build doc: Compiles the main documentation PDF.
 
-The files in the Documentation folder serve both as the documentation for this class file and as an example of its use.
+    l3build clean: Removes all temporary and generated files.
 
-### template
+    l3build ctan: Prepares a CTAN-ready TDS (TeX Directory Structure) archive.
 
-The template folder contains a basic document structure which you can use as a template for your own thesis.
+For a manual installation, see the instructions below.
 
-## Contributing
+### Manual Installation (Current Method)
 
-If you find a bug in the class file or something that it doesn't format correctly, please contact me either by posting
-an issue here on [GitHub](https://github.com/rpspringuel/maine-thesis/issues) or
-by [emailing me](mailto:rpspringuel@gmail.com). If emailing me please include `maine-thesis` in your subject line in
-order to avoid spam filters.
+To install the class file, copy or link maine-thesis.cls to your local texmf tree. On Unix-based systems, you can use
+one of these commands:
 
-Also, when reporting a bug or something that needs to be changed a MWE that demonstrates the current unacceptable
-behavior and a picture or complete description of the desired result is really useful.
+    Copy: cp maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)
 
-%% Copyright (C) 2003 by Jim Kenneally
-%%
-%% This file may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%%
-%% The latest version of this license is in
-%%   http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2005/12/01 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%%
-%% The Current Maintainer of this work is R. Padraic Springuel.
-%% Please report all bugs and problems (particularly formatting that
-%% the UMaine Graduate School wants changed) to:
-%% rpspringuel@gmail.com
-%%
-%% Contributions from Camden Bock and Hanna Brooks.
+    Link: ln maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)
+
+On Windows, the equivalent commands are:
+
+    Copy: for /f "usebackq tokens=*" %a in (\kpsewhich --var-value TEXMFHOME`) do copy maine-thesis.cls %a`
+
+    Link: for /f "usebackq tokens=*" %a in (\kpsewhich --var-value TEXMFHOME`) do mklink %a maine-thesis.cls`
+
+Linking is recommended because it allows you to update the class by simply using git pull from the repository.
+
+# Repository Contents
+
+    sources/: The main source files, including maine-thesis.dtx (the documented source) and CTANREADME.md.
+
+    doc/: Documentation for the class file, which also serves as an example of its use.
+
+    template/: A basic document structure you can use as a starting point for your thesis.
+
+# Contributing
+
+If you find a bug or a formatting issue, please file an issue on GitHub.
+
+When reporting a bug, it's very helpful to include a Minimal Working Example (MWE) that demonstrates the problem and a
+description of the desired result.

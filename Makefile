@@ -1,7 +1,7 @@
-.PHONY: all doc clean unpack ctan
+.PHONY: all doc clean unpack template ctan
 
 # Main target: Unpack sources, build documentation, and prepare for release.
-all: unpack doc
+all: unpack doc template
 
 # Unpacks the DTX files into the working directory.
 unpack:
@@ -12,13 +12,21 @@ unpack:
 doc:
 	@echo "--- Building documentation ---"
 	@l3build doc
+	@cp build/doc/maine-thesis.pdf doc/maine-thesis.pdf
+	@cp build/unpacked/example.pdf doc/maine-thesis-example.pdf
+
+template:
+	@echo "--- Building template ---"
+	@cp build/unpacked/maine-thesis.cls template/maine-thesis.cls
+	@cd template && latexmk main.tex
+	@cp template/_build/main.pdf doc/maine-thesis-template.pdf
+	@rm template/maine-thesis.cls
 
 # Cleans up temporary and generated files.
 clean:
 	@echo "--- Cleaning up files ---"
 	@l3build clean
-	@rm -f *.pdf *.cls *.sty *.log *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.synctex.gz *.out *.lot *.lol *.lof *.toc
-	@rm -f myclass*.zip
+	@cd template && latexmk -c main.tex
 
 # Prepares a CTAN-ready TDS archive.
 ctan:
