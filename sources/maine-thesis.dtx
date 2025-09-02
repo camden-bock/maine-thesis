@@ -1040,27 +1040,28 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % 'lineno' is enabled when in draft mode for easier review
 % Adds line numbers to a document, useful during the drafting process.
-
-%   \begin{macrocode}
-\RequirePackage{changes}
-%   \end{macrocode}
+%
+%    \begin{macrocode}
+\RequirePackage[]{changes}
+%    \end{macrocode}
+%
 % The main advantage of the changes package is its flexibility. You can define different authors with their own colors, which is great for showing who made which edits in a collaborative document.
 % When you're ready to submit the final version of your manuscript, you don't need to manually remove all the change markup. You can simply add the final option to the package in your preamble.
-
+%
 % The changes package provides commands to mark up text as additions, deletions, or replacements.
-
+%
 % \subsection{Table of Contents, Titles and Headings}
-
+%
 %    \begin{macrocode}
 \RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
 %    \end{macrocode}
 % Adds the bibliography, index, and lists of figures/tables to the table of contents.
-
+%
 %    \begin{macrocode}
 \RequirePackage{titlesec}[2021/07/05 v2.14 Sectioning titles]
 %    \end{macrocode}
 % Offers a powerful interface to sectioning commands, allowing for custom headings.
-
+%
 %    \begin{macrocode}
 \RequirePackage{textcase}[2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
 %    \end{macrocode}
