@@ -101,7 +101,7 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % \GetFileInfo{maine-thesis.cls}
 %
 % \title{^^A
-%   \textsf{maine-thesis} --- description text\thanks{^^A
+%   \textsf{maine-thesis} --- A LaTeX class file for the typesetting of a Masters or Doctorate Thesis at the University of Maine.\thanks{^^A
 %    This file describes version \fileversion, last revised \filedate.^^A
 %  }^^A
 % }
@@ -113,88 +113,222 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % \maketitle
 %
 % \begin{abstract}
-% This is an example package for educational purposes only that defines a single macro
+% This class provides assistance for implementing the thesis formatting requirement of the Graduate School at the University of Maine.
+% Upon the recommendation of their committee, students may follow the style manual of a leading journal or of a professional association for the use of field-specific terminology, formulas, signs, and other features of the text, as well as formats for documenting sources.
+% The format requirements of the graduate school must be satisfied first, even if they depart from the style manual that has been adopted. Papers that have been published in a journal or other publication and are included in the thesis must be re-formatted to adhere to these guidelines.
 % \end{abstract}
 %
 % \tableofcontents
 %
-% \section{User Interface}
+% \section{University of Maine Thesis Typestting Requirements}
+% These requirements for typesetting were retrieved from \href{https://umaine.edu/graduate/students/progress/thesis-resources/}{The Graduate School at The University of Maine}.
+% The requirements are listed throughout the implmenetation section to, generally, clearly identify the intended function of sections of the class, for easy future modification.
 %
-% \changes{v1.0}{2020/02/12}{First public release}
+% \subsection{Thesis and Dissertation Committee}
+%The thesis will be reviewed by the thesis committee for content and research accuracy. The role of the thesis committee is to guide the student through the research and writing process by providing suggestions and feedback as to the contents, direction, timeline, style, citations, and other aspects of the research.
 %
-% \DescribeMacro{\examplemacro}
-% Some text about an example macro called \cs{examplemacro}, which
-% might have an optional argument \oarg{arg1} and mandatory one
-% \marg{arg2}.
+% The thesis draft submitted to the Graduate School should be a product of this negotiation between the student and the committee. Even though the committee’s recommendations may have a significant impact on the thesis’ final form, it is the student who is ultimately responsible for the content and style of the thesis.
+% \begin{itemize}
+% \item{Master’s thesis committees are comprised of at least three (3) graduate faculty members.}
+% \item{Doctoral dissertation committees are comprised of at least five (5) graduate faculty members}
+% \end{itemize}
+% Graduate faculty are appointed by the Graduate School upon the recommendation of the appropriate department.
+%
+% \subsection{Common Formatting Errors}
+% \subsubsection{Abstract Formatting Errors}
+% All abstracts must have the below information on the same page as the abstract. This information must match the title page. The only difference between the title page and the abstract is the spacing: the abstract should have single spacing for the degree information.
+% \subsection{Pagination Errors}
+% The Title Page through Chapter 1 should be numbered using Roman numerals (iii, iv, v, …). The title page should be counted but not numbered. The Abstract will not have page numbers nor be counted.
+% The body of the dissertation should be numbered using Arabic numbers (1, 2, 3, …). The first page of the body of the text should begin with page 1.
+% All page numbers should be either top right or bottom center.
+%
+% \subsubsection{Figure and Table Errors}
+% Figures and tables must be placed within the text, as close to their first mention as possible.\footnote{figure placement is handled automatically by \LaTeX}
+% Figures and tables that span more than one page must be labeled on each page.
+% Any second and subsequent page of the figure/table must include the “(Continued)” notation.\footnote{this currently requires manually creating two figures to add continued to the short title}
+% This applies to figure captions as well as images.
+% Each page of a figure/table must be accounted for and appropriately labeled.\footnote{please use the `ref` and `label` system in latex}
+% All figures/tables must have a unique number.
+% They may not repeat within the dissertation.
+%
+% \subsubsection{Window and Orphan Errors}
+% A single line cannot appear alone at the top or bottom of a page.
+% Widow/orphan Control is an option in Word to prevent this.
+% W/O also applies in the reference section.
+% While a lone heading or subheading at the bottom of the page is not technically a widow/orphan, this must be moved to the next page to accompany its text.
+%
+% \subsubsection{Horizontal Figures \& Tables Errors}
+%Any figures/tables placed in a horizontal orientation must be rotated for readability.
+% Insert a section break to rotate the page.\footnote{in \LaTeX we do not use section breaks for this, but we have landscape package to support}
+%
+% Page numbers must be placed in the same location on all pages of the dissertation, centered, at the bottom or top of the page.\footnote{This needs clarification from the graduate school, whether the bottom is in print or digital form}
+% Page numbers may not appear under the table/figure.
+%
+% \subsubsection{Supplemental Figures \& Tables Errors}
+% Supplemental figures and tables must be placed in an appendix at the back of the dissertation.\footnote{this requires clarification, can one appendix contain multiple figures and tables without additional prose?}
+% They should not be placed at the back of the chapter.
+%
+% \subsubsection{Appendices Errors}
+% Appendices should be able to stand alone. Formatting applies to figures, tables, etc.
+% There should be no Appendix A if there is no Appendix B. It can be labeled Appendix in this case.\footnote{Appendix labeling is handled by the maine-thesis class.}
+%
+% \subsubsection{Biography Errors}
+% The biography is required and will be on the last page of the document. This must be listed in the Table of Contents. The last OR only sentence must read “S/He/They is/are a candidate for the <degree type> degree in <program> from the University of Maine in <month> <year>.”
+% \footnote{This is automatically inserted by the maine-thesis class.}
+%
+% \subsubsection{Post PDF Conversion Formatting Errors}
+% The entire document should be checked after all revisions, and before submitting to the Graduate School, to spot any inconsistencies or PDF conversion glitches.
+%
+% \subsubsection{Leader Dots Errors}
+% Leader dots must be present in the Table of Contents, List of Figures, and List of Tables.
+% The “5 Dot leader rule” is the most common mistake.
+% There can be no text within 5 dots of the listed page number. \footnote{While this is not handled precisely by the maine-thesis class, we have attempted to set the parameters for this to automatically occur whenever possible. Please review manually. Insert a line break when needed to correct. In a future version, the parameters for tuning for different fonts will be exposed}
+% For example, if a title is longer than one line, it must be broken into two lines.
+% The top and bottom lines cannot extend any closer than the 5 spaces.
 %
 % \section{Example}
 %
-% Here is a straightforward example to illustrate how these macro
-% are used.
+% Here is a straightforward example to illustrate how these macros, if you are building the document from scratch.
+% We reccomend that you use the provided template from GitLab or Overleaf\footnote{coming soon}.
+%
 %    \begin{macrocode}
 %<*example>
-\documentclass[jdecimal, citestyle=apa, 11pt]{maine-thesis}  % Default options 12pt and final copy
+\documentclass[jdecimal, citestyle=apa, 11pt]{maine-thesis}
+%    \end{macrocode}
+% Default options 12pt and final copy
+% Add draft for a faster compiling option with watermarks.
 
 % Include necessary packages here
+%    \begin{macrocode}
 \usepackage{mwe}
 \usepackage{blindtext}
+%    \end{macrocode}
+
 
 % Replace contents of {...} with your own information.
-\title{An essay upon the vasomotor changes in tabes dorsalis}					% Title of thesis
-\author{Mary Morstan}					% Author's name: First Middle Last
-\degreesheld{Bachelor of Medicine, University of Edinburg \\
-Master of Surgery, University of Edinburg}			% Previously earned degree(s), institution(s) and year(s).
-\degree{Doctor of Medicine}  				% Degree to be granted
-\program{School of Medicine}				% Degree granting department or program
-\submitdate{May 1885}				% Month and year of graduation (do not separate with a comma)
+%    \begin{macrocode}
+\title{An essay upon the vasomotor changes in tabes dorsalis}
+%    \end{macrocode}
 
-\principaladvisor[Dr. Seuss]{Dr. Seuss, Professor of Literature} 			% Advisor's [short title and name]{name, long title}
+% Title of thesis
+%    \begin{macrocode}
+\author{Mary Morstan}
+%    \end{macrocode}
+
+% Author's name: First Middle Last
+%    \begin{macrocode}
+\degreesheld{Bachelor of Medicine, University of Edinburg \\
+Master of Surgery, University of Edinburg}
+%    \end{macrocode}
+
+% Previously earned degree(s), institution(s) and year(s).
+%    \begin{macrocode}
+\degree{Doctor of Medicine}
+%    \end{macrocode}
+
+% Degree to be granted
+%    \begin{macrocode}
+\program{School of Medicine}
+%    \end{macrocode}
+
+% Degree granting department or program
+%    \begin{macrocode}
+\submitdate{May 1885}
+%    \end{macrocode}
+
+% Month and year of graduation (do not separate with a comma)
+
+% Advisor's [short title and name]{name, long title}
+%    \begin{macrocode}
+\principaladvisor[Dr. Seuss]{Dr. Seuss, Professor of Literature}
+%    \end{macrocode}
+
+%    \begin{macrocode}
+% %\principalshort{...}
+%    \end{macrocode}
+% Shortened advisor name for abstract.  See guidelines for example. Should include Dr. as title.
+
 % If you have more than one advisor then you'll should delete the first argument ("[...]") above and uncomment the following commands
-%\secondadvisor{...}
-%\principalshort{...} 			% Shortened advisor name for abstract.  See guidelines for example.
+%    \begin{macrocode}
+% %\secondadvisor{...}
+%    \end{macrocode}
 
 % Include all committee members names and titles
+%    \begin{macrocode}
 \firstreader{Dr. Dolittle, Vetinary School}
 \secondreader{Dr Watson, Medical School}
+%    \end{macrocode}
+
 % If necessary (i.e. for a doctorate), include extra committee members.  Else, comment out or delete any that are unnecessary
+%    \begin{macrocode}
 \thirdreader{Dr. Digory Kirke, Professor of Geography of Magical Lands}
+%    \end{macrocode}
 
 % If the thesis has MORE than one appendix, leave the following command in.  Else, comment it out.
+%    \begin{macrocode}
 \multipleappendicestrue
-
+%    \end{macrocode}
 
 % Begin the document.
+%    \begin{macrocode}
 \begin{document}
+%    \end{macrocode}
+
+% Tag prelimianry material and produce front matter
+%    \begin{macrocode}
 \preliminary
 \maketitle
+%    \end{macrocode}
 
+%    \begin{macrocode}
 \begin{abstract}
 \Blindtext
 \end{abstract}
+%    \end{macrocode}
 
-\begin{layabstract}{...}	% Replace the ... with the list of keywords
+%    \begin{macrocode}
+% Replace the ... with the list of keywords
+\begin{layabstract}{...}
+%    \end{macrocode}
+
+% blindtext is used to generate random text for the example.
+%    \begin{macrocode}
 \blindtext
 \end{layabstract}
+%    \end{macrocode}
 
 % Commands for the required lists
+%    \begin{macrocode}
 \tableofcontents
+%    \end{macrocode}
 
 % Sets the document spacing and pagestyle.
+%    \begin{macrocode}
 \mainmatter
+%    \end{macrocode}
 
 % Main text of the thesis.  Use of the `input' command will make later editing much easier.
-
+%    \begin{macrocode}
 \chapter{Observations of Medicine}
 \blindtext
 
 \chapter{Deducatinos about Disease}
 \blindtext
+%    \end{macrocode}
 
-\appendix					% Include this before any appendices.
+% Include this before any appendices.
+%    \begin{macrocode}
+\appendix
 \chapter{Some extras}
 \blindtext
+%    \end{macrocode}
 
+% end the document
+%    \begin{macrocode}
 \end{document}
+%    \end{macrocode}
+
+%    \begin{macrocode}
 %</example>
 %    \end{macrocode}
 %
@@ -203,8 +337,36 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %  \PrintIndex
 % }
 % \changes{v2.0}{2025/09/01}{Refactor with New Dependencies, Update Formatting}
-% \section{Implementation}
-% Identification of pkg
+% \section{Refactoring for V2}
+% \subsection{File Structure and Maintenance}
+% \begin{itemize}
+%    \item The v1 class was a single, manually maintained \texttt{.cls} file.
+%    \item In v2, \texttt{maine-thesis.dtx}, is a single source file that generates both the class file (\texttt{maine-thesis.cls}) and its documentation. This allows for a more streamlined and automated maintenance process.
+%    \item The \texttt{dtx} file format is part of a larger build system that uses \texttt{l3build} for unpacking and generating a CTAN-ready package.
+% \end{itemize}
+%
+% \subsection{Package and Dependency Updates}
+% \begin{itemize}
+%    \item The v1 class file used older packages for a variety of tasks.
+%    \item The v2 class has been refactored to use modern packages. For example, it now uses \texttt{biblatex} with the \texttt{biber} backend for citation management[cite: 1, 3, 5]. The previous version did not specify the use of these packages and appears to have a simpler citation approach.
+%    \item New dependencies were added, including \texttt{fontspec}, \texttt{microtype}, \texttt{hyperref}, \texttt{csquotes}, \texttt{titlesec}, and \texttt{etoolbox}, which provide more robust font, typography, hyperlinking, and title formatting capabilities.
+% \end{itemize}
+% \subsection{Formatting and User Interface}
+% \begin{itemize}
+%    \item The v1 class managed heading styles using a numerical counter (\texttt{\textbackslash setcounter\{head\}}) with \texttt{\textbackslash ifcase} logic.
+%    \item The v2 \texttt{maine-thesis.cls} uses named macros like \texttt{\textbackslash apaheadings}, \texttt{\textbackslash chicagoheadings}, and \texttt{\textbackslash idecimalheadings} for a clearer and more direct way to set heading formats.
+%    \item The v2 provides a unified command for caption formatting with \texttt{\textbackslash DeclareCaptionFormat\{thesis\}}. The original class handled captions through a redefinition of \texttt{\textbackslash \@ makecaption} and other low-level commands.
+%    \item The title page and abstract environments were completely redesigned with the \texttt{\textbackslash maketitlehooka} and \texttt{\textbackslash maketitlehookd} commands, allowing for more precise control over the layout.
+% \end{itemize}
+%
+% \subsection{Code and Variable Changes}
+% \begin{itemize}
+%    \item The v1 class contained deprecated commands like \texttt{\textbackslash libraryrights} and \texttt{\textbackslash dissacceptance}.
+%    \item The v2 class removes these deprecated commands and replaces them with a \texttt{\textbackslash ClassError} message, informing the user that the Graduate School no longer requires them.
+%    \item The \texttt{\textbackslash preliminary} command in the v2 version now sets the \texttt{tocdepth} and \texttt{secnumdepth} to 1, while the v1 version used a different command for this purpose (\texttt{\textbackslash settocdepth\{chapter\}}).
+%    \item The \texttt{\textbackslash appendix} command in the v2 class now uses \texttt{\textbackslash gdef} to globally change \texttt{\textbackslash chaptername} to ``Appendix'' and the chapter counter to use alphabetical characters (\texttt{\textbackslash thechapter\{\textbackslash @Alph\textbackslash c@chapter\}}).
+% \end{itemize}
+%
 %    \begin{macrocode}
 %<*package>
 %   \end{macrocode}
@@ -259,7 +421,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \DeclareOption{12pt}{\renewcommand\docsize{12pt}\PassOptionsToClass{12pt}{report}}
 %    \end{macrocode}
 %
-
+% \subsection{Draft Mode}
 % The `draft` option enables a "draft mode" for the document.
 % It sets the `ifdraft` conditional to true, which can be used by other
 % parts of the class to show or hide draft-specific content.
@@ -276,7 +438,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \mt@officialfalse
 }
 %    \end{macrocode}
-
+% \subsection{Page Layout}
 % These options control the page layout, specifically whether the document is
 % for a one-sided or two-sided print.
 % These options are standard and should be passed to the report class.
@@ -293,6 +455,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \DeclareOption{unbound}{\mt@officialtrue\unboundtrue\def\@margg{1in}}
 %    \end{macrocode}
 %
+% \subsection{Page Layout}
 % The following options allow the user to choose from different heading styles.
 %
 %    \begin{macrocode}
@@ -421,18 +584,22 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 % Enhances the appearance of justified text through micro-typographical
 % adjustments like character protrusion and font expansion.
 
-% \subsection{Formatting}
-%    \begin{macrocode}
-\RequirePackage{lscape}[2020/05/28 v3.02]
-%    \end{macrocode}
-% Provides a landscape environment to rotate pages. For PDF output, the
-% `pdflscape` package is required to correctly set the page orientation.
-
-%    \begin{macrocode}
-\RequirePackage{pdflscape}[2022-10-27 v0.13 Display of landscape pages in PDF]
-%    \end{macrocode}
-% Adds PDF support to the `lscape` environment, ensuring landscape pages
-% are displayed correctly in PDF viewers.
+% \subsection{Table of Contents, List of Tables and List of Figures}
+%The List of Tables and the List of Figures (if any) appear as individual pages.
+%
+%A List of Tables/Figures is necessary even if there is only one table or figure.
+%
+%If the text of the manuscript contains a consistent set of theorems, symbols, abbreviations, or definitions, those should be listed in a List of Theorems, Symbols, Abbreviations, or Definitions respectively. These lists are included in the Table of Contents.
+% \begin{itemize}
+%   \item Tables/figures must be numbered and titled. Further explanatory information provided in a caption that is not part of the title should not appear on the List of Tables/Figures.
+%   \item The tables/figures are numbered separately from each other. Each group is numbered consecutively throughout the entire manuscript or by chapter using a decimal numbering system (e.g., the third table in chapter two will be Table 2.3., and the third figure in chapter two will be Figure 2.3.). The same system should be used for numbering figures AND tables.
+%   \item All tables/figures must fit into the required page margins.
+%   \item The title and caption of the table/figure are part of the text and must be the same font size and style of the body of the manuscript. It is acceptable for the font within the table/figure to be as small as 9-point font.
+%   \item Tables/figures must be placed in the text as they are mentioned. If the Table/Figure is larger than one-half of the page it must be placed on a page of its own.
+%   \item Tables/figures that extend onto a second page must be labeled “Table/Figure \# Continued”
+%   \item Appendix tables/figures must be numbered separately (e.g., the third table in Appendix A would be numbered Table A.3.) and must be included in the List of Tables.
+%   \item Photographs must be originals or high-quality reproductions. All photographs must have captions.
+% \end{itemize}
 
 %    \begin{macrocode}
 \RequirePackage[titles]{tocloft}[2017/08/31 v2.3i parameterised ToC, etc., typesetting]
@@ -440,6 +607,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 % Offers extensive customization of the table of contents, list of figures,
 % and list of tables.
 
+% \subsection{Formatting}
 %    \begin{macrocode}
 \RequirePackage{newunicodechar}[2018/04/08 v1.2 Defining Unicode characters]
 %    \end{macrocode}
@@ -488,7 +656,21 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 % Within this class, it's used to set the document margins, including the left margin
 % based on the `unbound` option.
 
+% \subsection{References and Citations}
+%    \begin{macrocode}
+\RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
+%    \end{macrocode}
+% A powerful package for managing bibliographies and citations.
 
+% \subsection{Figures and Tables}
+% Figures: A FIGURE is a graphic illustration (chart, graph, diagram, photo, map, or plate).
+% Figures may be professionally prepared or drawn by the author.
+% In either case, they must be of letter-quality print.
+%
+% Figures \& Tables must be placed as close as possible to their first mention in the text.\footnote{\LaTeX handles this with the figure environment}
+% If a table or figure with the caption is larger than 2/3 of a page, it must be moved to a separate page.
+% Tables and figures referred to in the text may not be placed at the end of the chapter or the end of the dissertation.
+%
 %    \begin{macrocode}
 \RequirePackage{tabularx}[2023/12/11 v2.12a]
 %    \end{macrocode}
@@ -496,8 +678,6 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 % standard `tabular` environment. It includes a new column type, `X`, that
 % automatically adjusts its width to fill the specified table width. This is
 % essential for creating tables that span the full text width of your document.
-
-% \subsection{References and Citations}
 
 %    \begin{macrocode}
 \RequirePackage{hyperref}[2023-02-07 v7.00v Hypertext links for LaTeX]
@@ -512,21 +692,34 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 % nesting and language-specific rules.
 
 %    \begin{macrocode}
-\RequirePackage[backend=biber, style=\@citestyle, doi = true, autopunct = true, date=year]{biblatex}[2024/03/05 v3.19]
-%    \end{macrocode}
-% A powerful package for managing bibliographies and citations.
-
-% \subsection{Figures and Tables}
-%    \begin{macrocode}
 \RequirePackage{graphicx}[2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)]
 %    \end{macrocode}
 % A fundamental package for including graphics files in a document.
 
+% \subsubsection{Landscape Figures and Tables}
+% Tandscape orientation figures and tables must be oriented as such by inserting a section break and rotating the page.
+% This makes the figure/table readable in digital format.
+%
 %    \begin{macrocode}
 \RequirePackage{rotating}[2016/08/11 v2.16d rotated objects in LaTeX]
 %    \end{macrocode}
 % Provides environments for rotating objects such as figures and tables.
 
+%    \begin{macrocode}
+\RequirePackage{lscape}[2020/05/28 v3.02]
+%    \end{macrocode}
+% Provides a landscape environment to rotate pages. For PDF output, the
+% `pdflscape` package is required to correctly set the page orientation.
+
+%    \begin{macrocode}
+\RequirePackage{pdflscape}[2022-10-27 v0.13 Display of landscape pages in PDF]
+%    \end{macrocode}
+% Adds PDF support to the `lscape` environment, ensuring landscape pages
+% are displayed correctly in PDF viewers.
+
+%  \subsubsection{Caption}
+% Captions must be on the same page as the figure on the table.\footnote{currenlty,we use a short title and a caption description}
+% If the table exceeds one page, the caption should go on the first page and the second page will be labeled as table/figure continued.\footnote{currenlty, this must be handled manually, where the description is null for the second page.}
 %    \begin{macrocode}
 \RequirePackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}[2023/03/12 v3.6j Customizing captions (AR)]
 %    \end{macrocode}
@@ -565,7 +758,6 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 %
 % Provides fine control over hyphenation.
-
 
 %    \begin{macrocode}
 \RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
@@ -622,6 +814,14 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 % Provides a command to execute code after a specific package has been loaded.
 
+% \subsection{Endnotes \& Footnotes}
+% Footnotes appear at the bottom of the page or at the end of a chapter;
+% endnotes appear on a separate page at the end of the text before the Bibliography.
+% The notes are numbered consecutively throughout the text by a raised Arabic numeral (e.g. 12)
+% which corresponds to the number of the note at the bottom of the page or at the end of the text.
+%
+% This is handled by the \LaTeX base report class, and no additional packages are needed
+% Do not use the `footnote` package, as it breaks compatibility with other packages. Consider `footnotehyper` if more advanced controls are needed.
 
 %	\section{Additional Variables}
 %	\subsection{Title}
@@ -805,9 +1005,34 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %   \end{macrocode}
 %   \subsection{Default Font}
 %   \begin{macrocode}
+
+% \section{Style and Format}
+% \subsection{Recommended Fonts \& Point Size}
+% The text’s body font must also be used in headers, page numbers, and footnotes.
+% Exceptions are made only for tables and figures created with different software and inserted into the document.
+% \begin{itemize}
+%   \item Arial – 10 pt
+%   \item Century – 11 pt
+%   \item Courier New – 10 pt
+%   \item Garamond – 12 pt\footnote{In the maine-thesis class, we set EBGaramond as default since it is widely available.}
+%   \item Georgia – 11 pt
+%   \item Lucida Bright – 10 pt
+%   \item Microsoft Sans Serif – 10 pt
+%   \item Tahoma – 10 pt
+%   \item Times New Roman – 12 pt
+%   \item Trebuchet MS – 10 pt
+%   \item Verdana – 10 pt
+% \end{itemize}
 \setmainfont{EB Garamond}
 %   \end{macrocode}
-%   \subsection{Page Geometry}
+%
+% \subsection{Geometry}
+% \begin{itemize}
+%   \item Page Size: Standard Letter 8.5 by 11 inches
+%   \item Margins: 1 inch for all margins
+%   \item Spacing: Double spacing except for degree information on the Abstract \& Block quotations, footnotes, and bibliographies: single spacing within each entry but double-spacing between each entry
+% \end{itemize}
+%
 %   \begin{macrocode}
 \geometry{
     letterpaper,
@@ -839,6 +1064,18 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 % \section{Caption Format Declaration}
+% This customized the output from the captions package
+% \begin{itemize}
+%   \item Tables/figures must be numbered and titled. Further explanatory information provided in a caption that is not part of the title should not appear on the List of Tables/Figures.
+%   \item The tables/figures are numbered separately from each other. Each group is numbered consecutively throughout the entire manuscript or by chapter using a decimal numbering system (e.g., the third table in chapter two will be Table 2.3., and the third figure in chapter two will be Figure 2.3.). The same system should be used for numbering figures AND tables.
+%   \item All tables/figures must fit into the required page margins.
+%   \item The title and caption of the table/figure are part of the text and must be the same font size and style of the body of the manuscript. It is acceptable for the font within the table/figure to be as small as 9-point font.
+%   \item Tables/figures must be placed in the text as they are mentioned. If the Table/Figure is larger than one-half of the page it must be placed on a page of its own.
+%   \item Tables/figures that extend onto a second page must be labeled “Table/Figure \# Continued”
+%   \item Appendix tables/figures must be numbered separately (e.g., the third table in Appendix A would be numbered Table A.3.) and must be included in the List of Tables.
+%   \item Photographs must be originals or high-quality reproductions. All photographs must have captions.
+%\end{itemize}
+
 %    \begin{macrocode}
 \DeclareCaptionFormat{thesis}
 {
@@ -846,8 +1083,8 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 }
 \captionsetup{format=thesis}
 %    \end{macrocode}
-
-% \section{Heading Format Definitions}
+%
+% \section{Heading Format Definitions for the Table of Contents}
 % \subsection{Macros}
 %    \begin{macrocode}
 %Macro for period after heading
@@ -855,8 +1092,16 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %macro for underline
 \def\addul#1{\underline{#1}}
 \def\adddotul#1{\underline{#1}.\thinspace}
-
+%    \end{macrocode}
+%
 %   \subsection{APA 7 Format}
+%
+% The APA 7 format uses a five-level heading system. The critical features are:
+% \begin{itemize}
+%   \item Level 1 (Chapter): Centered and bold, with uppercase text.
+%   \item Levels 2 \& 3 (Section \& Subsection): Flush left, with level 2 bold and level 3 bold and italic.
+%   \item Levels 4 \& 5 (Subsubsection \& Paragraph): Run-in headings, meaning the text follows on the same line. Level 4 is bold, and level 5 is bold and italic. Both are followed by a period.
+% \end{itemize}
 %
 %    \begin{macrocode}
 \newcommand{\apaheadings}{%
@@ -873,11 +1118,16 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont\bfseries\itshape}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
-%   \end{macrocode}
-
-
-
+%    \end{macrocode}
+%
 %   \subsection{Chicago Format}
+%The Chicago format, as defined here, has a clear hierarchy with varying alignment and capitalization. Its critical features are:
+% \begin{itemize}
+%   \item Levels 1 \& 2 (Chapter \& Section): Centered. Level 1 is bold and uppercase, while level 2 is regular and uppercase.
+%   \item Level 3 (Subsection): Flush left, bold, and italic. The text is also in uppercase.
+%   \item Level 4 (Subsubsection): Flush left with normal roman font. The text is in sentence case.
+%   \item Level 5 (Paragraph): A run-in heading that is bold and italic, followed by a period.
+% \end{itemize}
 %
 %    \begin{macrocode}
 \newcommand{\chicagoheadings}{%
@@ -901,10 +1151,16 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont\bfseries\itshape}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
-%   \end{macrocode}
-
-
+%    \end{macrocode}
+%
 %   \subsection{Maine Thesis Default Format}
+% The format that was provided in the old DOCX template from the Graduate School
+%\begin{itemize}
+%   \item Underlining: It uses underlining for several heading levels.
+%   \item
+%   \item Levels 1-3: Level 1 (Chapter) is centered and bold. Level 2 and 3 (Section and Subsection) are flush left and bold. Level 2 is followed by an underline, and level 3 is a run-in heading that is bold, followed by a period and underline.
+%   \item Levels 4-5: The fourth- and fifth-level headings are also run-in, with the fourth being bold and underlined, and the fifth (paragraph) being regular text with a period and underline.
+% \end{itemize}
 %
 %    \begin{macrocode}
 \newcommand{\mainethesisheadings}{%
@@ -929,10 +1185,16 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont}{}{0pt}{\adddotul}
     \titlespacing{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
 }
-%   \end{macrocode}
-
-
+%    \end{macrocode}
+%
 %   \subsection{iDecimal Format}
+% The iDecimal format emphasizes a clear decimal numbering system. Its critical features are:
+%\begin{itemize}
+%   \item Numbering: All heading levels are numbered, which is more explicit than some other styles.
+%   \item Consistency: The style maintains a consistent use of bold for all heading levels.
+%   \item Alignment: Headings are flush left, except for the chapter title, which is centered.
+%   \item  Run-in Headings: The last two levels are run-in, with a period at the end.
+% \end{itemize}
 %
 %    \begin{macrocode}
 \newcommand{\idecimalheadings}{%
@@ -957,11 +1219,15 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\paragraph}[runin]{\normalfont\bfseries}{\theparagraph}{1em}{\adddot}
     \titlespacing{\paragraph}{\parindent}{3.25ex plus 1ex minus .2ex}{0pt}[1em]
 }
-%   \end{macrocode}
-
-
-
+%    \end{macrocode}
+%
 %   \subsection{jDecimal Format}
+% The jDecimal format, or Justified Decimal System, is characterized by its use of indentation in a justified, decimal format.
+%\begin{itemize}
+%   \item Indentation: It uses increasing indentation for lower-level headings. For example, subsection has 1.5em indentation, and subsubsection has 3.8em.
+%   \item Uppercase: It uses uppercase for both chapters and sections.
+%   \item Consistency: Like the iDecimal format, it uses bolding for most levels to provide emphasis.
+% \end{itemize}
 %
 %    \begin{macrocode}
 \newcommand{\jdecimalheadings}{%
@@ -979,10 +1245,10 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \titleformat{\subparagraph}{\normalfont\hspace{1.5em}}{\thesubparagraph}{0pt}{\addul}
     \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
 }
-%   \end{macrocode}
-
+%    \end{macrocode}
 %
-%\section{Implement Heading from Options Flag using a macro}
+%
+%\section{Implement Heading from Options Flag}
 %
 %   \begin{macrocode}
 \typeout{=== Checking HeadingStyle Flag ===}
@@ -1049,7 +1315,23 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %
 
 %   \section{Title Page Format}
-
+% The Title Page is the first page of the manuscript. It is considered page “i”, but the number does not appear on the page.
+% The following should be CENTERED included on the title page:
+% \begin{itemize}
+%   \item Title of thesis in ALL CAPS, bold, and inverted pyramid format
+%   \item The student’s full name as it appears in University records
+%   \item Previous degree(s) earned
+%   \item A statement of fulfilling requirements for the degree sought
+%   \item Institution name\: The Graduate School
+%   \item Institution name\: The University of Maine
+%   \item The month and year of the student’s graduation date
+%   \item The advisory committee members (single space \& left justify if necessary to keep on one page)
+% \end{itemize}
+%
+% Note: The first name(s) listed is the Advisor’s (or Co-Advisors’) and their title(s) followed by the names and titles of the remaining committee members.
+% Do not include degrees such as “Dr.” on the title page. \footnote{this requires review of the package specifications, and additional documentation for its use}
+% This page is to acknowledge committee members exclusively,
+% “Readers” are recognized in the Acknowledgements.
 %   \subsection{Refacotring Make Title}
 %   \subsubsection{Pre Title Formatting}
 %    \begin{macrocode}
@@ -1163,6 +1445,14 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 
 
 % \section{Table of Contents Formatting}
+% All chapter divisions and subsections must be included in the Table of Contents and labeled exactly as they appear in the text.
+% \subsection{Unlisted Sections}
+% The Copyright page, Abstract, and Table of Contents are NOT listed in the Table of Contents. \footnote{this is handled within each of the enviornment definitions}
+% \subsection{Chapter Divisions and Subsections}
+% All chapter divisions and subsections must be listed in the Table of Contents. Regardless of the system of headings being used for organizing the text of the manuscript (headings system or decimal system), all sub-divisions should be indented appropriately in the Table of Contents.
+% One system should be used consistently throughout the entire manuscript to define the chapter divisions and subsections.\footnote{five styles are provided here}
+
+
 % \subsection{Table of Contents Font Specs}
 %    \begin{macrocode}
 \renewcommand{\cftchapfont}{\normalfont\bfseries}
@@ -1180,7 +1470,9 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 %% Define Leader Dots
-% \subsection{Define Leader Dots Specifications}
+% \subsection{Leader Dots in the Table of Cotents}
+% Leader dots must be used to connect the chapter divisions/subsection headings to their respective page numbers.
+% A minimum of 5 leader dots between the chapter divisions/subsections and the page numbers is required (i.e. the text of the headings should not extend into the area where the page numbers are placed).
 %    \begin{macrocode}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
@@ -1190,7 +1482,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 \renewcommand{\contentsname}{Table of Contents}
 %    \end{macrocode}
 
-%	\subsubsection{Parameters for Ensuring that }
+%	\subsubsection{Ensuring that Leaders Dots meet 5-dot-rule}
 % These should eventually be exposed as options with default values.
 % cftsecindent and cftsecnumwidth define where the title starts.
 
@@ -1210,7 +1502,17 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 % Sets the width for the page number box
 
 %   \section{Abstract Environment}
-
+% An abstract (not paginated), which is a clearly written, concise summary of the thesis, must be included in the manuscript. It describes the problem, the procedures or methods used, and the results and conclusions of the research. Since doctoral abstracts are included in Dissertation Abstracts International, it is extremely important to write accurately. Formulas, diagrams, or other illustrations are not included in the abstract.
+%
+% The heading of the abstract should be centered and include:
+% \begin{itemize}
+%   \item
+%   \item Title of the thesis in ALL CAPS, bold, and inverted pyramid format
+%   \item The author’s full name
+%   \item The name of the thesis advisor (including degree “Dr.”)
+%   \item A statement that the thesis is fulfilling requirements for a degree sought in a particular department
+%   \item The month and year of the student’s graduation date
+% \end{itemize}
 %    \begin{macrocode}
 \newcounter{mt@page}
 \renewenvironment{abstract}{%
@@ -1280,6 +1582,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 %	\section{Acknowledgements Environment}
+
 %    \begin{macrocode}
 \newenvironment{acknowledgements}{%
     \chapter*{\acknowledgename}
@@ -1290,6 +1593,13 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 %	\section{Land Acknowledgements Environment}
+%University of Maine graduate students are expected to include a statement in their final thesis or dissertation that acknowledges that their graduate study has taken place on the ancestral lands of the Wabanaki Tribal Nations. The Graduate School acting through the Graduate Board recommends two nonexclusive options for a tribal land acknowledgement. The first option is to include the statement that was developed by the President’s Council on Diversity, Equity, and Inclusion and adopted by the University of Maine in the acknowledgments section of the thesis/dissertation.
+%\footnote{The `glsa` command supports this default option.}
+%The second option, which may be especially relevant to graduate students undertaking qualitative research studies is to include a researcher positionality statement in the thesis/dissertation.
+%\footnote{The LandAcknowledgements Enviornment supports this option.}
+%
+%Graduate programs supporting option two should provide resources to graduate students electing this option. The development of a researcher positionality statement that acknowledges the land may be used to complement the formal University land acknowledgment statement or may be used as an alternative to this statement.
+%
 %	For Custom Land Acknowledgements
 %    \begin{macrocode}
 \newenvironment{landacknowledgements}{%
@@ -1312,7 +1622,15 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 }
 %    \end{macrocode}
 
-%   \section{Seperators}
+% \section{Pagination}
+% \begin{itemize}
+%   \item Pagination: Check pagination carefully. Account for all pages.
+%   \item The Title Page is counted as page “i” but the number does not appear on the page.
+%   \item Excluding the Abstract, all other pages of the thesis are numbered including display (optional) pages.
+%   \item The preliminary pages, starting with the Copyright Notice (if included), are marked by lowercase Roman numerals (ii, iii, iv, v, vi, etc.).
+%   \item Beginning with the first page of the text, all pages including the appendices, are numbered consecutively with Arabic numerals (1, 2, 3, 4, etc.). The following table displays the proper pagination of all parts of the thesis and which pages should be listed on the Table of Contents.
+%   \item Page numbers appear either on the top right or bottom center of the page. Page numbers need not fall within the required margins of the text, yet they must not appear closer than half an inch from the top, one inch from the right, or half an inch from the bottom edge of the page. The page numbers’ location and font style must be consistent throughout the manuscript.
+% \end{itemize}
 %   \subsection{Preliminary}
 %   Contents following this tag are front matter with roman numeral page numbering
 %    \begin{macrocode}
@@ -1335,6 +1653,9 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 %	\subsection{Appendix}
+% \subsubsection{Appendices in the Table of Contents}
+% Each Appendix must be listed by its title and page number. If there is only one Appendix, it is listed by the name “Appendix” and its title. Therefore, an Appendix “A” should not be listed unless there is an Appendix “B”.
+%
 %	All chapters after the Appendix flag are appendicies.
 %    \begin{macrocode}
 \renewcommand{\appendix}{%
@@ -1351,13 +1672,21 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
     \fi
 }
 %    \end{macrocode}
-
+% \subsubsection{Appendices Titles}
 % We add Appendix to the chapter name for all appendicies.
 %    \begin{macrocode}
 \pretocmd{\chapter}{\ifapp\renewcommand*\chaptername{Appendix}\fi}{}{}
 %    \end{macrocode}
 
 %	\section{Biography Environment}
+% The Biography of the Author page is the LAST page of the thesis.
+% A biography of the candidate must be included in the thesis.
+%
+% For privacy reasons, students may exclude personal information. In such a case, the only line on the biography will read:
+% “`Name/Pronoun` is/are a candidate for the `DEGREE TYPE` degree in `FIELD OF STUDY` from The University of Maine in `Month` `Year`.”
+% If a student chooses to include a biography, it must be written in the third person. The absolute last line MUST read:
+% “`Name/Pronoun` is/are a candidate for the `DEGREE TYPE` degree in `FIELD OF STUDY` from The University of Maine in `Month` `Year`.”
+
 %    \begin{macrocode}
 \newenvironment{biography}{%
     \chapter*{\bioname}
@@ -1381,7 +1710,14 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 %  \section{Copyright Page}
-%   The copyright page is automatically placed using the copyright page command.
+%   Unless the manuscript has been formally registered (copyrighted), this page is optional.
+%   If the student chooses to acknowledge his or her rights as an author, a copyright notice should be placed as the sole text on a page immediately following the title page.
+% The page is numbered but a listing does not appear on the Table of Contents.
+% The copyright notice is centered vertically and horizontally within the margins.
+% Unless there are special terms under which the work has been copyrighted the text of the notice may take either of the two forms below.
+% Consider Creative Commons as an option for obtaining copyright.
+%
+% Use of Third-Party Content: For additional information regarding the use of copyrighted materials, please visit the U.S. Copyright Office website at http://www.copyright.gov
 %    \begin{macrocode}
 \newcommand{\copyrightpage}{%
     \setcounter{page}{3} % we must manually set the copyright page because of the runtime call of preliminary.
@@ -1400,6 +1736,12 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \end{macrocode}
 
 %   \section{Dedication Environment}
+% This page is for the author to express professional and/or personal indebtedness.
+% Permission(s) to use previously copyrighted materials, receipt of grant funds, recognition of “readers”, etc. are acknowledged on this page.
+% Students must be consistent with the use of the third (“the author”) or first person throughout.
+% This page is optional, but if included, it is paginated (lowercase Roman numerals) and listed in the Table of Contents.
+%
+% The use of copyrighted materials can be mentioned on the Acknowledgments page. Any copyright permission letters related to the manuscript should be included in an appendix.
 %    \begin{macrocode}
 \newenvironment{dedication}{%
     \chapter*{\dedicationname}
@@ -1446,6 +1788,7 @@ Master of Surgery, University of Edinburg}			% Previously earned degree(s), inst
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
+%
 %
 % \Finale
 

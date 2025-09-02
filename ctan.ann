@@ -1,2 +1,14 @@
 The updates to the maine-thesis class provide compatibility with biber, update format requirements, and refactor to simplify the codebase.
 Version 2.0 is the first version uploaded to CTAN.
+
+- Removal of Commands: V2 removes the `\libraryrights` and `\dissacceptance` commands, which will cause a `\ClassError` if a user attempts to use them.
+
+- Removal of Environments: The `\part` command, used for multi-volume theses in V1, is no longer supported and now throws a `\ClassError` in V2.
+
+- Changed Command Arguments: The syntax for the `\copyrightpage` command has changed. In V1, it took optional arguments for the author and year, but in V2, it takes a single optional argument.
+
+- Changes to Headings and Numbering: The method for selecting heading styles has been completely altered. Instead of setting a number with `\setcounter{head}`, V2 uses specific macros like `\apaheadings`.
+
+- Changes to Spacing: V2 relies on the setspace package for managing line spacing, replacing the custom `\doublespacing` and `\singlespacing` definitions from V1.
+
+- Bibliography and Citations: V2 uses the modern biblatex and biber system, a significant departure from V1. This change means that older documents using `\bibliography{...}` and `\bibliographystyle{...}` will fail and must be updated to use commands like `\addbibresource{...}` and `\printbibliography`.

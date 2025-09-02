@@ -26,6 +26,34 @@ In a future revision, the package will be available with automated releases in G
 
 In a future version, the template will be made available in overleaf with reference to the class file.
 
+## Changes v1.14 --> v2.0 [rpspringuel/maine-thesis](https://github.com/rpspringuel/maine-thesis/blob/master/maine-thesis.cls)
+
+This class is a fork of rpspringuel's maine-thesis class (v.1.14).
+
+The correct use for these changes is reflected in the template.
+
+The updates to the maine-thesis class provide compatibility with biber, update format requirements, and refactor to
+simplify the codebase. Version 2.0 is the first version uploaded to CTAN.
+
+- Removal of Commands: V2 removes the `\libraryrights` and `\dissacceptance` commands, which will cause a `\ClassError`
+  if a user attempts to use them.
+
+- Removal of Environments: The `\part` command, used for multi-volume theses in V1, is no longer supported and now
+  throws a `\ClassError` in V2.
+
+- Changed Command Arguments: The syntax for the `\copyrightpage` command has changed. In V1, it took optional arguments
+  for the author and year, but in V2, it takes a single optional argument.
+
+- Changes to Headings and Numbering: The method for selecting heading styles has been completely altered. Instead of
+  setting a number with `\setcounter{head}`, V2 uses specific macros like `\apaheadings`.
+
+- Changes to Spacing: V2 relies on the setspace package for managing line spacing, replacing the custom `\doublespacing`
+  and `\singlespacing` definitions from V1.
+
+- Bibliography and Citations: V2 uses the modern biblatex and biber system, a significant departure from V1. This change
+  means that older documents using `\bibliography{...}` and `\bibliographystyle{...}` will fail and must be updated to
+  use commands like `\addbibresource{...}` and `\printbibliography`.
+
 ## Development with l3build
 
 This project uses l3build to automate common tasks. To get started, you can use the following commands:
@@ -33,6 +61,10 @@ This project uses l3build to automate common tasks. To get started, you can use 
     l3build unpack: Extracts the .cls and .pdf files from the source.
 
     l3build doc: Compiles the main documentation PDF.
+
+    l3build template: Compiles the template PDF.
+
+    l3build tag: updates version tags.
 
     l3build clean: Removes all temporary and generated files.
 
@@ -44,16 +76,31 @@ For a manual installation, see the instructions below.
 
 To install the class file, copy or link maine-thesis.cls to your local texmf tree. On Unix-based systems, you can use
 one of these commands:
+Copy:
 
-    Copy: cp maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)
+```bash
+cp maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)
+```
 
-    Link: ln maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)
+Link:
+
+```bash
+ln maine-thesis.cls $(kpsewhich --var-value TEXMFHOME)
+```
 
 On Windows, the equivalent commands are:
 
-    Copy: for /f "usebackq tokens=*" %a in (\kpsewhich --var-value TEXMFHOME`) do copy maine-thesis.cls %a`
+Copy:
 
-    Link: for /f "usebackq tokens=*" %a in (\kpsewhich --var-value TEXMFHOME`) do mklink %a maine-thesis.cls`
+```cmd
+for /f "usebackq tokens=*" %a in (\kpsewhich --var-value TEXMFHOME`) do copy maine-thesis.cls %a`
+```
+
+Link:
+
+```cmd
+for /f "usebackq tokens=*" %a in (\kpsewhich --var-value TEXMFHOME`) do mklink %a maine-thesis.cls`
+```
 
 Linking is recommended because it allows you to update the class by simply using git pull from the repository.
 

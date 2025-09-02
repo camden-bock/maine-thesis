@@ -1,3 +1,6 @@
+--[[
+  ** Build config for maine-thesis using l3build **
+--]]
 
 -- Identify the bundle and main module
 bundle = "maine-thesis"
@@ -5,18 +8,20 @@ module = "maine-thesis"
 pkgversion = "2.0"
 pkgdate    = "2025-09-01"
 
-typesetexe = "lualatex"
-
 -- Specify the directory where the main source files (.dtx, .ins) are located
 maindir        = "."
 sourcefiledir = "./sources"
 textfiledir   = "./sources"
-
-
 textfiles     = {textfiledir.."/CTANREADME.md"}
 sourcefiles   = {"maine-thesis.dtx"}
-installfiles  = {"maine-thesis.pdf", "maine-thesis.cls"}
-template_main_file = "main.tex"
+installfiles  = {"maine-thesis.pdf", "maine-thesis.cls", "example.tex", "example.pdf"}
+tdslocations  = {
+  "source/latex/maine-thesis/maine-thesis.dtx",
+  "doc/latex/maine-thesis/example/example.tex",
+  "doc/latex/maine-thesis/example/example.pdf",
+  "doc/latex/maine-thesis/maine-thesis.pdf",
+  "tex/latex/maine-thesis/maine-thesis.sty"
+}
 
 unpackfiles = {"maine-thesis.dtx"}
 unpackopts  = "--interaction=batchmode"
