@@ -72,7 +72,7 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 \Msg{* TDS directory searched by TeX.}
 \Msg{*}
 \Msg{* To produce the documentation with source code run lualatex }%
-\Msg{* thrice on file maine-thesis.dtx }%
+\Msg{* thrice on file maine-thesis.dtx }
 \Msg{*}
 \Msg{* Happy TeXing!}
 \Msg{*}
@@ -1412,6 +1412,7 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 %   \subsection{Additional Page Format}
 %    \begin{macrocode}
+\setlength{\droptitle}{-60pt} %% adjust headspace of title page and chapter headings as needed.
 \setcounter{secnumdepth}{\value{secnumdefault}}
 \setcounter{tocdepth}{\value{secnumdefault}}
 \raggedbottom
@@ -1627,7 +1628,6 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\jdecimalheadings}
-%   \subsection{jDecimal Format}
 % The jDecimal format, or Justified Decimal System, is characterized by its use of indentation in a justified, decimal format.
 %\begin{itemize}
 %   \item Indentation: It uses increasing indentation for lower-level headings. For example, subsection has 1.5em indentation, and subsubsection has 3.8em.
@@ -1649,22 +1649,22 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % Second Level Headings
 %    \begin{macrocode}
-    \titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{0.3ex}{}
+    \titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{1.5ex}{}
     \titlespacing{\subsection}{1.5em}{0.3ex plus .2ex minus 0pt}{.2ex plus .1ex}
 %    \end{macrocode}
 % Third Level Headings
 %    \begin{macrocode}
-    \titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{0.2ex}{}
+    \titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{1.5ex}{}
     \titlespacing{\subsubsection}{3.8em}{0.2ex plus .1ex minus 0pt}{0.2ex plus .1ex}
 %    \end{macrocode}
 % Fourth Level Headings
 %    \begin{macrocode}
-    \titleformat{\paragraph}{\normalfont\bfseries}{\theparagraph}{0pt}{}
+    \titleformat{\paragraph}{\normalfont\bfseries}{\theparagraph}{1.5ex}{}
     \titlespacing{\paragraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
 %    \end{macrocode}
 % Fifth Level Headings
 %    \begin{macrocode}
-    \titleformat{\subparagraph}{\normalfont\hspace{1.5em}}{\thesubparagraph}{0pt}{\addul}
+    \titleformat{\subparagraph}{\normalfont\hspace{1.5em}}{\thesubparagraph}{1.5ex}{\addul}
     \titlespacing{\subparagraph}{7.0em}{3.25ex plus 1ex minus .2ex}{3.25ex plus 1ex minus .2ex}
 }
 %    \end{macrocode}
@@ -1749,6 +1749,12 @@ Master of Surgery, University of Edinburg}
 % “Readers” are recognized in the Acknowledgements.
 %   \subsection{Parameters for Make Title}
 %   The maine-thesis class now uses \texttt{maketitle} instead of \texttt{titlepage}.
+%
+% \begin{macrocode}
+\date{}
+% \end{macrocode}
+%% an empty date prevents the date from displaying on the title page
+
 %   \subsubsection{Pre Title Formatting}
 %    \begin{macrocode}
 \pretitle{
@@ -1772,7 +1778,6 @@ Master of Surgery, University of Edinburg}
 \preauthor{
     \begin{center}
     By \\
-    \MakeUppercase
 }
 %    \end{macrocode}
 %
@@ -2104,10 +2109,12 @@ Master of Surgery, University of Edinburg}
   \setcounter{secnumdepth}{1} % Sets the section numbering depth to chapters and above
   \setcounter{chapter}{0}
   \apptrue
-  \gdef\chaptername{Appendix} % This changes the name globally
+  \gdef\chaptername{\appendixname} % This changes the name globally
   \gdef\thechapter{\@Alph\c@chapter}% Changes the numbering globally
   \ifmultipleappendices%
-    \cftaddtitleline{toc}{chapter}{\texorpdfstring{\MakeUppercase{Appendices}}{Appendices}}
+    \chapter*{Appendices}
+    \addtocontents{toc}{\protect\nopagebreak}
+    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{Appendices}}{Appendices}}
   \fi
 }
 %    \end{macrocode}
@@ -2145,7 +2152,7 @@ Master of Surgery, University of Edinburg}
   \else
     \@authorpronoun
   \fi%
-  \ is a candidate for the \@degree\ degree in \@program\ from the University of Maine in \@submitdate.\par\endgroup
+  \ is a candidate for the \@degree\ degree in \@program\ from The University of Maine in \@submitdate.\par\endgroup
 }
 %    \end{macrocode}
 % \end{macro}

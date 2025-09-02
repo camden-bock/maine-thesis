@@ -3,7 +3,6 @@
 --]]
 
 -- Identify the bundle and main module
-bundle = "maine-thesis"
 module = "maine-thesis"
 pkgversion = "2.0"
 pkgdate    = "2025-09-01"
@@ -50,7 +49,7 @@ local function type_example()
 end
 
 specialtypesetting = { }
-specialtypesetting["example.tex"] = {func = type_example}
+specialtypesetting["example.tex"]= {func = type_example}
 
 -- Update package date and version
 tagfiles = {"maine-thesis.dtx", "CTANREADME.md"}
@@ -92,40 +91,32 @@ function update_tag(file, content, tagname, tagdate)
   return content
 end
 
-
 -- Configuration for ctan
 ctanreadme = "CTANREADME.md"
 ctanpkg    = "maine-thesis"
 ctanzip    = ctanpkg.."-"..pkgversion
-packtdszip = false
+packtdszip = true
 
 -- Load personal data for ctan upload
 local ok, mydata = pcall(require, "mypersonaldata.lua")
 if not ok then
-  -- This block is executed if the file is not found or has an error.
   mydata = { email="XXX", uploader="YYY", }
-  print("Warning: mypersonaldata.lua was not found or is invalid. Using default values.")
-else
-  -- This block is executed if the file is found and loaded successfully.
-  print("Success: mypersonaldata.lua loaded.")
-  print("Email:", mydata.email)
-  print("Uploader:", mydata.uploader)
 end
 
 uploadconfig = {
-  author      = "Camden Bock",
+  author      = "Your name",
   uploader    = mydata.uploader,
   email       = mydata.email,
   pkg         = ctanpkg,
   version     = pkgversion,
   license     = "lppl1.3c",
   summary     = "Document Class for University of Maine Graduate Thesis",
-  description = [[A Document Class for Thesis Formatting and Template]],
+  description = [[A Document Class for Thesis Formatting at the University of Maine]],
   topic       = { "thesis" },
   ctanPath    = "/macros/latex/contrib/" .. ctanpkg,
-  repository  = "https://gitlab.com/camden-bock/maine-thesis",
-  bugtracker  = "https://github.com/camden-bock/maine-thesis/issues",
-  support     = "https://github.com/camden-bock/maine-thesis/issues",
+  repository  = "https://github.com/yourrepo/maine-thesis-jw",
+  bugtracker  = "https://github.com/yourrepo/maine-thesis-jw/issues",
+  support     = "https://github.com/yourrepo/maine-thesis-jw/issues",
   announcement_file="ctan.ann",
   note_file   = "ctan.note",
   update      = true,
@@ -204,21 +195,21 @@ if options["target"] == "testpkg" then
   end
   -- Unpack files
   local file = jobname(tempdir.."/maine-thesis.dtx")
-  errorlevel = run(tempdir, "luatex -interaction=batchmode "..file..".dtx > "..os_null)
+  errorlevel = run(tempdir, "pdftex -interaction=batchmode "..file..".dtx > "..os_null)
   if errorlevel ~= 0 then
-    error("** Error!!: luatex -interaction=batchmode "..file..".dtx")
+    error("** Error!!: pdftex -interaction=batchmode "..file..".dtx")
     return errorlevel
   else
-    os_message("** Running: luatex -interaction=batchmode "..file..".dtx")
+    os_message("** Running: pdftex -interaction=batchmode "..file..".dtx")
   end
-  -- lualatex
+  -- pdflatex
   local file = jobname(tempdir.."/example.tex")
-  errorlevel = run(tempdir, "lualatex -interaction=nonstopmode "..file.." > "..os_null)
+  errorlevel = run(tempdir, "pdflatex -interaction=nonstopmode "..file.." > "..os_null)
   if errorlevel ~= 0 then
-    error("** Error!!: lualatex -interaction=nonstopmode "..file..".tex")
+    error("** Error!!: pdflatex -interaction=nonstopmode "..file..".tex")
     return errorlevel
   else
-    os_message("** Running: lualatex -interaction=nonstopmode "..file..".tex")
+    os_message("** Running: pdflatex -interaction=nonstopmode "..file..".tex")
   end
   -- Copying
   os_message("** Copying "..file..".log and "..file..".pdf files to main dir: OK")

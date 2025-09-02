@@ -15,7 +15,7 @@ doc:
 	@cp build/doc/maine-thesis.pdf doc/maine-thesis.pdf
 	@cp build/unpacked/example.pdf doc/maine-thesis-example.pdf
 
-template:
+template: unpack doc
 	@echo "--- Building template ---"
 	@cp build/unpacked/maine-thesis.cls template/maine-thesis.cls
 	@cd template && latexmk main.tex

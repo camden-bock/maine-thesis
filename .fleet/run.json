@@ -8,12 +8,12 @@
                 "all"
             ],
             "dependsOn": [
-                "make_clean"
+                "clean"
             ],
         },
         {
             "type": "command",
-            "name": "make_clean",
+            "name": "clean",
             "program": "make",
             "args": [
                 "clean"
@@ -21,55 +21,40 @@
         },
         {
             "type": "command",
-            "name": "distclean",
+            "name": "unpack",
             "program": "make",
             "args": [
-                "distclean"
+                "unpack"
             ],
-        },
-        {
-            "name": "compile_template",
-            "type": "command",
-            "program": "latexmk",
             "dependsOn": [
-                "clean_template"
+                "clean"
             ],
-            "args": [
-                "main.tex"
-            ],
-            "workingDir": "template/"
         },
         {
-            "name": "clean_template",
+            "name": "tag",
             "type": "command",
-            "program": "latexmk",
+            "program": "make",
             "args": [
-                "-c",
-                "main.tex"
+                "tag"
             ],
-            "workingDir": "template/"
-        },
-        {
-            "name": "compile_mwe",
-            "type": "command",
-            "program": "latexmk",
             "dependsOn": [
-                "clean_mwe"
+                "doc",
+                "unpack"
             ],
-            "args": [
-                "maine-thesis-example.tex"
-            ],
-            "workingDir": "mwe/"
         },
         {
-            "name": "clean_mwe",
+            "name": "ctan",
             "type": "command",
-            "program": "latexmk",
+            "program": "make",
             "args": [
-                "-c",
-                "maine-thesis-example.tex"
+                "ctan"
             ],
-            "workingDir": "mwe/"
+            "dependsOn": [
+                "clean",
+                "unpack",
+                "doc",
+                "tag"
+            ],
         }
     ]
 }
