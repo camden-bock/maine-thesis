@@ -124,25 +124,281 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % These requirements for typesetting were retrieved from \href{https://umaine.edu/graduate/students/progress/thesis-resources/}{The Graduate School at The University of Maine}.
 % The requirements are listed throughout the implmenetation section to, generally, clearly identify the intended function of sections of the class, for easy future modification.
 %
-% \subsection{Thesis and Dissertation Committee}
-%The thesis will be reviewed by the thesis committee for content and research accuracy. The role of the thesis committee is to guide the student through the research and writing process by providing suggestions and feedback as to the contents, direction, timeline, style, citations, and other aspects of the research.
+% \section{Class Usage}
 %
-% The thesis draft submitted to the Graduate School should be a product of this negotiation between the student and the committee. Even though the committee’s recommendations may have a significant impact on the thesis’ final form, it is the student who is ultimately responsible for the content and style of the thesis.
-% \begin{itemize}
-% \item{Master’s thesis committees are comprised of at least three (3) graduate faculty members.}
-% \item{Doctoral dissertation committees are comprised of at least five (5) graduate faculty members}
-% \end{itemize}
-% Graduate faculty are appointed by the Graduate School upon the recommendation of the appropriate department.
+% \subsection{Commands}
 %
-% \subsection{Common Formatting Errors}
-% \subsubsection{Abstract Formatting Errors}
+% The following is a guide to the key commands and environments used in the thesis template, listed in the order you would likely use them while writing your thesis. Each entry includes a macro block and instructions for its use.
+%
+% \begin{macro}{\title}
+% The title of your dissertation in inverted pyramid format. Use line breaks to ensure that your title is shaped as an inverted pyrmid if multiple lines.
+% \end{macro}
+%
+% \begin{macro}{\author}
+% Your name
+% \end{macro}
+%
+% \begin{macro}{\degreesheld}
+% Degrees that you currently hold, with institutions listed.
+% Use line breaks as needed
+% \end{macro}
+%
+% \begin{macro}{\degree}
+% The name of your degree (e.g., Masters of Science)
+% \end{macro}
+%
+% \begin{macro}{\program}
+% The name of your degree program
+% \end{macro}
+%
+% \begin{macro}{\submitdate}
+% The date of submission (May, Dec or Aug) and the Year
+% \end{macro}
+%
+% \begin{macro}{\principaladvisor[...]\{...\}}
+% The name of your principal advisor. Short title in square brackets, full title in braces.
+% \end{macro}
+%
+% \begin{macro}{\firstreader}
+% The name of your first committee member, who is not an advisor.
+% \end{macro}
+%
+%
+% \begin{macro}{\multipleappendicestrue}
+% This command, located in \texttt{main.tex}, is a conditional that tells the template to use multiple appendices. If you only have one appendix, you should comment this line out.
+% \end{macro}
+%
+% \begin{macro}{\preliminary}
+% This command in \texttt{main.tex} prepares the document for the preliminary pages, such as the abstract and table of contents, which are typically numbered with Roman numerals.
+% \end{macro}
+%
+% \begin{macro}{\mainmatter}
+% This command is used in \texttt{main.tex} to signal the start of the main content of your thesis. It resets page numbering and changes the numbering style from Roman to Arabic.
+% \end{macro}
+% \begin{macro}{\references}
+% This command automatically generates and formats your bibliography section using the entries in \texttt{references.bib} that have been cited in the document.
+% \end{macro}
+%
+% \begin{macro}{\appendix}
+% This command, placed at the beginning of \texttt{skeleton/appendicies.tex}, changes the chapter counter to use letters (A, B, C) instead of numbers.
+% \end{macro}
+%
+% \subsection{Environments}
+%
+% \begin{macro}{\abstract\{...\}}
+% This environment defines the abstract section. The \texttt{\textbackslash input} command is used to pull the content of your abstract from the \texttt{front/abstract.tex} file.
+% \end{macro}
+%
+% \begin{macro}{\layabstract\{...\}}
+% This environment is used for a non-technical abstract. The \texttt{...} should be replaced with keywords, and the content is pulled from \texttt{front/layabstract.tex}.
+% \end{macro}
+%
+% \begin{macro}{\dedication\{...\}}
+% This optional environment is for your thesis dedication. The dedication text is written in \texttt{front/dedication.tex}.
+% \end{macro}
+%
+% \begin{macro}{\acknowledgements\{...\}}
+% This optional environment is for your acknowledgements. The acknowledgements text is written in \texttt{front/acknowledgements.tex}.
+% \end{macro}
+%
+%
+% \begin{macro}{\biography}
+% This environment is for the author's biography. The content for this section is located in \texttt{front/biography.tex}.
+% \end{macro}
+%
+%% \subsection{Options}
+%
+% This document outlines the various options available when using the \texttt{maine-thesis.cls} document class. These options are grouped by function to help you easily configure your thesis or dissertation.
+%
+% \begin{macro}{12pt}
+% Sets the base font size to 12 points. Replace with 10pt or 11pt as needed.
+% \end{macro}
+%
+% \subsubsection{Document Mode}
+% These options define the general style and layout of the document.
+% \begin{macro}{draft}
+%   Enables draft annotations and sets the font size to 10 points for faster compilation. It also adds a "DRAFT" watermark to the pages.
+% \end{macro}
+%
+% \begin{macro}{oneside}
+%   Configures the document for one-sided printing. This is the default setting.
+% \end{macro}
+%
+% \begin{macro}{twosided}
+%   Configures the document for two-sided printing, which affects page margins and headers.
+% \end{macro}
+%
+% \begin{macro}{unbound}
+%   Adjusts the left margin to 1 inch for digital submission. This is the default setting.
+% \end{macro}
+%
+% \subsection{Heading Styles}
+% These options control the formatting and numbering of section headings.
+% \begin{macro}{apa}
+%   Applies APA7 (American Psychological Association) heading styles.
+% \end{macro}
+%
+% \begin{macro}{chicago}
+%   Applies Chicago heading styles.
+% \end{macro}
+%
+% \begin{macro}{headings}
+%   Applies a specific set of University of Maine thesis heading styles from an earlier version of the DOCX thesis guide.
+% \end{macro}
+%
+% \begin{macro}{idecimal}
+%   Applies a decimal heading style for numbering.
+% \end{macro}
+%
+% \begin{macro}{jdecimal}
+%   Applies a justified decimal heading style for numbering. This is the default setting.
+% \end{macro}
+%
+% \subsection{Caption and Spacing}
+% These options modify the appearance of captions and line spacing.
+% \begin{macro}{legacycaptions}
+%   Uses the previous version of caption formatting.\footnote{This may be depricated in the future.}
+% \end{macro}
+%
+% \begin{macro}{loftspacing}
+%   Adjusts spacing in the List of Figures and List of Tables.
+% \end{macro}
+%
+% \subsection{Page Numbering Style}
+% These options dictate where the page numbers appear on the page.
+% \begin{macro}{pagenumberbottom}
+%   Places the page number at the bottom center of the page. This is the default setting.
+% \end{macro}
+%
+% \begin{macro}{pagenumbertop}
+%   Places the page number at the top of the page.
+% \end{macro}
+%
+% \subsection{Other Options}
+% \begin{macro}{citestyle={style}}
+%   Sets the citation style to the specified style. The default is \texttt{authoryear}, but you can pass any option to biblatex or biber. See biblatex and biber documentaiton for more information about citation style.
+% \end{macro}
+%
+% \begin{macro}{table}
+%   Provides additional options for styling tables.
+% \end{macro}
+%
+% \begin{macro}{xcdraw}
+%   Used for chemical drawing with the \texttt{xcolor} package.
+% \end{macro}
+%
+% \section{Using the Thesis Template}
+%
+% This section provides an overview of the file structure and instructions for getting started with the provided LaTeX thesis template.
+% Download the contents of this repository, and copy the contents of `template` to any directory you would like to use to work on your thesis.\footnote{We hope to publish on overleaf soon to make this easier}.
+%
+% \subsection{File Structure}
+%
+% The template is organized into a modular file structure to make editing and content management more straightforward. The primary file is \verb|main.tex|, which compiles all other sections. The main directories and key files are laid out as follows:
+% \begin{verbatim}
+% .
+% ├── .latexmkrc
+% ├── appendix/
+% │   ├── AppA.tex
+% │   └── AppB.tex
+% ├── front/
+% │   ├── abstract.tex
+% │   ├── acknowledgements.tex
+% │   ├── biography.tex
+% │   ├── customlist.tex
+% │   ├── dedication.tex
+% │   ├── landacknowledgement.tex
+% │   └── layabstract.tex
+% ├── skeleton/
+% │   ├── appendicies.tex
+% │   ├── chapters.tex
+% │   ├── front.tex
+% │   └── metadata.tex
+% ├── thesis/
+% │   ├── Ch1.tex
+% │   ├── Ch2.tex
+% │   ├── Ch3.tex
+% │   ├── figures/
+% │   │   └── fig1.tex
+% │   └── tables/
+% │       ├── table1.tex
+% │       └── table2.tex
+% ├── main.tex
+% └── references.bib
+% \end{verbatim}
+% \subsection{Getting Started}
+%
+% Follow these steps to customize the template for your thesis:
+%
+% \begin{enumerate}
+%     \item \textbf{Update Your Information}:
+%         \begin{itemize}
+%             \item Edit the \verb|skeleton/metadata.tex| file to input your thesis title, author name, previously earned degrees, the degree being granted, your program, and the graduation date. You also need to list your principal advisor and committee readers.
+%         \end{itemize}
+%     \item \textbf{Add Front Matter}:
+%         \begin{itemize}
+%               \item The \verb|skeleton/front.tex| file includes the abstract, dedication, and acknowledgements sections. You can add your content by editing the files in the \verb|front/| directory, such as \verb|front/abstract.tex|, \verb|front/dedication.tex|, and \verb|front/acknowledgements.tex|.
+%         \end{itemize}
+%     \item \textbf{Write Your Chapters}:
+%         \begin{itemize}
+%             \item The main body of your thesis is managed in the \verb|thesis/| directory. The \verb|skeleton/chapters.tex| file includes the sample chapters \verb|Ch1.tex|, \verb|Ch2.tex|, and \verb|Ch3.tex|. You can add new chapters by creating a new \verb|.tex| file in this directory and including it in \verb|skeleton/chapters.tex| with the \verb|\input{}| command.
+%             \item You can add figures and tables by creating new files in the \verb|thesis/figures/| and \verb|thesis/tables/| directories respectively, and then including them in your chapters.
+%         \end{itemize}
+%     \item \textbf{Manage Appendices}:
+%         \begin{itemize}
+%             \item If you have appendices, you can add them to the \verb|appendix/| directory and include them in \verb|skeleton/appendicies.tex|.
+%         \end{itemize}
+%     \item \textbf{Add References}:
+%         \begin{itemize}
+%             \item Your bibliography is handled by the \verb|references.bib| file. Add your citations to this file, and the template will automatically format them in the bibliography.
+%         \end{itemize}
+%     \item \textbf{Compile Your Document}:
+%         \begin{itemize}
+%             \item The template uses \verb|lualatex| for compilation. For a full compilation, including the bibliography, you should use a build tool like \verb|latexmk|. You can compile the document by running the command \verb|latexmk -pdf main.tex| in your terminal.
+%         \end{itemize}
+% \end{enumerate}
+%
+% \subsection{Other Useful Commands}
+% If you are new to \LaTeX this will help you get started with the fundamentals.
+%
+% \begin{macro}{\input}
+% This is a fundamental command used throughout the template to import the content of another \texttt{.tex} file into the current document.
+% \end{macro}
+%
+% \begin{macro}{blindtext}
+% Commands from the \texttt{blindtext} package are used for generating placeholder text, lists, and mathematical formulas. They are a helpful way to visualize the final layout of the document before adding your own content.
+% \end{macro}
+%
+% \begin{macro}{changes}
+% These commands from the \texttt{changes} package are very helpful for communicating and reviewing changes between versions in draft mode. See the \texttt{changes} package documentation for more information.
+%   \begin{itemize}
+%     \item comment
+%     \item highlight
+%     \item added
+%     \item deleted
+%     \item replaced
+%   \end{itemize}
+% \end{macro}
+%
+% \begin{macro}{\caption[...]\{...\}}
+% This command adds a caption to a figure or table. The optional argument in square brackets provides a short title for the List of Figures/Tables, and the mandatory \texttt{...} provides the full caption text.
+% \end{macro}
+%
+% \begin{macro}{\parencite}
+% This command from biblatex is used for in-text citations. The argument is the citation key from your \texttt{references.bib} file. See biblatex and biber for more information about citation styles.
+% Biblatex generally intergrates well with reference managers for consistent citations. Other commands are available for providing author or year seperately in text, or for numeric and other citation styles.
+% \end{macro}
+%
+% \section{Common Formatting Errors}
+% This section is continued from the formatting requirements page at the University of Maine's Graduate School Thesis Guide.
+% \subsection{Abstract Formatting Errors}
 % All abstracts must have the below information on the same page as the abstract. This information must match the title page. The only difference between the title page and the abstract is the spacing: the abstract should have single spacing for the degree information.
 % \subsection{Pagination Errors}
 % The Title Page through Chapter 1 should be numbered using Roman numerals (iii, iv, v, …). The title page should be counted but not numbered. The Abstract will not have page numbers nor be counted.
 % The body of the dissertation should be numbered using Arabic numbers (1, 2, 3, …). The first page of the body of the text should begin with page 1.
 % All page numbers should be either top right or bottom center.
 %
-% \subsubsection{Figure and Table Errors}
+% \subsection{Figure and Table Errors}
 % Figures and tables must be placed within the text, as close to their first mention as possible.\footnote{figure placement is handled automatically by \LaTeX}
 % Figures and tables that span more than one page must be labeled on each page.
 % Any second and subsequent page of the figure/table must include the “(Continued)” notation.\footnote{this currently requires manually creating two figures to add continued to the short title}
@@ -151,35 +407,35 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % All figures/tables must have a unique number.
 % They may not repeat within the dissertation.
 %
-% \subsubsection{Window and Orphan Errors}
+% \subsection{Window and Orphan Errors}
 % A single line cannot appear alone at the top or bottom of a page.
 % Widow/orphan Control is an option in Word to prevent this.
 % W/O also applies in the reference section.
 % While a lone heading or subheading at the bottom of the page is not technically a widow/orphan, this must be moved to the next page to accompany its text.
 %
-% \subsubsection{Horizontal Figures \& Tables Errors}
+% \subsection{Horizontal Figures \& Tables Errors}
 %Any figures/tables placed in a horizontal orientation must be rotated for readability.
 % Insert a section break to rotate the page.\footnote{in \LaTeX we do not use section breaks for this, but we have landscape package to support}
 %
 % Page numbers must be placed in the same location on all pages of the dissertation, centered, at the bottom or top of the page.\footnote{This needs clarification from the graduate school, whether the bottom is in print or digital form}
 % Page numbers may not appear under the table/figure.
 %
-% \subsubsection{Supplemental Figures \& Tables Errors}
+% \subsection{Supplemental Figures \& Tables Errors}
 % Supplemental figures and tables must be placed in an appendix at the back of the dissertation.\footnote{this requires clarification, can one appendix contain multiple figures and tables without additional prose?}
 % They should not be placed at the back of the chapter.
 %
-% \subsubsection{Appendices Errors}
+% \subsection{Appendices Errors}
 % Appendices should be able to stand alone. Formatting applies to figures, tables, etc.
 % There should be no Appendix A if there is no Appendix B. It can be labeled Appendix in this case.\footnote{Appendix labeling is handled by the maine-thesis class.}
 %
-% \subsubsection{Biography Errors}
+% \subsection{Biography Errors}
 % The biography is required and will be on the last page of the document. This must be listed in the Table of Contents. The last OR only sentence must read “S/He/They is/are a candidate for the <degree type> degree in <program> from the University of Maine in <month> <year>.”
 % \footnote{This is automatically inserted by the maine-thesis class.}
 %
-% \subsubsection{Post PDF Conversion Formatting Errors}
+% \subsection{Post PDF Conversion Formatting Errors}
 % The entire document should be checked after all revisions, and before submitting to the Graduate School, to spot any inconsistencies or PDF conversion glitches.
 %
-% \subsubsection{Leader Dots Errors}
+% \subsection{Leader Dots Errors}
 % Leader dots must be present in the Table of Contents, List of Figures, and List of Tables.
 % The “5 Dot leader rule” is the most common mistake.
 % There can be no text within 5 dots of the listed page number. \footnote{While this is not handled precisely by the maine-thesis class, we have attempted to set the parameters for this to automatically occur whenever possible. Please review manually. Insert a line break when needed to correct. In a future version, the parameters for tuning for different fonts will be exposed}
@@ -203,7 +459,6 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 \usepackage{mwe}
 \usepackage{blindtext}
 %    \end{macrocode}
-
 
 % Replace contents of {...} with your own information.
 %    \begin{macrocode}
@@ -367,6 +622,16 @@ Master of Surgery, University of Edinburg}
 %    \item The \texttt{\textbackslash appendix} command in the v2 class now uses \texttt{\textbackslash gdef} to globally change \texttt{\textbackslash chaptername} to ``Appendix'' and the chapter counter to use alphabetical characters (\texttt{\textbackslash thechapter\{\textbackslash @Alph\textbackslash c@chapter\}}).
 % \end{itemize}
 %
+% \begin{macro}{\comment}
+%   The comment command is now pulled from the `changes` packages with more extensive functionality.
+%   In v1.14 this command uses the todonotes package to create margin notes but also checks a conditional (ifdraft) to ensure the notes only appear in draft mode.
+% \end{macro}
+%
+% \begin{macro}{\highlight}
+%   The highlight command is now pulled from the `changes` packages with more extensive functionality.
+%   In v1.14 this command uses the soul package to create margin notes but also checks a conditional (ifdraft) to ensure the notes only appear in draft mode.
+%  \end{macro}
+%
 %    \begin{macrocode}
 %<*package>
 %   \end{macrocode}
@@ -375,18 +640,16 @@ Master of Surgery, University of Edinburg}
 %<@@=maine-thesis>
 %    \end{macrocode}
 
-% \begin{macrocode}
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{maine-thesis}[2025/09/01 v2.0 University of Maine Thesis]
-%    \end{macrocode}
-%
-% \begin{macro}{\examplemacro}
 % \changes{v1.0}{2020/02/12}{Depricated Functions}
+% \begin{macro}{\libraryrights}
 %    \begin{macrocode}
 \newcommand{\libraryrights}{%
     \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Library Rights Statement page}{Please remove \protect\libraryrights\space from your thesis.}%
   }
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\dissacceptance}
 %    \begin{macrocode}
 	\newcommand{\dissacceptance}{%
     \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
@@ -394,6 +657,10 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{maine-thesis}[2025/09/01 v2.0 University of Maine Thesis]
+%    \end{macrocode}
 
 % \section{Initial Variables}
 %	\begin{macrocode}
@@ -432,6 +699,7 @@ Master of Surgery, University of Edinburg}
     % The `draft` option is passed to the underlying `report` class to
     % show draft annotations (like black squares for overfull hboxes).
     \PassOptionsToClass{draft}{report}
+    \PassOptionsToPackage{draft}{changes}
     % Defines a command to display a "DRAFT" watermark or text.
     \newcommand{\drafttext}{\sffamily\small{DRAFT}}
     % Sets a conditional to false, which might hide official marks.
@@ -546,22 +814,32 @@ Master of Surgery, University of Edinburg}
 \ExecuteOptions{citestyle=authoryear}
 %    \end{macrocode}
 %
-%%%%%%%%%%%%%%%%%%%%%
-% ------EXECUTION OF OPTIONS------
-%%%%%%%%%%%%%%%%%%%%%
+% \section{Execution of Options}
 % This is the final execution block. It's crucial for processing all
 % the options that have been declared and passed.
 %
+% sets the default font
 %    \begin{macrocode}
 \ExecuteOptions{12pt,unbound}
 %    \end{macrocode}
 
 %   \begin{macrocode}
 \ProcessOptions
-\LoadClass[\docsize,\side]{report}[2022/07/02 v1.4n Standard LaTeX document class]
 %   \end{macrocode}
 
-%   \section{Import Required Packages}
+% \subsection{Changes Package}
+% Pass final to changes if draft is not provided as an option. This will disable related document markup.
+%   \begin{macrocode}
+  \ifdraft{}\else{\PassOptionsToPackage{final}{changes}}\fi
+%   \end{macrocode}
+%
+% \section{Import Required Packages}
+% Depending on your system, there are diffent methods for installing pacakges, but generally they are sourced from CTAN. If you are using Overleaf, all of these pacakges are installed for you by default.
+% On fedora, they are all included within texlive-scheme-full, which can be installed with dnf.
+%
+% \subsection{Report Class}
+\LoadClass[\docsize,\side]{report}[2022/07/02 v1.4n Standard LaTeX document class]
+%   \end{macrocode}
 %   \subsection{Fonts}
 %    \begin{macrocode}
 \RequirePackage[T1]{fontenc}[2024/06/01 v2.0h Standard LaTeX package]
@@ -625,11 +903,6 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % Adds commands for typesetting ordinal numbers (e.g., 1st, 2nd, 3rd)
 % with correct superscripting.
-
-%    \begin{macrocode}
-\RequirePackage[colorinlistoftodos]{todonotes}[2023/01/31]
-%    \end{macrocode}
-% Provides commands for adding margin notes and todo lists during drafting.
 
 % \section{ Numbers, Special Characters, and Chemical Formulas}
 %    \begin{macrocode}
@@ -751,33 +1024,32 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % Provides an environment for creating tables that can span multiple pages.
 
-% \subsection{Other Packages}
-
+% \section{Document Markup}
 %    \begin{macrocode}
-\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
+\RequirePackage[colorinlistoftodos]{todonotes}[2023/01/31]
 %    \end{macrocode}
-%
-% Provides fine control over hyphenation.
-
-%    \begin{macrocode}
-\RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
-%    \end{macrocode}
-% Provides a conditional command to check which TeX engine is being used.
-
-%    \begin{macrocode}
-\RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
-%    \end{macrocode}
-% Adds line numbers to a document, useful during the drafting process.
-
-%    \begin{macrocode}
-\RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
-%    \end{macrocode}
-% A set of tools for programming in LaTeX, providing macros for conditionals.
+% Provides commands for adding margin notes and todo lists during drafting.
 
 %    \begin{macrocode}
 \RequirePackage{soul}[2003/11/17 v2.4]
 %    \end{macrocode}
 % Provides commands for letter-spacing, underlining, and highlighting text.
+
+%    \begin{macrocode}
+\RequirePackage{lineno}[2023/01/19 line numbers on paragraphs v5.1]
+%    \end{macrocode}
+% 'lineno' is enabled when in draft mode for easier review
+% Adds line numbers to a document, useful during the drafting process.
+
+%   \begin{macrocode}
+\RequirePackage{changes}
+%   \end{macrocode}
+% The main advantage of the changes package is its flexibility. You can define different authors with their own colors, which is great for showing who made which edits in a collaborative document.
+% When you're ready to submit the final version of your manuscript, you don't need to manually remove all the change markup. You can simply add the final option to the package in your preamble.
+
+% The changes package provides commands to mark up text as additions, deletions, or replacements.
+
+% \subsection{Table of Contents, Titles and Headings}
 
 %    \begin{macrocode}
 \RequirePackage{tocbibind}[2010/10/13 v1.5k extra ToC listings]
@@ -803,6 +1075,24 @@ Master of Surgery, University of Edinburg}
 \RequirePackage{setspace}[2022/12/04 v6.7b set line spacing]
 %    \end{macrocode}
 % Provides support for setting line spacing, such as single, one-and-a-half, and double spacing.
+
+% \subsection{Other Packages}
+
+%    \begin{macrocode}
+\RequirePackage[none]{hyphenat}[2009/09/02 v2.3c]
+%    \end{macrocode}
+%
+% Provides fine control over hyphenation.
+
+%    \begin{macrocode}
+\RequirePackage{iftex}[2022/02/03 v1.0f TeX engine tests]
+%    \end{macrocode}
+% Provides a conditional command to check which TeX engine is being used.
+
+%    \begin{macrocode}
+\RequirePackage{etoolbox}[2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)]
+%    \end{macrocode}
+% A set of tools for programming in LaTeX, providing macros for conditionals.
 
 %    \begin{macrocode}
 \RequirePackage{xstring}[2013/10/13 v1.7c]
@@ -968,49 +1258,17 @@ Master of Surgery, University of Edinburg}
 }
 \renewcommand{\bibname}{References}
 %    \end{macrocode}
-
-%    \section{Document Markup}
-%   \subsection{comment}
-%   This command uses the todonotes package to create margin notes but also checks a conditional (ifdraft) to ensure the notes only appear in draft mode.
-%    \begin{macrocode}
-\newcommand{\comment}[1]{
-    \ifdraft
-    \marginpar{
-        \color{red}\flushleft\scriptsize\setlength{\baselineskip}{7pt}
-        {\MakeTextUppercase{Note}: #1}}
-    \fi
-}
-%    \end{macrocode}
 %
-%   \subsection{ignore}
-% This command is a custom macro that discards its argument, effectively making the text disappear. It doesn't rely on any external package for this functionality.
-%    \begin{macrocode}
-\newcommand{\ignore}[1]{}
-%    \end{macrocode}
-%
-%   \subsection{highlight}
-% This command uses the soul package's \hl command for highlighting, but like \comment, its execution is controlled by the \ifdraft conditional.
-%    \begin{macrocode}
-\newcommand{\highlight}[1]{%
-    \ifdraft%
-        \hl{#1}%
-    \else%
-        #1%
-    \fi%
-}
-%    \end{macrocode}
 %   \section{General Formatting}
 
 %   \subsection{Line Numbering on Draft Mode}
 %   \begin{macrocode}
 \ifdraft{\linenumbers}\fi
 %   \end{macrocode}
-%   \subsection{Default Font}
-%   \begin{macrocode}
 
 % \section{Style and Format}
 % \subsection{Recommended Fonts \& Point Size}
-% The text’s body font must also be used in headers, page numbers, and footnotes.
+% The text’s body font must also be used in headers, page numbers, and footnotes.\footnote{we use fontspec to load system fonts with XeLaTeX or LuaLaTeX}.
 % Exceptions are made only for tables and figures created with different software and inserted into the document.
 % \begin{itemize}
 %   \item Arial – 10 pt
@@ -1025,6 +1283,7 @@ Master of Surgery, University of Edinburg}
 %   \item Trebuchet MS – 10 pt
 %   \item Verdana – 10 pt
 % \end{itemize}
+%   \begin{macrocode}
 \setmainfont{EB Garamond}
 %   \end{macrocode}
 %
@@ -1263,11 +1522,8 @@ Master of Surgery, University of Edinburg}
 \fi
 
 \typeout{=== Finished HeadingStyle Check ===}
-
-
 %    \end{macrocode}
-
-
+%
 % \section{Page Style}
 % \subsection{Bottom of Page}
 %    \begin{macrocode}
@@ -1786,11 +2042,34 @@ Master of Surgery, University of Edinburg}
     \printbibliography
 }
 %    \end{macrocode}
-
+%    \section{Leagacy Document Markup}
+%
+%   \subsection{ignore}
+% This command is a custom macro that discards its argument, effectively making the text disappear. It doesn't rely on any external package for this functionality.
+%    \begin{macrocode}
+\newcommand{\ignore}[1]{}
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
 %
+% \section{Future Work: Class Development Needs}
+% \subsection{Local Names and Functions}
+% This package has a number of local functions and names that should not be called outside of the class. These should be refactored appropriately.
+% \subsection{Exposing Options}
+% There are a few parameters that would be useful to expose to the user to help them fine tune their document if there are small differences in font, spacing, etc.
+% \subsection{Documentation}
+% The documentation needs further review for completeness and clarity.
+% It may be helpful to add a guide for transitioning through breaking changes to v1.
+% \subsection{Output Format Approval \& Continual Review}
+% We are currently working to ensure that the defaults within this package provide the correct formatting for the graduate school, and that as many of their requirements are
+% \subsection{CTAN Availability}
+% We are currently working to make this available on CTAN for easy access, and availability of updates when format requirements are changed or bugs can be patched.
+% \subsection{GitLab automated Builds}
+% We are currently working to ensure that GitLab is able to automatically release builds, and ideally upload them to CTAN when patches are made.
+% \subsection{Overleaf Availability}
+% We are working to provide a template on Overleaf. Ideally, it would either fetch the class from GitLab or from CTAN.
 %
 % \Finale
 
