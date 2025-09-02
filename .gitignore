@@ -41,6 +41,7 @@ _build/*
 mwe/maine-thesis.cls
 template/maine-thesis.cls
 mypersonaldata.lua
+/maine-thesis.pdf
 
 ## Intermediate documents:
 *.dvi
