@@ -969,9 +969,9 @@ Master of Surgery, University of Edinburg}
 \renewcommand{\bibname}{References}
 %    \end{macrocode}
 
-%    \section{Custom Commands}
-%   Our goal is to minimize these as much as possible in future versions.
+%    \section{Document Markup}
 %   \subsection{comment}
+%   This command uses the todonotes package to create margin notes but also checks a conditional (ifdraft) to ensure the notes only appear in draft mode.
 %    \begin{macrocode}
 \newcommand{\comment}[1]{
     \ifdraft
@@ -983,11 +983,13 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 %
 %   \subsection{ignore}
+% This command is a custom macro that discards its argument, effectively making the text disappear. It doesn't rely on any external package for this functionality.
 %    \begin{macrocode}
 \newcommand{\ignore}[1]{}
 %    \end{macrocode}
 %
 %   \subsection{highlight}
+% This command uses the soul package's \hl command for highlighting, but like \comment, its execution is controlled by the \ifdraft conditional.
 %    \begin{macrocode}
 \newcommand{\highlight}[1]{%
     \ifdraft%
