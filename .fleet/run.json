@@ -31,6 +31,30 @@
             ],
         },
         {
+            "type": "command",
+            "name": "doc",
+            "program": "make",
+            "args": [
+                "doc"
+            ],
+            "dependsOn": [
+                "clean",
+                "unpack"
+            ],
+        },
+        {
+            "type": "command",
+            "name": "template",
+            "program": "make",
+            "args": [
+                "template"
+            ],
+            "dependsOn": [
+                "clean",
+                "unpack"
+            ],
+        },
+        {
             "name": "tag",
             "type": "command",
             "program": "make",

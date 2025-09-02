@@ -168,10 +168,6 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % \end{macro}
 %
 %
-% \begin{macro}{\multipleappendicestrue}
-% This command, located in \texttt{main.tex}, is a conditional that tells the template to use multiple appendices. If you only have one appendix, you should comment this line out.
-% \end{macro}
-%
 % \begin{macro}{\preliminary}
 % This command in \texttt{main.tex} prepares the document for the preliminary pages, such as the abstract and table of contents, which are typically numbered with Roman numerals.
 % \end{macro}
@@ -183,11 +179,12 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % This command automatically generates and formats your bibliography section using the entries in \texttt{references.bib} that have been cited in the document.
 % \end{macro}
 %
-% \begin{macro}{\appendix}
-% This command, placed at the beginning of \texttt{skeleton/appendicies.tex}, changes the chapter counter to use letters (A, B, C) instead of numbers.
-% \end{macro}
 %
 % \subsection{Environments}
+%
+% \begin{macro}{appendices}
+% The appendicies command should wrap all of the chapters included in the appendix.
+% \end{macro}
 %
 % \begin{macro}{\abstract\{...\}}
 % This environment defines the abstract section. The \texttt{\textbackslash input} command is used to pull the content of your abstract from the \texttt{front/abstract.tex} file.
@@ -523,11 +520,6 @@ Master of Surgery, University of Edinburg}
 \thirdreader{Dr. Digory Kirke, Professor of Geography of Magical Lands}
 %    \end{macrocode}
 
-% If the thesis has MORE than one appendix, leave the following command in.  Else, comment it out.
-%    \begin{macrocode}
-\multipleappendicestrue
-%    \end{macrocode}
-
 % Begin the document.
 %    \begin{macrocode}
 \begin{document}
@@ -577,9 +569,10 @@ Master of Surgery, University of Edinburg}
 
 % Include this before any appendices.
 %    \begin{macrocode}
-\appendix
+\begin{appendices}
 \chapter{Some extras}
 \blindtext
+\end{appendices}
 %    \end{macrocode}
 
 % end the document
@@ -635,6 +628,15 @@ Master of Surgery, University of Edinburg}
 %   The highlight command is now pulled from the `changes` packages with more extensive functionality.
 %   In v1.14 this command uses the soul package to create margin notes but also checks a conditional (ifdraft) to ensure the notes only appear in draft mode.
 %  \end{macro}
+%
+% \begin{macro}{\appendix}
+%   The \appendix command should no longer be used to define appendicies; however it is still supported in the appendix pacakge. (replacing custom appendix and heading table of contents functionality.
+% \end{macro}
+%
+% \begin{macro}{\multipleappendicestrue}
+% This command, located in \texttt{main.tex}, is a conditional that tells the template to use multiple appendices. If you only have one appendix, you should comment this line out.
+% This has been replaced with the multiappendices option for the class.
+% \end{macro}
 %
 % \changes{v1.0}{2020/02/12}{Depricated Functions}
 % \begin{macro}{\libraryrights}
@@ -751,6 +753,14 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{Multiple Appendices}
+%\subsection{Pass options to appendix package}
+% This replaces the multipleappendicestrue commands
+% \begin{macro}{multiappendices}
+% \begin{macrocode}
+\DeclareOption{multiappendices}{\PassOptionsToPackage{toc,titletoc, title}{appendix}}
+% \end{macrocode}
+% \end{macro}
 % \subsection{Heading Style Options}
 % The following options allow the user to choose from different heading styles.
 %
@@ -1006,7 +1016,16 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % A powerful package for managing bibliographies and citations.
 % \end{macro}
-
+%
+% \subsection{Appendices}
+% Each Appendix must be listed by its title and page number. If there is only one Appendix, it is listed by the name “Appendix” and its title. Therefore, an Appendix “A” should not be listed unless there is an Appendix “B”.
+% \begin{macro}{appendix}
+% The appendix package provides the `appendix` command for legacy support as well as the `appendicies` enviornment.
+% \begin{macrocode}
+\RequirePackage[titletoc, title]{appendix}
+% \end{macrocode}
+% \end{macro}
+%
 % \subsection{Figures and Tables}
 % Figures: A FIGURE is a graphic illustration (chart, graph, diagram, photo, map, or plate).
 % Figures may be professionally prepared or drawn by the author.
@@ -1273,7 +1292,6 @@ Master of Surgery, University of Edinburg}
 
 %	\subsection{Initialize Conditionals}
 %    \begin{macrocode}
-\newif\ifmultipleappendices\multipleappendicesfalse
 \newif\ifcopyrightpage\copyrightpagefalse
 \newif\ifbigtitlepage\bigtitlepagefalse
 \newif\ifverybigtitlepage\verybigtitlepagefalse
@@ -1292,7 +1310,6 @@ Master of Surgery, University of Edinburg}
 \renewcommand*\bibname{References}
 \renewcommand*\indexname{INDEX}
 \renewcommand*\chaptername{Chapter}
-\renewcommand*\appendixname{Appendix}
 \newcommand*\listname{List of}
 \newcommand*\chapternamep{\chaptername s}
 \newcommand*\prefacename{Preface}
@@ -1482,7 +1499,7 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % Chapter Titles
 %    \begin{macrocode}
-    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\chaptertitlename\ \thechapter}{-3pt}{\MakeTextUppercase}
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\@chapapp\thinspace \thechapter}{-3pt}{\MakeTextUppercase}
     \titlespacing{\chapter}{0pt}{50pt}{15pt}
 %    \end{macrocode}
     % First Level Headings
@@ -1522,7 +1539,7 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
     % Level 1: Centered, Boldface, Headline-style
 %    \begin{macrocode}
-    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\chaptertitlename\ \thechapter}{-3pt}{\MakeTextUppercase}
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\@chapapp\thinspace \thechapter}{-3pt}{\MakeTextUppercase}
     \titlespacing{\chapter}{0pt}{50pt}{15pt}
 %    \end{macrocode}
     % Level 2: Centered, Regular, Headline-style
@@ -1561,7 +1578,7 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
     % Chapter Titles
 %    \begin{macrocode}
-    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\chaptertitlename\ \thechapter}{-3pt}{\MakeTextUppercase}
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\@chapapp\thinspace \thechapter}{-3pt}{\MakeTextUppercase}
     \titlespacing{\chapter}{0pt}{50pt}{15pt}
 %    \end{macrocode}
     % First Level Headings
@@ -1602,7 +1619,7 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
     % Chapter Titles: Centered and bold
 %    \begin{macrocode}
-    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\thechapter}{1em}{}
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries}{\@chapapp\thinspace \thechapter}{1em}{}
     \titlespacing{\chapter}{0pt}{50pt}{15pt}
 %    \end{macrocode}
     % Level 1 Headings: Bold, followed by a line break
@@ -1639,7 +1656,7 @@ Master of Surgery, University of Edinburg}
 \newcommand{\jdecimalheadings}{%
 %    \begin{macrocode}
   % Chapter Titles
-    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\chaptername\ \thechapter}{-3pt}{\MakeUppercase}
+    \titleformat{\chapter}[display]{\normalfont\centering\bfseries\normalsize}{\@chapapp \thinspace \thechapter}{-3pt}{\MakeUppercase}
     \titlespacing{\chapter}{0pt}{0pt}{15pt}
 %    \end{macrocode}
 % First Level Headings
@@ -2042,7 +2059,10 @@ Master of Surgery, University of Edinburg}
     \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\landacknowledgename}}{\landacknowledgename}}
     \doublespacing
     \begingroup
-}{\par\endgroup}
+}{
+  \cleardoublepage
+  \par\endgroup
+}
 %    \end{macrocode}
 % \end{macro}
 
@@ -2094,36 +2114,6 @@ Master of Surgery, University of Edinburg}
 }
 %    \end{macrocode}
 % \end{macro}
-
-%	\subsection{Appendix}
-% \subsubsection{Appendices in the Table of Contents}
-% Each Appendix must be listed by its title and page number. If there is only one Appendix, it is listed by the name “Appendix” and its title. Therefore, an Appendix “A” should not be listed unless there is an Appendix “B”.
-%
-%	All chapters after the Appendix flag are appendicies.
-% \begin{macro}{\appendix}
-%    \begin{macrocode}
-\renewcommand{\appendix}{%
-  \cleardoublepage
-  \doublespacing
-  \setcounter{tocdepth}{1} % Sets the ToC depth to chapters and above
-  \setcounter{secnumdepth}{1} % Sets the section numbering depth to chapters and above
-  \setcounter{chapter}{0}
-  \apptrue
-  \gdef\chaptername{\appendixname} % This changes the name globally
-  \gdef\thechapter{\@Alph\c@chapter}% Changes the numbering globally
-  \ifmultipleappendices%
-    \chapter*{Appendices}
-    \addtocontents{toc}{\protect\nopagebreak}
-    \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{Appendices}}{Appendices}}
-  \fi
-}
-%    \end{macrocode}
-% \end{macro}
-% \subsubsection{Appendices Titles}
-% We add Appendix to the chapter name for all appendicies.
-%    \begin{macrocode}
-\pretocmd{\chapter}{\ifapp\renewcommand*\chaptername{Appendix}\fi}{}{}
-%    \end{macrocode}
 
 %	\section{Biography Environment}
 % The Biography of the Author page is the LAST page of the thesis.
