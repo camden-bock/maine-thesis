@@ -1,7 +1,7 @@
 .PHONY: all doc clean unpack template ctan
 
 # Main target: Unpack sources, build documentation, and prepare for release.
-all: unpack doc template
+all: unpack doc template ctan
 
 # Unpacks the DTX files into the working directory.
 unpack:
