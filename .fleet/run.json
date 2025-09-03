@@ -55,6 +55,18 @@
             ],
         },
         {
+            "type": "command",
+            "name": "guide",
+            "program": "make",
+            "args": [
+                "guide"
+            ],
+            "dependsOn": [
+                "clean",
+                "unpack"
+            ],
+        },
+        {
             "name": "tag",
             "type": "command",
             "program": "make",

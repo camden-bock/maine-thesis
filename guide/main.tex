@@ -1,0 +1,64 @@
+\documentclass[headings, multiappendices]{maine-thesis}
+\listfiles
+
+\usepackage{hyperref}
+\usepackage{blindtext}
+
+%\includeonly{Ch1}
+
+\title{maine-thesis: A class file for typesetting thesis documents at the University of Maine}
+\author{<Your Name appears here, see Section \ref{self} for details>}
+\degreesheld{<Degrees you already have,\\see Section \ref{self} for details>}
+\degree{<The degree you want>}
+\program{<Specialty of your degree>}
+\submitdate{<Month \& Year of Graduation>}
+
+\principaladvisor{<Name and Title of your advisor will appear here, see Section \ref{comm} for details>}
+\principalshort{<The short name of your advisor will appear here, see Section \ref{comm} for details>}
+\firstreader{<Name and Title of a committee member appears here>}
+\secondreader{<Name and Title of a committee member appears here>}
+\thirdreader{<Name and Title of a committee member appears here>}
+\fourthreader{<Name and Title of a committee member appears here>}
+\fifthreader{<Name and Title of a committee member appears here>}
+
+\makeatletter
+\newcommand{\email}{rpspringuel@gmail.com}
+\makeatother
+
+\begin{document}
+\preliminary
+\maketitle
+
+\input{Front}
+\input{Ch1}
+\chapter{Dummy to force widow/orphan protection in TOC to show}
+\input{Ch2}
+\input{Ch3}
+\input{Ch4}
+\input{Ch5}
+\chapter{Really long chapter title in order to show how wrapping is handled in the table of contents testt}
+\chapter{Really long chapter title in order to show how wrapping is handled in the table of contents testtt}
+\blindtext
+\section{Sample section title}
+\blindtext
+\subsection{Sample subsection title}
+\blindtext
+\subsubsection{Sample subsubsection title}
+\blindtext
+\paragraph{Sample paragraph title}
+\blindtext
+\subparagraph{Sample subparagraph title}
+\blindtext
+
+\references
+
+\begin{appendices}
+\include{AppA}
+\include{AppB}
+\chapter{Really long appendix title in order to show how wrapping is handled in the TOC}
+\chapter{Really long appendix title in order to show how wrapping is handled in the TOCC}
+\end{appendices}
+
+\include{Biography}
+
+\end{document}
