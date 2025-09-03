@@ -1,7 +1,7 @@
 .PHONY: all doc clean unpack template ctan
 
 # Main target: Unpack sources, build documentation, and prepare for release.
-all: unpack doc tag template guide ctan
+all: unpack doc template longtemplate tag ctan
 
 # Unpacks the DTX files into the working directory.
 unpack:
@@ -18,14 +18,14 @@ doc:
 template:
 	@echo "--- Building template ---"
 	@cp build/unpacked/maine-thesis.cls template/maine-thesis.cls
-	@cd template && latexmk main.tex
+	@cd template && latexmk -c main.tex && latexmk main.tex
 	@cp template/_build/main.pdf doc/maine-thesis-template.pdf
 	@rm template/maine-thesis.cls
 
-guide:
-	@echo "--- Building template ---"
+longtemplate:
+	@echo "--- Building guide ---"
 	@cp build/unpacked/maine-thesis.cls guide/maine-thesis.cls
-	@cd guide && latexmk main.tex
+	@cd guide && latexmk -c main.tex && latexmk main.tex
 	@cp guide/_build/main.pdf doc/maine-thesis-guide.pdf
 	@rm guide/maine-thesis.cls
 

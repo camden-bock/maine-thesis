@@ -59,7 +59,7 @@
             "name": "guide",
             "program": "make",
             "args": [
-                "guide"
+                "longtemplate"
             ],
             "dependsOn": [
                 "clean",
