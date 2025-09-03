@@ -89,6 +89,8 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 \usepackage{lmodern}
 \usepackage[numbered]{hypdoc}
 \usepackage{bookmark}
+\usepackage{biblatex}
+\usepackage[draft]{changes}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -103,7 +105,9 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 % \makeatletter
 % \def\@xobeysp{\leavevmode\penalty100\ }
 % \makeatother
-
+% \makeatletter
+% \newcommand{\email}{camden.bock@maine.edu}
+% \makeatother
 % \title{^^A
 %   \textsf{maine-thesis} --- A LaTeX class file for the typesetting of a Masters or Doctorate Thesis at the University of Maine.\thanks{^^A
 %    This file describes version \fileversion, last revised \filedate.^^A
@@ -124,6 +128,555 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 %
 % \tableofcontents
 %
+% \section{Introduction}
+% This document is not intended to be an introduction on how to use \LaTeX. In fact, I will assume that you are familiar with basic \LaTeX\ commands and have typeset documents in \LaTeX\ before throughout this document.  If you haven't, then I highly suggest finding a reference book or tutorial that will teach you the basics of \LaTeX\ and read through that first.  There are several options available both in print and online (e.g. \cite{Kopka:2004,Mittelbach:2004,Flynn:2005}).  Which one you use is largely a matter of preference.
+%
+% \subsection{Installation}
+% To install this class file you need to place it in \verb=~=/texmf/tex/latex/ where the ``\verb=~='' represents the location of your local texmf directory.\footnote{The final path should not have .../texmf/texmf/... in it, just .../texmf/...}  Since this changes from system to system, I can't be more specific than that, so check the documentation for your system.
+%
+% \subsection{Organizing your Thesis}
+% While not required by the class file, I have some specific recommendations as to how you should organize the tex files that make up your thesis.  These recommendations are designed to make editing and distribution of drafts easier and were followed in assembling this document.  While I will go into more detail about this structure as I go over the various elements of the maine-thesis.cls file and how to use them, the basic message is to break the thesis up into multiple files.  In particular, the break down that I use is:
+% \begin{description}
+% \item[Main.tex] This file has the responsibility for coordinating all the other files, but contains very little of the actual body of the thesis.
+% \item[Front.tex] This file contains all the material which appears up to and including the Table of Contents.
+% \item[Ch\#.tex] The individual chapters of your thesis.  By splitting out each thesis chapter into its own file, it will be easier to find where you want to work in any particular session as well as make generating draft copies of just part of the thesis easier.
+% \item[App\#.tex] Like the chapter files, each appendix gets its own file.
+% \item[Biography.tex] The last element of the thesis, the biography of the author also gets its own file to avoid adding clutter to Main.tex.
+% \item[Figures] Since most of the figures you use in your thesis are likely to be separate image files which \LaTeX\ will need access to when it typesets your thesis, I advise making a subfolder for your project where you can place these images.  It'll make them easier to find later when you need to change them and keep the project root folder from getting too cluttered.
+% \end{description}
+%
+% All of these files should be located in a single folder specifically created for this purpose.  Since \LaTeX\ creates several files when typesetting documents, this will keep all those files in one place and keep them from crowding up your usual documents folders.
+%
+% In this documentation, I will be assuming that the above organization structure is in use.  If you're using something else, you'll have to modify the instructions provided here accordingly.
+%
+% If you are using these guidelines, however, it is highly useful if you set main.tex as the root project file for all other files in your \LaTeX\ editor.  You'll get fewer errors this way as you'll be able to order your editor to typeset the project without switching to Main.tex first, regardless of which file you're currently working on.
+%
+% \subsection{Organization of this document}
+% If you've read the Table of Contents, you've no doubt noticed that each of the chapters in this document deals with one of the files listed above.  In that chapter you'll find instructions for what has to be in that file.  For the most part these are requirements of either the Graduate School or the maine-thesis.cls itself.  Deviation from them may result in your document not typesetting correctly or in it not conforming to the Graduate School guidelines.  If you follow all these instructions perfectly and the Graduate School still rejects your thesis on the basis of some formatting error, please contact me (\email) with a full description of the problem that the Graduate School had with your thesis and I will make every effort to update the class file as quickly as possible.
+%
+% \subsection{Reporting a Bug or Formatting Problem}
+% If you find a bug with this class file, please create a minimal working example which reproduces the bug and email it to \email\ along with a description of the bug and any possible fixes you have tried (and whether they worked or not).  For those not familiar with it, there are a couple of good descriptions on the web:
+% \begin{itemize}
+% \item{\url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=minxampl}}
+% \item{\url{http://www.minimalbeispiel.de/mini-en.html}}
+% \end{itemize}
+%
+% If you find a formatting problem with this class file, please create a minimal working example which reproduces the problem and email it to \email\ along with a description of the formatting problem.  If the problem was pointed out to you by the Graduate School, please indicate who in the Graduate School pointed the problem so that I can consult with them directly if needed.  If available, a document which demonstrates what the desired formatting looks like should also be included.
+%
+% For those with GitHub accounts (they are free), you can also submit formatting problems and bug reports via the GitHub repository: \url{https://gitlab.com/camden-bock/maine-thesis}.  Please open a separate issue for each problem so that they can be tracked independently and make sure to upload a minimal working example.  If you have some experience with programming, you may also submit Pull Requests with suggested changes.
+%
+% I cannot guarantee any timeline on how quickly bugs or formatting problems will be dealt with, but I will make every effort to correct them as quickly as possible.
+%
+% \section{Main.tex}
+% Main.tex is responsible for 5 things:
+% \begin{enumerate}
+% \item{the loading of the class file and any packages you need to properly typeset your thesis,}
+% \item{the declaration of the principal variables in the thesis (author, title, advisor, etc.),}
+% \item{coordinating which files should be typeset at this particular time,}
+% \item{typesetting the title page of the thesis, and}
+% \item{placing and typesetting the references according to the style file you select.}
+% \end{enumerate}
+% We shall deal with each of these, though not necessarily in the order listed above.
+%
+% \subsection{Class and Package Loading}\label{class}
+% Like any other \LaTeX\ project, a thesis set using maine-thesis.cls must start with a declaration of the document class:
+%
+% \begin{verbatim}
+% \documentclass[options]{maine-thesis}
+% \end{verbatim}
+%
+% \pagebreak[3]The options are as follows:
+% \begin{description}
+% \item[10pt]{This option sets the font size to 10pt.  This option is allowed by the graduate school for an official copy, but is not recommended (the smaller font size doesn't convert to microfilm as well as the default).}
+% \item[11pt]{This option sets the font size to 11pt.  This option is allowed by the graduate school for an official copy, but is not recommended (the smaller font size doesn't convert to microfilm as well as the default).}
+% \item[12pt]{This option sets the font size to 12pt.  This is the default option, and doesn't normally need to be issued.}
+% \item[unbound]{This option sets the margins to equal width.  This is the default option, and doesn't normally need to be issued.}
+% \item[apa]{This option changes the headings to follow the American Psychology Association style with one exception: italics are replaced by underlines (since italics in the headings is prohibited by the Graduate School).  These heading styles are unnumbered and thus cross references using \verb=\ref= will point to just the chapter.}
+% \item[chicago]{This option changes the headings to follow the Chicago style guidelines.  These heading styles are unnumbered and thus cross references using \verb=\ref= will point to just the chapter.}
+% \item[headings]{This option changes the headings to follow the example given in the Guidelines for unnumbered headings.  As they are unnumbered, cross references using \verb=\ref= will point to just the chapter.}
+% \item[idecimal]{This option changes the headings to follow the indented decimal example given in the Guidelines.}
+% \item[jdecimal]{This option is the default headings system (so you don't need to give it explicitly) and matches the left-justified decimal example given in the Guidelines.}
+% \item[pagenumberbottom]{This is the default option for the position of the page numbers.  It places them in the middle of the bottom of the page.}
+% \item[pagenumbertop]{This option puts the page numbers in the upper right-hand corner of the page for body pages.}
+% \end{description}
+%
+% All of the above options are permitted in the official copy of your these.  There are also several options which are intended to help you create copies of your thesis which are intended for some other purpose.  They may not be used in the official copy of your thesis.  These options are as follows:
+%
+% \begin{description}
+% \item[draft]{This option does a few things:
+% 	\begin{itemize}
+% 	\item{it marks the copy of the file as a draft by placing DRAFT in all four corners of each page (moving the page number to the bottom center if the top page style was selected),}
+% 	\item{it marks any over full line with a black rectangle at the end,}
+% 	\item{it allows \verb=\comment{...}= commands to show in the outside margin (right-hand normally, but if twoside is also given, then it's the left-hand margin on even pages),}
+% 	\item{it places the current date in the top center of each page, and}
+% 	\item{it sets the font size to 10pt to reduce the document page count and save paper.}
+% 	\end{itemize}
+% Taken together, these changes make this option useful when you want to distribute copies of your thesis (or parts thereof) to someone for feedback prior to completing it.}
+% \item[oneside]{This option sets the margins to allow for binding.  This means the left-hand margin is enlarged to 1.5in.  No other changes are made, but the larger margin leads to a reduced line length and thus different line breaking, page breaking, etc.  When using this option you should review all manual page breaking decisions.
+%
+% Since the Graduate School no longer requires a printed copy of the thesis, this option is mostly intended for when you department requires a bound copy for themselves using the old one-sided printing rules.  You might want to consult with them about the possibility of using the twoside option below in order to save paper.}
+% \item[twoside]{This option sets the margins to allow for binding of a two sided printing.  Thus odd number pages have a larger left-hand margin while even number pages have a larger right-hand margin.  Chapters (or chapter equivalent elements) will always begin on an odd page.  Finally, when page numbers are at the top (pagenumbertop option), they are shifted to always be on the outside edge of the page.  As with the oneside option, the change in margins will affect line breaking and therefore page breaking as compared to the official copy of the thesis.  Double check any manual page breaks to make sure they are still where you want them.
+%
+% This option is useful for producing extra copies of your thesis that you want bound for your advisor, your committee members, yourself, or other people.  When combined with the 10pt option, it will result in the most economical printing (fewest number of pages).}
+% \item[loftspacing]{This option introduces extra spacing between the chapters in your list of figures, and list of tables.  This makes it easier to see the change between chapters at a glance in those lists, but breaks the Graduate School’s strict double-spacing requirements.}
+% \end{description}
+% If you issue more than one of the font size options, only the largest one will take effect.  However, the draft option will always change the font size to 10pt, regardless of any other options issued.  If you have the tex files for this documentation, you can see the effects of each of these options by editing the document class declaration in Main.tex and re-typsetting the document.
+%
+% If you issue the unbound option explicitly, it will overrule both the oneside and twoside option as far as margins are concerned.  Page number positions are still affected by twoside if page numbers at the top are being used.
+%
+% Once you have declared the document class, it's time to load packages.  There are far too many of these for me to possibly cover them all, but ones which have known issues are listed in Appendix \ref{package}.
+%
+% \subsection{Variable Declarations}
+%
+% Once you've initialized all the stuff you need to typeset your document, it's time to start adding content.  Since many elements of this content get used over and over again, the class file allows for you to declare them once and then places them in all the appropriate places.
+%
+% \subsubsection{Describe Yourself}\label{self}
+% The first batch of these variables that you'll declare are the title of your thesis, your name, the degrees you already hold, the degree you're going for, the specialty in which this degree is, and when you are graduating.  These are declared with some fairly self explanatory commands:
+%
+% \begin{verbatim}
+% \title{...}
+% \author{...}
+% \degreesheld{...}
+% \degree{...}
+% \program{...}
+% \submitdate{...}
+% \end{verbatim}
+%
+% Note that you should use \verb=\\= to separate multiple degrees if you have more than one.  This will place them on separate lines (a Graduate School requirement).  Also, your submit date should be ``May,'' ``August,'' or ``December'' and the appropriate year with no additional text.
+%
+% \subsubsection{Describe Your Committee}\label{comm}
+% Next, you'll want to tell the class file about your committee.  To do this, you'll need each committee member's full name and title (i.e. Ph.D., faculty position, etc., as in ``John Smith, Ph.D., Associate Professor of Interesting Stuff'').  Each member is declared with a separate command (use only the ones you need):
+%
+% \begin{verbatim}
+% \principaladvisor[...]{...}
+% \secondadvisor{...}
+%
+% \firstreader{...}
+% \secondreader{...}
+% \thirdreader{...}
+% \fourthreader{...}
+% \fifthreader{...}
+% \end{verbatim}
+%
+% Note that these commands are order sensitive as the class file uses the last one called to determine the number of committee members.  I.e. if you call \verb=\thirdreader{...}= after \verb=\fifthreader{...}= then the class file will think that you have 3 committee members beyond your advisor(s) rather than 5.
+%
+% If this automatic numbering of your committee isn't working for some reason, then there are two commands which you can issue after the members list to override the behavior: \verb=\twoadvisors=, \verb=\oneadvisor= and \verb=\members{#}=.  The first is used to change the number of advisors to two, the second sets it to one (one advisor is the default for the class file).  The last tells the class file how many members your committee has (not including your advisor(s)).  If you find that you have to issue these commands, please send me a minimal working example that duplicates the problem you experienced so that I can fix it.
+%
+% In a couple of locations, the thesis requires the ``short'' name for your advisor.  In this case, the advisor's title should simply be ``Dr.'' (or whatever is appropriate) and should precede their name (as in ``Dr.~John Smith'').  This short name can be defined in two ways.  If you have just one advisor, then you can make use of the first (optional) argument of \verb=\prinicpaladvisor= (the one appearing between the square brackets):
+%
+% \begin{verbatim}
+% \principaladvisor[Dr.~John Smith]{John Smith, Ph.D., Associate Professor of Interesting Stuff}
+% \end{verbatim}
+%
+% If you have two advisors, then you should leave out the first argument for \verb=\prinicpaladvisor= and use the command \verb=\prinicpalshort= instead.  For this command both names should appear as the argument to the command with their short titles separate:
+%
+% \begin{verbatim}
+% \principaladvisor{John Smith, Ph.D., Associate Professor of Interesting Stuff}
+% \secondadvisor{Jane Doe, Ph.D., Professor of More Interesting Stuff}
+% \principalshort{Dr.~John Smith and Dr.~Jane Doe}
+% \end{verbatim}
+%
+% \subsubsection{Number of Appendices}
+% If you have more than one appendix, then you have to tell the class file this with the command \verb=\multipleappendicestrue=.  This is because the Graduate School requires different formatting for a document with a single appendix as opposed to one with multiple appendices (in particular as relating to lettering them and how they appear in the table of contents).  By default, the class file assumes one appendix and will format it accordingly.  If you have more than one, then this command will tell the class file to change to the multiple appendices format.  If you don't have any appendices, then it shouldn't matter if you issue this command or not.
+%
+% \subsubsection{Document Type}
+% By default, the class file will refer to your document as a dissertation.  If your degree program refers to it as a thesis or project, then you'll want to tell the class file that.  The command \verb=\thesis= will change all occurrences of ``dissertation'' to ``thesis'' and \verb=\project= will change them to ``project.''
+%
+% \subsection{Title page}
+%
+% Now that all the variables are declared, it's time to start the document itself.  This consists of three commands:
+%
+% \begin{verbatim}
+% \begin{document}
+% \preliminary
+% \maketitle
+% \end{verbatim}
+%
+%
+% The first is the usual command that tells \LaTeX\ where the document starts.  The second tells the class file that what comes next is the front matter of the thesis.  This means that pages should be numbered with lowercase roman numerals.  The last command creates the title page.  Putting it here ensures that every copy of your thesis that you create will include a copy of the title page, making it easier to identify the document (especially important when you're handing out bits and pieces).
+%
+% After the title page, it's time to include the rest of the preliminary material, but I don't suggest putting all of that in Main.tex.  Instead, all of that should be put in Front.tex, a process which gets us to our next job for Main.tex: coordinating which files are to be processed at this time.
+%
+% \subsection{File Coordination}
+% Chances are pretty good that your final thesis will be close to, if not well over, 100 pages.  If all of that material were in a single file, finding where it is you want to edit something can be difficult.  To make this easier, \LaTeX\ allows you to split the document up into multiple files and then use the \verb=\include{...}= statement to tell the main file to add the contents of another file at this point.  We're going to make use of that here.  First off, we'll place all the front matter (copyright page, dissertation acceptance statement, library rights statement, abstract(s), preface, dedication, acknowledgements, and table of contents):
+%
+% \begin{verbatim}
+% \include{Front}
+% \end{verbatim}
+%
+% Next comes the main body of the thesis, which is just a bunch of \verb=\include{...}= statements: one for each chapter:
+%
+% \begin{verbatim}
+% \include{Ch1}
+% \include{Ch2}
+% \include{Ch3}
+% ...
+% ...
+% ...
+% \end{verbatim}
+%
+% \subsection{Bibliography}\label{bib}
+% After the main body of the thesis, it's time to set the bibliography.  It should be noted that the Graduate School requires a single, all inclusive bibliography for your thesis, even if each chapter has its own bibliography.
+%
+% Since citation styles and the required contents of the bibliography can vary dramatically from discipline to discipline, the Graduate School has no specific requirements for the this subsection.  As a result, this class file contains no formatting specifications for the subsection beyond the margins and line spacing.
+%
+% By default the name of this subsection is ``REFERENCES'' but you can change it to ``WORKS CITED,'' ``BIBLIOGRAPHY,'' or whatever is customary for your discipline.  To do so you'll need to redefine the command \verb=\bibname=.  For example \verb=\renewcommand{\bibname}{Works Cited}= will change the name to ``WORKS CITED'' (capitalization is enforced by the class file, so you don't need to worry about it when redefining \verb=\bibname=).  \textbf{This is a change from how the class file used to work.}  This change serves to bring the class file more in line with usual \LaTeX\ expectations so that packages like babel will work more smoothly with the class file.
+%
+% There are two ways of handling your bibliography: with \textsc{Bib}\TeX\ and by hand.
+%
+% \subsubsection{\textsc{Bib}\TeX}
+% If you're using \textsc{Bib}\TeX\ then you'll need to set several external parameters which tell the class file how to find and format the references.  Do do this use the following series of commands:
+%
+% \begin{verbatim}
+% \bibfiles{...}
+% \bibliographystyle{...}
+% \references
+% \end{verbatim}
+%
+% The first command tells the class file where the bibliography entries are located.  This should be a \textsc{Bib}\TeX\ file (i.e. one with a ``.bib'' extension).  If you're unfamiliar with \textsc{Bib}\TeX\ then you'll need to familiarize your self with it \parencite{Feder:2006}, or one of the various programs designed to help you manage a \textsc{Bib}\TeX\ file (e.g. Bibdesk \parencite{BibDesk} for Mac OS X, Referencer \parencite{Spray:2007} for Linux, and BibDB \parencite{Doron:1999} for Windows).
+%
+% The second command indicates the style the list should follow.  There are a few styles built into \textsc{Bib}\TeX\ by default (plain, unsrt, alpha, abbrv) but there are also countless bibliography style files (``.bst'') out there that can achieve alternate formats.  Consult with your advisor and committee about which bibliography style you should be using.
+%
+% The last command simply tells the class file its time to typeset the reference list.  Since this command manually adds an entry to the table of contents you will sometimes run into a peculiar bug within the \LaTeX\ kernel when using it.  This bug causes the processing of manually added table of contents entries to be delayed until after the processing of a subsequent included file.  The result is that if said file adds entries to the table of contents (by containing subsectioning commands, for instance) the manually added table of contents entry will be out of place.  This can be fixed in one of two ways:
+% \begin{enumerate}
+% \item{Use the \verb=\input= command instead of \verb=\include=.  This command allows the placement of other files in the document just like \verb=\inlcude= but doesn't have the same file coordination capabilities described in subsection \ref{coord}.}
+% \item{Place the command which manually adds to the table of contents inside an included file.  If all table of contents entries are added from within an included file, then the bug about order won't manifest itself.}
+% \end{enumerate}
+% Since the bug is in the \LaTeX\ kernel, I cannot change the class file to fix it.  As a result, if it effects you, try one of the two above fixes.
+%
+% Don't forget that if you're using \textsc{Bib}\TeX\ you'll need to process your document at least 4 times for it to come out right: once with \LaTeX, once with \textsc{Bib}\TeX, and twice more with \LaTeX.
+%
+% \subsubsection{Bibliographies by hand}
+% If you've elected to create your bibliography by hand then you simply need to use:
+% \begin{verbatim}
+% \begin{thebibliography}{...}
+% ...
+% ...
+% ...
+% \end{thebibliography}
+% \end{verbatim}
+% Since the contents and format of this environment is covered in most \LaTeX\ manuals (e.g. subsection 11.3.1 in \cite{Kopka:2004}), I'm not going to go over it here.  Note that the same issue that effects \verb=\references= applies to this environment.
+%
+% \subsection{More File Coordination}
+%
+% Having taken care of the bibliography, it's time to work on the appendices:
+%
+% \begin{verbatim}
+% \appendix
+% \include{AppA}
+% \include{AppB}
+% ...
+% ...
+% ...
+% \end{verbatim}
+%
+% The first command resets the chapter counter and changes it from numbers to letters.  This means that from now on the \verb=\chapter{...}= command will create ``Appendix *'' (where ``*'' is A, B, C, etc.) rather than ``Chapter \#'' (where ``\#'' is 1, 2, 3, etc.).  It is necessary even if you have only one appendix (and thus don't want it lettered).\footnote{If your document has only one appendix, then the letter is left off completely and it is simply designated ``Appendix''.}  The subsequent commands point to and allow the inclusion of the various appendix files.
+%
+% \subsection{Biography}\label{bio}
+% After the list of appendix inclusions you'll need to write your biography.  According to the graduate school the requirements for the biography are as follows:
+% \begin{quote}
+% A biography of the candidate must be included in the thesis.  It must  be written in the
+% third person and include the following information:  place of birth, place of high school gradua-
+% tion, place and date of college graduation with degree(s) and major(s), professional or
+% employment experience, scholarly publications, and memberships in professional or honorary
+% societies.  The last sentence must state, "S/He is a candidate for the---------degree in ------- from
+% The University of Maine in Month, Year."
+% \end{quote}
+% Obviously these are some very stringent requirements, but even so there is still a substantial amount of variation that might be introduced into any given biography so it's left up to you to write all but the last sentence of the biography (which has such specific required wording that the class file can do it for you).  To format your biography correctly, it should be placed between \verb=\begin{biography}= and \verb=\end{biography}=.  You might also consider placing it in a separate file which you then include (as I've done in this document) so that you can exclude it from draft copies of the thesis.
+%
+% By default, the class file will use your full name (as defined by the \verb=\author= command in the last sentence.  This is allowed by the graduate school, but if you prefer to use a pronoun (as is suggested in the above requirements) then you should make use of the \verb=\authorpronoun= command to indicate what your preferred pronoun is.  It is recommended that you place this command in the preamble of the document along side the \verb=\author= command, but technically it can appear anywhere before the biography environment.
+%
+% Since the biography is required to be the last page of your thesis, the only command that should appear after it in your document is \verb=\end{document}=, which will tell \LaTeX\ that the document is finished.
+%
+%
+% \subsection{Using the File Coordination}\label{coord}
+%
+% In addition to breaking your thesis up into multiple smaller files, the \verb=\include{...}= statements enable another feature of \LaTeX\ that should make your life much easier.
+%
+% Let's say during the editing process your committee requires you to make changes to chapter 3 but not any of the rest of the document.  Once you've made those changes, do you have to retypeset the whole document and give it all to your committee just so they can approve those changes?  Thanks to the \verb=\include{...}= statements, the answer is no.  Simply introduce the command \verb=\includeonly{Ch3}= into the preamble of your document (somewhere before \verb=\begin{document}=, I suggest just after the packages are loaded) and \LaTeX\ will only process chapter 3, but will look at the aux files for the other chapters so that any reference commands point to the right place.  This will create a document which consists of the title page, chapter 3, and the reference list: a much smaller and easier file to be handing out to your committee.  By changing the argument of this command you can control which chapter (or appendix) is typeset and can even typeset more than one (simply separate each file name by a comma as in ``Ch2,Ch3,AppA'' which will typeset chapters 2 and 3 and appendix A).  Once you're ready to typeset the whole document again, simply delete the \verb=\includeonly{...}= command.
+%
+% It should be noted that \verb=\include{...}= not only adds the contents of the specified file to this one, it also starts a new page both before and after the file is read in (the equivalent of issuing \verb=\clearpage=).  As a result, you should only use it on files that should start and end on their own pages (like chapters) and not with those that can share their page space with something else (like a subsection in a chapter).  As with spaces and carriage returns, \LaTeX\ always ignores multiple commands to start a new page in a row so two \verb=\include{...}= statements in a row won't create a blank page in between.  If you have to place in a separate file some material which shouldn't automatically start and end its own page, you'll need to use \verb=\input{...}= instead and there is no equivalent to \verb=\includeonly{...}= for \verb=\input{...}=.
+% \section{Front.tex}
+%
+% The front matter of your thesis is primarily made up of special things that are required by the Graduate School, but also contains some optional elements.  Table \ref{front} provides a summary of these elements.
+%
+% \begin{table}
+% \begin{minipage}{\textwidth}
+% \centering
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+% \hline\hline
+% Thesis Element & Required or Optional\\
+% \hline
+% Copyright Page & Optional\\
+% Abstract & Required\\
+% Lay Abstract & Special\footnote{See subsection \ref{abstracts}}\\
+% Preface & Optional\\
+% Dedication & Optional\\
+% Acknowledgements & Optional\\
+% Table of Contents & Required\\
+% \hline\hline
+% \end{tabular*}\\
+% \end{minipage}
+% \caption{The elements of the front matter for your thesis.}
+% \label{front}
+% \end{table}
+%
+% \subsection{Copyright}\label{copy}
+%
+% \begin{verbatim}
+% \copyrightpage[copyright holder]{year}
+% \end{verbatim}
+%
+% This command creates a copyright page.  This page is optional (unless you've taken the time to register the copyright, in which case it's required by law, not the Graduate School), so you can neglect this page if you want to.  If you do issue it, there are a pair of arguments that it takes.  The first (between ``['' and ``]'') specifies the copyright holder.  This argument can be left off completely (in which case the ``['' and ``]'' are also not necessary) and will default to you, the author.  The second argument is required and declares the year of the copyright.  If parts of your thesis were supported by grants or were previously published, you should consult with your advisor and the prior publishers to make sure that you specify these arguments correctly before including this page.
+%
+% \textbf{Note:} In 2016 (v1.12 of this class file) the Graduate School switched to an electronic thesis submission process and eliminated the Dissertation Acceptance and Library Rights Statement pages which had previously surrounded the Copyright page.  If you are recompiling an older thesis which contains these pages, then you will need to use earlier version of the class file.
+%
+% \subsection{University of Maine Graduate School Land Acknowledgment}\label{glsa}
+% \begin{verbatim}
+% \glsa{}
+% \end{verbatim}
+%
+% This command creates the University of Maine Graduate School Land Acknowledgment. This page is optional and takes no parameters. The land acknowledgment should be after the copyright page, as shown by the thesis template made by the Graduate School.
+%
+% \subsection{Abstract(s)}\label{abstracts}
+% The graduate requires two abstracts, but only one has to appear in the bound dissertation.
+%
+% This first abstract is the usual abstract you would write for a scholarly journal in your field.  This is the abstract that must be in the bound thesis.  It should be limited to 500 words for a Master's Thesis and 350 words for a Doctoral Thesis.  It cannot contain formulas, tables, diagrams, or other illustrations.  Typesetting your abstract is accomplished with the ``abstract'' environment:
+% \begin{verbatim}
+% \begin{abstract}
+% ...
+% ...
+% ...
+% \end{abstract}
+% \end{verbatim}
+%
+% The second abstract is one suitable for a lay audience.  This abstract is limited to 350 words regardless of the kind of degree you're getting and should not contain highly technical language.  It should be written with the expectation that the reader will have only minimal knowledge of your field as it may be ``submitted [...] for publication in newspapers, magazines, and other media of
+% interest to the general public, and it may be used in selecting nominees for regional and
+% national competitions.''  It must be accompanied by at least 5 keywords (for search engines to pick up on, presumably) and it may contain 1 (and only 1) image.  If you didn't create said image, then you need permission of the copyright holder to use it.
+%
+% This abstract doesn't have to be bound with your thesis, but must be submitted electronically to crystal.burgess@maine.edu.  When submitting this abstract, a Word document that is formated correctly is preferred due to some copy/paste peculiarities between Adobe Reader and the form the grad school uses to upload the file to the web.  If you don't have access to Word, however, you can get away with a pdf version.  This pdf version can be generated by this class file with the ``layabstract'' environment; the same environment you'd use to generate the lay abstract for inclusion in the bound copy:
+%
+% \begin{verbatim}
+% \begin{layabstract}{...}
+% ...
+% ...
+% ...
+% \end{layabstract}
+% \end{verbatim}
+%
+% In this case, the environment argument is the list of keywords, while the body of the abstract should be within between the environment commands.  If you do include an image, do not enclose it within a figure environment as it should not appear in the List of Figures.
+%
+% \subsection{Dedication}
+% If there is some person (or group of persons) to whom you want to dedicate your thesis, then you'll need to use the dedication environment.  This should be short, and is optional:
+% \begin{verbatim}
+% \begin{dedication}
+% ...
+% \end{dedication}
+% \end{verbatim}
+%
+% \subsection{Preface}
+% If you want to include a preface to your thesis then you typeset it with the preface environment.  This can be long or short and is optional.
+%
+% \begin{verbatim}
+% \begin{preface}
+% ...
+% ...
+% ...
+% \end{preface}
+% \end{verbatim}
+%
+% \paragraph{Note:}The document structure within the Preface is unnumbered (a Graduate School requirement).
+%
+% \subsection{Acknowledgements}
+% While considered optional by the Graduate School, the acknowledgments are the appropriate place to mention funding sources, collaborators, and anyone who helped with the writing or revision of your thesis.  They are typeset with the acknowledgements environment:
+%
+% \begin{verbatim}
+% \begin{acknowledgements}
+% ...
+% ...
+% ...
+% \end{acknowledgements}
+% \end{verbatim}
+%
+% \subsection{Table of Contents}
+% The last element of the front matter is the table of contents.  This actually consists of several lists, the first of which is actually called ``Table of Contents'' and contains the name and page numbers of chapters, subsections, subsubsections, and chapter-like elements.  The other lists are all pseudo-optional.  If they would be populated (i.e. if you have tables or figures), then they need to be there.  If they are empty, then you can leave the empty list off.  Typesetting these lists is handled with a series of commands:
+%
+% \begin{verbatim}
+% \tableofcontents
+% \listoftables
+% \listoffigures
+% \end{verbatim}
+%
+% In addition, the Graduate School requires you to have other lists for ``a consistent set of theorems, symbols, abbreviations or definitions'' should such a set appear in your thesis.  Some packages add \verb=\listof*= commands to create and auto-populate the list for the element that they are support just like \verb=\listoftables= and \verb=\listoffigures= do for tables and figures.  If so, you should probably use said command as it will make your life much easier (though pay attention to the formatting that the command creates, you may need to modify it manually).  However, for those instances where the package doesn't do so, there is a ``listof'' environment which you can use to manually create such a page:
+%
+% \begin{verbatim}
+% \begin{listof}{...}
+% ...
+% ...
+% ...
+% \end{listof}
+% \end{verbatim}
+%
+% \subsection{File Close}
+% The second to last line that should be in your Front file signals the start of the main body of the thesis with the command \verb=\mainmatter=.  This resets the page numbering, changes it to arabic numerals, switches to double spacing, and adds the word ``Chapter'' to your table of contents before your first chapter.
+%
+% Since this isn't strictly creating a piece of the front matter of your thesis it might seem more logical to put this command in Main.tex after \verb=\include{Front}=, however, this command suffers from the same bug that effects \verb=\references=.  However, since this command comes first in the document, it appears to be subject to it more reliably.  Putting the command at the end of Front.tex dodges that bug (as would placing it at the beginning of Ch1.tex).  It's not elegant, but it works.
+%
+% The last line of Front.tex is \verb=\endinput=.  This command isn't technically necessary (i.e. your document will typeset just fine without it), but it is good programming practice to include it.  If it is used, then anything that appears after it will be ignored by \LaTeX, making it a great way to create a scratch space at the end of each file where you can write notes to yourself.  You don't even have to comment them out!
+% \section{Chapters and Appendices}
+%
+% \subsection{Chapters}
+% While the chapters are probably the hardest part of the thesis for you to actually write, the class file requires very little in each chapter.  Each chapter file should open with \verb=\chapter{...}= and close with \verb=\endinput=.  In between is largely up to you, but there are a few things to keep in mind.
+%
+% You cannot use \verb=\include{...}= inside chapters because they are already included files.  If you want to breakup a long chapter into multiple files, use \verb=\input{...}= instead.  Note that there is no \verb=\input{...}= equivalent to \verb=\includeonly{...}=.  Every file inside an \verb=\input{...}= command will be processed every time.
+%
+% Figures and tables should be inside the figure and table environments, respectively, so that they are automatically inserted into the list of figures or tables.  If the caption for a figure or table is particularly long, I also recommend using the optional argument in the \verb=\caption[...]{...}= command to create a short version of the caption that will appear in the table of contents.
+%
+% Footnotes inside figures or tables will be captured by the figure or table environment and thus won't appear anywhere in the document.  There are several possible solutions for this problem, none of which are implemented by this class file, so if you want to put footnotes in your table, look into it.
+%
+% \subsection{Appendices}
+% The file that contains an appendix looks just like a file that contains a chapter.  It starts with \verb=\chapter{...}= and ends with \verb=\endinput=.
+%
+% \subsection{Headings}
+% There are 5 levels of headings within a chapter or appendix: subsection, subsubsection, subsubsubsection, paragraph, and subparagraph.  To create a heading (and start a new element at the appropriate level) simply issue the appropriate command (\verb=\subsection=, \verb=\subsubsection=, etc.).  By default headings are numbered down to the subsubsubsection level using a decimal system (<Chapter \#>.<subsection \#>.<Sub\-sec\-tion \#>.<Sub\-sub\-sec\-tion \#>).  You can change the depth to which headings are numbered with the command \verb=\setcounter{secnumdepth}{#}=.  The argument should be a number between 0 (no headings are numbered) and 5 (all headings down to the subparagraph level are numbered).  This command can be issued at anytime in your document and will affect the numbering from that point forward.
+%
+% In addition to the options described in subsection \ref{class} which automatically change the format of the headings to match a specific style, it is possible to manually change the formats by redefining the following commands:
+% \begin{verbatim}
+% \subsectionstyle
+% \subsubsectionstyle
+% \subsubsubsectionstyle
+% \paragraphstyle
+% \subparagraphstyle
+% \end{verbatim}
+% These commands should take no arguments and consist purely of formating commands (it is up to you to provide any punctuation a style might demand in the heading name itself).  As an example, if you wanted to make subsection headings be underlined and boldfaced, you would need to issue the following command in your preamble:
+% \begin{verbatim}
+% \renewcommand*{\subsectionstyle}{\bfseries\underline}
+% \end{verbatim}
+% If manually redefining the heading styles, remember that the Graduate School prohibits italics in headings.
+%
+% Similarly there exist the following lengths which can be used to redefine where the text starts after a heading:
+% \begin{verbatim}
+% \subsectionpost
+% \subsubsectionpost
+% \subsubsubsectionpost
+% \paragraphpost
+% \subparagraphpost
+% \end{verbatim}
+% These lengths should be altered in the preamble with a \verb=\setlength= command.  If the value the lengths are set to is positive, then they represent the vertical distance between the header and the first paragraph which follows (and should probably be a rubber length to give \LaTeX\ some wiggle room in making things fit on a page).  If they are negative then the absolute value represents the horizontal distance between the header and the first word of the paragraph which follows (and should probably be a fixed length).  For example, the lengths for APA style headings are positive (and rubber) for \verb=\subsectionpost= and \verb=\subsubsectionpost=, but negative (and fixed) for the other three.  This places subsection and subsubsection headers on their own line, but subsubsubsection, paragraph, and subparagraph headers are on the same line as the text which follows them.  On the other hand, the default style uses positive (and rubber) lengths for \verb=\subsectionpost=, \verb=\subsubsectionpost=, and \verb=\subsubsubsectionpost=, but negative (and fixed) lengths for \verb=\paragraphpost= and \verb=\subparagraphpost=.
+%
+% For more on the difference between rubber and fixed lengths, consult your \LaTeX\ reference book of choice.
+% \section{Other Stuff}
+% \subsection{\textbackslash ignore}
+% The class file defines the command \verb=\ignore{...}= which is very useful for removing large blocks of text from the thesis without deleting them.  Anything within the argument is treated as if it was commented out and will not appear in the typeset document.
+%
+% \subsection{\textbackslash comment}
+% There is also a \verb=\comment{...}= command.  If the draft option was issued to the class file, the argument of this command will appear in the right hand margin in red with ``NOTE:'' preceding it in a smaller font (as can be seen in this file if you typeset it in draft mode).  This makes it useful for adding reminders to yourself about things you still need to do, or questions for your advisor when you're asking him to review a draft version of something.  Without the draft option this command functions identically to \verb=\ignore=.\comment{There is a comment here.}
+%
+% \subsection{\textbackslash highlight}
+% The \verb=\highlight= command is a useful companion to \verb=\comment=.  In draft mode it will highlight its argument (i.e., give it a yellow background).  In final mode, the text appears normally.
+%
+% \subsection{\textbackslash pocket}
+% If you have supplementary materials such as a DVD or CD which will be stored in a pocket inside the cover of your thesis the Graduate school requires you to list these in the table of contents.  This can be done with the \verb=\pocket{...}= command.  However, like the \verb=\references= command, the entry in the table of the contents that this produces may be out of place if it is put in Main.tex.  See subsection \ref{bib} for more details.
+%
+% Table of contents entries created by this command have the status of chapters (or appendicies, if you've already issued the \verb=\appendix= command) and will increment the appropriate counter.
+%
+% \subsection{\textbackslash toclabel}
+% If you need to add a label into your table of contents then you can use the command \verb=\toclabel{...}= to do so.  Due to a bug in the \LaTeX\ kernel that effects this command you may need to put the command inside a chapter file rather than in Main.tex. Otherwise the label may not end up in the correct place in the TOC.
+%
+% \subsection{\textbackslash compresstitlepage}
+% In rare cases your title page may spill over onto a second page when typeset with double line spacing (generally due to a long title, many previous degrees, or committee members with long/multiple titles).  When this happens, issue the command \verb=\compresstitlepage= in your preamble.  This will change the line spacing for the committee members to single line spacing.  If that isn't enough to get your title page onto one page, add the optional argument (``[2]'') to change the spacing for the rest of the title page to one-and-a-half spacing.\comment{There is another comment here.}
+%
+% \subsection{verbatim and \textbackslash verb}
+% Since the Graduate School doesn't want the font to change during the course of the document, the verbatim environment and the \verb=\verb= command have had their font changed from the standard typewriter font of \LaTeX\ to the normal roman font.  This required a change to the font encoding to get what you type in the verbatim environment to be the same characters that appear on the page.  As a result, the mapping of quotation marks, ", to close double quotes, '', doesn't work.  To get '' you will need to type two close quotation marks, '\,', just like you have to type two two open quotation marks, `\,`, to get the double open quotes, ``.
+%
+% \subsection{Widows and Clubs}
+% The graduate school requires that page breaks occur so that at least 3 lines of any paragraph are on a page.  Thus, if a paragraph starts on a certain page at least the first three lines of that paragraph should be on that page.  Likewise, if a paragraph ends on a page at least the last three lines of that paragraph should be on that page.  This is an unusually stringent requirement for clubs (paragraph starts at the end of a page) and widows (paragraph ends at the beginning of a page) and one which is impossible to force \LaTeX\ to respect.  The club penalty and widow penalty have been set high to large values so that at least two lines of each paragraph should appear on each page, but if the graduate school starts bugging you about this, you are going to have to play with this manually using \verb=\pagebreak= and \verb=\nopagebreak=.  Do this only when preparing the \textit{absolutely final copy} of the thesis as said manual breaks will stick around despite any subsequent edits to the document.
+%
+% Likewise, the Graduate School has similar standards for the table of contents: at least 3 entries from any given chapter must be on the page (unless the chapter has fewer than 3 entries, in which case all entries should appear on the same page).  I've done my best to make sure this happens, but I can't possibly test every possible pattern of chapters, subsections, and subsubsections that you might have.  If the graduate school is bugging you about this, then place \verb=\addtocontents{toc}{\protect\pagebreak}= just before a chapter, subsection, or subsubsection to manually insert a page break into that position in your table of contents.  This command can likewise be used to manually insert page breaks into the list of figures (lof) or the list of tables (lot) by changing the first argument.  It also will run into the same bug that effects \verb=\references=.  See subsection \ref{bib} for more details.  If you do have to do this, I'd also appreciate a minimal working example so that I can try to further fine tune the class file's ability to do this automatically.
+%
+% \subsection{Thesis in a Foreign Language}
+% The class file has not been tested on a thesis written in a foreign language and thus its behavior on such documents is not guaranteed.  Support for these kinds of documents is planned for a future version, but probably won't come until 2019 at the earliest.  Contributions designed to make the class file work with foreign language theses are appreciated: \verb=R.Springuel@umit.maine.edu=.
+%
+% \subsection{Hyphenation \& Justification}
+% At the graduate school request, automatic hyphenation is turned off and the document should be set left justified (\verb=\raggedright= in LaTeX parlance).  If this creates strange behavior for you, please let me know so that any possible bugs can be resolved.
+%
+% \subsection{5-dot Leader Minimum in TOC}
+% As of v1.10 the this requirement should be obeyed automatically.  If you run into problems here please report it to me (\email).  As a work around, you can fix this manually by either changing the appropriate title/caption, or by making use of the optional short title/caption built into the appropriate command.
+%
+% \section{Other Packages}
+% \label{package}
+% This appendix lists the packages which have interesting behavior when used along side maine-thesis.cls.  If you find a package that creates difficulties which isn't listed here, please email me the name of the package, the version you have, and the particular difficulty that you encountered.
+%
+% \subsection{Working Packages}
+% While not thoroughly tested, the following packages have been used with this class file without incident:
+% \begin{itemize}
+% \item{acronym (v1.35, last revised 2009/10/20)}
+% \item{epic (v1.2, last revised 1986/06/01)}
+% \item{epstopdf (v2.5, last revised 2010/02/09)}
+% \item{excludeonly (v1.0, last revised 2003/03/14)}
+% \item{graphics (v1.0o, last revised 2009/02/05)}
+% \item{graphicx (v1.0f, last revised 1999/02/16)}
+% \item{hhline (v2.03, last revised 1994/05/23)}
+% \item{natbib (v8.31a, last revised 2009/11/07)}
+% \item{pdfpages (v0.4j, last revised 2010/01/12)}
+% \item{tabularx (v2.07, last revised 1999/01/07)}
+% \item{tabulary (v0.9, last revised 2008/12/01)}
+% \item{float (v1.3d, last revised 2001/11/08)}
+% \item{subfig.sty (1.3, last revised 2005/06/28)\footnote{\emph{Note:} If you use the subfig package, the following warning will be raised: ``Package caption Warning: Unsupported document class (or package) detected, usage of the caption package is not recommended.''  It should be safe to ignore this warning, if you don't use any other packages which manipulate the caption command.  For anything beyond that, I can't make any guarantees on what will work and what won’t.}}
+% \end{itemize}
+% If you experience a problem with any of these packages please make sure you have the version listed above or a more recent one before submitting a bug report.
+%
+% If you use a package other than one of the ones listed above without incident, please email me (\email) the package name and version so that I can add it to the above list.
+%
+% \subsection{caption}
+% This class file already formats captions for figures and tables according the requirements of the Graduate School.  As a result, the caption package, which allows you to manipulate how these elements appear, should not be used.
+%
+% \subsection{color}
+% The class file uses this package to color the \verb=\comment= command in draft mode.  As a result, any attempt to load this package with options by using \verb=\usepackage= will result in an option clash error.  Instead, pass whatever options for color you want to the class file and they will automatically be passed along to color when it is loaded.
+%
+% The class file was tested with v1.0j, last revised 2005/11/14.  If you're having problems with color, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{footmisc}
+% The class file uses this package to eliminate the usual rule that occurs between the body of the text and the footnotes at the bottom of the page.  As a result, any attempt to load this package with options by using \verb=\usepackage= will result in an option clash error.  Instead, pass whatever options for footmisc you want to the class file and they will automatically be passed along to footmisc when it is loaded.
+%
+% The class file was tested with v5.5a, last revised 2009/09/15.  If you're having problems with footmisc, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{hyperref}
+% The hyperref package can be used to create many links within your document, making the digital copy easier to navigate.  When links are created in the document, they can be highlighted in a variety of ways: colored boxes around the text, colored text, and small capitals.  While these are necessary indicators of the presence of the link in an electronic document, they should not appear in the printed copy.  As a result, you are advised to turn hyperref (comment out the load command) when typesetting the file for printing purposes.  When you go back to typesetting with hyperlinks, you are likely going to need to trash the auxilarly (aux, toc, lof, lot, etc.) files to get the document to typeset correctly.
+%
+% The class file was tested with v6.80n, last revised 2010/03/11.  If you're having problems with hyperref, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{hyperref and ifthen}
+% If a user defined command that calls the commands from the ifthen package (like \verb=\equal=) is placed inside a subsectioning command, this is likely to raise a problem if hyperref is also being used, even if the user defined command is robust or protected.  I have been unable to identify exactly what causes this error and can provide no fix.  My only suggestion is to redefine your command so that it uses the \TeX\ primitive if statements instead of the ifthen package.
+%
+% This bug was observed with v6.80n, last revised 2010/03/11, of hyperref and v1.1c, last revised 2001/05/26, of ifthen.
+%
+% \subsection{soul}
+% The class file uses this package for the \verb=\highlight= command.  As a result, any attempt to load this package with options by using \verb=\usepackage= will result in an option clash error.  Instead, pass whatever options for soul you want to the class file and they will automatically be passed along to soul when it is loaded.
+%
+% The class file was tested with v2.4, last revised 2003/11/17.  If you're having problems with soul, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{tocvsec2}
+% The class file uses this package to control the table of contents depth.  In particular, it is used to prevent preface subsections from being numbered and appearing in the table of contents and to prevent appendix subsections from appearing in the table of contents while still being numbered.  If you need to use this package for some other purpose, you don't need to reload it.
+%
+% The class file was tested with v1.2b, last revised 2010/02/27.  If you're having problems with tocvsec2, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{hyphenat}
+% The class file uses this package to turn off hyphenation for the entire document.  As a result, any attempt to load this package with options by using \verb=\usepackage= will result in an option clash error.  Since the only options for this package either disable all hyphenation (the option being used by the class file) or enable it for monospaced (typewriter-style) fonts which aren't allowed in a thesis (the graduate school wants a single font used throughout the document), you shouldn't have to load this package anyway.
+%
+% The class file was tested with 2009/09/02 v2.3c.  If you're having problems with hyphenat, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{geometry}
+% The class file uses this package to set the margins and paper size.  As a result, any attempt to load this package with options by using \verb=\usepackage= will result in an option clash error.  Since the graduate school has very specific requirements for the margins and paper size, both of which are set by the class file, you shouldn't need to load this package anyway.
+%
+% The class file was tested with v5.6, last revised 2010/09/12.  If you're having problems with geometry, make sure you have this version or a more recent one before submitting a bug report.
+%
+% \subsection{iftex}
+% The class file uses this package to test for the use of the PDF\TeX engine.  This engine adds some spurious tags to the pdf, but also provides a command, \verb=\pdfsuppresstexinfo= to get rid of them.  If we see this engine, we use the command to remove those tags.  If you need this package, then simply make use of it.  There is no need to load it (especially as it has no options).
+%
+% The class file was tested with v0.2, last revised 2013/04/04.  If you're having problems with iftex, make sure you have this version or a more recent one before submitting a bug report.
+%
+
 % \section{University of Maine Thesis Typestting Requirements}
 % These requirements for typesetting were retrieved from \href{https://umaine.edu/graduate/students/progress/thesis-resources/}{The Graduate School at The University of Maine}.
 % The requirements are listed throughout the implmenetation section to, generally, clearly identify the intended function of sections of the class, for easy future modification.
@@ -588,22 +1141,22 @@ Master of Surgery, University of Edinburg}
 %  \PrintChanges
 %  \PrintIndex
 % }
-% \changes{v2.0}{2025/09/01}{Refactor with New Dependencies, Update Formatting}
-% \section{Refactoring for V2}
-% \subsection{File Structure and Maintenance}
+% \section{Change Log}
+% \subsection{v2.0}
+% \subsubsection{File Structure and Maintenance}
 % \begin{itemize}
 %    \item The v1 class was a single, manually maintained \texttt{.cls} file.
 %    \item In v2, \texttt{maine-thesis.dtx}, is a single source file that generates both the class file (\texttt{maine-thesis.cls}) and its documentation. This allows for a more streamlined and automated maintenance process.
 %    \item The \texttt{dtx} file format is part of a larger build system that uses \texttt{l3build} for unpacking and generating a CTAN-ready package.
 % \end{itemize}
 %
-% \subsection{Package and Dependency Updates}
+% \subsubsection{Package and Dependency Updates}
 % \begin{itemize}
 %    \item The v1 class file used older packages for a variety of tasks.
 %    \item The v2 class has been refactored to use modern packages. For example, it now uses \texttt{biblatex} with the \texttt{biber} backend for citation management[cite: 1, 3, 5]. The previous version did not specify the use of these packages and appears to have a simpler citation approach.
 %    \item New dependencies were added, including \texttt{fontspec}, \texttt{microtype}, \texttt{hyperref}, \texttt{csquotes}, \texttt{titlesec}, and \texttt{etoolbox}, which provide more robust font, typography, hyperlinking, and title formatting capabilities.
 % \end{itemize}
-% \subsection{Formatting and User Interface}
+% \subsubsection{Formatting and User Interface}
 % \begin{itemize}
 %    \item The v1 class managed heading styles using a numerical counter (\texttt{\textbackslash setcounter\{head\}}) with \texttt{\textbackslash ifcase} logic.
 %    \item The v2 \texttt{maine-thesis.cls} uses named macros like \texttt{\textbackslash apaheadings}, \texttt{\textbackslash chicagoheadings}, and \texttt{\textbackslash idecimalheadings} for a clearer and more direct way to set heading formats.
@@ -611,7 +1164,7 @@ Master of Surgery, University of Edinburg}
 %    \item The title page and abstract environments were completely redesigned with the \texttt{\textbackslash maketitlehooka} and \texttt{\textbackslash maketitlehookd} commands, allowing for more precise control over the layout.
 % \end{itemize}
 %
-% \subsection{Code and Variable Changes}
+% \subsubsection{Code and Variable Changes}
 % \begin{itemize}
 %    \item The v1 class contained deprecated commands like \texttt{\textbackslash libraryrights} and \texttt{\textbackslash dissacceptance}.
 %    \item The v2 class removes these deprecated commands and replaces them with a \texttt{\textbackslash ClassError} message, informing the user that the Graduate School no longer requires them.
@@ -630,7 +1183,7 @@ Master of Surgery, University of Edinburg}
 %  \end{macro}
 %
 % \begin{macro}{\appendix}
-%   The \appendix command should no longer be used to define appendicies; however it is still supported in the appendix pacakge. (replacing custom appendix and heading table of contents functionality.
+%   The appendix command should no longer be used to define appendicies; however it is still supported in the appendix pacakge. (replacing custom appendix and heading table of contents functionality.
 % \end{macro}
 %
 % \begin{macro}{\multipleappendicestrue}
@@ -638,22 +1191,146 @@ Master of Surgery, University of Edinburg}
 % This has been replaced with the multiappendices option for the class.
 % \end{macro}
 %
-% \changes{v1.0}{2020/02/12}{Depricated Functions}
-% \begin{macro}{\libraryrights}
-%    \begin{macrocode}
-\newcommand{\libraryrights}{%
-    \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Library Rights Statement page}{Please remove \protect\libraryrights\space from your thesis.}%
-  }
-%    \end{macrocode}
-% \end{macro}
+% \subsection{Changes in v1.16}
+% \begin{itemize}
+% \item{\bfseries Added University of Maine Graduate School Land Acknowledgment}
+% \end{itemize}
 %
-% \begin{macro}{\dissacceptance}
-%    \begin{macrocode}
-	\newcommand{\dissacceptance}{%
-    \ClassError{maine-thesis}{The Graduate School no longer requires\MessageBreak a Dissertation Acceptance page}{Please remove \protect\dissacceptance\space from your thesis.}%
-}
-%    \end{macrocode}
-% \end{macro}
+% \subsection{Changes in v1.15}
+% \begin{itemize}
+% \item{\bfseries Add “APPENDICES” to title of first Appendix and TOC when multiple appendices are present.}
+% \end{itemize}
+%
+% \subsection{Changes in v1.14}
+% \begin{itemize}
+% \item{\bfseries Ensured double spacing in chapter titles.}
+% \item{\bfseries Removed extra space above chapter titles.}
+% \item{{\bfseries Removed extra space between chapters in list of figures and list of tables.} This is implemented as an option, you can add the space back (for unofficial copies) with the loftspacing option.}
+% \item{\bfseries Changed ``The University of Maine'' to ``the University of Maine'' in the auto-sentence of the author biography.}
+% \item{\bfseries Reduce space between title and author name on abstract pages.}
+% \item{\bfseries Remove “Chapter” heading from TOC.}
+% \item{Fixed problem with link target (when using hyperref) and page number in TOC for reference section.}
+% \item{\bfseries changed ``The University of Maine'' to ``the University of Maine'' in the auto-sentence of the author biography.}
+% \item{Improved capitalization enforcement for chapter headings and TOC entries.  This should make redefining section names (as when using babel) much easier.}
+% \item{Dropped 2-volume support. (Graduate School no longer needs a printed copy of the thesis.)}
+% \item{Page number placement now controlled by a class option.  It's also more consistent in its application as a result.}
+% \item{\bfseries Extra space before ``Chapter'' label in TOC has been removed.}
+% \item{``Chapter'' and ``Appendix'' in chapter headings is now printed in all uppercase.}
+% \item{\bfseries Tweaks to make 5-dot minimum in TOC leaders better respected.  Thanks to pmbean6 for this fix.}
+% \item{\bfseries Use a pronoun instead of author name for the last sentence of author biography.  Users now need to define their preferred pronoun with the \verb=\authorpronoun= command.  Do not forget to capitalize the first letter of the pronoun.  If no pronoun is provided, then the full author name will appear in the last sentence of the biography.}
+% \item{\bfseries When figure/table captions are too long to go into the table of contents, the graduate school wants the entry in the table of contents to match the first sentence of caption exactly.  To facilitate this the \verb=\caption= command has been redefined so that the optional argument, if given, is automatically prepended to the caption text.  Older theses, for which this new behavior would be undesirable, can turn it off with the legacycaptions option.}
+% \item{\bfseries On title page, when the name and title of an advisor or committee member is long enough to wrap to a second line, that second line will be indented 1.5em (the same as the indentation of a paragraph in the body of the thesis).}
+% \end{itemize}
+%
+% \subsection{Changes in v1.13}
+% \begin{itemize}
+% \item{Short form of advisor's name can now be entered as an optional argument of \verb=\principaladvisor=.}
+% \item{Bugfix: idecimal and jdecimal heading styles were suppressing the section numbers.  Thanks to pmbean6 for this fix.}
+% \item{Margin widths have been tweaked a little so that they more closely conform to the guidelines.  Thanks to pmbean6 for this fix.}
+% \item{If you edited the class file to get justified text back, then subsection headings were being indented in jdecimal style.  This has been fixed in preparation for later changes.  Thanks to pmbean6 for this fix.}
+% \item{Package conflict with float package has been resolved.  Thanks to pmbean6 for this fix.  Those updating thesis should change listof environments to thesislist.}
+% \item{Bugfix: The default setting of \verb=\parindent= was being forced to 0, which was not as intended.}
+% \item{Indentation for the headings has been decoupled from \verb=\parindent= and is now tied to \verb=\headindent=.}
+% \item{Added some basic metadata (title and author) handling when hyperref is loaded.  Thanks to pmbean6 for this enhancement}
+% \item{\bfseries Adjusted page numbering to account for removal of Dissertation Acceptance page.}
+% \end{itemize}
+%
+% \subsection{Changes in v1.12}
+% \begin{itemize}
+% \item{\bfseries Eliminated Dissertation Acceptance and Library Rights Statement pages.}
+% \end{itemize}
+%
+% \subsection{Changes in v1.11}
+% \begin{itemize}
+% \item{\bfseries Replaced ``thesis'' with \verb=\@type= on Library Rights page.}
+% \item{\textbf{Labels for signature lines now use the same size font as the rest of the thesis (they were formerly reduced).}}
+% \item{\textbf{Gap between the title and the text on Dissertation Acceptance and Library Rights page has been reduced.}}
+% \item{\textbf{Mandatory sentence at the end of the Author Biography (and which the class file produces automatically) is no longer its own paragraph.}}
+% \item{\textbf{The default headings system has been modified to make it match more closely with the justified decimal example in the Guidelines.}}
+% \item{Two additional headings systems (headings and idecimal) have been added.  These are based on the headings and indented decimal examples in the Guidelines.}
+% \item{\bfseries Improved Widow/Orphan protection in the TOC.}
+% \item{\bfseries Improved Widow/Orphan protection in bibliography.}
+% \end{itemize}
+%
+% \subsection{Changes in v1.10}
+% \begin{itemize}
+% \item{\textbf{Alignment of multi-line table of contents entries for Appendices altered}}
+% \item{5-dot leader minimum code reworked to be more robust}
+% \end{itemize}
+%
+% \subsection{Changes in v1.9}
+% \begin{itemize}
+% \item{\textbf{Acceptance Page title consolidated to a single line.}}
+% \item{\textbf{Removed ``Submitted for graduation\ldots'' from Acceptance Page.}}
+% \end{itemize}
+%
+% \subsection{Changes in v1.8}
+% \begin{itemize}
+% \item{\textbf{Hyphenation disabled.}}
+% \item{\textbf{Full justification disabled.}}
+% \end{itemize}
+%
+% \subsection{Changes in v1.7}
+% \begin{itemize}
+% \item{Added \verb=\highlight= command.}
+% \item{Modifications to \verb=\pocket= to make its ToC entries match other chapter-level entries.}
+% \item{Added two-volume support.}
+% \item{Made some modifications to help with widow/orphan control in the ToC.}
+% \end{itemize}
+%
+% \subsection{Changes in v1.6}
+% \begin{itemize}
+% \item{\textbf{Changed line length for multiple line entires in the ToC.}}
+% \item{\textbf{Removed the multiple appendices ``Appendices'' header from the ToC.}}
+% \item{Added twoside option.}
+% \item{Added unbound option.}
+% \item{Added hooks to alter heading styles.}
+% \item{Added chicago and apa option to switch headings automatically to the appropriate style.}
+% \end{itemize}
+%
+% \subsection{Changes in v1.5}
+% \begin{itemize}
+% \item{License Changed to LPPL v1.3c.}
+% \item{Generalized Dissertation Acceptance Page.}
+% \item{Changed to signature line on Library Rights Page.}
+% \item{Fixed delimiter in figure and table captions.}
+% \item{Unified \verb=\copyrightyear{...}= and \verb=\copyrightpage= into single command.}
+% \item{Refined support for two advisors and number of committee members.}
+% \item{Removed support for External Reader on title page.}
+% \item{Created patch code to fix list of tables and list of figures when hyperref is used.}
+% \item{Added layabstract environment.}
+% \item{Added listof environment.}
+% \item{Changed font for verbatim environment and \verb=\verb= command.}
+% \item{Fixed typesetting of dedication.}
+% \item{General file maintenance.}
+% \item{Added insertion of ``Appendices'' to ToC when there are multiple appendices.}
+% \item{Modified biography environment to auto-generate the last sentence.}
+% \item{Made identification of number of advisors and committee members automatic.}
+% \item{Removed \verb=\appsection{...}= as it is redundant with \verb=\section*{...}=.}
+% \item{Changed way ``Chapters'' and ``Appendices'' are added to the TOC.}
+% \item{Added tocvsec2 dependance to make the change in TOC depth for the front matter and appendices automatic.}
+% \item{Modified preface environment to make the non-numbering of its sections, subsections, etc automatic.}
+% \item{Reserved \verb=\part= for multiple volume support.}
+% \item{Added \verb=\pocket=.}
+% \item{Defined a pseudo \verb=\texorpdfstring= command for use in chapter titles.  When hyperref is loaded (and defines the command properly) this has the effect of hiding \verb=\MakeUppercase= commands from hyperref.}
+% \item{Made Preface, Dedication, and Acknowledgements double spaced.}
+% \item{Created type variables and commands that allows switching to ``thesis'' or ``project'' instead of ``dissertation.''}
+% \item{Removed footnote rule.}
+% \item{Renamed \verb=\labelchaptersintoc= to \verb=\toclabel=, generalized its function, and made it compatible with hyperref.}
+% \item{Added commands to compress title page when needed.}
+% \end{itemize}
+%
+% \subsection{Changes prior to v1.5}
+% This list is not entirely complete but is a best reconstruction as I can manage.  Changes were not logged prior to v1.5.
+% \begin{itemize}
+% \item{Added Dissertation Acceptance Page}
+% \item{Added support for 6 member committees}
+% \item{Removed Boldface from TOC entries}
+% \item{Reduced size of chapter and section headers to match text font, both in place and TOC entries}
+% \item{Added support for two advisors}
+%
+% \end{itemize}
+
 % \section{Implementation of Class. Package Definition}
 %    \begin{macrocode}
 %<*package>
