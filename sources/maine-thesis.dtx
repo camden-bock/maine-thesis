@@ -2597,6 +2597,7 @@ Master of Surgery, University of Edinburg}
 % Leader dots must be used to connect the chapter divisions/subsection headings to their respective page numbers.
 % A minimum of 5 leader dots between the chapter divisions/subsections and the page numbers is required (i.e. the text of the headings should not extend into the area where the page numbers are placed).
 %    \begin{macrocode}
+\renewcommand{\cftdotsep}{2}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
@@ -2610,8 +2611,8 @@ Master of Surgery, University of Edinburg}
 % cftsecindent and cftsecnumwidth define where the title starts.
 
 %    \begin{macrocode}
-\setlength{\cftsecindent}{1.5em}
-\setlength{\cftsecnumwidth}{2em}
+\setlength{\cftsecindent}{1em}
+\setlength{\cftsecnumwidth}{3em}
 %    \end{macrocode}
 
 % cftsetrmarg and cftsetpnumwidth define where the dotted leader ends and where the page number starts.
@@ -2620,7 +2621,7 @@ Master of Surgery, University of Edinburg}
 %    \end{macrocode}
 % Sets the right margin for the TOC entry
 %    \begin{macrocode}
-\cftsetpnumwidth{2cm}
+\cftsetpnumwidth{0.5cm}
 %    \end{macrocode}
 % Sets the width for the page number box
 
