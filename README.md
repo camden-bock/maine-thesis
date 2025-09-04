@@ -10,16 +10,13 @@ A LaTeX class file for typesetting Master's and Doctorate theses at the Universi
 This project aims to update the class file to the current graduate school specifications and make it available on CTAN
 for wider use.
 
-## Quick Start
-
-Once maine-thesis is available on CTAN, the easiest way to install it will be through your TeX distribution's package
-manager. In the meantime, you can install it manually from this repository.
-
-### Overleaf Template (Easiest Method)
+## Quick Start: Overleaf Template
 
 Click the link below to create a new template in Overleaf from the template.
 
 [Open Template in Overleaf](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F72873936%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
+
+## Other Installation Methods
 
 ### CTAN Installation (Future Support)
 
