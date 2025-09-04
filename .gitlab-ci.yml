@@ -1,24 +1,48 @@
 variables:
-  LATEX_IMAGE: texlive/texlive:latest
+  # The name for your generic package
+  PACKAGE_NAME: maine-thesis
+  # Use a minimal image with curl for the publish job
+  CURL_IMAGE: curlimages/curl:latest
 
 stages:
   - build
+  - publish
   - release
 
 build_assets:
   stage: build
-  image:
-    name: $LATEX_IMAGE
+  image: $LATEX_IMAGE
   script:
     - make gitlab
   artifacts:
+    # Save the entire output directory as an artifact
     paths:
-      - build/unpacked/maine-thesis.cls
-      - maine-thesis.tds.zip
-      - "maine-thesis-*.zip"
-      - template.zip
+      - build/distrib/gl/
     expire_in: 1 week
-  # This section is updated from 'except:' to 'rules:'
+  rules:
+    - if: $CI_COMMIT_TAG
+
+publish:
+  stage: publish
+  image: $CURL_IMAGE
+  needs:
+    # This job needs the artifacts from the build job
+    - job: build_assets
+      artifacts: true
+  script:
+    - echo "Uploading all files from build/distrib/gl/ to the package registry..."
+    # Use 'find' to locate all files in the artifact directory and its subdirectories
+    - |
+      find build/distrib/gl -type f | while read -r file; do
+        # Extract just the filename to use in the URL
+        filename=$(basename "$file")
+        echo "-> Uploading ${filename}"
+        
+        # The generic package API requires the filename to be part of the URL
+        curl --fail --show-error --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+             --upload-file "${file}" \
+             "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${filename}"
+      done
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -26,25 +50,33 @@ create_release:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   needs:
-    - job: build_assets
-      artifacts: true
+    # This job only needs to run after the publish job is successful.
+    # It does not need the build artifacts directly.
+    - publish
+  variables:
+    # Define the base URL for your packages to keep the 'assets' section clean
+    PACKAGE_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}"
   script:
-    - echo "Creating release for tag $CI_COMMIT_TAG"
+    - echo "Creating release and linking to assets in the Package Registry."
   release:
     name: 'Release $CI_COMMIT_TAG'
     tag_name: '$CI_COMMIT_TAG'
-    description: 'Release created for tag $CI_COMMIT_TAG' # You can add a description file here too
+    description: "Assets for this release are available in the package registry."
     assets:
       links:
         - name: 'maine-thesis.cls'
-          # This path points directly to the artifact from the 'build_assets' job
-          filepath: /build/unpacked/maine-thesis.cls
+          url: '${PACKAGE_URL}/maine-thesis.cls'
         - name: 'maine-thesis.tds.zip'
-          filepath: /maine-thesis.tds.zip
+          url: '${PACKAGE_URL}/maine-thesis.tds.zip'
         - name: 'maine-thesis-template.zip'
-          filepath: /template.zip
-        #
-        #- name: 'maine-thesis-${CI_COMMIT_TAG#v}.zip'
-        #  filepath: '/maine-thesis-${CI_COMMIT_TAG#v}.zip'
+          url: '${PACKAGE_URL}/maine-thesis-template.zip'
+        # For the versioned zip, we get the version number from the tag
+        - name: 'maine-thesis-${CI_COMMIT_TAG#v}.zip'
+          url: '${PACKAGE_URL}/maine-thesis-${CI_COMMIT_TAG#v}.zip'
+        # Links for the files that were in the 'maine-thesis' subdirectory
+        - name: 'maine-thesis.dtx'
+          url: '${PACKAGE_URL}/maine-thesis.dtx'
+        - name: 'maine-thesis.pdf'
+          url: '${PACKAGE_URL}/maine-thesis.pdf'
   rules:
     - if: $CI_COMMIT_TAG
