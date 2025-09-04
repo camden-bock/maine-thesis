@@ -14,7 +14,7 @@ manager. In the meantime, you can install it manually from this repository.
 
 Click the link below to create a new template in Overleaf from the template.
 
-[Create New Project in Overleaf](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fcamden-bock%2Fmaine-thesis%2F-%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
+[Create New Project in Overleaf](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F72873936%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
 
 ### CTAN Installation (Future Support)
 
@@ -28,9 +28,9 @@ When the package is on CTAN, you'll be able to install it using your TeX distrib
 
 Include the class file at the root directory of your project, or download a zip of the repository.
 
-- [Class File](https://gitlab.com/camden-bock/maine-thesis/-/packages/generic/maine-thesis/latest/maine-thesis.cls)
-- [Template (includes class file)](https://gitlab.com/camden-bock/maine-thesis/-/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
-- [Documentation PDF](https://gitlab.com/camden-bock/maine-thesis/-/packages/generic/maine-thesis/latest/maine-thesis.pdf)
+- [Class File](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/v2.0/maine-thesis.cls)
+- [Template (includes class file)](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
+- [Documentation PDF](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.pdf)
 
 ## Changes v1.14 --> v2.0 [rpspringuel/maine-thesis](https://github.com/rpspringuel/maine-thesis/blob/master/maine-thesis.cls)
 
