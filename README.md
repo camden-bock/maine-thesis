@@ -20,7 +20,11 @@ When the package is on CTAN, you'll be able to install it using your TeX distrib
 
 ### GitLab Installation (Future Support)
 
-In a future revision, the package will be available with automated releases in Gitlab.
+Include the class file at the root directory of your project
+
+- [Class File](https://gitlab.com/<your-group>/<your-project>/-/packages/generic/maine-thesis/latest/maine-thesis.cls)
+- [Template (includes class file)](https://gitlab.com/<your-group>/<your-project>/-/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
+- [Documentation PDF](https://gitlab.com/<your-group>/<your-project>/-/packages/generic/maine-thesis/latest/maine-thesis.pdf)
 
 ### Overleaf Template (Future Support)
 
