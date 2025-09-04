@@ -19,7 +19,7 @@ manager. In the meantime, you can install it manually from this repository.
 
 Click the link below to create a new template in Overleaf from the template.
 
-[Create New Project in Overleaf](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F72873936%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
+[Create New Project in Overleaf ![overleaf_logo](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Overleaf_Logo.svg/250px-Overleaf_Logo.svg.png)](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F72873936%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
 
 ### CTAN Installation (Future Support)
 
