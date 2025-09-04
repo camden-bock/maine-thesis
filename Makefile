@@ -50,8 +50,9 @@ ctan:
 #packs the template for overleaf
 packtemplate:
 	@echo "--- Packing Template for Overleaf ---"
-	@mkdir /build/distrib/gl
-	@cp -r /build/distrib/ctan/* /build/distrib/gl
+	@mkdir build/distrib/gl
+	@cp -r build/distrib/ctan/* build/distrib/gl
+	@cp build/unpacked/maine-thesis.cls build/distrib/gl/maine-thesis.cls
 	@mkdir -p _template
 	@cp -r template/* _template
 	@cp build/unpacked/maine-thesis.cls _template/maine-thesis.cls
