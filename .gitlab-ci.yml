@@ -34,14 +34,19 @@ publish:
     # Use 'find' to locate all files in the artifact directory and its subdirectories
     - |
       find build/distrib/gl -type f | while read -r file; do
-        # Extract just the filename to use in the URL
         filename=$(basename "$file")
-        echo "-> Uploading ${filename}"
         
-        # The generic package API requires the filename to be part of the URL
+        # 1. Upload to the numbered version (e.g., v1.2.3)
+        echo "-> Uploading ${filename} to version ${CI_COMMIT_TAG}"
         curl --fail --show-error --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
              --upload-file "${file}" \
              "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${filename}"
+        
+        # 2. Upload the same file to the 'latest' version, overwriting any previous 'latest' file
+        echo "-> Uploading ${filename} to version 'latest'"
+        curl --fail --show-error --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+             --upload-file "${file}" \
+             "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/latest/${filename}"
       done
   rules:
     - if: $CI_COMMIT_TAG
