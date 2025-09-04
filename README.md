@@ -10,6 +10,12 @@ for wider use.
 Once maine-thesis is available on CTAN, the easiest way to install it will be through your TeX distribution's package
 manager. In the meantime, you can install it manually from this repository.
 
+### Overleaf Template (Easiest Method)
+
+Click the link below to create a new template in Overleaf from the template.
+
+[Create New Project in Overleaf](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fcamden-bock%2Fmaine-thesis%2F-%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
+
 ### CTAN Installation (Future Support)
 
 When the package is on CTAN, you'll be able to install it using your TeX distribution's package manager.
@@ -18,17 +24,13 @@ When the package is on CTAN, you'll be able to install it using your TeX distrib
 
     MiKTeX: Use the MiKTeX Console or mpm utility.
 
-### GitLab Installation (Future Support)
+### Manual Installation from GitLab Release
 
-Include the class file at the root directory of your project
+Include the class file at the root directory of your project, or download a zip of the repository.
 
-- [Class File](https://gitlab.com/<your-group>/<your-project>/-/packages/generic/maine-thesis/latest/maine-thesis.cls)
-- [Template (includes class file)](https://gitlab.com/<your-group>/<your-project>/-/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
-- [Documentation PDF](https://gitlab.com/<your-group>/<your-project>/-/packages/generic/maine-thesis/latest/maine-thesis.pdf)
-
-### Overleaf Template (Future Support)
-
-In a future version, the template will be made available in overleaf with reference to the class file.
+- [Class File](https://gitlab.com/camden-bock/maine-thesis/-/packages/generic/maine-thesis/latest/maine-thesis.cls)
+- [Template (includes class file)](https://gitlab.com/camden-bock/maine-thesis/-/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
+- [Documentation PDF](https://gitlab.com/camden-bock/maine-thesis/-/packages/generic/maine-thesis/latest/maine-thesis.pdf)
 
 ## Changes v1.14 --> v2.0 [rpspringuel/maine-thesis](https://github.com/rpspringuel/maine-thesis/blob/master/maine-thesis.cls)
 
