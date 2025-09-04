@@ -1,6 +1,6 @@
 # Use a modern TeX Live image that also includes the 'make' utility.
 variables:
-  LATEX_IMAGE: listx/texlive:2024
+  LATEX_IMAGE: texlive/texlive:latest
 
 # Define the stages for the pipeline: first build, then release.
 stages:
