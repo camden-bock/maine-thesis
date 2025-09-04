@@ -5,9 +5,9 @@ A LaTeX class file for typesetting Master's and Doctorate theses at the Universi
 This project aims to update the class file to the current graduate school specifications and make it available on CTAN
 for wider use.
 
-[![recent-release-badge](https://gitlab.example.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
+[![link to most recent release](https://gitlab.example.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
 
-[pipeline-status-badge](https://gitlab.example.com/<namespace>/<project>/badges/<branch>/pipeline.svg?ignore_skipped=true)
+[pipeline status](https://gitlab.example.com/camden-bock/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
 
 ## Quick Start
 
