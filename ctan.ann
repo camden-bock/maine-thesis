@@ -1,5 +1,5 @@
 The updates to the maine-thesis class provide compatibility with biber, update format requirements, and refactor to simplify the codebase.
-Version 2.0 is the first version uploaded to CTAN.
+Version 2.0.0 is the first version uploaded to CTAN.
 
 - Removal of Commands: V2 removes the `\libraryrights` and `\dissacceptance` commands, which will cause a `\ClassError` if a user attempts to use them.
 
