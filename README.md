@@ -1,7 +1,6 @@
-[![link to most recent release](https://gitlab.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
+[![link to most recent release](https://gitlab.com/maine-thesis/maine-thesis/-/badges/release.svg)](https://gitlab.com/maine-thesis/maine-thesis/-/releases)
 
-![pipeline status](https://gitlab.com/camden-bock/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
-
+![pipeline status](https://gitlab.com/maine-thesis/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
 
 # maine-thesis
 
@@ -38,9 +37,11 @@ Include the class file at the root directory of your project.
 ### Command Line Installation (Linux / macOS)
 
 Follow these steps to download and install the package into your personal texmf directory.
+
 #### Step 1: Find your local texmf directory
 
-First, determine the location of your user-specific TeX directory by running the following command. The output should be a path like ~/texmf.
+First, determine the location of your user-specific TeX directory by running the following command. The output should be
+a path like ~/texmf.
 
 ```bash
 TEXMFHOME=$(kpsewhich --var-value=TEXMFHOME)
@@ -54,21 +55,25 @@ If the command doesn't return a path, you may need to create the directory yours
 Use wget to download the TDS .zip file directly from the provided URL, and then unzip it into your texmf directory.
 
 Define the URL for clarity
+
 ```bash
-PACKAGE_URL="[https://gitlab.com/camden-bock/maine-thesis/-/package_files/226178653/download](https://gitlab.com/camden-bock/maine-thesis/-/package_files/226178653/download)"
+PACKAGE_URL="[https://gitlab.com/maine-thesis/maine-thesis/-/package_files/226178653/download](https://gitlab.com/maine-thesis/maine-thesis/-/package_files/226178653/download)"
 ```
 
 Download the file to a temporary location
+
 ```bash
 wget --output-document maine-thesis.zip "$PACKAGE_URL"
 ```
 
 Unzip the contents directly into your texmf directory
+
 ```bash
 unzip maine-thesis.zip -d "$TEXMFHOME"
 ```
 
 Clean up the downloaded zip file
+
 ```bash
 rm maine-thesis.zip
 ```
@@ -76,6 +81,7 @@ rm maine-thesis.zip
 #### Step 3: Update the TeX Filename Database
 
 Finally, you must update TeX's filename database so that it can find the new package files.
+
 ```
 # Update the filename database for your personal texmf tree
 texhash "$TEXMFHOME"
@@ -83,6 +89,7 @@ texhash "$TEXMFHOME"
 # Alternatively, you can use mktexlsr (it's the same command)
 # mktexlsr "$TEXMFHOME"
 ```
+
 The package is now installed and ready to be used in your LaTeX documents.
 
 ## Development with l3build
