@@ -4,8 +4,8 @@
 
 -- Identify the bundle and main module
 module = "maine-thesis"
-pkgversion = "2.0"
-pkgdate    = "2025-09-01"
+pkgversion = "2.0.0"
+pkgdate    = "2025-09-05"
 
 -- Specify the directory where the main source files (.dtx, .ins) are located
 maindir        = "."
@@ -104,7 +104,7 @@ if not ok then
 end
 
 uploadconfig = {
-  author      = "Your name",
+  author      = "R. Padraic Springuel; Camden Bock; Hanna Brooks",
   uploader    = mydata.uploader,
   email       = mydata.email,
   pkg         = ctanpkg,
