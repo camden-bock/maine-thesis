@@ -1,5 +1,5 @@
 variables:
-  LATEX_IMAGE: texlive/texlive:2025
+  LATEX_IMAGE: texlive/texlive:latest
 
 stages:
   - build
