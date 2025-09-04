@@ -16,6 +16,8 @@ Click the link below to create a new template in Overleaf from the template.
 
 [Open Template in Overleaf](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F72873936%2Fpackages%2Fgeneric%2Fmaine-thesis%2Flatest%2Fmaine-thesis-template.zip&engine=lualatex)
 
+[Read Maine-Thesis Documentation](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.pdf)
+
 ## Other Installation Methods
 
 ### CTAN Installation (Future Support)
@@ -32,7 +34,6 @@ Include the class file at the root directory of your project.
 
 - [Class File](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.cls)
 - [Template (includes class file)](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
-- [Documentation PDF](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.pdf)
 
 ### Command Line Installation (Linux / macOS)
 
