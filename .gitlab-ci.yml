@@ -21,8 +21,8 @@ build_assets:
       - maine-thesis.tds.zip
       - "maine-thesis-*.zip"
       - template.zip
-    # Expire artifacts after 1 week to save space.
-    expire_in: 1 week
+    # Expire artifacts after 1 day to save space.
+    expire_in: 1 day
   # This job will run on all commits except tags.
   except:
     - tags
@@ -44,10 +44,10 @@ create_release:
     # The release-cli command uploads the files directly from the artifacts.
     # We use 'filepath' which is much simpler and more reliable than building a URL.
     - release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
-        --assets-link "{\"name\":\"maine-thesis.cls\", \"filepath\":\"build/unpacked/maine-thesis.cls\"}" \
-        --assets-link "{\"name\":\"maine-thesis.tds.zip\", \"filepath\":\"maine-thesis.tds.zip\"}" \
-        --assets-link "{\"name\":\"maine-thesis-template.zip\", \"filepath\":\"template.zip\"}" \
-        --assets-link "{\"name\":\"${VERSIONED_ZIP_FILENAME}\", \"filepath\":\"${VERSIONED_ZIP_FILENAME}\"}"
+      --assets-link "{\"name\":\"maine-thesis.cls\", \"filepath\":\"build/unpacked/maine-thesis.cls\"}" \
+      --assets-link "{\"name\":\"maine-thesis.tds.zip\", \"filepath\":\"maine-thesis.tds.zip\"}" \
+      --assets-link "{\"name\":\"maine-thesis-template.zip\", \"filepath\":\"template.zip\"}" \
+      --assets-link "{\"name\":\"${VERSIONED_ZIP_FILENAME}\", \"filepath\":\"${VERSIONED_ZIP_FILENAME}\"}"
   # This rule ensures the release job ONLY runs when a new Git tag is pushed.
   rules:
     - if: $CI_COMMIT_TAG

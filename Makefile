@@ -3,6 +3,9 @@
 # Main target: Unpack sources, build documentation, and prepare for release.
 all: unpack doc template longtemplate tag ctan
 
+#Target for CI/CD
+gitlab: unpack doc template longtemplate ctan packtemplate
+
 # Unpacks the DTX files into the working directory.
 unpack:
 	@echo "--- Unpacking sources ---"
@@ -43,3 +46,14 @@ clean:
 ctan:
 	@echo "--- Preparing CTAN package ---"
 	@l3build ctan
+
+#packs the template for overleaf
+packtemplate:
+	@echo "--- Packing Template for Overleaf ---"
+	@mkdir -p _template
+	@cp -r template/* _template
+	@cp build/unpacked/maine-thesis.cls _template/maine-thesis.cls
+	@cp build/doc/maine-thesis.pdf _template/documentation.pdf
+	@echo "--- Zipping template files ---"
+	@(cd _template && zip -r ../maine-thesis-template.zip .)
+	@rm -r _template
