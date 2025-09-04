@@ -1,15 +1,14 @@
+[![link to most recent release](https://gitlab.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
+
+![pipeline status](https://gitlab.com/camden-bock/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
+
+
 # maine-thesis
 
 A LaTeX class file for typesetting Master's and Doctorate theses at the University of Maine (Orono, ME).
 
 This project aims to update the class file to the current graduate school specifications and make it available on CTAN
 for wider use.
-
-[![link to most recent release](https://gitlab.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
-
-
-
-![pipeline status](https://gitlab.com/camden-bock/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
 
 ## Quick Start
 
