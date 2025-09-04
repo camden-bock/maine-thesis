@@ -7,7 +7,7 @@ for wider use.
 
 [![link to most recent release](https://gitlab.example.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
 
-[pipeline status](https://gitlab.example.com/camden-bock/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
+![pipeline status](https://gitlab.example.com/camden-bock/maine-thesis/badges/master/pipeline.svg?ignore_skipped=true)
 
 ## Quick Start
 
