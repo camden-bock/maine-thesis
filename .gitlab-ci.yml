@@ -55,14 +55,20 @@ create_release:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   needs:
-    # This job only needs to run after the publish job is successful.
-    # It does not need the build artifacts directly.
     - publish
   variables:
-    # Define the base URL for your packages to keep the 'assets' section clean
+    # The base URL is still correct
     PACKAGE_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}"
   script:
-    - echo "Creating release and linking to assets in the Package Registry."
+    # 1. Use shell expansion to strip the 'v' prefix from the tag.
+    #    We save this clean version number to a .env file.
+    - echo "RELEASE_VERSION=${CI_COMMIT_TAG#v}" > release.env
+    - echo "Creating release for tag $CI_COMMIT_TAG with clean version $RELEASE_VERSION"
+  artifacts:
+    reports:
+      # 2. Expose the .env file as a dotenv report.
+      #    This makes RELEASE_VERSION available to the 'release' keyword below.
+      dotenv: release.env
   release:
     name: 'Release $CI_COMMIT_TAG'
     tag_name: '$CI_COMMIT_TAG'
@@ -75,10 +81,9 @@ create_release:
           url: '${PACKAGE_URL}/maine-thesis.tds.zip'
         - name: 'maine-thesis-template.zip'
           url: '${PACKAGE_URL}/maine-thesis-template.zip'
-        # For the versioned zip, we get the version number from the tag
-        - name: 'maine-thesis-${CI_COMMIT_TAG#v}.zip'
-          url: '${PACKAGE_URL}/maine-thesis-${CI_COMMIT_TAG#v}.zip'
-        # Links for the files that were in the 'maine-thesis' subdirectory
+        # 3. Use the new, sanitized $RELEASE_VERSION variable here.
+        - name: 'maine-thesis-${RELEASE_VERSION}.zip'
+          url: '${PACKAGE_URL}/maine-thesis-${RELEASE_VERSION}.zip'
         - name: 'maine-thesis.dtx'
           url: '${PACKAGE_URL}/maine-thesis.dtx'
         - name: 'maine-thesis.pdf'
