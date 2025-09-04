@@ -12,8 +12,8 @@ build_assets:
   stage: build
   image: $LATEX_IMAGE
   script:
-    # We assume your Makefile's "all" target creates all the necessary files.
-    - make all
+    # We assume your Makefile's "gitlab" target creates all the necessary files.
+    - make gitlab
   artifacts:
     # Define the specific files you want to keep and pass to the release job.
     paths:
