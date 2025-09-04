@@ -5,6 +5,10 @@ A LaTeX class file for typesetting Master's and Doctorate theses at the Universi
 This project aims to update the class file to the current graduate school specifications and make it available on CTAN
 for wider use.
 
+[![recent-release-badge](https://gitlab.example.com/camden-bock/maine-thesis/-/badges/release.svg)](https://gitlab.com/camden-bock/maine-thesis/-/releases)
+
+[pipeline-status-badge](https://gitlab.example.com/<namespace>/<project>/badges/<branch>/pipeline.svg?ignore_skipped=true)
+
 ## Quick Start
 
 Once maine-thesis is available on CTAN, the easiest way to install it will be through your TeX distribution's package
@@ -28,7 +32,7 @@ When the package is on CTAN, you'll be able to install it using your TeX distrib
 
 Include the class file at the root directory of your project.
 
-- [Class File](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/v2.0/maine-thesis.cls)
+- [Class File](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.cls)
 - [Template (includes class file)](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
 - [Documentation PDF](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.pdf)
 
