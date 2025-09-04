@@ -10,7 +10,7 @@ build_assets:
   image:
     name: $LATEX_IMAGE
   script:
-    - make all
+    - make gitlab
   artifacts:
     paths:
       - build/unpacked/maine-thesis.cls
