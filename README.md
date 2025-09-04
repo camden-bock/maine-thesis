@@ -26,39 +26,61 @@ When the package is on CTAN, you'll be able to install it using your TeX distrib
 
 ### Manual Installation from GitLab Release
 
-Include the class file at the root directory of your project, or download a zip of the repository.
+Include the class file at the root directory of your project.
 
 - [Class File](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/v2.0/maine-thesis.cls)
 - [Template (includes class file)](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis-template.zip)
 - [Documentation PDF](https://gitlab.com/api/v4/projects/72873936/packages/generic/maine-thesis/latest/maine-thesis.pdf)
 
-## Changes v1.14 --> v2.0 [rpspringuel/maine-thesis](https://github.com/rpspringuel/maine-thesis/blob/master/maine-thesis.cls)
+### Command Line Installation (Linux / macOS)
 
-This class is a fork of rpspringuel's maine-thesis class (v.1.14).
+Follow these steps to download and install the package into your personal texmf directory.
+#### Step 1: Find your local texmf directory
 
-The correct use for these changes is reflected in the template.
+First, determine the location of your user-specific TeX directory by running the following command. The output should be a path like ~/texmf.
 
-The updates to the maine-thesis class provide compatibility with biber, update format requirements, and refactor to
-simplify the codebase. Version 2.0 is the first version uploaded to CTAN.
+```bash
+TEXMFHOME=$(kpsewhich --var-value=TEXMFHOME)
+echo "Your local texmf directory is: $TEXMFHOME"
+```
 
-- Removal of Commands: V2 removes the `\libraryrights` and `\dissacceptance` commands, which will cause a `\ClassError`
-  if a user attempts to use them.
+If the command doesn't return a path, you may need to create the directory yourself. It is typically located at ~/texmf.
 
-- Removal of Environments: The `\part` command, used for multi-volume theses in V1, is no longer supported and now
-  throws a `\ClassError` in V2.
+#### Step 2: Download and Unzip the Package
 
-- Changed Command Arguments: The syntax for the `\copyrightpage` command has changed. In V1, it took optional arguments
-  for the author and year, but in V2, it takes a single optional argument.
+Use wget to download the TDS .zip file directly from the provided URL, and then unzip it into your texmf directory.
 
-- Changes to Headings and Numbering: The method for selecting heading styles has been completely altered. Instead of
-  setting a number with `\setcounter{head}`, V2 uses specific macros like `\apaheadings`.
+Define the URL for clarity
+```bash
+PACKAGE_URL="[https://gitlab.com/camden-bock/maine-thesis/-/package_files/226178653/download](https://gitlab.com/camden-bock/maine-thesis/-/package_files/226178653/download)"
+```
 
-- Changes to Spacing: V2 relies on the setspace package for managing line spacing, replacing the custom `\doublespacing`
-  and `\singlespacing` definitions from V1.
+Download the file to a temporary location
+```bash
+wget --output-document maine-thesis.zip "$PACKAGE_URL"
+```
 
-- Bibliography and Citations: V2 uses the modern biblatex and biber system, a significant departure from V1. This change
-  means that older documents using `\bibliography{...}` and `\bibliographystyle{...}` will fail and must be updated to
-  use commands like `\addbibresource{...}` and `\printbibliography`.
+Unzip the contents directly into your texmf directory
+```bash
+unzip maine-thesis.zip -d "$TEXMFHOME"
+```
+
+Clean up the downloaded zip file
+```bash
+rm maine-thesis.zip
+```
+
+#### Step 3: Update the TeX Filename Database
+
+Finally, you must update TeX's filename database so that it can find the new package files.
+```
+# Update the filename database for your personal texmf tree
+texhash "$TEXMFHOME"
+
+# Alternatively, you can use mktexlsr (it's the same command)
+# mktexlsr "$TEXMFHOME"
+```
+The package is now installed and ready to be used in your LaTeX documents.
 
 ## Development with l3build
 
