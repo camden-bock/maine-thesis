@@ -68,7 +68,7 @@ uploadconfig = {
   support     = "https://gitlab.com/maine-thesis/maine-thesis/issues",
   announcement_file="ctan.ann",
   note_file   = "ctan.note",
-  update      = true,
+  update      = false,
 }
 
 -- Update package date and version
@@ -110,29 +110,6 @@ function update_tag(file, content, tagname, tagdate)
   end
   return content
 end
-
-uploadconfig = {
-  author      = "R. Padraic Springuel; Camden Bock; Hanna Brooks",
-  uploader    = ctan_uploader,
-  email       = ctan_email,
-  pkg         = ctanpkg,
-  version     = pkgversion,
-  license     = "lppl1.3c",
-  summary     = "Document Class for University of Maine Graduate Thesis",
-  description = [[The 'maine-thesis' class provides support for the formating requirements for graduate theses of the Graduate School at The university of Maine.
-  It sets default parameters for the report class, modifies captions, referneces, and the table of contents, and makes specific environments available.
-
-  The maine-thesis class reflects the guidelines published by the Graduate School at The University of Maine (https://umaine.edu/graduate/students/progress/thesis-resources/).
-  The Graduate School at the University of Maine does not provide official support for any thesis style class or template.]],
-  topic       = { "class", "Dissertation", "Std conform"},
-  ctanPath    = "/macros/latex/contrib/" .. ctanpkg,
-  repository  = "https://gitlab.com/maine-thesis/maine-thesis",
-  bugtracker  = "https://gitlab.com/maine-thesis/maine-thesis/issues",
-  support     = "https://gitlab.com/maine-thesis/maine-thesis/issues",
-  announcement_file="ctan.ann",
-  note_file   = "ctan.note",
-  update      = false,
-}
 
 -- Clean files
 cleanfiles = {

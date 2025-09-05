@@ -5,7 +5,7 @@ all: unpack doc template longtemplate tag ctan
 
 #Target for CI/CD
 gitlab: unpack doc ctan packtemplate
-ctanupload: unpack doc ctan upload
+ctanupload: unpack doc ctan manifest ctan upload
 
 # Unpacks the DTX files into the working directory.
 unpack:
