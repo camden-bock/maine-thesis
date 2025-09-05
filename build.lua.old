@@ -2,74 +2,35 @@
   ** Build config for maine-thesis using l3build **
 --]]
 
+-- Identify the bundle and main module
 module = "maine-thesis"
 pkgversion = "2.0.0"
 pkgdate    = "2025-09-05"
 
--- 1. DEFINE FILES BY THEIR PURPOSE
--- l3build will use these lists to build the package, documentation, and final .zip
+-- Specify the directory where the main source files (.dtx, .ins) are located
 maindir        = "."
 sourcefiledir = "./sources"
--- Source files for unpacking
-sourcefiles   = {"maine-thesis.dtx", "maine-thesis"}
-
--- The final file(s) for a user's TeX installation
+textfiledir   = "./sources"
+textfiles     = {textfiledir.."/README.md"}
+sourcefiles   = {"maine-thesis.dtx"}
 installfiles  = {"maine-thesis.cls"}
-
--- Source files to be typeset into PDFs for documentation
-typesetfiles  = {"maine-thesis.dtx", "maine-thesis-example.tex"}
 binaryfiles = {"*.pdf"}
+ctanfiles  = {"maine-thesis.cls", "README.md", "maine-thesis-example.tex", "maine-thesis-example.pdf", "maine-thesis.pdf", "maine-thesis.dtx", "maine-thesis.ins"}
+-- Configuration for a flat zip file using the 'zip' target
+zipfile  = module .. "-" .. pkgversion
+zipfiles = {"maine-thesis.cls", "README.md", "maine-thesis-example.tex", "maine-thesis-example.pdf", "maine-thesis.pdf", "maine-thesis.dtx", "maine-thesis.ins"}
 
--- Plain text files for the CTAN zip
-textfiles     = {"./sources/CTANREADME.md", "MANIFEST.md"}
-
-
-
--- 2. CONFIGURE THE BUILD PROCESS
-
--- Unpacking configuration (using the .ins file is standard)
 unpackfiles = {"maine-thesis.dtx"}
 unpackopts  = "--interaction=batchmode"
 unpackexe   = "luatex"
 
--- Documentation typesetting configuration
+-- Set the name for the main documentation.
+-- We'll assume the main documentation is compiled from myclass.dtx
+typesetfiles  = {"maine-thesis.dtx", "maine-thesis-example.tex"}
 typesetexe    = "lualatex"
 typesetopts   = "--interaction=batchmode"
-typesetruns   = 3 -- Use 3 runs for stability with references/TOCs
-
--- 3. CONFIGURE CTAN PACKAGE CREATION
-
--- These settings will create a flat zip named "maine-thesis-2.0.0.zip"
-ctanpkg    = "maine-thesis"
-ctanzip    = ctanpkg.."-"..pkgversion
-packtdszip = false -- Key setting for a flat package
-ctanreadme = "CTANREADME.md"
-
-
--- 4. UPLOAD & TAGGING CONFIGURATION (Your settings are good here)
-
--- Load personal data for ctan upload
-local ctan_uploader = os.getenv("CTAN_UPLOADER")
-local ctan_email = os.getenv("CTAN_EMAIL")
-
-uploadconfig = {
-  author      = "R. Padraic Springuel; Camden Bock; Hanna Brooks",
-  uploader    = ctan_uploader,
-  email       = ctan_email,
-  pkg         = ctanpkg,
-  version     = pkgversion,
-  license     = "lppl1.3c",
-  summary     = "Document Class for University of Maine Graduate Thesis",
-  description = [[The 'maine-thesis' class provides support for the formating requirements for graduate theses of the Graduate School at The university of Maine. It sets default parameters for the report class, modifies captions, referneces, and the table of contents, and makes specific environments available. The maine-thesis class reflects the guidelines published by the Graduate School at The University of Maine (https://umaine.edu/graduate/students/progress/thesis-resources/). The Graduate School at the University of Maine does not provide official support for any thesis style class or template.]],
-  topic       = { "thesis" },
-  ctanPath    = "/macros/latex/contrib/" .. ctanpkg,
-  repository  = "https://gitlab.com/maine-thesis/maine-thesis",
-  bugtracker  = "https://gitlab.com/maine-thesis/maine-thesis/issues",
-  support     = "https://gitlab.com/maine-thesis/maine-thesis/issues",
-  announcement_file="ctan.ann",
-  note_file   = "ctan.note",
-  update      = true,
-}
+typesetruns   = 3
+makeindexopts = "-q"
 
 -- Update package date and version
 tagfiles = {"maine-thesis.dtx", "README.md"}
@@ -110,6 +71,16 @@ function update_tag(file, content, tagname, tagdate)
   end
   return content
 end
+
+-- Configuration for ctan
+ctanreadme = "README.md"
+ctanpkg    = "maine-thesis"
+ctanzip    = ctanpkg.."-"..pkgversion
+packtdszip = false
+
+-- Load personal data for ctan upload
+local ctan_uploader = os.getenv("CTAN_UPLOADER")
+local ctan_email = os.getenv("CTAN_EMAIL")
 
 uploadconfig = {
   author      = "R. Padraic Springuel; Camden Bock; Hanna Brooks",

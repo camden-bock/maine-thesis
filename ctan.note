@@ -1,2 +1,23 @@
-Package 'maine-thesis' provides support for the formating requirements for graduate theses of the Graduate School at The university of Maine.
-It sets default parameters for the report class, modifies captions, referneces, and the table of contents, and makes specific environments available.
+Hello CTAN Team,
+
+Thank you for your feedback on our new package, "maine-thesis". We have made the requested revisions and are re-uploading the package. Here is a summary of the changes made in response to your comments:
+
+    (1) Packaging: We have repackaged the files into a standard .zip archive instead of including a .tds.zip file, as requested. The new archive contains the files in a flat directory structure.
+
+    (2) Example File: The example PDF has been included as maine-thesis-example.pdf.
+
+    (3) README.md: The README.md file has been updated to include the license information (LPPL v1.3c or later).
+
+    (4) .dtx File Correction: We have corrected the references in maine-thesis.dtx from .sty to .cls.
+
+    (5) .ins File: The maine-thesis.ins file is now included in the package. It is also embedded in the .dtx file.
+
+    (6) PDF Documentation: The version information is now correctly displayed in the maine-thesis.pdf documentation.
+
+We have also taken your suggestion to use the "Note" text for the package description and announcement. We believe the package now meets the CTAN requirements and look forward to your review.
+
+Thank you for your time and assistance.
+
+Sincerely,
+
+Camden Bock

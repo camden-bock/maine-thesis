@@ -1,14 +1,29 @@
-The updates to the maine-thesis class provide compatibility with biber, update format requirements, and refactor to simplify the codebase.
-Version 2.0.0 is the first version uploaded to CTAN.
+Package 'maine-thesis' provides support for the formating requirements for graduate theses of the Graduate School at The university of Maine.
+It sets default parameters for the report class, modifies captions, referneces, and the table of contents, and makes specific environments available.
 
-- Removal of Commands: V2 removes the `\libraryrights` and `\dissacceptance` commands, which will cause a `\ClassError` if a user attempts to use them.
+Key Features
 
-- Removal of Environments: The `\part` command, used for multi-volume theses in V1, is no longer supported and now throws a `\ClassError` in V2.
+ Modernized Codebase:
+ - Version 2.0.0 is a complete refactor of the previous version. It uses a .dtx file format to generate both the class file (maine-thesis.cls) and its documentation from a single source, which streamlines maintenance.
+ - The class now uses modern packages like biblatex with the Biber backend for citation management, replacing a simpler, older approach.
+ - New dependencies like fontspec, microtype, and hyperref have been added for more robust font, typography, and hyperlinking capabilities.
 
-- Changed Command Arguments: The syntax for the `\copyrightpage` command has changed. In V1, it took optional arguments for the author and year, but in V2, it takes a single optional argument.
+ Improved User Interface:
+ - The new version introduces clearer, named macros for setting heading styles, such as \apaheadings, \chicagoheadings, and \idecimalheadings, replacing the old numerical counter system. Caption formatting has also been unified with
+ \DeclareCaptionFormat{thesis}, providing a single command for customization.
 
-- Changes to Headings and Numbering: The method for selecting heading styles has been completely altered. Instead of setting a number with `\setcounter{head}`, V2 uses specific macros like `\apaheadings`.
+ Updated Formatting and Requirements:
+ - The class file has been updated to align with the latest Graduate School requirements.
+ - It removes deprecated commands like \libraryrights and \dissacceptance because the Graduate School no longer requires these pages for electronic submission. The biography environment now automatically inserts the final required sentence, which can use a pronoun specified by the \authorpronoun command.
+ - It also includes an optional command, \glsa, to generate the official University of Maine Graduate School Land Acknowledgment.
 
-- Changes to Spacing: V2 relies on the setspace package for managing line spacing, replacing the custom `\doublespacing` and `\singlespacing` definitions from V1.
+ Streamlined Environments:
+ - The \appendix command has been updated and now works within the appendices environment.
+ - The multiappendices option replaces the old \multipleappendicestrue command for managing multiple appendices.
+ - The \preliminary and \mainmatter commands now handle page numbering and document structure more reliably.
+ - The main.tex file now coordinates other files using \include{...} statements for better organization and easier drafting.
 
-- Bibliography and Citations: V2 uses the modern biblatex and biber system, a significant departure from V1. This change means that older documents using `\bibliography{...}` and `\bibliographystyle{...}` will fail and must be updated to use commands like `\addbibresource{...}` and `\printbibliography`.
+ Enhanced Functionality:
+  - The class file supports the draft option, which adds a "DRAFT" watermark, line numbers, and marks overfull lines, making it useful for sharing review copies.
+  - You can use \compresstitlepage to adjust line spacing on the title page to prevent it from spilling onto a second page.
+  - The \ignore and \comment commands, sourced from the changes package, provide useful tools for managing content during the drafting process.

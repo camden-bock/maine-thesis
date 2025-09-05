@@ -16,14 +16,20 @@ These are source files for a number of purposes, including the `unpack` process 
 generates the installation files of the package. Additional files included here will also
 be installed for processing such as testing.
 
-* maine-thesis.dtx 
+* maine-thesis.dtx ‡
+
+### Text files
+
+Plain text files included as documentation or metadata.
+
+* MANIFEST.md ‡
 
 ### Derived files
 
 The files created by ‘unpacking’ the package sources. This typically includes
 `.sty` and `.cls` files created from DocStrip `.dtx` files.
 
-* maine-thesis.cls 
+* maine-thesis.cls †
 
 
 ## TDS manifest
@@ -31,7 +37,36 @@ The files created by ‘unpacking’ the package sources. This typically include
 The following groups list the files included in the TeX Directory Structure used to install
 the package into a TeX distribution.
 
+### Source files (TDS)
+
+All files included in the `maine-thesis/source` directory.
+
+* maine-thesis.dtx 
+
+### TeX files (TDS)
+
+All files included in the `maine-thesis/tex` directory.
+
+* maine-thesis.cls 
+
+### Doc files (TDS)
+
+All files included in the `maine-thesis/doc` directory.
+
+* MANIFEST.md 
+* README.md 
+* maine-thesis-example.pdf 
+* maine-thesis.pdf 
+
 
 ## CTAN manifest
 
 The following group lists the files included in the CTAN package.
+
+### CTAN files
+
+* MANIFEST.md 
+* README.md 
+* maine-thesis-example.pdf 
+* maine-thesis.dtx 
+* maine-thesis.pdf 

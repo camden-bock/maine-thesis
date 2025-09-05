@@ -13,9 +13,13 @@
 % Fr. Samuel Springuel and Camden Bock.
 %
 % This work consists of the files maine-thesis.dtx and
-% and the derived files           maine-thesis.ins,
-%                                 maine-thesis.sty,
-%                                 example.tex.
+% and the derived files     maine-thesis-example.pdf,
+%                           maine-thesis.dtx,
+%                           maine-thesis.pdf,
+%                           maine-thesis.cls
+%
+% The ins files is embedded in the maine-thesis.dtx.
+%
 %
 %<*ignore>
 \begingroup
@@ -49,9 +53,11 @@ This work is "maintained" (as per LPPL maintenance status) by
 Fr. Samuel Springuel, Camden Bock, and Hanna Brooks.
 
 This work consists of the files maine-thesis.dtx and
-and the derived files           maine-thesis.ins,
-                                maine-thesis.sty,
-                                example.tex.
+and the derived files     maine-thesis-example.pdf,
+                          maine-thesis.dtx,
+                          maine-thesis.pdf,
+                          maine-thesis.cls
+
 
 \endpreamble
 \postamble
@@ -63,7 +69,7 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 \generate{
   \file{maine-thesis.cls}{\from{maine-thesis.dtx}{package}}
   \nopreamble\nopostamble
-  \file{example.tex}{\from{maine-thesis.dtx}{example}}
+  \file{maine-thesis-example.tex}{\from{maine-thesis.dtx}{example}}
 }
 
 \Msg{*****************************************************************}%
@@ -91,6 +97,8 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 \usepackage{bookmark}
 \usepackage{biblatex}
 \usepackage[draft]{changes}
+
+\usepackage{readprov}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -99,9 +107,8 @@ https://www.texdev.net/2009/10/06/a-model-dtx-file/
 \end{document}
 %</driver>
 % \fi
-%
-% \GetFileInfo{maine-thesis.cls}
-%
+% \renewcommand{\fileversion}{2.0.0}
+% \renewcommand{\filedate}{2025/09/05}
 % \makeatletter
 % \def\@xobeysp{\leavevmode\penalty100\ }
 % \makeatother
@@ -1223,7 +1230,6 @@ Master of Surgery, University of Edinburg}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{maine-thesis}[2025/09/05 v2.0.0 University of Maine Thesis]
 %    \end{macrocode}
-
 % \subsection{Initial Variables}
 %	\begin{macrocode}
 \newif\ifdraft\draftfalse

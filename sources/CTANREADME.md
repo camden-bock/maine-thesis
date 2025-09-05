@@ -62,3 +62,11 @@ The maine-thesis class has undergone significant updates from version 1.16 to 2.
 Please report any bugs or formatting problems to the GitLab
 repository: https://www.google.com/search?q=https://gitlab.com/maine-thesis/maine-thesis. When submitting an issue,
 please include a minimal working example that reproduces the problem.
+
+## Licence
+
+This work may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version
+1.3c of this license or (at your option) any later version.
+
+The latest version of this license is in   http://www.latex-project.org/lppl.txt and version 1.3c or later is part of
+all distributions of LaTeX version 2005/12/01 or later.
