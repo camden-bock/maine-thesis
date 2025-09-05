@@ -44,6 +44,7 @@ template/maine-thesis.cls
 mypersonaldata.lua
 /maine-thesis.pdf
 /*.zip
+*.curlopt
 
 ## Intermediate documents:
 *.dvi
