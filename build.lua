@@ -96,17 +96,14 @@ ctanreadme = "CTANREADME.md"
 ctanpkg    = "maine-thesis"
 ctanzip    = ctanpkg.."-"..pkgversion
 packtdszip = true
-
 -- Load personal data for ctan upload
-local ok, mydata = pcall(require, "mypersonaldata.lua")
-if not ok then
-  mydata = { email="XXX", uploader="YYY", }
-end
+local ctan_uploader = os.getenv("CTAN_UPLOADER")
+local ctan_email = os.getenv("CTAN_EMAIL")
 
 uploadconfig = {
   author      = "R. Padraic Springuel; Camden Bock; Hanna Brooks",
-  uploader    = mydata.uploader,
-  email       = mydata.email,
+  uploader    = ctan_uploader,
+  email       = ctan_email,
   pkg         = ctanpkg,
   version     = pkgversion,
   license     = "lppl1.3c",

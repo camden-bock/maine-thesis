@@ -5,6 +5,7 @@ all: unpack doc template longtemplate tag ctan
 
 #Target for CI/CD
 gitlab: unpack doc ctan packtemplate
+ctanupload: unpack doc ctan upload
 
 # Unpacks the DTX files into the working directory.
 unpack:
@@ -46,6 +47,11 @@ clean:
 ctan:
 	@echo "--- Preparing CTAN package ---"
 	@l3build ctan
+
+# Prepares a CTAN-ready TDS archive.
+upload:
+	@echo "--- Uploading CTAN Package ---"
+	@l3build upload
 
 #packs the template for overleaf
 packtemplate:

@@ -8,6 +8,7 @@ stages:
   - build
   - publish
   - release
+  - ctan
 
 build_assets:
   stage: build
@@ -35,13 +36,13 @@ publish:
     - |
       find build/distrib/gl -type f | while read -r file; do
         filename=$(basename "$file")
-        
+
         # 1. Upload to the numbered version (e.g., v1.2.3)
         echo "-> Uploading ${filename} to version ${CI_COMMIT_TAG}"
         curl --fail --show-error --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
              --upload-file "${file}" \
              "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${filename}"
-        
+
         # 2. Upload the same file to the 'latest' version, overwriting any previous 'latest' file
         echo "-> Uploading ${filename} to version 'latest'"
         curl --fail --show-error --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
@@ -88,5 +89,17 @@ create_release:
           url: '${PACKAGE_URL}/maine-thesis.dtx'
         - name: 'maine-thesis.pdf'
           url: '${PACKAGE_URL}/maine-thesis.pdf'
+  rules:
+    - if: $CI_COMMIT_TAG
+
+ctan_upload:
+  stage: ctan
+  image: texlive/texlive:latest
+  needs:
+    - job: build_assets
+      artifacts: true
+  script:
+    - echo "Uploading package to CTAN"
+    - make ctanupload
   rules:
     - if: $CI_COMMIT_TAG
